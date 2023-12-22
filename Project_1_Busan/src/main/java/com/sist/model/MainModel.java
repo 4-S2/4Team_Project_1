@@ -38,8 +38,16 @@ public class MainModel {
         NoticeDAO ndao = NoticeDAO.newInstance();
         QnaBoardDAO qdao = QnaBoardDAO.newInstance();
         
+        // 각 리스트 쿠키 번호만 잘라서 저장
 		Cookie[] cookies = request.getCookies();
-		List<BusanListVO> recentList = new ArrayList<>();
+		List<BusanListVO> rcntList = new ArrayList<>();
+		/*
+		 * List<BusanListVO> tRntList = new ArrayList<>(); List<BusanListVO> fRntList =
+		 * new ArrayList<>(); List<BusanListVO> aRntList = new ArrayList<>();
+		 * List<BusanListVO> fdRntList = new ArrayList<>(); List<BusanListVO> eRntList =
+		 * new ArrayList<>();
+		 */
+		
 		if(cookies!=null) {
 			for(Cookie c : cookies) {
 				if(c.getName().startsWith("tour")) {
@@ -48,7 +56,9 @@ public class MainModel {
 					
 					while(st.hasMoreTokens()) {
 						int no = Integer.parseInt(st.nextToken());
-						recentList.add(topdao.busanDetailData(no,"tour"));
+						BusanListVO vo = topdao.busanDetailData(no,"tour");
+						vo.setCate(1);
+						rcntList.add(vo);
 					}
 				}else if(c.getName().startsWith("festival")) {
 					String value = c.getValue();
@@ -56,7 +66,9 @@ public class MainModel {
 					
 					while(st.hasMoreTokens()) {
 						int no = Integer.parseInt(st.nextToken());
-						recentList.add(topdao.busanDetailData(no,"festival"));
+						BusanListVO vo = topdao.busanDetailData(no,"festival");
+						vo.setCate(2);
+						rcntList.add(vo);
 					}
 				}else if(c.getName().startsWith("activity")) {
 					String value = c.getValue();
@@ -64,7 +76,9 @@ public class MainModel {
 					
 					while(st.hasMoreTokens()) {
 						int no = Integer.parseInt(st.nextToken());
-						recentList.add(topdao.busanDetailData(no,"activity"));
+						BusanListVO vo = topdao.busanDetailData(no,"activity");
+						vo.setCate(3);
+						rcntList.add(vo);
 					}
 				}else if(c.getName().startsWith("food")) {
 					String value = c.getValue();
@@ -72,13 +86,29 @@ public class MainModel {
 					
 					while(st.hasMoreTokens()) {
 						int no = Integer.parseInt(st.nextToken());
-						recentList.add(topdao.busanDetailData(no,"food"));
+						BusanListVO vo = topdao.foodDetailData(no);
+						vo.setCate(4);
+						rcntList.add(vo);
 					}
 				}
 			}
 		}
-		Collections.reverse(recentList);
-		request.setAttribute("recentList", recentList);
+		/*
+		 * Collections.reverse(tRntList); Collections.reverse(fRntList);
+		 * Collections.reverse(aRntList); Collections.reverse(fdRntList);
+		 * Collections.reverse(eRntList);
+		 */
+		
+		Collections.reverse(rcntList);
+		request.setAttribute("rcntList", rcntList);
+		
+		
+		/*
+		 * request.setAttribute("tRntList", tRntList); request.setAttribute("fRntList",
+		 * fRntList); request.setAttribute("aRntList", aRntList);
+		 * request.setAttribute("fdRntList", fdRntList);
+		 * request.setAttribute("eRntList", eRntList);
+		 */
 		
 		 // 추천 맛집 Top 3 
 		 List<BusanListVO> fdtoplist = topdao.findTop3("food");

@@ -180,11 +180,13 @@ public class BusanDAO {
 			String tag = rs.getString(11);
 			String[] tags = tag.split("#");
 		   vo.setTag(tags);
+	   // vo.setTag(rs.getString(11));
 		   vo.setJjim(rs.getString(12));
 		   vo.setHeart(rs.getInt(13));
 			String dimage = rs.getString(14);
 			String[] dimgs = dimage.split("\\^");
 		   vo.setDeimage(dimgs);
+		// vo.setDeimage(rs.getString(14));
 		   vo.setRdate(rs.getString(15));
 		   rs.close();
 	   }catch(Exception ex)
@@ -229,9 +231,11 @@ public class BusanDAO {
 			String dimage = rs.getString(12);
 			String[] dimgs = dimage.split("\\^");
 		   vo.setDeimage(dimgs);
+		 //vo.setDeimage(rs.getString(12));
 			String tag = rs.getString(13);
 			String[] tags = tag.split("#");
 		   vo.setTag(tags);
+		 //vo.setTag(rs.getString(13));
 		   }
 		   rs.close();
 	   }catch(Exception ex)
