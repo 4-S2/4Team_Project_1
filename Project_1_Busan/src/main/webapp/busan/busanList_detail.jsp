@@ -18,84 +18,87 @@
     <div class="section no-padding-vertical">
         <div class="wrapper side-paddings">
             <div class="product">
-            	<div class="product-image-wrapper">
-                    <img alt="대표 이미지" src="${vo.poster}" sizes="(max-width: 479px) 83vw, (max-width: 767px) 75vw, (max-width: 991px) 76vw, 32vw" />
-                </div>
-            
-                <div class="product-info">
-                    <h1>${vo.title }</h1>
-                    <div class="heart">
-                    	<span>좋아요 수</span>
-                    	<button>좋아요</button>
-                    </div>
-                    <div class="jjim">
-                    	<span>찜하기 수</span>
-                    	<button>찜하기</button>
-                    </div>
-                </div>
+            	<div class="product-top">
+            		<div class="product-poster">
+	                    <img alt="대표 이미지" src="${vo.poster}" sizes="(max-width: 479px) 83vw, (max-width: 767px) 75vw, (max-width: 991px) 76vw, 32vw" />
+	                </div>
+	            
+	                <div class="product-info">
+	                    <h1>${vo.title}</h1>
+	                    <div class="heart">
+	                    	<span>좋아요 수</span>
+	                    	<button>좋아요</button>
+	                    </div>
+	                    <div class="jjim">
+	                    	<span>찜하기 수</span>
+	                    	<button>찜하기</button>
+	                    </div>
+	                </div>
+            	</div>
 
                 <!-- 탭 메뉴 -->
-                <div class="product-details-wrapper">
+                <div class="product-detail">
                		<ul class="tab-menu">
                			<li id="detailBtn">상세 설명</li>
                			<li id="mapBtn">지도/주변 추천</li>
                			<li id="reviewBtn">리뷰</li>
                			<li id="reserveBtn">예약하기</li>
                		</ul>
-               		<div class="shop-header-line">
+               		<!-- <div class="shop-header-line">
 	                    <div class="shop-header-color"></div>
-	                </div>
+	                </div> -->
                		<div id="detailCont">
 	               		<div class="detail-info">              		
 	               			<!-- 상세 이미지 -->
 	               			<c:forEach var="dimg" items="${vo.deimage}" >
-	                    		<img src="${dimg}" alt="상세 이미지"> 
+	                    		<img class="deimage" src="${dimg}" alt="상세 이미지"> 
 	                    	</c:forEach>
 	                    	
 	                    	<!-- 상세 설명 -->
-	                    	<p>${vo.cont}</p>
+	                    	<p class="cont">${vo.cont}</p>
+	                    	
+	                    	<!-- 테이블 -->
+		                    <div class="detail-table">
+		                    	<div class="product-table">
+			                        <div class="product-table-cell">
+			                            <div>주소</div>
+			                            <div class="product-table-info">
+			                                <div data-wf-sku-bindings="%5B%7B%22from%22%3A%22f_width_%22%2C%22to%22%3A%22innerHTML%22%7D%5D">${vo.addr}</div>
+			                                <!-- <div>in</div> -->
+			                            </div>
+			                        </div>
+			                        <div class="product-table-cell">
+			                            <div>전화번호</div>
+			                            <div class="product-table-info">
+			                                <div data-wf-sku-bindings="%5B%7B%22from%22%3A%22f_height_%22%2C%22to%22%3A%22innerHTML%22%7D%5D">${vo.phone}</div>
+			                                <!-- <div>in</div> -->
+			                            </div>
+			                        </div>
+			                        <div class="product-table-cell">
+			                            <div>운영시간</div>
+			                            <div class="product-table-info">
+			                                <div data-wf-sku-bindings="%5B%7B%22from%22%3A%22f_length_%22%2C%22to%22%3A%22innerHTML%22%7D%5D">${vo.bhour}</div>
+			                                <!-- <div>in</div> -->
+			                            </div>
+			                        </div>
+			                        <div class="product-table-cell no-border-bottom">
+			                            <div>요금</div>
+			                            <div class="product-table-info">
+			                                <div data-wf-sku-bindings="%5B%7B%22from%22%3A%22f_weight_%22%2C%22to%22%3A%22innerHTML%22%7D%5D">${vo.rate}</div>
+			                                <!-- <div>oz</div> -->
+			                            </div>
+			                        </div>
+			                    </div>
+		                    </div>
 	
 		                    <!-- 해시 태그 -->
 		                    <div class="tag-list">
+		                    	<h5>연관 태그</h5>
 			                    <c:forEach var="tag" items="${vo.tag}">
-			                    	<a href="#"><span>${tag}</span></a>
+			                    	<a href="#"><span>#${tag}</span></a>
 			                    </c:forEach>
 		                    </div>
 		                </div>
-		                
-	                    <!-- 테이블 -->
-	                    <div class="detail-table">
-	                    	<div class="product-table">
-		                        <div class="product-table-cell">
-		                            <div>주소</div>
-		                            <div class="product-table-info">
-		                                <div data-wf-sku-bindings="%5B%7B%22from%22%3A%22f_width_%22%2C%22to%22%3A%22innerHTML%22%7D%5D">${vo.addr}</div>
-		                                <!-- <div>in</div> -->
-		                            </div>
-		                        </div>
-		                        <div class="product-table-cell">
-		                            <div>전화번호</div>
-		                            <div class="product-table-info">
-		                                <div data-wf-sku-bindings="%5B%7B%22from%22%3A%22f_height_%22%2C%22to%22%3A%22innerHTML%22%7D%5D">${vo.phone}</div>
-		                                <!-- <div>in</div> -->
-		                            </div>
-		                        </div>
-		                        <div class="product-table-cell">
-		                            <div>운영시간</div>
-		                            <div class="product-table-info">
-		                                <div data-wf-sku-bindings="%5B%7B%22from%22%3A%22f_length_%22%2C%22to%22%3A%22innerHTML%22%7D%5D">${vo.bhour}</div>
-		                                <!-- <div>in</div> -->
-		                            </div>
-		                        </div>
-		                        <div class="product-table-cell no-border-bottom">
-		                            <div>요금</div>
-		                            <div class="product-table-info">
-		                                <div data-wf-sku-bindings="%5B%7B%22from%22%3A%22f_weight_%22%2C%22to%22%3A%22innerHTML%22%7D%5D">${vo.rate}</div>
-		                                <!-- <div>oz</div> -->
-		                            </div>
-		                        </div>
-		                    </div>
-	                    </div>
                		</div>
                 </div>
             </div>
