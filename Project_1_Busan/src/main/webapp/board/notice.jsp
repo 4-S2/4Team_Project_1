@@ -114,6 +114,7 @@
 					<c:if test="${endPage<totalpage}">
 						<li><a href="notice.do?page=${endPage+1}">&gt;</a></li>
 					</c:if>
+					
 				</ul>
 			</div>
 			
