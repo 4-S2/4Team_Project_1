@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+   <script>
+    $(document).ready(function(){
+        // 드롭다운 메뉴에만 적용
+        $('.navbar-nav .dropdown-toggle').dropdown();
+    });
+</script>
     
 <nav class="navbar navbar-inverse">
 	<div class="container-fluid">
