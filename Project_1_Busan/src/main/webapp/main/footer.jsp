@@ -59,7 +59,7 @@
 	<c:if test="${recentList.size() > 0 }">	
 	<h6>최근 본 목록</h6>
 	<ul>
-		<c:forEach var="vo" items="${recentList }">
+		<c:forEach var="vo" items="${recentList }" begin="1" end="5" >
 			<li><a href="../busan/tour_detail.do?no=${vo.no }"><img src="${vo.poster }"></a></li>
 		</c:forEach>
 	</ul>

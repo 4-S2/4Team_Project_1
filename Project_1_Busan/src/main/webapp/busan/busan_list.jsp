@@ -23,6 +23,14 @@
             padding: 5px 18px;
             margin: 0px auto;
          }
+         a.tag:hover{
+         color: #2b75d5;
+         text-decoration: none;
+         }
+         a.tag:focus{
+         color: white;
+         text-decoration: none;
+         }
          a {
          transition: color 0.2s; /* 모든 링크에 대한 트랜지션 추가 */
          }
@@ -33,14 +41,49 @@
          background-color: #2b75d5;
          color: white;
          }
+         img{
+           height: 100%;
+           object-fit: cover;
+         }
+         .product-card-image-wrapper{
+           padding:0px;
+           height: 260px;
+         }
+         .product-card {
+         overflow: hidden;
+         }
+         .product-card-wrapper{
+	     height: 360px;
+         }
+         img{
+	 	 width: 100%;
+	     height: 100%;
+	     object-fit: cover;
+         }
+         .product-card{
+	     padding: 0px 0px 0px;
+         }
+         .subscribe-form{
+         margin-top: 130px;
+         }
+         .search .button{
+         background-color: #2b75d5;
+         }
+         .list h6{
+         margin-top: 20px;
+         font-size: 16px;
+         }
+         .product-card-price{
+         background-color: #2b75d5;
+         }
         </style>
         <script type="text/javascript">
-            !function(o, c) {
+            /* !function(o, c) {
                 var n = c.documentElement
                   , t = " w-mod-";
                 n.className += t + "js",
                 ("ontouchstart"in o || o.DocumentTouch && c instanceof DocumentTouch) && (n.className += t + "touch")
-            }(window, document);
+            }(window, document); */
             
          // 초기에 선택된 링크
             document.addEventListener('DOMContentLoaded', function() {
@@ -109,7 +152,7 @@
             </div> -->
             
             
-            <div class="section">
+            <div class="section list">
                 <div class="wrapper">
                     <div class="shop-header">
                         <h3 class="no-margin w-hidden-small w-hidden-tiny">${cate}</h3>
@@ -132,11 +175,11 @@
                     </div>
 
 					<!-- list -->
-                    <div class="full-width w-dyn-list">
+                    <div class="full-width w-dyn-list list2">
                         <div role="list" class="products w-dyn-items">
                             <c:forEach var="vo" items="${list}">
                             <div role="listitem" class="product-card-wrapper w-dyn-item">
-                                <a href="${tab}_detail.do?no=${vo.no }" class="product-card w-inline-block">
+                                <a href="../busan/${tab }_detail.do?no=${vo.no}" class="product-card w-inline-block">
                                     <div class="product-card-image-wrapper">
                                         <img src="${vo.poster}" alt="" sizes="(max-width: 479px) 73vw, (max-width: 767px) 34vw, (max-width: 991px) 33vw, 12vw"/>
                                     </div>
@@ -159,13 +202,13 @@
                             => &lt;
                         --%>
                         <c:if test="${startPage>1}">
-                            <li><a href="${tab}.do?page=${startPage-1}">&lt;</a></li>
+                            <li><a href="${tab }.do?page=${startPage-1}">&lt;</a></li>
                         </c:if>
                         <c:forEach var="i" begin="${startPage}" end="${endPage}">
-                            <li ${curpage==i?"class=active":""}><a href="${tab}.do?page=${i}">${i}</a></li>
+                            <li ${curpage==i?"class=active":""}><a href="${tab }.do?page=${i}">${i}</a></li>
                         </c:forEach>
                         <c:if test="${endPage<totalpage}">
-                            <li><a href="${tab}.do?page=${endPage+1}">&gt;</a></li>
+                            <li><a href="${tab }.do?page=${endPage+1}">&gt;</a></li>
                         </c:if>
                     </ul>
                 </div>
