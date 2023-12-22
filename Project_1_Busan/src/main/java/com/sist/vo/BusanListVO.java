@@ -18,9 +18,16 @@ public class BusanListVO {
 		   private String[] deimage;
 		   private String rdate;
 		   private String rate;
+		   private int cate;
 		
 		
 		
+		public int getCate() {
+			return cate;
+		}
+		public void setCate(int cate) {
+			this.cate = cate;
+		}
 		public String[] getTag() {
 			return tag;
 		}
