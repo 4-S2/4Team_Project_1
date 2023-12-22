@@ -56,11 +56,28 @@
 </div>
 	
 <div id="cookieBar">
-	<c:if test="${recentList.size() > 0 }">	
+	<c:if test="${rcntList.size() > 0 }">	
 	<h6>최근 본 목록</h6>
 	<ul>
-		<c:forEach var="vo" items="${recentList }" begin="1" end="5" >
-			<li><a href="../busan/tour_detail.do?no=${vo.no }"><img src="${vo.poster }"></a></li>
+		<c:forEach var="vo" items="${rcntList }" begin="1" end="5" >
+			<c:choose>
+				 <c:when test="${vo.cate == 1 }"> 
+				 	<li><a href="../busan/tour_detail.do?no=${vo.no }"><img src="${vo.poster }"></a></li>
+				 </c:when>
+				 <c:when test="${vo.cate == 2 }"> 
+				 	<li><a href="../busan/festival_detail.do?no=${vo.no }"><img src="${vo.poster }"></a></li>
+				 </c:when>
+				 <c:when test="${vo.cate == 3 }"> 
+				 	<li><a href="../busan/activity_detail.do?no=${vo.no }"><img src="${vo.poster }"></a></li>
+				 </c:when>
+				 <c:when test="${vo.cate == 4 }"> 
+				 	<li><a href="../busan/food_detail.do?no=${vo.no }"><img src="${vo.poster }"></a></li>
+				 </c:when>
+				 <c:when test="${vo.cate == 5 }"> 
+				 	<li><a href="../busan/exhibition_detail.do?no=${vo.no }"><img src="${vo.poster }"></a></li>
+				 </c:when>
+			</c:choose>
+			
 		</c:forEach>
 	</ul>
 	</c:if>	

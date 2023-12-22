@@ -10,24 +10,24 @@ import com.sist.dao.GoodsDAO;
 import com.sist.vo.GoodsVO;
 
 public class GoodsModel {
-	@RequestMapping("busan/goods_detail.do")
+	@RequestMapping("store/goods_detail.do")
 	public String busan_goods_detail(HttpServletRequest request,
 			  HttpServletResponse response)
 	{
 		  // DB연동 
 		  //1. 요청값 받기
-		  String no=request.getParameter("no");
+		  String gno=request.getParameter("gno");
 
 		  GoodsDAO dao=new GoodsDAO();
-		  List<GoodsVO> list=dao.goodsDetailData(Integer.parseInt(no));
+		  List<GoodsVO> list=dao.goodsDetailData(Integer.parseInt(gno));
 		 
 		  request.setAttribute("list", list);
 		  //3. 결과값 모아서 request에 저장 
-		  request.setAttribute("main_jsp", "../busan/goods_detail.jsp");
+		  request.setAttribute("main_jsp", "../store/goods_detail.jsp");
 		  return "../main/main.jsp";
 	}
 	
-	@RequestMapping("busan/goods.do")
+	@RequestMapping("store/goods.do")
 	public String busan_goods_list(HttpServletRequest request,
 			  HttpServletResponse response)
 	{
@@ -55,7 +55,7 @@ public class GoodsModel {
 		   request.setAttribute("endPage", endPage);
 		  request.setAttribute("list", list);
 		  //3. 결과값 모아서 request에 저장 
-		  request.setAttribute("main_jsp", "../busan/goods_detail.jsp");
+		  request.setAttribute("main_jsp", "../store/goods.jsp");
 		  return "../main/main.jsp";
 	}
 }

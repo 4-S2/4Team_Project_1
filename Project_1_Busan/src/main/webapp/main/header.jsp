@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+   <script>
+    $(document).ready(function(){
+        // 드롭다운 메뉴에만 적용
+        $('.navbar-nav .dropdown-toggle').dropdown();
+    });
+</script>
     
 <nav class="navbar navbar-inverse">
 	<div class="container-fluid">
@@ -20,7 +26,7 @@
 		            </ul>
 	        </li>
 	        
-	        <li><a href="../busan/goods.do">특산물 쇼핑</a></li>
+	        <li><a href="../store/goods.do">특산물 쇼핑</a></li>
 	        
 	        <li class="dropdown">
 	            <a class="dropdown-toggle" data-toggle="dropdown" href="#">커뮤니티<span class="caret"></span></a>

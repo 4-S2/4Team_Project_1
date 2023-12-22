@@ -2448,7 +2448,7 @@ td,th{padding:0}
      color: #111;
      font-size: 14px;
      line-height: normal;
-     letter-spacing: -0.5px;
+     letter-spacing: -0.75px;
    }
 
    h1 {
@@ -2617,8 +2617,8 @@ td,th{padding:0}
    }
    
    .wrapper.side-paddings {
-     padding-right: 15px;
-     padding-left: 15px;
+     padding-right: 0;
+     padding-left: 0;
    }
    
    .button {
@@ -4809,6 +4809,9 @@ a{
   color: #2b75d5;
   text-decoration: none;
  }
+ ul{
+	 padding-left: 0 !important;
+ }
 
  .navbar{
   position: fixed;
@@ -4864,6 +4867,7 @@ a{
   background-size: cover;
   background-repeat: no-repeat;
   color: #fff;
+  cursor: grab;
 }
 #mainVisual .tourSlide .slide1{
   background-image: url("../images/visual1.jpg");
@@ -4887,14 +4891,17 @@ a{
 :root {
     --swiper-theme-color: #fff;
 }
-#mainVisual .swiper-button-next, .swiper-button-prev{
+#mainVisual .swiper-button-next,
+#mainVisual .swiper-button-prev{
 	opacity: 0.5;
 }
-#mainVisual .swiper-button-next:hover, .swiper-button-prev:hover{
+#mainVisual .swiper-button-next:hover,
+#mainVisual .swiper-button-prev:hover{
 	opacity: 1;
 	
 }
-#mainVisual .swiper-button-next:after, .swiper-button-prev:after{
+#mainVisual .swiper-button-next:after,
+#mainVisual .swiper-button-prev:after{
 	font-size: 28px;
 }
 #mainVisual .swiper-button-next {
@@ -4914,14 +4921,14 @@ a{
     overflow: hidden;
 }
 #foodShop{
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  justify-content: space-between;
-  align-items: start;
-  gap: 30px;
-  width: 1200px;
-  margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: start;
+    gap: 30px;
+    width: 1200px;
+    margin: 0 auto;
 }
 #food .products{
 	flex-wrap: nowrap;
@@ -5001,6 +5008,7 @@ a{
 }
 #festival_activity .swiper .swiper-slide{
 	position: relative;
+	cursor: grab;
 }
 #festival_activity .swiper .swiper-slide:hover{
     box-shadow: 0 8px 20px -4px rgba(0, 0, 0, 0.15);
@@ -5080,22 +5088,22 @@ a{
 }
 
 #bottom{
-  width: 100%;
+    width: 100%;
 }
 #bottom .wrapper{
-  display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 15px;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 15px;
 }
 #bottom .con-box{
-  width: 33.333%;
-  padding: 20px;
-  border-radius: 15px;
-  background-color: #fff;
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.15);
+    width: 33.333%;
+    padding: 20px;
+    border-radius: 15px;
+    background-color: #fff;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.15);
 }
 #bottom .con-box .shop-header{
 	margin-bottom: 10px;
@@ -5120,20 +5128,19 @@ a{
     font-weight: normal;
 }
 #bottom .con-box ul{
-  padding-left: 0;
+    padding-left: 0;
 }
 #bottom .con-box ul li{
-  padding: 10px 5px;
-  border-bottom: 1px solid #ddd;
-
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  word-break: break-all;
+    padding: 10px 5px;
+    border-bottom: 1px solid #ddd;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    word-break: break-all;
 }
 #bottom .con-box ul li:last-child{
-  border-bottom: none;
-  padding-bottom: 0;
+    border-bottom: none;
+    padding-bottom: 0;
 }
 #bottom .service h2{
 	margin-top: 15px;
@@ -5149,16 +5156,36 @@ a{
 #cookieBar{
 	position: fixed;
 	top: 50%;
-	right: 80px;
+	right: 40px;
+	transform: translate(0, -50%);
 	z-index: 999;
-	width: 80px;	
+	width: auto;
+	background-color: #fff;
+	border: 1px solid #eee;
+	border-radius: 10px;
+	box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.15);
+	overflow: hidden;
+}
+#cookieBar h6{
+	display: block;
+	width: 100%;
+	padding: 8px 0 8px 0;
+	background-color: #005eb4;
+	color: #fff;
+	text-align: center;
+	font-size: 14px;
+	font-weight: 500;
+}
+#cookieBar ul{
+	padding: 0 10px !important;
 }
 #cookieBar ul li{
 	width: 60px;
 	height: 60px;
 	border: 10px;
+	border-radius: 5px;
 	overflow: hidden;
-	margin-top: 10px;	
+	margin: 0 auto 10px auto;	
 }
 #cookieBar ul li img{
 	width: 100%;
@@ -5201,6 +5228,89 @@ a{
 #topBtn:hover{
 	background-color: #888;
 	transition: all ease-in-out 0.3s;
+}
+
+
+/***** detail page *****/
+#detail .product-top{
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+	gap: 30px;
+}
+#detail .product-poster{
+	width: 60%;
+}
+#detail .product-info{
+	width: 40%;
+	padding-right: 0;
+}
+#detail .product-info h1{
+	font-size: 32px;
+	word-break: keep-all;
+}
+#detail .product-info .heart{
+	margin: 10px 0;
+}
+#detail .product-info button{
+	width : 100px;
+	text-align: center;
+	line-height: 36px;
+	font-size: 14px;
+	border-radius: 500px;
+	margin-left: 10px;
+}
+#detail .product-info .heart button{
+	border: 2px solid #005eb4;
+	background-color: #fff;
+	color: #005eb4;
+}
+#detail .product-info .jjim button{
+	border: 2px solid #005eb4;
+	background-color: #005eb4;
+	color: #fff;
+}
+#detail #detailCont .deimage{
+	max-width: 100%;
+	margin-bottom: 10px;
+	text-align: center;
+}
+#detail #detailCont .cont{
+	margin-top: 20px;
+}
+#detail .tab-menu{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	width: 100%;
+	margin: 40px 0;
+	border-top: 1px solid #eee;
+	border-bottom: 1px solid #eee;
+}
+#detail .tab-menu li{
+	width: 100%;
+	padding: 15px 0;
+	text-align: center;
+	font-size: 16px;
+	border-right: 1px solid #eee;
+}
+#detail .tab-menu li:last-child{
+	border-right: 0;
+}
+#detail .product-table{
+	width: 100%;
+	padding: 15px 30px;
+	margin: 40px 0;
+}
+#detail .product-table-cell{
+	font-size: 14px;
+}
+#detail .tag-list{
+	margin-top: 20px;
+}
+#detail .tag-list a{
+	display: inline-block;
+	margin-right: 10px;
 }
 
 
