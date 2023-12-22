@@ -17,7 +17,7 @@ public class NoticeDAO {
       // DBCP라이브러리 
       private CreateDBCPConnection dbconn=
                  new CreateDBCPConnection();
-      
+      private final int rowSize=12;
       public static NoticeDAO newInstance() {
          if (dao==null)
             dao = new NoticeDAO();
@@ -78,8 +78,7 @@ public class NoticeDAO {
             // 3. 미리 전송 
             ps=conn.prepareStatement(sql);
             // 4. 실행 요청전에 ?에 값을 채운다 
-            int rowSize=12;
-            int start=(rowSize*page)-(rowSize-1); // 오라클 => 1번 
+            int start=(rowSize*page)-(rowSize-1); // 오라클 => 1번  
             int end=rowSize*page;
             
             ps.setInt(1, start);
