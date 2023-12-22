@@ -95,7 +95,7 @@
 		                    <div class="tag-list">
 		                    	<h5>연관 태그</h5>
 			                    <c:forEach var="tag" items="${vo.tag}">
-			                    	<a href="#"><span>#${tag}</span></a>
+			                    	<a href="#"><span>${tag}</span></a>
 			                    </c:forEach>
 		                    </div>
 		                </div>
