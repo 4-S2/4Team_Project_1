@@ -1,7 +1,7 @@
 package com.sist.vo;
 
 public class ExVO {
-	private int eno,elike,hit,jjim,price;
+	private int eno,elike,hit,jjim,price,cocate;
 	public int getJjim() {
 		return jjim;
 	}
@@ -14,6 +14,14 @@ public class ExVO {
 	public void setPrice(int price) {
 		this.price = price;
 	}
+	
+	public int getCocate() {
+		return cocate;
+	}
+	public void setCocate(int cocate) {
+		this.cocate = cocate;
+	}
+
 	private String ename,eename,efield,eitem,cate,homepage,s_date,e_date,loc,loc_detail,host,poster;
 	private double score;
 	public int getEno() {

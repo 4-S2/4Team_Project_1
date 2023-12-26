@@ -18,15 +18,15 @@ public class BusanListVO {
 		   private String[] deimage;
 		   private String rdate;
 		   private String rate;
-		   private int cate;
+		   private int cocate;
 		
 		
 		
-		public int getCate() {
-			return cate;
+		public int getCocate() {
+			return cocate;
 		}
-		public void setCate(int cate) {
-			this.cate = cate;
+		public void setCocate(int cocate) {
+			this.cocate = cocate;
 		}
 		public String[] getTag() {
 			return tag;

@@ -61,19 +61,19 @@
 	<ul>
 		<c:forEach var="vo" items="${rcntList }" begin="1" end="5" >
 			<c:choose>
-				 <c:when test="${vo.cate == 1 }"> 
+				 <c:when test="${vo.cocate == 1 }"> 
 				 	<li><a href="../busan/tour_detail.do?no=${vo.no }"><img src="${vo.poster }"></a></li>
 				 </c:when>
-				 <c:when test="${vo.cate == 2 }"> 
+				 <c:when test="${vo.cocate == 2 }"> 
 				 	<li><a href="../busan/festival_detail.do?no=${vo.no }"><img src="${vo.poster }"></a></li>
 				 </c:when>
-				 <c:when test="${vo.cate == 3 }"> 
+				 <c:when test="${vo.cocate == 3 }"> 
 				 	<li><a href="../busan/activity_detail.do?no=${vo.no }"><img src="${vo.poster }"></a></li>
 				 </c:when>
-				 <c:when test="${vo.cate == 4 }"> 
+				 <c:when test="${vo.cocate == 4 }"> 
 				 	<li><a href="../busan/food_detail.do?no=${vo.no }"><img src="${vo.poster }"></a></li>
 				 </c:when>
-				 <c:when test="${vo.cate == 5 }"> 
+				 <c:when test="${vo.cocate == 5 }"> 
 				 	<li><a href="../busan/exhibition_detail.do?no=${vo.no }"><img src="${vo.poster }"></a></li>
 				 </c:when>
 			</c:choose>

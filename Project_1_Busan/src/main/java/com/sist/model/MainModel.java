@@ -41,6 +41,7 @@ public class MainModel {
         // 각 리스트 쿠키 번호만 잘라서 저장
 		Cookie[] cookies = request.getCookies();
 		List<BusanListVO> rcntList = new ArrayList<>();
+		List<ExVO> eRcntList = new ArrayList<>();
 		/*
 		 * List<BusanListVO> tRntList = new ArrayList<>(); List<BusanListVO> fRntList =
 		 * new ArrayList<>(); List<BusanListVO> aRntList = new ArrayList<>();
@@ -57,7 +58,7 @@ public class MainModel {
 					while(st.hasMoreTokens()) {
 						int no = Integer.parseInt(st.nextToken());
 						BusanListVO vo = topdao.busanDetailData(no,"tour");
-						vo.setCate(1);
+						vo.setCocate(1);
 						rcntList.add(vo);
 					}
 				}else if(c.getName().startsWith("festival")) {
@@ -67,7 +68,7 @@ public class MainModel {
 					while(st.hasMoreTokens()) {
 						int no = Integer.parseInt(st.nextToken());
 						BusanListVO vo = topdao.busanDetailData(no,"festival");
-						vo.setCate(2);
+						vo.setCocate(2);
 						rcntList.add(vo);
 					}
 				}else if(c.getName().startsWith("activity")) {
@@ -77,7 +78,7 @@ public class MainModel {
 					while(st.hasMoreTokens()) {
 						int no = Integer.parseInt(st.nextToken());
 						BusanListVO vo = topdao.busanDetailData(no,"activity");
-						vo.setCate(3);
+						vo.setCocate(3);
 						rcntList.add(vo);
 					}
 				}else if(c.getName().startsWith("food")) {
@@ -87,8 +88,18 @@ public class MainModel {
 					while(st.hasMoreTokens()) {
 						int no = Integer.parseInt(st.nextToken());
 						BusanListVO vo = topdao.foodDetailData(no);
-						vo.setCate(4);
+						vo.setCocate(4);
 						rcntList.add(vo);
+					}
+				}else if(c.getName().startsWith("exhibition")) {
+					String value = c.getValue();
+					StringTokenizer st = new StringTokenizer(value, "|");
+					
+					while(st.hasMoreTokens()) {
+						int eno = Integer.parseInt(st.nextToken());
+						ExVO vo = exTopDao.exDetailData(eno);
+						vo.setCocate(5);
+						eRcntList.add(vo);
 					}
 				}
 			}
