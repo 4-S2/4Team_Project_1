@@ -92,7 +92,6 @@ public class BusanDetailModel {
 
 		  BusanDAO dao = new BusanDAO();
 		  BusanListVO vo = dao.busanDetailData(Integer.parseInt(no),"tour");
-		  int dimgSize = (vo.getDeimage()).length;
 		  
 		  // 쿠키 저장
 		  Cookie[] cookies = request.getCookies();
@@ -145,7 +144,6 @@ public class BusanDetailModel {
 				}
 			}
 			
-			request.setAttribute("dimgSize",dimgSize);
 			request.setAttribute("cate","명소");
 			request.setAttribute("vo", vo);
 		  
@@ -164,7 +162,6 @@ public class BusanDetailModel {
 
 		  BusanDAO dao = new BusanDAO();
 		  BusanListVO vo = dao.busanDetailData(Integer.parseInt(no),"festival");
-		  int dimgSize = (vo.getDeimage()).length;
 		  
 		  // 쿠키 저장
 		  Cookie[] cookies = request.getCookies();
@@ -217,7 +214,6 @@ public class BusanDetailModel {
 				}
 			}
 		  
-		  request.setAttribute("dimgSize",dimgSize);
 		  request.setAttribute("cate","축제");
 		  request.setAttribute("vo", vo);
 		  
@@ -236,7 +232,6 @@ public class BusanDetailModel {
 
 		  BusanDAO dao = new BusanDAO();
 		  BusanListVO vo = dao.busanDetailData(Integer.parseInt(no),"activity");
-		  int dimgSize = (vo.getDeimage()).length;
 		  
 		  // 쿠키 저장
 		  Cookie[] cookies = request.getCookies();
@@ -289,7 +284,6 @@ public class BusanDetailModel {
 				}
 			}
 		  
-		  request.setAttribute("dimgSize",dimgSize);
 		  request.setAttribute("cate","체험");
 		  request.setAttribute("vo", vo);
 		  

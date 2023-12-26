@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 
 <div id="detail">   
     <!-- <div class="section no-padding-vertical">
@@ -50,9 +52,11 @@
                		<div id="detailCont">
 	               		<div class="detail-info">              		
 	               			<!-- 상세 이미지 -->
-	               			<c:forEach var="dimg" items="${vo.deimage}" >
-	                    		<img class="deimage" src="${dimg}" alt="상세 이미지"> 
-	                    	</c:forEach>
+							<c:forEach var="dimg" items="${vo.deimage}" varStatus="d">
+							    <c:if test="${d.index < fn:length(vo.deimage) - 1}">
+							        <img class="deimage" src="${dimg}" alt="상세 이미지"> 
+							    </c:if>
+							</c:forEach>
 	                    	
 	                    	<!-- 상세 설명 -->
 	                    	<p class="cont">${vo.cont}</p>
