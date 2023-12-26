@@ -1,46 +1,51 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 
 <html>
 <head>
   <meta charset="UTF-8">
   <title>회원가입</title>
-   <style>
-    
-    body {
-      font-family: sans-serif;
-      background-color: #f0f0f0; /* Light gray background */
-    }
+  <%-- Assume that you have a CSS file included here --%>
+  <style>
+    <%-- Define your arbitrary delimiter --%>
+    <% String delimiter = "%{"; %>
 
-    label {
-      display: inline;
+    .signup-container {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh; /* Ensure full viewport height */
+      margin-top: 50px; /* Add margin to create space below the header */
+      position: relative; /* Make the container position relative */
+      z-index: 1; /* Ensure it's above other elements */
     }
 
     .container {
-      width: 500px;
-      margin: 0 auto;
+      width: 400px;
       padding: 20px;
       background-color: #ffffff; /* White container background */
-      border: 1px solid #ddd; /* Light gray border */
+      border: 1px solid #dee2e6; /* Light gray border */
       border-radius: 8px; /* Rounded corners */
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Box shadow for depth */
+      z-index: 2; /* Ensure it's above other elements, including the header */
     }
 
     .title {
       font-size: 24px;
       text-align: center;
-      color: #3498db; /* Blue title color */
+      color: #007bff; /* Blue title color */
+      margin-bottom: 10px; /* Reduced margin */
     }
 
     .form-group {
-      margin-bottom: 10px;
+      margin-bottom: 10px; /* Reduced margin */
     }
 
     .form-control {
       width: 100%;
       padding: 10px;
-      border: 1px solid #3498db; /* Blue border */
+      border: 1px solid #007bff; /* Blue border */
       border-radius: 5px;
     }
 
@@ -48,90 +53,137 @@
       color: red;
     }
 
-    .join-button, .btn1 {
-      width: 100px;
+    .btn {
+      width: 100%;
       height: 40px;
       border: none;
       border-radius: 5px;
       cursor: pointer;
       color: #fff; /* White text color */
+      background-color: #007bff; /* Blue button background */
+      margin-top: 10px;
     }
 
-    .join-button {
-      background-color: #3498db; /* Blue button background */
+    .btn-secondary {
+      background-color: #6c757d; /* Secondary button background */
     }
-
-    .btn1 {
-      background-color: #000; /* Black button background */
-    }
-
   </style>
-   <script>
-        function goBack() {
-            window.location.href = document.referrer;
-        }
-    </script>
+  <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script>
+    function sample6_execDaumPostcode() {
+        new daum.Postcode({
+            oncomplete: function(data) {
+                // 팝업에서 검색 결과 항목이 클릭될 때 실행될 코드 부분입니다.
+
+                // 각 주소별 노출 규칙에 따라 주소를 조합합니다.
+                // 아래로 내려오는 변수가 값이 없으면 공백('') 값을 가지므로 이를 참고하여 분기합니다.
+                var addr = ''; // 주소 변수
+                var extraAddr = ''; // 참고 변수
+
+                // 사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져옵니다.
+                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택한 경우
+                    addr = data.roadAddress;
+                } else { // 사용자가 지번 주소를 선택한 경우
+                    addr = data.jibunAddress;
+                }
+
+                // 사용자가 선택한 주소가 도로명 주소인 경우 참고항목을 조합합니다.
+                if(data.userSelectedType === 'R'){
+                    // 법정동이 있고 그 법정동이 '동/로/가'로 끝난다면 추가합니다. (법정동 제외)
+                    // 법정동의 경우 마지막 글자가 '동/로/가'로 끝납니다.
+                    if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                        extraAddr += data.bname;
+                    }
+                    // 건물명이 있고 아파트일 경우 추가합니다.
+                    if(data.buildingName !== '' && data.apartment === 'Y'){
+                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                    }
+                    // 표시할 참고항목이 있다면 괄호를 추가하여 최종 문자열을 생성합니다.
+                    if(extraAddr !== ''){
+                        extraAddr = '(' + extraAddr + ')';
+                    }
+                    // 조합된 참고항목을 해당 필드에 삽입합니다.
+                    document.getElementById("sample6_extraAddress").value = extraAddr;
+                
+                } else {
+                    document.getElementById("sample6_extraAddress").value = '';
+                }
+
+                // 우편번호와 주소 정보를 각각의 필드에 입력합니다.
+                document.getElementById('sample6_postcode').value = data.zonecode;
+                document.getElementById("sample6_address").value = addr;
+                // 상세주소 필드로 커서를 이동합니다.
+                document.getElementById("sample6_detailAddress").focus();
+            }
+        }).open();
+    }
+</script>
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <script src="../js/member.js"></script>
+  <script>
+    function goBack() {
+      window.history.back();
+    }
+  </script>
 </head>
-  <body>
+<body>
+  <div class="signup-container">
     <div class="container">
-        <h2 class="title">회원가입</h2>
-        <form action="RegisterServlet" method="post"> <!-- Assuming you have a servlet named RegisterServlet to handle the form submission -->
-            <div class="form-group">
-                <label for="id">아이디</label>
-                <span class="required">*</span>
-                <input type="text" class="form-control" name="id" id="id" placeholder="아이디를 입력하세요" required>
-                
-            </div>
-            <div class="form-group">
-                <label for="password">비밀번호</label>
-                 <span class="required">*</span>
-                <input type="password" class="form-control" name="password" id="password" placeholder="비밀번호를 입력하세요" required>
-               
-            </div>
-            <div class="form-group">
-                <label for="password_confirmation">비밀번호 확인</label>
-                <span class="required">*</span>
-                <input type="password" class="form-control" name="password_confirmation" id="password_confirmation" placeholder="비밀번호를 다시 입력하세요" required>
-                
-            </div>
-            <div class="form-group">
-                <label for="name">이름</label>
-                <span class="required">*</span>
-                <input type="text" class="form-control" name="name" id="name" placeholder="이름을 입력하세요">
-            </div>
-            <div class="form-group">
-                <label for="mobile">휴대폰 번호</label>
-                <span class="required">*</span>
-                <input type="text" class="form-control" name="mobile" id="mobile" placeholder="휴대폰 번호를 입력하세요">
-            </div>
-            <div class="form-group">
-                <label for="email">이메일</label>
-                <span class="required">*</span>
-                <input type="email" class="form-control" name="email" id="email" placeholder="이메일을 입력하세요">
-            </div>
-           
-            <div class="form-group">
-                <label for="address">주소</label>
-                <span class="required">*</span>
-                <input type="text" class="form-control" name="address" id="address" placeholder="주소를 입력하세요">
-            </div>
-            <div class="form-group">
-                <label for="detail_address">상세 주소</label>
-                <span class="required">*</span>
-                <input type="text" class="form-control" name="address" id="address" placeholder="주소를 입력하세요">
-            </div>
-            <div class="form-group">
-                <label for="postal_code">우편번호</label>
-                <span class="required">*</span>
-                <input type="text" class="form-control" name="postal_code" id="postal_code" placeholder="우편번호를 입력하세요">
-            </div>
+      <h2 class="title">회원가입</h2>
+      <form action="RegisterServlet" method="post">
+        <!-- Your form groups here -->
+        <div class="form-group">
+        
+     
+          <label for="id">아이디 <span class="required">*</span></label>
           
-             
-            <button type="submit" class="btn">회원가입</button>
-            
-            <button type="button" class="btn" onclick="goBack()">돌아가기</button>
-             
-        </form>
+          <input type="text" class="form-control" name="id" id="id" placeholder="아이디를 입력하세요" required>
+        </div>
+        <div class="form-group">
+          <label for="password">비밀번호 <span class="required">*</span></label>
+          <input type="password" class="form-control" name="password" id="password" placeholder="비밀번호를 입력하세요" required>
+        </div>
+        <div class="form-group">
+          <label for="password_confirmation">비밀번호 확인 <span class="required">*</span></label>
+          <input type="password" class="form-control" name="password_confirmation" id="password_confirmation" placeholder="비밀번호를 다시 입력하세요" required>
+          <div id="passwordConfirmationMessage" style="color: red;"></div>
+        </div>
+        <div class="form-group">
+          <label for="email">이메일 <span class="required">*</span></label>
+          <input type="email" class="form-control" name="email" id="email" placeholder="이메일을 입력하세요" required>
+          <div id="emailFormatMessage" style="color: red;"></div>
+        </div>
+        <div class="form-group">
+          <label for="name">이름 <span class="required">*</span></label>
+          <input type="text" class="form-control" name="name" id="name" placeholder="이름을 입력하세요" required>
+        </div>
+        <div class="form-group">
+          <label for="mobile">휴대폰 번호 <span class="required">*</span></label>
+          <input type="text" class="form-control" name="mobile" id="mobile" placeholder="휴대폰 번호를 입력하세요" required>
+        </div>
+        <div class="form-group">
+  <label for="postal_code">우편번호 <span class="required">*</span></label>
+  <input type="text" class="form-control" name="postal_code" id="sample6_postcode" placeholder="우편번호를 입력하세요" readonly required>
+  <button type="button" id="searchZipCodeBtn">우편번호 찾기</button>
+</div>
+<div class="form-group">
+  <label for="address">주소 <span class="required">*</span></label>
+  <input type="text" class="form-control" name="address" id="sample6_address" placeholder="주소를 입력하세요" readonly required>
+</div>
+<div class="form-group">
+  <label for="detail_address">상세 주소</label>
+  <input type="text" class="form-control" name="detail_address" id="sample6_detailAddress" placeholder="상세 주소를 입력하세요">
+</div>
+<div class="form-group">
+  <label for="extra_address">참고항목</label>
+  <input type="text" class="form-control" name="extra_address" id="sample6_extraAddress" readonly>
+</div>
+        <!-- Add other form groups here -->
+        <button type="submit" class="btn">회원가입</button>
+        <button type="button" class="btn btn-secondary" onclick="goBack()">돌아가기</button>
+     
+      </form>
     </div>
+  </div>
 </body>
 </html>

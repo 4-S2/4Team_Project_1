@@ -11,6 +11,35 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
         <link href="../css/style.css" rel="stylesheet" type="text/css"/> 
+        <style type="text/css">
+     .product-table{
+         width:400px;
+        }
+ .full-width {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.buy-buttons {
+    margin-top: 10px; /* Adjust the margin as needed */
+}
+
+.w-commerce-commerceaddtocartquantityinput,
+.w-commerce-commerceaddtocartbutton,
+.w-commerce-commercebuynowbutton {
+    margin-bottom: 10px; /* Adjust the margin as needed */
+}
+
+.w-commerce-commerceaddtocartquantityinput {
+    width: 50px; /* Adjust the width as needed */
+}
+.w-commerce-commerceaddtocartbutton {
+    vertical-align: middle;
+}
+        
+        </style>
         <script type="text/javascript">
             !function(o, c) {
                 var n = c.documentElement
@@ -115,13 +144,6 @@
                                         <!-- <div>in</div> -->
                                     </div>
                                 </div>
-                                 <div class="product-table-cell">
-                                    <div>상세장소</div>
-                                    <div class="product-table-info">
-                                        <div data-wf-sku-bindings="%5B%7B%22from%22%3A%22f_length_%22%2C%22to%22%3A%22innerHTML%22%7D%5D">${vo.loc_detail}</div>
-                                        <!-- <div>in</div> -->
-                                    </div>
-                                </div>
                                  <div class="product-table-cell no-border-bottom">
                                     <div>주최</div>
                                     <div class="product-table-info">
@@ -129,18 +151,20 @@
                                         <!-- <div>in</div> -->
                                     </div>
                                 </div>
+                  
                             </div>
                             	 </p>
-                            <div data-wf-sku-bindings="%5B%7B%22from%22%3A%22f_price_%22%2C%22to%22%3A%22innerHTML%22%7D%5D" class="product-price">${vo.price }</div>
+                            
                             <div class="full-width">
                             
-                                <form data-node-type="commerce-add-to-cart-form" data-commerce-sku-id="5bae129d35e11310a69a82d2" data-loading-text="Adding to cart..." data-commerce-product-id="5bae129d1c68cc806025c48d" class="w-commerce-commerceaddtocartform add-to-cart">
-                                    <input type="number" pattern="^[0-9]+$" inputMode="numeric" id="quantity-652131f9f904302b3296412795400fe8" name="commerce-add-to-cart-quantity-input" min="1" class="w-commerce-commerceaddtocartquantityinput input quantity-input" value="1"/>
+                                 <form data-node-type="commerce-add-to-cart-form" data-commerce-sku-id="5bae129d35e11310a69a82d2" data-loading-text="Adding to cart..." data-commerce-product-id="5bae129d1c68cc806025c48d" class="w-commerce-commerceaddtocartform add-to-cart">
+                                    <!-- <input type="number" pattern="^[0-9]+$" inputMode="numeric" id="quantity-652131f9f904302b3296412795400fe8" name="commerce-add-to-cart-quantity-input" min="1" class="w-commerce-commerceaddtocartquantityinput input quantity-input" value="1"/> -->
                                     <div class="buy-buttons">
                                         <input type="submit" data-node-type="commerce-add-to-cart-button" data-loading-text="Adding to cart..." value="예약하기" aria-busy="false" aria-haspopup="dialog" class="w-commerce-commerceaddtocartbutton button add-to-cart-button"/>
                                         <a data-node-type="commerce-buy-now-button" data-default-text="Buy now" data-subscription-text="Subscribe now" aria-busy="false" aria-haspopup="false" class="w-commerce-commercebuynowbutton button buy-now-button" href="/checkout">Buy now</a>
                                     </div>
                                 </form>
+                                
                                 
                                 <div style="display:none" class="w-commerce-commerceaddtocartoutofstock out-of-stock" tabindex="0">
                                     <div>This product is out of stock.</div>
