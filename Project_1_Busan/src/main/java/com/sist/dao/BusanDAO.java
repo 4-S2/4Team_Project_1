@@ -251,6 +251,80 @@ public class BusanDAO {
 	   return vo;
    }
    
+   // 검색 기능 리스트
+   public List<BusanListVO> BusanFindList(String keyword,int page,String tab)
+   {
+	   List<BusanListVO> list=new ArrayList<>();
+	   try
+	   {
+		   // 1. 연결 
+		   conn=dbconn.getConnection();
+		   // 2. SQL문장 전송 
+		   String sql="SELECT no,title,poster,num "
+				     +"FROM (SELECT no,title,poster,rownum as num "
+				     +"FROM (SELECT no,title,poster "
+				     +"FROM "+tab+" WHERE title LIKE '%'||?||'%' ORDER BY no ASC)) "
+				     +"WHERE num BETWEEN ? AND ?";
+		   // 3. 미리 전송 
+		   ps=conn.prepareStatement(sql);
+		   // 4. 실행 요청전에 ?에 값을 채운다 
+		   int rowSize=12;
+		   int start=(rowSize*page)-(rowSize-1); // 오라클 => 1번 
+		   int end=rowSize*page;
+		   
+		   ps.setString(1, keyword);
+		   ps.setInt(2, start);
+		   ps.setInt(3, end);
+		   
+		   // 5. 실행후에 결과값을 받는다 
+		   ResultSet rs=ps.executeQuery();
+		   while(rs.next()) // 출력 1번째 위치부터 읽기 시작 
+		   {
+			   BusanListVO vo=new BusanListVO();
+			   vo.setNo(rs.getInt(1));
+			   vo.setTitle(rs.getString(2));
+			   vo.setPoster(rs.getString(3));
+			   list.add(vo);
+		   }
+		   rs.close();
+	   }catch(Exception ex)
+	   {
+		  // 에러 출력 
+		   ex.printStackTrace();
+	   }
+	   finally
+	   {
+		   // 반환 => 재사용 
+		   dbconn.disConnection(conn, ps);
+	   }
+	   return list;
+   }
+   
+// 검색 리스트 총 페이지
+   public int BusanFindTotalPage(String keyword,String tab)
+   {
+	   int total=0;
+	   try
+	   {
+		   conn=dbconn.getConnection();
+		   String sql="SELECT CEIL(COUNT(*)/12.0) FROM "+tab
+				   +" WHERE title LIKE '%'||?||'%'";
+		   ps=conn.prepareStatement(sql);
+		   ps.setString(1, keyword);
+		   ResultSet rs=ps.executeQuery();
+		   rs.next();
+		   total=rs.getInt(1);
+		   rs.close();
+	   }catch(Exception ex)
+	   {
+		   ex.printStackTrace();
+	   }
+	   finally
+	   {
+		   dbconn.disConnection(conn, ps);
+	   }
+	   return total;
+   }
 }
 
 

@@ -104,9 +104,11 @@
                 }
               }
             }
+            
         </script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
         <script type="text/javascript">
             window.__WEBFLOW_CURRENCY_SETTINGS = {
                 "currencyCode": "USD",
@@ -118,6 +120,22 @@
                 "template": "{{wf {\"path\":\"symbol\",\"type\":\"PlainText\"} }} {{wf {\"path\":\"amount\",\"type\":\"CommercePrice\"} }} {{wf {\"path\":\"currencyCode\",\"type\":\"PlainText\"} }}",
                 "hideDecimalForWholeNumbers": false
             };
+            
+            $(function(){
+            	$('.tag').on('click',function(){
+            		let tag=$(this).text().substring(1);
+            		$.ajax({
+            			type:'post',
+            			url:'food_find.do',
+            			data:{"tag":tag},
+            			success:function(result)
+            			{
+            				
+            			}
+            		})
+            	})
+            })
+            
         </script>
         <!--  <link href="https://assets.website-files.com/5badda2935e11303a89a461e/5bd83035e7345f2f22c0bece_favicon.png" rel="shortcut icon" type="image/x-icon"/>
         <link href="https://assets.website-files.com/5badda2935e11303a89a461e/5bd8303816e1ea6c375be6cb_webclip.png" rel="apple-touch-icon"/> -->
@@ -128,9 +146,10 @@
                 <div>
                     <div class="search">
                         <div>
-                            <form name="Search-Form" method="get" class="subscribe-form">
-                                <input type="text" class="input subscribe-input w-input" name="Search" placeholder="검색어를 입력하세요" 
-                                id="" required style="width:500px"/>
+                            <form name="Search-Form" method="post" class="subscribe-form" action="food_find.do">
+                            
+                                <input type="text" class="input subscribe-input w-input" name="word" placeholder="검색어를 입력하세요" 
+                                id="find" required style="width:500px" value="${word }"/>
                                 <input type="submit" value="Search" class="button w-button"/>
                             </form>
                         </div>
@@ -140,6 +159,7 @@
             
             <div id="tag-wrap">
                 <a class="tag" id="link1" href="#" onclick="selectLink(this)"><span>#전체</span></a>
+                <a class="tag" id="link1" href="#">#전체</a>
                 <a class="tag" id="link2" href="#" onclick="selectLink(this)"><span>#한식</span></a>
                 <a class="tag" id="link3" href="#" onclick="selectLink(this)"><span>#중식</span></a>
                 <a class="tag" id="link4" href="#" onclick="selectLink(this)"><span>#일식</span></a>
@@ -149,6 +169,15 @@
                 <a class="tag" id="link8" href="#" onclick="selectLink(this)"><span>#해산물</span></a>
                 <a class="tag" id="link9" href="#" onclick="selectLink(this)"><span>#그릴</span></a>
                 
+                <!-- <span class="tag" id="link1">#전체</span>
+                <span class="tag" id="link2">#한식</span>
+                <span class="tag" id="link3">#중식</span>
+                <span class="tag" id="link4">#일식</span>
+                <span class="tag" id="link5">#아세안요리</span>
+                <span class="tag" id="link6">#양식</span>        
+                <span class="tag" id="link7">#카페&베이커리</span>
+                <span class="tag" id="link8">#해산물</span>
+                <span class="tag" id="link9">#그릴</span> -->
             </div>
             
             
