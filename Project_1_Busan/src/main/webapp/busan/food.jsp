@@ -134,6 +134,19 @@
             			}
             		})
             	})
+            	$('.button').on('click',function(){
+            		let word=$('.find').text();
+            		$.ajax({
+            			type:'post',
+            			url:'food_find.do',
+            			data:{"word":word},
+            			success:function(result)
+            			{
+            				
+            			}
+            		})
+            	})
+            	
             })
             
         </script>
