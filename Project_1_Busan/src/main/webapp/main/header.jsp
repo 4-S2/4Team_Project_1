@@ -37,7 +37,7 @@
 	        </li>
 	    </ul>
 	    
-	    <ul class="navbar-user" style="float: right;">
+	    <ul class="navbar-user" style="float: right; margin-bottom: 0">
 	        <li style="display: inline-block;"><a href="../member/login.do" style="padding: 0 15px; line-height: 50px;">로그인</a></li>
 	        <li style="display: inline-block;"><a href="../member/join.do" style="padding: 0 15px; line-height: 50px;">회원가입</a></li>
 	        <li style="display: inline-block;"><a href="#"><img class="icon-cart" src="../images/icon_cart.png"></a></li>
