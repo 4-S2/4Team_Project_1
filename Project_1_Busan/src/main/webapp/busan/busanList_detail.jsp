@@ -6,9 +6,9 @@
 <!-- <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script> -->
 <script type="text/javascript">
 /* //JavaScript
-//이벤트 리스너를 이용하여 탭 버튼에 클릭 이벤트 추가
+// 이벤트 리스너를 이용하여 탭 버튼에 클릭 이벤트 추가
 document.addEventListener('DOMContentLoaded', function() {
- // 각 탭 버튼(li 요소)를 가져와서 클릭 이벤트를 추가
+// 각 탭 버튼(li 요소)를 가져와서 클릭 이벤트를 추가
  var tabButtons = document.querySelectorAll('.tab-menu li');
  for (var i = 0; i < tabButtons.length; i++) {
      tabButtons[i].addEventListener('click', function(event) {
@@ -57,7 +57,7 @@ function showTab(tabName) {
 
 </script>
 
-<div id="detail">   
+<div id="busan" class="detail">   
     <!-- <div class="section no-padding-vertical">
         <div class="wrapper side-paddings">
             <div class="breadcrumbs">
@@ -77,7 +77,6 @@ function showTab(tabName) {
             		<div class="product-poster">
 	                    <img alt="대표 이미지" src="${vo.poster}" sizes="(max-width: 479px) 83vw, (max-width: 767px) 75vw, (max-width: 991px) 76vw, 32vw" />
 	                </div>
-	            
 	                <div class="product-info">
 	                    <h1>${vo.title}</h1>
 	                    <div class="heart">
@@ -99,9 +98,11 @@ function showTab(tabName) {
                			<li id="review">리뷰</li>
                			<li id="reserve">예약하기</li>
                		</ul>
+               		
                		<!-- <div class="shop-header-line">
 	                    <div class="shop-header-color"></div>
 	                </div> -->
+	                
                		<div id="detailCont" class="tab-content">
 	               		<div class="detail-info">              		
 	               			<!-- 상세 이미지 -->
@@ -147,7 +148,6 @@ function showTab(tabName) {
 			                        </div>
 			                    </div>
 		                    </div>
-
 	
 		                    <!-- 해시 태그 -->
 		                    <div class="tag-list">
@@ -159,18 +159,19 @@ function showTab(tabName) {
 		                </div>
                		</div>
                		
-               			    <div id="mapCont" class="tab-content" style="display: none;">
-						        <!-- 지도/주변 추천 내용 -->
-						        지도/주변 추천 내용을 입력하세요.
-						    </div>
-						    <div id="reviewCont" class="tab-content" style="display: none;">
-						        <!-- 리뷰 내용 -->
-						        리뷰 내용을 입력하세요.
-						    </div>
-						    <div id="reserveCont" class="tab-content" style="display: none;">
-						        <!-- 예약하기 내용 -->
-						        예약하기 내용을 입력하세요.
-						    </div>
+             		<div id="mapCont" class="tab-content" style="display: none;">
+				        <!-- 지도/주변 추천 내용 -->
+				        지도/주변 추천 내용을 입력하세요.
+				    </div>
+				    <div id="reviewCont" class="tab-content" style="display: none;">
+				        <!-- 리뷰 내용 -->
+				        리뷰 내용을 입력하세요.
+				    </div>
+				    <div id="reserveCont" class="tab-content" style="display: none;">
+				        <!-- 예약하기 내용 -->
+				        예약하기 내용을 입력하세요.
+				    </div>
+				    
                 </div>
             </div>
         </div>
@@ -180,7 +181,7 @@ function showTab(tabName) {
         <div class="wrapper">
             <div class="shop-header">
                 <h3>추천</h3>
-                <a href="/catalog" class="link arrow-link">전체보기</a>
+                <a href="#" class="link arrow-link">전체보기</a>
                 <div class="shop-header-line">
                     <div class="shop-header-color"></div>
                 </div>

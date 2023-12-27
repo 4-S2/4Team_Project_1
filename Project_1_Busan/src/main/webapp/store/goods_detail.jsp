@@ -3,13 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
 </head>
 <body>
-<img src="${vo.poster }" style="width:300px;height: 450px">
-
-${vo.gname }
-
+	<img src="${vo.poster}" style="width:300px;height: 450px">
+	${vo.gname}
 </body>
 </html> --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -17,8 +14,32 @@ ${vo.gname }
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
+<!-- JavaScript 코드 -->
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', function() {
+    var tabButtons = document.querySelectorAll('.tab-menu li');
+    for (var i = 0; i < tabButtons.length; i++) {
+        tabButtons[i].addEventListener('click', function(event) {
+            var tabId = event.target.id + 'Cont';
+            showTab(tabId);
+        });
+    }
+});
 
-<div id="detail">   
+function showTab(tabName) {
+    var tabContents = document.getElementsByClassName('tab-content');
+    for (var i = 0; i < tabContents.length; i++) {
+        tabContents[i].style.display = 'none';
+    }
+
+    var selectedTab = document.getElementById(tabName);
+    if (selectedTab) {
+        selectedTab.style.display = 'block';
+    }
+}
+</script>
+
+<div id="goods" class="detail">
     <!-- <div class="section no-padding-vertical">
         <div class="wrapper side-paddings">
             <div class="breadcrumbs">
@@ -41,14 +62,20 @@ ${vo.gname }
 	            
 	                <div class="product-info">
 	                    <h1>${vo.gname}</h1>
-	                    <div class="heart">
-	                    	<span>좋아요 수</span>
-	                    	<button>좋아요</button>
-	                    </div>
-	                    <div class="jjim">
-	                    	<span>찜하기 수</span>
-	                    	<button>찜하기</button>
-	                    </div>
+	                    <p class="origin"><span>원산지</span></p>
+	                    <p class="manufacturer"><span>제조사</span></p>
+	                    <form>
+	                    	<p class="price"><span>가격</span></p>
+	                    	<!-- 수량 -->
+	                    	<div class="number"> </div>
+	                    	<!-- 총 가격 -->
+	                    	<div class="totalPrice"></div>
+	                    	<div class="btnWrap">
+	                    		<input type="button" value="장바구니" id="cartBtn" class="btn bnt-sm btn-info">
+	                    		<input type="button" value="구매하기" id="buyBtn" class="btn btn-sm btn-primary">
+	                    		<input type="button" value="목록" id="listBtn" class="btn btn-sm btn-default">
+	                    	</div>
+	                    </form>
 	                </div>
             	</div>
 
@@ -114,6 +141,19 @@ ${vo.gname }
 		                    </div> --%>
 		                </div>
                		</div>
+                	
+                	<div id="mapCont" class="tab-content" style="display: none;">
+				        <!-- 지도/주변 추천 내용 -->
+				        지도/주변 추천 내용을 입력하세요.
+				    </div>
+				    <div id="reviewCont" class="tab-content" style="display: none;">
+				        <!-- 리뷰 내용 -->
+				        리뷰 내용을 입력하세요.
+				    </div>
+				    <div id="reserveCont" class="tab-content" style="display: none;">
+				        <!-- 예약하기 내용 -->
+				        예약하기 내용을 입력하세요.
+				    </div>
                 </div>
             </div>
         </div>
@@ -123,7 +163,7 @@ ${vo.gname }
         <div class="wrapper">
             <div class="shop-header">
                 <h3>추천</h3>
-                <a href="/catalog" class="link arrow-link">전체보기</a>
+                <a href="#" class="link arrow-link">전체보기</a>
                 <div class="shop-header-line">
                     <div class="shop-header-color"></div>
                 </div>
@@ -133,7 +173,7 @@ ${vo.gname }
                     <div data-w-id="df75c36d-8d89-3a15-6c0d-6078372525bd" style="opacity:0" role="listitem" class="product-card-wrapper w-dyn-item">
                         <a href="#" class="product-card w-inline-block">
                             <div class="product-card-image-wrapper">
-                                <img alt="썸네일 이미지" src="https://assets.website-files.com/5baddb6a35e113da0e9a4802/5baf5171ace69cb064b33d42_33388-1-wooden-toy-photos-min.png" data-wf-sku-bindings="%5B%7B%22from%22%3A%22f_main_image_4dr%22%2C%22to%22%3A%22src%22%7D%5D" sizes="(max-width: 479px) 73vw, (max-width: 767px) 34vw, (max-width: 991px) 33vw, 12vw" srcset="https://assets.website-files.com/5baddb6a35e113da0e9a4802/5baf5171ace69cb064b33d42_33388-1-wooden-toy-photos-min-p-500.png 500w, https://assets.website-files.com/5baddb6a35e113da0e9a4802/5baf5171ace69cb064b33d42_33388-1-wooden-toy-photos-min.png 1200w"/>
+                                <img alt="썸네일 이미지" src=""/>
                             </div>
                             <h6 class="product-card-heading">Happy Dog</h6>
                             <div data-wf-sku-bindings="%5B%7B%22from%22%3A%22f_price_%22%2C%22to%22%3A%22innerHTML%22%7D%5D" class="product-card-price">$ 30.00 USD</div>
