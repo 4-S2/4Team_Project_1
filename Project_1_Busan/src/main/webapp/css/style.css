@@ -3374,15 +3374,15 @@ td,th{padding:0}
    }
    
    .products {
-     display: -webkit-box;
+/*     display: -webkit-box;
      display: -webkit-flex;
      display: -ms-flexbox;
-     display: flex;
+     display: flex;*/
      width: 100%;
-     -webkit-flex-wrap: wrap;
+/*     -webkit-flex-wrap: wrap;
      -ms-flex-wrap: wrap;
      flex-wrap: wrap;
-     gap: 15px;
+     gap: 15px;*/
    }
    
    .product-card-wrapper {
