@@ -52,26 +52,37 @@ public class MemberModel {
   		  request.setCharacterEncoding("UTF-8");
   	  }catch(Exception ex) {}
   	  String id=request.getParameter("id");
-  	  String pwd=request.getParameter("pwd");
-  	  String name=request.getParameter("name");
+  	  String pwd=request.getParameter("password");
   	  String email=request.getParameter("email");
-  	  String post=request.getParameter("post");
-  	  
-  	  String addr=request.getParameter("addr1");
-  	  String Detail_addr=request.getParameter("addr2");
+  	  String name=request.getParameter("name");
   	  String phone=request.getParameter("phone");
-  	 
+  	  String postcode=request.getParameter("postal_code"); 
+  	  String addr=request.getParameter("address");
+  	  String Detail_addr=request.getParameter("detail_address");
+  	  
+  	 /*
+  	  *      ps.setString(1, vo.getId());
+	        ps.setString(2, vo.getPwd());
+	        ps.setString(3, vo.getEmail());
+	        ps.setString(4, vo.getName());
+	        ps.setString(5, vo.getPhone());
+	        ps.setString(6, vo.getPostcode());
+	        ps.setString(7, vo.getAddr());
+	        ps.setString(8, vo.getDetail_addr());
+	        ps.setString(9, vo.getAdmin());
+  	  */
   	 
   	  
   	  MemberVO vo=new MemberVO();
   	  vo.setId(id);
   	  vo.setPwd(pwd);
-  	  vo.setName(name);
   	  vo.setEmail(email);
-  	  vo.setPostcode(post);
+  	  vo.setName(name);
+  	  vo.setPhone(phone);
+  	  vo.setPostcode(postcode);
   	  vo.setAddr(addr);
   	  vo.setDetail_addr(Detail_addr);
-  	  vo.setPhone(phone);
+  	  
   	 
   	  
   	  MemberDAO dao=MemberDAO.newInstance();
@@ -79,12 +90,18 @@ public class MemberModel {
   	  dao.memberInsert(vo);
   	  return "redirect:../main/main.do";
     }
-    @RequestMapping("member/login.do")
-    public void member_login(HttpServletRequest request,
-  		  HttpServletResponse response)
-    {
-  	  String id=request.getParameter("id");
-  	  String pwd=request.getParameter("pwd");
+    
+    
+    @RequestMapping("member/login_main.do")
+    public String member_login_main(HttpServletRequest request, HttpServletResponse response) {
+        request.setAttribute("main_jsp", "../member/login_main.jsp");
+        
+        response.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html;charset=UTF-8");
+
+        String id=request.getParameter("id");
+  	  String pwd=request.getParameter("password");
+  	
   	  
   	  MemberDAO dao=MemberDAO.newInstance();
   	  MemberVO vo=dao.memberLogin(id, pwd);
@@ -96,15 +113,24 @@ public class MemberModel {
   		  session.setAttribute("id", vo.getId());
   		  session.setAttribute("name", vo.getName());
   		  session.setAttribute("admin", vo.getAdmin());
+  		  session.setAttribute("address", vo.getAddr());
+  		  session.setAttribute("detail_address", vo.getDetail_addr());
+  		  session.setAttribute("postal_code", vo.getPostcode());
   	  }
   	  
   	  // ajax로 전송 
   	  try
   	  {
+  		
   		  PrintWriter out=response.getWriter();
   		  out.write(vo.getMsg());
   	  }catch(Exception ex) {}
+  	  
+  	      return "../main/main.jsp";
     }
+    
+
+
     @RequestMapping("member/logout.do")
     public String member_logout(HttpServletRequest request,
   		  HttpServletResponse response)

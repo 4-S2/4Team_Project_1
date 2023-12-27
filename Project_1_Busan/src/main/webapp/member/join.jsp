@@ -169,11 +169,11 @@ $(function(){
         <div class="form-group">
         
      
-          <label for="id">아이디 <span class="required">*</span></label>
-          
+          <label for="id" style="display: inline">아이디 <span class="required">*</span></label>
+          <input type="button" value="중복체크" style="float: right"
+         class="btn-sm btn-info" id="checkBtn">
           <input type="text" class="form-control" name="id" id="id" placeholder="아이디를 입력하세요" required>
-           <input type="button" value="중복체크"
-         class="btn-sm btn-danger" id="checkBtn">
+           
         </div>
         <div class="form-group">
           <label for="password">비밀번호 <span class="required">*</span></label>
@@ -195,7 +195,7 @@ $(function(){
         </div>
         <div class="form-group">
           <label for="mobile">휴대폰 번호 <span class="required">*</span></label>
-          <input type="text" class="form-control" name="mobile" id="mobile" placeholder="휴대폰 번호를 입력하세요" required>
+          <input type="text" class="form-control" name="phone" id="phone" placeholder="휴대폰 번호를 입력하세요" required>
         </div>
         <div class="form-group">
   <label for="postal_code" style="display: inline">우편번호 <span class="required">*</span></label>
@@ -215,10 +215,10 @@ $(function(){
   <label for="extra_address">참고항목</label>
   <input type="text" class="form-control" name="extra_address" id="sample6_extraAddress" readonly>
 </div>
-      <input type="submit" value="회원가입"
-         class="btn-sm btn-info" id="joinBtn">
-        <input type=button value="취소"
-         class="btn-sm btn-warning"
+      <input type="submit" value="회원가입" class="btn"
+         id="joinBtn">
+        <input type=button value="취소" class="btn"
+         
          onclick="javascript:history.back()"
         >
      

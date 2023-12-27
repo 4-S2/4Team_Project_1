@@ -1,7 +1,7 @@
 package com.sist.vo;
 
 public class MemberVO {
-	private String id,pwd,email,name,phone,postcode,addr,detail_addr,msg,admin;
+	private String id, pwd, email, name, phone, postcode, addr, detail_addr, msg, admin;
 	public String getMsg() {
 		return msg;
 	}

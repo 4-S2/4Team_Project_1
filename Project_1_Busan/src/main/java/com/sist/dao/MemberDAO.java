@@ -46,20 +46,19 @@ public class MemberDAO {
 	   try
 	   {
 		   conn=dbconn.getConnection();
-		   String sql="INSERT INTO user_ VALUES("
-				     +"?,?,?,?,?,?,?,?,?,'n')";
-		   ps=conn.prepareStatement(sql);
-		   ps.setString(1, vo.getId());
-		   ps.setString(2, vo.getPwd());
-		   ps.setString(3, vo.getEmail());
-		   ps.setString(4, vo.getName());
-		   ps.setString(5, vo.getPhone());
-		   ps.setString(6, vo.getPostcode());
-		   ps.setString(7, vo.getAddr());
-		   ps.setString(8, vo.getDetail_addr());
-		   ps.setString(9, vo.getAdmin());
+		   String sql = "INSERT INTO user_ VALUES(?,?,?,?,?,?,?,?,'n')";
+	        ps = conn.prepareStatement(sql);
+	        ps.setString(1, vo.getId());
+	        ps.setString(2, vo.getPwd());
+	        ps.setString(3, vo.getEmail());
+	        ps.setString(4, vo.getName());
+	        ps.setString(5, vo.getPhone());
+	        ps.setString(6, vo.getPostcode());
+	        ps.setString(7, vo.getAddr());
+	        ps.setString(8, vo.getDetail_addr());
+	        
 		
-		   ps.executeUpdate();
+		     ps.executeUpdate();
 		   // save(vo)
 	   }catch(Exception ex)
 	   {
@@ -92,7 +91,7 @@ public class MemberDAO {
 		   }
 		   else
 		   {
-			  sql="SELECT id,name,pwd,admin "
+			  sql="SELECT id,name,password,admin "
 				 +"FROM user_ "
 				 +"WHERE id=?";
 			  ps=conn.prepareStatement(sql);
