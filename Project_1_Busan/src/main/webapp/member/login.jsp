@@ -9,11 +9,11 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            height: 100vh;
+            height: 130vh;
         }
 
         #log {
-            width: 400px;
+            width: 500px;
             height: auto;
             border-radius: 5px;
             margin-right: 20px;
