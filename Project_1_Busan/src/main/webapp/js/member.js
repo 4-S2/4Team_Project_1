@@ -69,9 +69,9 @@ $(document).ready(function() {
     var emailFormat = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     if (email.match(emailFormat)) {
-      $("#emailFormatMessage").text("올바른 이메일 형식입니다.");
+      $("#emailFormatMessage").text("올바른 이메일 형식입니다.").css("color", "blue");
     } else {
-      $("#emailFormatMessage").text("올바른 이메일 형식이 아닙니다.");
+      $("#emailFormatMessage").text("올바른 이메일 형식이 아닙니다.").css("color", "red");
     }
   });
 

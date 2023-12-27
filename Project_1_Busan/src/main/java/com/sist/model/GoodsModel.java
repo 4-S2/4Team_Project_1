@@ -11,7 +11,7 @@ import com.sist.vo.GoodsVO;
 
 public class GoodsModel {
 	@RequestMapping("store/goods_detail.do")
-	public String busan_goods_detail(HttpServletRequest request,
+	public String store_goods_detail(HttpServletRequest request,
 			  HttpServletResponse response)
 	{
 		  // DB연동 
@@ -19,16 +19,16 @@ public class GoodsModel {
 		  String gno=request.getParameter("gno");
 
 		  GoodsDAO dao=new GoodsDAO();
-		  List<GoodsVO> list=dao.goodsDetailData(Integer.parseInt(gno));
+		  GoodsVO vo=dao.goodsDetailData(Integer.parseInt(gno));
 		 
-		  request.setAttribute("list", list);
+		  request.setAttribute("vo", vo);
 		  //3. 결과값 모아서 request에 저장 
 		  request.setAttribute("main_jsp", "../store/goods_detail.jsp");
 		  return "../main/main.jsp";
 	}
 	
 	@RequestMapping("store/goods.do")
-	public String busan_goods_list(HttpServletRequest request,
+	public String store_goods_list(HttpServletRequest request,
 			  HttpServletResponse response)
 	{
 		// DB연동 

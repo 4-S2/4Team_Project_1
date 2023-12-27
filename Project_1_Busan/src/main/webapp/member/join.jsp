@@ -69,55 +69,55 @@
     }
   </style>
   <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+  
 <script>
     function sample6_execDaumPostcode() {
         new daum.Postcode({
-            oncomplete: function(data) {
-                // 팝업에서 검색 결과 항목이 클릭될 때 실행될 코드 부분입니다.
-
-                // 각 주소별 노출 규칙에 따라 주소를 조합합니다.
-                // 아래로 내려오는 변수가 값이 없으면 공백('') 값을 가지므로 이를 참고하여 분기합니다.
-                var addr = ''; // 주소 변수
-                var extraAddr = ''; // 참고 변수
-
-                // 사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져옵니다.
-                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택한 경우
+            oncomplete: function(data) {    
+                var addr = ''; 
+                var extraAddr = '';
+                if (data.userSelectedType === 'R') { 
                     addr = data.roadAddress;
-                } else { // 사용자가 지번 주소를 선택한 경우
+                } else { 
                     addr = data.jibunAddress;
                 }
 
-                // 사용자가 선택한 주소가 도로명 주소인 경우 참고항목을 조합합니다.
                 if(data.userSelectedType === 'R'){
-                    // 법정동이 있고 그 법정동이 '동/로/가'로 끝난다면 추가합니다. (법정동 제외)
-                    // 법정동의 경우 마지막 글자가 '동/로/가'로 끝납니다.
-                    if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                   
+                    if(data.bname !== '' && /[dong|ro|ga]$/g.test(data.bname)){
                         extraAddr += data.bname;
                     }
-                    // 건물명이 있고 아파트일 경우 추가합니다.
+                    
                     if(data.buildingName !== '' && data.apartment === 'Y'){
                         extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
                     }
-                    // 표시할 참고항목이 있다면 괄호를 추가하여 최종 문자열을 생성합니다.
+                    
                     if(extraAddr !== ''){
                         extraAddr = '(' + extraAddr + ')';
                     }
-                    // 조합된 참고항목을 해당 필드에 삽입합니다.
+                    
                     document.getElementById("sample6_extraAddress").value = extraAddr;
                 
                 } else {
                     document.getElementById("sample6_extraAddress").value = '';
                 }
 
-                // 우편번호와 주소 정보를 각각의 필드에 입력합니다.
+                
                 document.getElementById('sample6_postcode').value = data.zonecode;
                 document.getElementById("sample6_address").value = addr;
-                // 상세주소 필드로 커서를 이동합니다.
+              
                 document.getElementById("sample6_detailAddress").focus();
             }
         }).open();
+        $(document).ready(function() {
+          
+            $("#searchZipCodeBtn").click(function() {
+              
+              sample6_execDaumPostcode();
+            });
+          });
     }
-</script>
+</script> 
   <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
   <script src="../js/member.js"></script>
   <script>
@@ -151,7 +151,7 @@
         <div class="form-group">
           <label for="email">이메일 <span class="required">*</span></label>
           <input type="email" class="form-control" name="email" id="email" placeholder="이메일을 입력하세요" required>
-          <div id="emailFormatMessage" style="color: red;"></div>
+          <div id="emailFormatMessage"></div>
         </div>
         <div class="form-group">
           <label for="name">이름 <span class="required">*</span></label>
@@ -162,9 +162,10 @@
           <input type="text" class="form-control" name="mobile" id="mobile" placeholder="휴대폰 번호를 입력하세요" required>
         </div>
         <div class="form-group">
-  <label for="postal_code">우편번호 <span class="required">*</span></label>
+  <label for="postal_code" style="display: inline">우편번호 <span class="required">*</span></label>
+  <button type="button" id="searchZipCodeBtn" style="float:right" onclick="sample6_execDaumPostcode()">우편번호 찾기</button>
   <input type="text" class="form-control" name="postal_code" id="sample6_postcode" placeholder="우편번호를 입력하세요" readonly required>
-  <button type="button" id="searchZipCodeBtn">우편번호 찾기</button>
+  
 </div>
 <div class="form-group">
   <label for="address">주소 <span class="required">*</span></label>

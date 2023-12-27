@@ -3,6 +3,59 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
+<!-- <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script> -->
+<script type="text/javascript">
+/* //JavaScript
+//이벤트 리스너를 이용하여 탭 버튼에 클릭 이벤트 추가
+document.addEventListener('DOMContentLoaded', function() {
+ // 각 탭 버튼(li 요소)를 가져와서 클릭 이벤트를 추가
+ var tabButtons = document.querySelectorAll('.tab-menu li');
+ for (var i = 0; i < tabButtons.length; i++) {
+     tabButtons[i].addEventListener('click', function(event) {
+         // 클릭된 탭 버튼의 id를 추출하여 해당하는 탭을 보여줌
+         var tabId = event.target.id;
+         showTab(tabId);
+     });
+ }
+});
+
+function showTab(tabName) {
+ // 모든 탭 컨텐츠를 숨김
+ var tabContents = document.getElementsByClassName('tab-content');
+ for (var i = 0; i < tabContents.length; i++) {
+     tabContents[i].style.display = 'none';
+ }
+
+ // 선택한 탭에 해당하는 컨텐츠만 보여줌
+ var selectedTab = document.getElementById(tabName + 'Cont');
+ if (selectedTab) {
+     selectedTab.style.display = 'block';
+ }
+} */
+// JavaScript 코드
+document.addEventListener('DOMContentLoaded', function() {
+    var tabButtons = document.querySelectorAll('.tab-menu li');
+    for (var i = 0; i < tabButtons.length; i++) {
+        tabButtons[i].addEventListener('click', function(event) {
+            var tabId = event.target.id + 'Cont';
+            showTab(tabId);
+        });
+    }
+});
+
+function showTab(tabName) {
+    var tabContents = document.getElementsByClassName('tab-content');
+    for (var i = 0; i < tabContents.length; i++) {
+        tabContents[i].style.display = 'none';
+    }
+
+    var selectedTab = document.getElementById(tabName);
+    if (selectedTab) {
+        selectedTab.style.display = 'block';
+    }
+}
+
+</script>
 
 <div id="detail">   
     <!-- <div class="section no-padding-vertical">
@@ -41,15 +94,15 @@
                 <!-- 탭 메뉴 -->
                 <div class="product-detail">
                		<ul class="tab-menu">
-               			<li id="detailBtn">상세 설명</li>
-               			<li id="mapBtn">지도/주변 추천</li>
-               			<li id="reviewBtn">리뷰</li>
-               			<li id="reserveBtn">예약하기</li>
+               			<li id="detail">상세 설명</li>
+               			<li id="map">지도/주변 추천</li>
+               			<li id="review">리뷰</li>
+               			<li id="reserve">예약하기</li>
                		</ul>
                		<!-- <div class="shop-header-line">
 	                    <div class="shop-header-color"></div>
 	                </div> -->
-               		<div id="detailCont">
+               		<div id="detailCont" class="tab-content">
 	               		<div class="detail-info">              		
 	               			<!-- 상세 이미지 -->
 							<c:forEach var="dimg" items="${vo.deimage}" varStatus="d">
@@ -94,6 +147,7 @@
 			                        </div>
 			                    </div>
 		                    </div>
+
 	
 		                    <!-- 해시 태그 -->
 		                    <div class="tag-list">
@@ -104,6 +158,19 @@
 		                    </div>
 		                </div>
                		</div>
+               		
+               			    <div id="mapCont" class="tab-content" style="display: none;">
+						        <!-- 지도/주변 추천 내용 -->
+						        지도/주변 추천 내용을 입력하세요.
+						    </div>
+						    <div id="reviewCont" class="tab-content" style="display: none;">
+						        <!-- 리뷰 내용 -->
+						        리뷰 내용을 입력하세요.
+						    </div>
+						    <div id="reserveCont" class="tab-content" style="display: none;">
+						        <!-- 예약하기 내용 -->
+						        예약하기 내용을 입력하세요.
+						    </div>
                 </div>
             </div>
         </div>
