@@ -1,14 +1,11 @@
 package com.sist.dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import java.sql.*;
 
 import com.sist.dbcp.CreateDBCPConnection;
-import com.sist.vo.BusanListVO;
-import com.sist.vo.GoodsVO;
+import com.sist.model.BusanListModel;
+import com.sist.vo.*;
 
 public class GoodsDAO {
 	   private Connection conn; //데이터베이스 연결
@@ -63,47 +60,8 @@ public class GoodsDAO {
 	      }
 	      return list;
 	   }
-	   //특산물 상세보기
-	   public List<GoodsVO> goodsDetailData(int no)
-	   {
-	      List<GoodsVO> list=new ArrayList<>();
-	      try
-	      {
-	         // 1. 연결 
-	         conn=dbconn.getConnection();
-	         // 2. SQL문장 전송 
-	         String sql="SELECT * FROM goods "
-	                 +"WHERE gno="+no;
-	         // 3. 미리 전송 
-	         ps=conn.prepareStatement(sql);
-	         // 4. 실행 요청전에 ?에 값을 채운다 
-	         
-	         // 5. 실행후에 결과값을 받는다 
-	         ResultSet rs=ps.executeQuery();
-	         rs.next();
-	            GoodsVO vo=new GoodsVO();
-	            vo.setGno(rs.getInt(1));
-	            vo.setGname(rs.getString(2));
-	            vo.setPoster(rs.getString(3));
-	            vo.setOrigin(rs.getString(4));
-	            vo.setManufacturer(rs.getString(5));
-	            vo.setPrice(rs.getString(6));
-	            vo.setDimage(rs.getString(7));
-	            list.add(vo);
-	         rs.close();
-	      }catch(Exception ex)
-	      {
-	        // 에러 출력 
-	         ex.printStackTrace();
-	      }
-	      finally
-	      {
-	         // 반환 => 재사용 
-	         dbconn.disConnection(conn, ps);
-	      }
-	      return list;
-	   }
-	   //특산물 리스트 출력
+	   
+	 //특산물 리스트 출력
 	   public List<GoodsVO> goodsListData(int page)
 	   {
 		   List<GoodsVO> list=new ArrayList<>();
@@ -173,5 +131,46 @@ public class GoodsDAO {
 			   dbconn.disConnection(conn, ps);
 		   }
 		   return total;
+	   }	   
+	   
+	   //특산물 상세보기
+	   public GoodsVO goodsDetailData(int gno)
+	   {
+	      GoodsVO vo=new GoodsVO();
+	      try
+	      {
+	         // 1. 연결 
+	         conn=dbconn.getConnection();
+	         // 2. SQL문장 전송 
+	         String sql="SELECT * FROM goods "
+	                 +"WHERE gno="+gno;
+	         // 3. 미리 전송 
+	         ps=conn.prepareStatement(sql);
+	         // 4. 실행 요청전에 ?에 값을 채운다 
+	         
+	         // 5. 실행후에 결과값을 받는다 
+	         ResultSet rs=ps.executeQuery();
+	         if(rs.next()) {
+	            vo.setGno(rs.getInt(1));
+	            vo.setGname(rs.getString(2));
+	            vo.setPoster(rs.getString(3));
+	            vo.setOrigin(rs.getString(4));
+	            vo.setManufacturer(rs.getString(5));
+	            vo.setPrice(rs.getString(6));
+	            vo.setDimage(rs.getString(7));
+	         }
+	         rs.close();
+	      }catch(Exception ex)
+	      {
+	        // 에러 출력 
+	         ex.printStackTrace();
+	      }
+	      finally
+	      {
+	         // 반환 => 재사용 
+	         dbconn.disConnection(conn, ps);
+	      }
+	      return vo;
 	   }
+	   
 }

@@ -62,7 +62,7 @@
     <div id="shop">
         <div class="shop-header">
             <h3 class="no-margin">추천 특산물</h3>
-            <a href="../busan/goods.do" class="link arrow-link">전체보기</a>
+            <a href="../store/goods.do" class="link arrow-link">전체보기</a>
             <div class="shop-header-line">
                 <div class="shop-header-color"></div>
             </div>
@@ -71,7 +71,7 @@
             <div class="swiper-wrapper">
             	<c:forEach var="vo" items="${gtoplist}" >
 	                <div class="swiper-slide">
-	                  <a href="../busan/goods_detail.do?no=${vo.gno}">
+	                  <a href="../store/goods_detail.do?no=${vo.gno}">
 	                    <img src="${vo.poster}" width="80px" height="80px">
 	                	<div class="text">
 	                		<span class="badge">HOT</span>

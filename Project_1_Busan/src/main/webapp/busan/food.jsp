@@ -121,33 +121,30 @@
                 "hideDecimalForWholeNumbers": false
             };
             
-            $(function(){
-            	$('.tag').on('click',function(){
-            		let tag=$(this).text().substring(1);
-            		$.ajax({
-            			type:'post',
-            			url:'food_find.do',
-            			data:{"tag":tag},
-            			success:function(result)
-            			{
-            				
-            			}
-            		})
-            	})
-            	$('.button').on('click',function(){
-            		let word=$('.find').text();
-            		$.ajax({
-            			type:'post',
-            			url:'food_find.do',
-            			data:{"word":word},
-            			success:function(result)
-            			{
-            				
-            			}
-            		})
-            	})
+            $(document).ready(function() {
+            	var tag="";
+            	 $('.tag').on('click',function(){
+                    tag = $(this).text().substring(1);
+                    selectLink(this);
+                    alert(tag);
+                 });
             	
-            })
+                $('.button').on('click', function() {
+                    let word = $('#find').val();
+                    $.ajax({
+                        type: 'post',
+                        url: 'food.do',
+                        data: {"word": word,"tag": tag},
+                        success: function(result) {
+                            // Ajax 요청이 성공했을 때만 페이지 이동을 진행
+                            /* if (result === "../main/main.jsp") {
+                                window.location.href = "../busan/food.do";
+                            } */
+                        }
+                    });
+                });
+                
+            });
             
         </script>
         <!--  <link href="https://assets.website-files.com/5badda2935e11303a89a461e/5bd83035e7345f2f22c0bece_favicon.png" rel="shortcut icon" type="image/x-icon"/>
@@ -159,7 +156,7 @@
                 <div>
                     <div class="search">
                         <div>
-                            <form name="Search-Form" method="post" class="subscribe-form" action="food_find.do">
+                            <form name="Search-Form" class="subscribe-form">
                             
                                 <input type="text" class="input subscribe-input w-input" name="word" placeholder="검색어를 입력하세요" 
                                 id="find" required style="width:500px" value="${word }"/>
@@ -172,7 +169,6 @@
             
             <div id="tag-wrap">
                 <a class="tag" id="link1" href="#" onclick="selectLink(this)"><span>#전체</span></a>
-                <a class="tag" id="link1" href="#">#전체</a>
                 <a class="tag" id="link2" href="#" onclick="selectLink(this)"><span>#한식</span></a>
                 <a class="tag" id="link3" href="#" onclick="selectLink(this)"><span>#중식</span></a>
                 <a class="tag" id="link4" href="#" onclick="selectLink(this)"><span>#일식</span></a>
@@ -247,7 +243,7 @@
                             <li><a href="food.do?page=${startPage-1}">&lt;</a></li>
                         </c:if>
                         <c:forEach var="i" begin="${startPage}" end="${endPage}">
-                            <li ${curpage==i?"class=active":""}><a href="food.do?page=${i}">${i}</a></li>
+                            <li ${curpage==i?"class=active":""}><a href="food.do?page=${i}" class="pages">${i}</a></li>
                         </c:forEach>
                         <c:if test="${endPage<totalpage}">
                             <li><a href="food.do?page=${endPage+1}">&gt;</a></li>

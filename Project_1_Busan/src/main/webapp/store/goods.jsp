@@ -179,7 +179,7 @@
                         <div role="list" class="products w-dyn-items">
                             <c:forEach var="vo" items="${list}">
                             <div role="listitem" class="product-card-wrapper w-dyn-item">
-                                <a href="../busan/goods_detail.do?gno=${vo.gno}" class="product-card w-inline-block">
+                                <a href="../store/goods_detail.do?gno=${vo.gno}" class="product-card w-inline-block">
                                     <div class="product-card-image-wrapper">
                                         <img src="${vo.poster}" alt="" sizes="(max-width: 479px) 73vw, (max-width: 767px) 34vw, (max-width: 991px) 33vw, 12vw"/>
                                     </div>
@@ -205,7 +205,7 @@
                             <li><a href="goods.do?page=${startPage-1}">&lt;</a></li>
                         </c:if>
                         <c:forEach var="i" begin="${startPage}" end="${endPage}">
-                            <li ${curpage==i?"class=active":""}><a href="goods.do?page=${i}">${i}</a></li>
+                            <li ${curpage==i?"class=active":""}><a href="${tab }.do?page=${i}">${i}</a></li>
                         </c:forEach>
                         <c:if test="${endPage<totalpage}">
                             <li><a href="goods.do?page=${endPage+1}">&gt;</a></li>
