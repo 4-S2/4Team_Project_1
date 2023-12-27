@@ -118,16 +118,25 @@ public class BusanListModel {
 	public String busan_foodList(HttpServletRequest request,
 			  HttpServletResponse response)
 	{
+		try {
+			  request.setCharacterEncoding("UTF-8");
+		  }catch(Exception e) {}
+		 
 		  // DB연동 
 		  //1. 요청값 받기
 		  String page=request.getParameter("page");
+		  String word=request.getParameter("word");
+		  String tag=request.getParameter("tag");
+		  System.out.println(word);
+		  System.out.println(tag);
 		  if(page==null)
 			  page="1";
+		  System.out.println(page);
 		  int curpage=Integer.parseInt(page);
 		  //2. DB연동 
 		  BusanDAO dao=new BusanDAO();
-		  List<BusanListVO> list=dao.BusanListData(curpage,"food");
-		  int totalpage=dao.BusanListTotalPage("food");
+		  List<BusanListVO> list=dao.BusanFindList(word,curpage,"food");
+		  int totalpage=dao.BusanFindTotalPage(word, "food");
 		  
 		   final int BLOCK=10;
 		   int startPage=((curpage-1)/BLOCK*BLOCK)+1;
@@ -141,6 +150,8 @@ public class BusanListModel {
 		   request.setAttribute("startPage", startPage);
 		   request.setAttribute("endPage", endPage);
 		  request.setAttribute("list", list);
+		  request.setAttribute("word", word);
+		  request.setAttribute("tag", tag);
 		  //3. 결과값 모아서 request에 저장 
 		  request.setAttribute("main_jsp", "../busan/food.jsp");
 		  return "../main/main.jsp";
@@ -159,8 +170,10 @@ public class BusanListModel {
 		  String page=request.getParameter("page");
 		  String word=request.getParameter("word");
 		  System.out.println(word);
+
 		  if(page==null)
 			  page="1";
+		  System.out.println(page);
 		  int curpage=Integer.parseInt(page);
 		  //2. DB연동 
 		  BusanDAO dao=new BusanDAO();
@@ -196,7 +209,6 @@ public class BusanListModel {
 		  //1. 요청값 받기
 		  String page=request.getParameter("page");
 		  String word=request.getParameter("word");
-		  System.out.println(word);
 		  if(page==null)
 			  page="1";
 		  int curpage=Integer.parseInt(page);
@@ -234,7 +246,6 @@ public class BusanListModel {
 		  //1. 요청값 받기
 		  String page=request.getParameter("page");
 		  String word=request.getParameter("word");
-		  System.out.println(word);
 		  if(page==null)
 			  page="1";
 		  int curpage=Integer.parseInt(page);
@@ -272,7 +283,6 @@ public class BusanListModel {
 		  //1. 요청값 받기
 		  String page=request.getParameter("page");
 		  String word=request.getParameter("word");
-		  System.out.println(word);
 		  if(page==null)
 			  page="1";
 		  int curpage=Integer.parseInt(page);
