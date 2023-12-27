@@ -1,8 +1,14 @@
 package com.sist.vo;
 
 public class MemberVO {
-	private String id,pwd,email,name,phone,postcode,addr,detail_addr;
-	private char admin;
+	private String id,pwd,email,name,phone,postcode,addr,detail_addr,msg,admin;
+	public String getMsg() {
+		return msg;
+	}
+	public void setMsg(String msg) {
+		this.msg = msg;
+	}
+	
 	public String getId() {
 		return id;
 	}
@@ -51,10 +57,10 @@ public class MemberVO {
 	public void setDetail_addr(String detail_addr) {
 		this.detail_addr = detail_addr;
 	}
-	public char getAdmin() {
+	public String getAdmin() {
 		return admin;
 	}
-	public void setAdmin(char admin) {
+	public void setAdmin(String admin) {
 		this.admin = admin;
 	}
 }

@@ -6,6 +6,39 @@
   <meta charset="UTF-8">
   <title>회원가입</title>
   <%-- Assume that you have a CSS file included here --%>
+  <link rel="stylesheet" href="../shadow/css/shadowbox.css">
+<script type="text/javascript" src="../shadow/js/shadowbox.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+<script type="text/javascript">
+Shadowbox.init({
+	  players: ['iframe']
+	});
+$(function(){
+	/*$('#joinBtn').on('click',function(){
+		let id=$('#id').val();
+		if(id.trim()==="")
+		{
+			alert("아이디 체크를 하세요!!");
+			$('#id').focus();
+			return;
+		}
+	})*/
+	
+	$('#checkBtn').click(function(){
+		Shadowbox.open({
+			content:'../member/idcheck.do',
+			player:'iframe',
+			title:'아이디 중복체크',
+			width:350,
+			height:200
+		})
+	});
+	
+	
+})
+	
+
+</script>
   <style>
     <%-- Define your arbitrary delimiter --%>
     <% String delimiter = "%{"; %>
@@ -116,7 +149,7 @@
               sample6_execDaumPostcode();
             });
           });
-    }
+    }  
 </script> 
   <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
   <script src="../js/member.js"></script>
@@ -125,12 +158,13 @@
       window.history.back();
     }
   </script>
+  
 </head>
 <body>
   <div class="signup-container">
     <div class="container">
       <h2 class="title">회원가입</h2>
-      <form action="RegisterServlet" method="post">
+      <form method="post" action="../member/join_ok.do" name="frm">
         <!-- Your form groups here -->
         <div class="form-group">
         
@@ -138,6 +172,8 @@
           <label for="id">아이디 <span class="required">*</span></label>
           
           <input type="text" class="form-control" name="id" id="id" placeholder="아이디를 입력하세요" required>
+           <input type="button" value="중복체크"
+         class="btn-sm btn-danger" id="checkBtn">
         </div>
         <div class="form-group">
           <label for="password">비밀번호 <span class="required">*</span></label>
@@ -179,9 +215,12 @@
   <label for="extra_address">참고항목</label>
   <input type="text" class="form-control" name="extra_address" id="sample6_extraAddress" readonly>
 </div>
-        <!-- Add other form groups here -->
-        <button type="submit" class="btn">회원가입</button>
-        <button type="button" class="btn btn-secondary" onclick="goBack()">돌아가기</button>
+      <input type="submit" value="회원가입"
+         class="btn-sm btn-info" id="joinBtn">
+        <input type=button value="취소"
+         class="btn-sm btn-warning"
+         onclick="javascript:history.back()"
+        >
      
       </form>
     </div>
