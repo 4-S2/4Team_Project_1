@@ -104,7 +104,7 @@
 <body>
 
     <div id="login-all-cont">
-        <img src="../images/login_1.jpg" id="log">
+       
         <form id="login-form-all" action="login.do" method="post">
             <div>
                 <h2>로그인</h2>
