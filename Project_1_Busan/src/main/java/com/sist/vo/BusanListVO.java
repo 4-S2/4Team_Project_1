@@ -13,6 +13,7 @@ public class BusanListVO {
 		   private String addr;
 		   private String phone,restday,bhour;
 		   private String[] tag;
+		   private String tag1;
 		   private String jjim;
 		   private int heart;
 		   private String[] deimage;
@@ -22,6 +23,12 @@ public class BusanListVO {
 		
 		
 		
+		public String getTag1() {
+			return tag1;
+		}
+		public void setTag1(String tag1) {
+			this.tag1 = tag1;
+		}
 		public int getCocate() {
 			return cocate;
 		}

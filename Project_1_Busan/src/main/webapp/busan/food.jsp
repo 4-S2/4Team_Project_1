@@ -16,24 +16,24 @@
            margin-top:50px;
            text-align:center; 
          }
-         a.tag{
+         button.tag{
             border: 1px solid #dbeeff;
             display: inline-block;
             border-radius: 25px;
             padding: 5px 18px;
             margin: 0px auto;
          }
-         a.tag:hover{
+         button.tag:hover{
          color: #2b75d5;
          text-decoration: none;
          }
-         a.tag:focus{
+         button.tag:focus{
          color: white;
          text-decoration: none;
          }
-         a {
+         /* a {
          transition: color 0.2s; /* 모든 링크에 대한 트랜지션 추가 */
-         }
+         } */
          span{
          	display: inline-block;
          }
@@ -78,33 +78,48 @@
          }
         </style>
         <script type="text/javascript">
-            /* !function(o, c) {
-                var n = c.documentElement
-                  , t = " w-mod-";
-                n.className += t + "js",
-                ("ontouchstart"in o || o.DocumentTouch && c instanceof DocumentTouch) && (n.className += t + "touch")
-            }(window, document); */
-            
-         // 초기에 선택된 링크
-            document.addEventListener('DOMContentLoaded', function() {
-              var initialLink = document.getElementById('link1'); // 링크의 ID에 따라 변경
-              selectLink(initialLink);
-            });
+        document.addEventListener('DOMContentLoaded', function () {
+            // 초기 로딩 시 localStorage에서 선택된 태그를 읽어옴
+            var selectedTag = localStorage.getItem('selectedTag');
+            var initialLink = selectedTag ? document.getElementById(selectedTag) : document.getElementById('link1');
+            selectLink(initialLink);
 
-            // 링크 클릭시 호출되는 함수
-            function selectLink(link) {
-              // 현재 선택된 링크에 대한 스타일 적용
-              link.classList.add('selected-link');
-              
-              // 현재 선택된 링크 이외의 다른 링크에 대한 스타일 제거
-              var allLinks = document.querySelectorAll('a');
-              for (var i = 0; i < allLinks.length; i++) {
-                if (allLinks[i] !== link) {
-                  allLinks[i].classList.remove('selected-link');
+            // 검색 버튼 클릭 시
+            document.forms['Search-Form'].addEventListener('submit', function () {
+                // 현재 선택된 태그를 localStorage에 저장
+                var selectedButton = document.querySelector('.selected-link');
+                if (selectedButton) {
+                    localStorage.setItem('selectedTag', selectedButton.id);
                 }
-              }
+            });
+        });
+        
+        function selectLink(button) {
+            // 이전에 선택된 태그를 지움
+            var prevSelectedTag = localStorage.getItem('selectedTag');
+            if (prevSelectedTag) {
+                var prevSelectedButton = document.getElementById(prevSelectedTag);
+                if (prevSelectedButton) {
+                    prevSelectedButton.classList.remove('selected-link');
+                }
             }
+
+            // 현재 선택된 태그를 설정
+            button.classList.add('selected-link');
+
+            var allButtons = document.querySelectorAll('button.tag');
+            for (var i = 0; i < allButtons.length; i++) {
+                if (allButtons[i] !== button) {
+                    allButtons[i].classList.remove('selected-link');
+                }
+            }
+
+            var tagValue = button.textContent.trim().substring(1);
+            document.forms['Search-Form'].elements['tag'].value = tagValue;
+            var searchInput = document.forms['Search-Form'].elements['word'];
             
+        }
+
         </script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -120,32 +135,6 @@
                 "template": "{{wf {\"path\":\"symbol\",\"type\":\"PlainText\"} }} {{wf {\"path\":\"amount\",\"type\":\"CommercePrice\"} }} {{wf {\"path\":\"currencyCode\",\"type\":\"PlainText\"} }}",
                 "hideDecimalForWholeNumbers": false
             };
-            
-            $(document).ready(function() {
-            	var tag="";
-            	 $('.tag').on('click',function(){
-                    tag = $(this).text().substring(1);
-                    selectLink(this);
-                    alert(tag);
-                 });
-            	
-                $('.button').on('click', function() {
-                    let word = $('#find').val();
-                    $.ajax({
-                        type: 'post',
-                        url: 'food.do',
-                        data: {"word": word,"tag": tag},
-                        success: function(result) {
-                            // Ajax 요청이 성공했을 때만 페이지 이동을 진행
-                            /* if (result === "../main/main.jsp") {
-                                window.location.href = "../busan/food.do";
-                            } */
-                        }
-                    });
-                });
-                
-            });
-            
         </script>
         <!--  <link href="https://assets.website-files.com/5badda2935e11303a89a461e/5bd83035e7345f2f22c0bece_favicon.png" rel="shortcut icon" type="image/x-icon"/>
         <link href="https://assets.website-files.com/5badda2935e11303a89a461e/5bd8303816e1ea6c375be6cb_webclip.png" rel="apple-touch-icon"/> -->
@@ -156,18 +145,33 @@
                 <div>
                     <div class="search">
                         <div>
-                            <form name="Search-Form" class="subscribe-form">
+                            <form name="Search-Form" method="post" action="../busan/food_find.do" class="subscribe-form">
                             
                                 <input type="text" class="input subscribe-input w-input" name="word" placeholder="검색어를 입력하세요" 
                                 id="find" required style="width:500px" value="${word }"/>
                                 <input type="submit" value="Search" class="button w-button"/>
+                                
+                                 <!-- 수정된 태그 버튼들 -->
+                                
+                                <input type="hidden" name="tag" value=""/>
+                                <div id="tag-wrap">
+                                <button class="tag" id="link1" type="button" onclick="selectLink(this)"><span>#전체</span></button>
+                                <button class="tag" id="link2" type="button" onclick="selectLink(this)"><span>#한식</span></button>
+                                <button class="tag" id="link3" type="button" onclick="selectLink(this)"><span>#중식</span></button>
+                                <button class="tag" id="link4" type="button" onclick="selectLink(this)"><span>#일식</span></button>
+                                <button class="tag" id="link5" type="button" onclick="selectLink(this)"><span>#아세안요리</span></button>
+                                <button class="tag" id="link6" type="button" onclick="selectLink(this)"><span>#양식</span></button>
+                                <button class="tag" id="link7" type="button" onclick="selectLink(this)"><span>#카페&베이커리</span></button>
+                                <button class="tag" id="link8" type="button" onclick="selectLink(this)"><span>#해산물</span></button>
+                                <button class="tag" id="link9" type="button" onclick="selectLink(this)"><span>#그릴</span></button>
+                                </div>
                             </form>
                         </div>
                     </div>
                 </div>
             </div>
             
-            <div id="tag-wrap">
+            <!-- <div id="tag-wrap">
                 <a class="tag" id="link1" href="#" onclick="selectLink(this)"><span>#전체</span></a>
                 <a class="tag" id="link2" href="#" onclick="selectLink(this)"><span>#한식</span></a>
                 <a class="tag" id="link3" href="#" onclick="selectLink(this)"><span>#중식</span></a>
@@ -178,7 +182,7 @@
                 <a class="tag" id="link8" href="#" onclick="selectLink(this)"><span>#해산물</span></a>
                 <a class="tag" id="link9" href="#" onclick="selectLink(this)"><span>#그릴</span></a>
                 
-                <!-- <span class="tag" id="link1">#전체</span>
+                <span class="tag" id="link1">#전체</span>
                 <span class="tag" id="link2">#한식</span>
                 <span class="tag" id="link3">#중식</span>
                 <span class="tag" id="link4">#일식</span>
@@ -186,8 +190,8 @@
                 <span class="tag" id="link6">#양식</span>        
                 <span class="tag" id="link7">#카페&베이커리</span>
                 <span class="tag" id="link8">#해산물</span>
-                <span class="tag" id="link9">#그릴</span> -->
-            </div>
+                <span class="tag" id="link9">#그릴</span>
+            </div> -->
             
             
             <div class="section list">
