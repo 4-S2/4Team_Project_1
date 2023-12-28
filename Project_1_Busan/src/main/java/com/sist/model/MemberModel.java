@@ -95,38 +95,31 @@ public class MemberModel {
     @RequestMapping("member/login_main.do")
     public String member_login_main(HttpServletRequest request, HttpServletResponse response) {
         request.setAttribute("main_jsp", "../member/login_main.jsp");
-        
+
         response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=UTF-8");
 
-        String id=request.getParameter("id");
-  	  String pwd=request.getParameter("password");
-  	
-  	  
-  	  MemberDAO dao=MemberDAO.newInstance();
-  	  MemberVO vo=dao.memberLogin(id, pwd);
-  	  if(vo.getMsg().equals("OK"))
-  	  {
-  		  // 세션에 저장 
-  		  HttpSession session=
-  				  request.getSession();
-  		  session.setAttribute("id", vo.getId());
-  		  session.setAttribute("name", vo.getName());
-  		  session.setAttribute("admin", vo.getAdmin());
-  		  session.setAttribute("address", vo.getAddr());
-  		  session.setAttribute("detail_address", vo.getDetail_addr());
-  		  session.setAttribute("postal_code", vo.getPostcode());
-  	  }
-  	  
-  	  // ajax로 전송 
-  	  try
-  	  {
-  		
-  		  PrintWriter out=response.getWriter();
-  		  out.write(vo.getMsg());
-  	  }catch(Exception ex) {}
-  	  
-  	      return "../main/main.jsp";
+        String id = request.getParameter("id");
+        String pwd = request.getParameter("password");
+
+        MemberDAO dao = MemberDAO.newInstance();
+        MemberVO vo = dao.memberLogin(id, pwd);
+        if (vo.getMsg().equals("OK")) {
+            // 세션에 저장 
+            HttpSession session = request.getSession();
+            session.setAttribute("id", vo.getId());
+            session.setAttribute("name", vo.getName());
+            session.setAttribute("admin", vo.getAdmin());
+            session.setAttribute("address", vo.getAddr());
+            session.setAttribute("detail_address", vo.getDetail_addr());
+            session.setAttribute("postal_code", vo.getPostcode());
+
+            // 로그인 성공 시 메인 페이지로 리디렉션
+            return "redirect:../main/main.do";
+        } else {
+            // 로그인 실패 시 다시 로그인 페이지로
+            return "../member/login_main.jsp";
+        }
     }
     
 

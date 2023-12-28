@@ -151,6 +151,16 @@ $(function(){
           });
     }  
 </script> 
+<script type="text/javascript">
+var postalCode = data.zonecode;
+var address = addr;
+var detailAddress = document.getElementById("sample6_detailAddress").value;
+
+// Store data in session
+sessionStorage.setItem("postalCode", postalCode);
+sessionStorage.setItem("address", address);
+sessionStorage.setItem("detailAddress", detailAddress);
+</script>
   <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
   <script src="../js/member.js"></script>
   <script>
