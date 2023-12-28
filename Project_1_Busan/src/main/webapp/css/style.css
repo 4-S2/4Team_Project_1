@@ -3819,16 +3819,16 @@ ul, ol{margin: 0; list-style: none;}
    }
    
    .product {
-     /*display: -webkit-box;
+     display: -webkit-box;
      display: -webkit-flex;
      display: -ms-flexbox;
-     display: flex;*/
+     display: flex;
      width: 100%;
      margin-top: 80px;
      padding: 80px;
-     /*-webkit-flex-wrap: wrap;
+     -webkit-flex-wrap: wrap;
      -ms-flex-wrap: wrap;
-     flex-wrap: wrap;*/
+     flex-wrap: wrap;
      border-radius: 16px;
      background-color: #fff;
      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.15);
@@ -5250,7 +5250,9 @@ ul, ol{margin: 0; list-style: none;}
 
 
 /***** detail page *****/
-
+.detail .product{
+	display: block;
+}
 .detail .product-top{
 	display: flex;
 	justify-content: space-between;
