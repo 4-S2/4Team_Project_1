@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
    
-   
+<main>
 <div id="mainVisual">
     <div class="swiper tourSlide">
         <div class="swiper-wrapper">
@@ -172,9 +172,7 @@
                         <div class="product-card-image-wrapper">
                             <img alt="" src="${vo.poster}" data-wf-sku-bindings="%5B%7B%22from%22%3A%22f_main_image_4dr%22%2C%22to%22%3A%22src%22%7D%5D" sizes="100vw" srcset=""/>
                         </div>
-                        <p></p>
-                        <br>
-                        <h6 class="product-card-heading">${vo.ename}</h6>
+                        <%-- <h6 class="product-card-heading">${vo.ename}</h6> --%>
                         <div class="product-card-price">${vo.s_date}~${vo.e_date}</div>
                     </a>
                 </div>
@@ -232,6 +230,7 @@
         </div>
     </div>
 </div>
+</main>
 
 <!-- <div class="section haze">
     <div class="wrapper">

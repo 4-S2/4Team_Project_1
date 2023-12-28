@@ -11,6 +11,13 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
         <link href="../css/style.css" rel="stylesheet" type="text/css"/> 
+        
+        <style type="text/stylesheet">
+			.product-card{
+				height: 480px;
+			}
+		</style>
+        
         <script type="text/javascript">
             !function(o, c) {
                 var n = c.documentElement
@@ -38,6 +45,7 @@
     </head>
     
     <body>
+    
         <div style="margin-top:100px">
                 <div>
                     <div class="search">

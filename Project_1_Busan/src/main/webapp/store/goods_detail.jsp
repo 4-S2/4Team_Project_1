@@ -150,10 +150,10 @@ function showTab(tabName) {
 				        <!-- 리뷰 내용 -->
 				        리뷰 내용을 입력하세요.
 				    </div>
-				    <div id="reserveCont" class="tab-content" style="display: none;">
-				        <!-- 예약하기 내용 -->
+				    <!-- <div id="reserveCont" class="tab-content" style="display: none;">
+				        예약하기 내용
 				        예약하기 내용을 입력하세요.
-				    </div>
+				    </div> -->
                 </div>
             </div>
         </div>
@@ -162,7 +162,7 @@ function showTab(tabName) {
     <div class="section">
         <div class="wrapper">
             <div class="shop-header">
-                <h3>추천</h3>
+                <h3>추천 상품</h3>
                 <a href="#" class="link arrow-link">전체보기</a>
                 <div class="shop-header-line">
                     <div class="shop-header-color"></div>

@@ -149,28 +149,24 @@
 			                            <div>주소</div>
 			                            <div class="product-table-info">
 			                                <div data-wf-sku-bindings="%5B%7B%22from%22%3A%22f_width_%22%2C%22to%22%3A%22innerHTML%22%7D%5D">${vo.addr}</div>
-			                                <!-- <div>in</div> -->
 			                            </div>
 			                        </div>
 			                        <div class="product-table-cell">
 			                            <div>전화번호</div>
 			                            <div class="product-table-info">
 			                                <div data-wf-sku-bindings="%5B%7B%22from%22%3A%22f_height_%22%2C%22to%22%3A%22innerHTML%22%7D%5D">${vo.phone}</div>
-			                                <!-- <div>in</div> -->
 			                            </div>
 			                        </div>
 			                        <div class="product-table-cell">
 			                            <div>운영시간</div>
 			                            <div class="product-table-info">
 			                                <div data-wf-sku-bindings="%5B%7B%22from%22%3A%22f_length_%22%2C%22to%22%3A%22innerHTML%22%7D%5D">${vo.bhour}</div>
-			                                <!-- <div>in</div> -->
 			                            </div>
 			                        </div>
 			                        <div class="product-table-cell no-border-bottom">
 			                            <div>요금</div>
 			                            <div class="product-table-info">
 			                                <div data-wf-sku-bindings="%5B%7B%22from%22%3A%22f_weight_%22%2C%22to%22%3A%22innerHTML%22%7D%5D">${vo.rate}</div>
-			                                <!-- <div>oz</div> -->
 			                            </div>
 			                        </div>
 			                    </div>
@@ -192,6 +188,40 @@
 				    <div id="reviewCont" class="tab-content" style="display: none;">
 				        <!-- 리뷰 내용 -->
 				        리뷰 내용을 입력하세요.
+				        <!-- <form method="post" action="insert_ok.do">
+							<table class="table">
+								<tr>
+									<th width=10% class="text-center">이름</th>
+									<td width=90%>
+										<input type=text name=name size=20 required class="input-sm">
+									</td>
+								</tr>
+								<tr>
+									<th width=10% class="text-center">제목</th>
+									<td width=90%>
+										<input type=text name=subject size=55 required class="input-sm">
+									</td>
+								</tr>
+								<tr>
+									<th width=10% class="text-center">내용</th>
+									<td width=90%>
+										<textarea rows="10" cols="60" name=content required></textarea>
+									</td>
+								</tr>
+								<tr>
+									<th width=10% class="text-center">비밀번호</th>
+									<td width=90%>
+										<input type="password" name=pwd size=10 required class="input-sm">
+									</td>
+								</tr>
+								<tr>
+									<td colspan="2" class="text-center">
+										<button class="btn-sm btn-success">글쓰기</button>
+					           			<input type=button class="btn-sm btn-info" value="취소" onclick="javascript:history.back()">
+					         		</td>
+					       		</tr>
+					    	</table>
+					    </form> -->
 				    </div>
 				    <div id="reserveCont" class="tab-content" style="display: none;">
 				        <!-- 예약하기 내용 -->
