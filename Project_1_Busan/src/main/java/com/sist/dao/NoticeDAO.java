@@ -129,4 +129,38 @@ public class NoticeDAO {
          }
          return total;
       }
+      public NoticeVO noticeDetailData(int nno)
+      {
+         NoticeVO vo=new NoticeVO();
+         try
+         {
+            // 1. 연결 
+            conn=dbconn.getConnection();
+            // 2. SQL문장 전송 
+            String sql="SELECT nno,ntitle,TO_CHAR(ndate,'yyyy-mm-dd'),ncont "
+                    +"FROM notice "
+                    +"WHERE nno="+nno;
+            // 3. 미리 전송 
+            ps=conn.prepareStatement(sql);
+            // 5. 실행후에 결과값을 받는다 
+            ResultSet rs=ps.executeQuery();
+            rs.next(); // 출력 1번째 위치부터 읽기 시작 
+            
+               vo.setNno(rs.getInt(1));
+               vo.setNtitle(rs.getString(2));
+               vo.setDbday(rs.getString(3));
+               vo.setNcont(rs.getString(4));
+            rs.close();
+         }catch(Exception ex)
+         {
+           // 에러 출력 
+            ex.printStackTrace();
+         }
+         finally
+         {
+            // 반환 => 재사용 
+            dbconn.disConnection(conn, ps);
+         }
+         return vo;
+      }
 }

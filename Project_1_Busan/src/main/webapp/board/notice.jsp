@@ -8,6 +8,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
+
 #notice .container {
 	margin-top: 50px;
 	margin: 0px auto;
@@ -91,7 +92,7 @@
 				<c:forEach var="vo" items="${list}">
 					<tr>
 						<td width=10% class="text-center">${vo.nno}</td>
-						<td width=40%><a href="notice_detail.do?no=${vo.nno}">${vo.ntitle}</a></td>
+						<td width=40%><a href="../board/notice_detail.do?nno=${vo.nno}">${vo.ntitle}</a></td>
 						<td width=20% class="text-center">${vo.dbday}</td>
 					</tr>
 				</c:forEach>

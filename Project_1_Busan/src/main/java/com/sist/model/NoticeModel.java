@@ -11,7 +11,7 @@ import com.sist.vo.*;
 
 public class NoticeModel {
    @RequestMapping("board/notice.do")
-   public String busan_tourList(HttpServletRequest request,
+   public String notice_list(HttpServletRequest request,
            HttpServletResponse response)
    {
         // DB연동 
@@ -21,7 +21,7 @@ public class NoticeModel {
            page="1";
         int curpage=Integer.parseInt(page);
         //2. DB연동 
-        NoticeDAO dao=new NoticeDAO();
+        NoticeDAO dao=NoticeDAO.newInstance();
         List<NoticeVO> list=dao.noticeListData(curpage);
         int totalpage=dao.noticeListTotalPage();
         
@@ -39,6 +39,23 @@ public class NoticeModel {
         request.setAttribute("list", list);
         //3. 결과값 모아서 request에 저장 
         request.setAttribute("main_jsp", "../board/notice.jsp");
+        return "../main/main.jsp";
+   }
+   @RequestMapping("board/notice_detail.do")
+   public String notice_detail(HttpServletRequest request,
+           HttpServletResponse response)
+   {
+        // DB연동 
+	    String nno=request.getParameter("nno");
+        //1. 요청값 받기
+        NoticeDAO dao=NoticeDAO.newInstance();
+        NoticeVO vo=dao.noticeDetailData(Integer.parseInt(nno));
+        
+        
+        request.setAttribute("vo", vo);
+        request.setAttribute("nno", nno);
+        //3. 결과값 모아서 request에 저장 
+        request.setAttribute("main_jsp", "../board/notice_detail.jsp");
         return "../main/main.jsp";
    }
 }
