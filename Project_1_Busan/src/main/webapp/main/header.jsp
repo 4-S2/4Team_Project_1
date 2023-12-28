@@ -6,7 +6,10 @@
         // 드롭다운 메뉴에만 적용
         $('.navbar-nav .dropdown-toggle').dropdown();
     });
+    
+
 </script>
+
 
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
@@ -38,17 +41,32 @@
             </li>
         </ul>
 
-        <ul class="navbar-user" style="float: right; margin-bottom: 0">
-            <c:if test="${sessionScope.id==null}">
-                <!-- 세션에 id 속성이 없으면 로그인 링크 표시 -->
-                <li style="display: inline-block;"><a href="../member/login_main.do" style="padding: 0 15px; line-height: 50px;">로그인</a></li>
-            </c:if>
-            <c:if test="${sessionScope.id!=null}">
-                <!-- 세션에 id 속성이 있으면 로그아웃 링크 표시 -->
-                <li style="display: inline-block;"><a href="../member/logout.do" style="padding: 0 15px; line-height: 50px;">로그아웃</a></li>
-            </c:if>
-            <li style="display: inline-block;"><a href="../member/join.do" style="padding: 0 15px; line-height: 50px;">회원가입</a></li>
-            <li style="display: inline-block;"><a href="#"><img class="icon-cart" src="../images/icon_cart.png"></a></li>
-        </ul>
+   <ul class="navbar-user" style="float: right; margin-bottom: 0">
+    <!-- Check if the user is not logged in -->
+    <c:if test="${sessionScope.id==null}">
+        <li style="display: inline-block;"><a href="../member/login_main.do" style="padding: 0 15px; line-height: 50px;">Login</a></li>
+        <!-- Only display the Sign up link if the user is not logged in -->
+        <li style="display: inline-block;"><a href="../member/join.do" style="padding: 0 15px; line-height: 50px;">Sign up</a></li>
+    </c:if>
+
+    <!-- Check if the user is logged in -->
+    <c:if test="${sessionScope.id!=null}">
+        <!-- Show logout link -->
+        <li style="display: inline-block;"><a href="../member/logout.do" style="padding: 0 15px; line-height: 50px;">Logout</a></li>
+
+        <!-- Further check if the user is an administrator -->
+        <c:if test="${sessionScope.admin=='y'}">
+            <li style="display: inline-block;"><a href="#" style="padding: 0 15px; line-height: 50px;">Management Page</a></li>
+        </c:if>
+
+        <!-- Check if the user is a regular user -->
+        <c:if test="${sessionScope.admin=='n'}">
+            <li style="display: inline-block;"><a href="#" style="padding: 0 15px; line-height: 50px;">My Page</a></li>
+        </c:if>
+    </c:if>
+
+    <!-- Shopping Cart Icon, always displayed -->
+    <li style="display: inline-block;"><a href="#"><img class="icon-cart" src="../images/icon_cart.png"></a></li>
+</ul>
     </div>
 </nav>

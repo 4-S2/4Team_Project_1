@@ -95,6 +95,11 @@ public class MemberModel {
     @RequestMapping("member/login_main.do")
     public String member_login_main(HttpServletRequest request, HttpServletResponse response) {
         request.setAttribute("main_jsp", "../member/login_main.jsp");
+        return "../main/main.jsp";
+    }
+    
+    @RequestMapping("member/login_ok.do")
+    public String member_login_ok(HttpServletRequest request, HttpServletResponse response) {
 
         response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=UTF-8");
@@ -118,9 +123,11 @@ public class MemberModel {
             return "redirect:../main/main.do";
         } else {
             // 로그인 실패 시 다시 로그인 페이지로
-            return "../member/login_main.jsp";
+            return "../member/login_main.do";
         }
     }
+    
+    
     
 
 

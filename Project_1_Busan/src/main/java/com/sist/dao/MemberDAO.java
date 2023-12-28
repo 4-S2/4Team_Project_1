@@ -69,63 +69,56 @@ public class MemberDAO {
 		   dbconn.disConnection(conn, ps);
 	   } 
    }
-   public MemberVO memberLogin(String id,String pwd)
-   {
-	   MemberVO vo=new MemberVO();
-	   try
-	   {
-		   conn=dbconn.getConnection();
-		   String sql="SELECT COUNT(*) "
-				     +"FROM user_ "
-				     +"WHERE id=?";
-		   ps=conn.prepareStatement(sql);
-		   ps.setString(1, id);
-		   ResultSet rs=ps.executeQuery();
-		   rs.next();
-		   int count=rs.getInt(1);
-		   rs.close();
-		   
-		   if(count==0)
-		   {
-			   vo.setMsg("NOID");
-		   }
-		   else
-		   {
-			  sql="SELECT id,name,password,admin "
-				 +"FROM user_ "
-				 +"WHERE id=?";
-			  ps=conn.prepareStatement(sql);
-			  ps.setString(1, id);
-			  rs=ps.executeQuery();
-			  rs.next();
-			  String db_id=rs.getString(1);
-			  String name=rs.getString(2);
-			  String db_pwd=rs.getString(3);
-			  String admin=rs.getString(4);
-			  rs.close();
-			  
-			  if(db_pwd.equals(pwd))
-			  {
-				  vo.setId(db_id);
-				  vo.setName(name);
-				  vo.setAdmin(admin);
-				  vo.setMsg("OK");
-			  }
-			  else
-			  {
-				  vo.setMsg("NOPWD");
-			  }
-		   }
-		   
-	   }catch(Exception ex)
-	   {
-		   ex.printStackTrace();
-	   }
-	   finally
-	   {
-		   dbconn.disConnection(conn, ps);
-	   }
-	   return vo;
-   }
+   public MemberVO memberLogin(String id, String pwd) {
+	    MemberVO vo = new MemberVO();
+	    try {
+	        conn = dbconn.getConnection();
+	        String sql = "SELECT id,password, email, name, phone, postcode, addr, detail_addr , admin "
+	                   + "FROM user_ "
+	                   + "WHERE id=?";
+	        ps = conn.prepareStatement(sql);
+	        ps.setString(1, id);
+	        ResultSet rs = ps.executeQuery();
+
+	        if (rs.next()) {
+	            String db_id = rs.getString("id");
+	            String db_pwd = rs.getString("password");
+	            String db_email = rs.getString("email");
+	            String name = rs.getString("name");
+	            String phone = rs.getString("phone");
+	            String postcode = rs.getString("postcode");
+	            String addr = rs.getString("addr");
+	            String detail_addr = rs.getString("detail_addr");
+	            String admin =rs.getString("admin");
+
+	            vo.setId(db_id);
+	            vo.setEmail(db_email);
+	            vo.setName(name);
+	            vo.setPhone(phone);
+	            vo.setPostcode(postcode);
+	            vo.setAddr(addr);
+	            vo.setDetail_addr(detail_addr);
+	            vo.setAdmin(admin);
+
+	            
+
+	            if (db_pwd.equals(pwd)) {
+	                vo.setMsg("OK");
+	            } else {
+	                vo.setMsg("NOPWD");
+	            }
+	        } else {
+	            vo.setMsg("NOID");
+	        }
+
+	        rs.close();
+	    } catch (Exception ex) {
+	        ex.printStackTrace();
+	    } finally {
+	        dbconn.disConnection(conn, ps);
+	    }
+	    return vo;
+	}
+
 }
    

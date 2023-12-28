@@ -4,16 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <script type="text/javascript">
-    var storedPostalCode = sessionStorage.getItem("postalCode");
-    var storedAddress = sessionStorage.getItem("address");
-    var storedDetailAddress = sessionStorage.getItem("detailAddress");
-
-    // Populate the fields
-    document.getElementById("sample6_postcode").value = storedPostalCode;
-    document.getElementById("sample6_address").value = storedAddress;
-    document.getElementById("sample6_detailAddress").value = storedDetailAddress;
-    </script>
+    
     <style>
          #login-all-cont {
             display: flex;
@@ -115,7 +106,7 @@
 
     <div id="login-all-cont">
        
-        <form id="login-form-all" action="../member/login_main.do" method="post">
+        <form id="login-form-all" action="../member/login_ok.do" method="post">
 
             <div>
                 <h2>로그인</h2>
