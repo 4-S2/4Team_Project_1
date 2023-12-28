@@ -128,8 +128,8 @@
                 <div>
                     <div class="search">
                         <div>
-                            <form name="Search-Form" method="get" class="subscribe-form">
-                                <input type="text" class="input subscribe-input w-input" name="Search" placeholder="검색어를 입력하세요" 
+                            <form name="Search-Form" method="post" class="subscribe-form" action="${tab }_find.do">
+                                <input type="text" class="input subscribe-input w-input" name="word" placeholder="검색어를 입력하세요" 
                                 id="" required style="width:500px"/>
                                 <input type="submit" value="Search" class="button w-button"/>
                             </form>

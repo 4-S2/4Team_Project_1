@@ -12,6 +12,11 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
         <link href="../css/style.css" rel="stylesheet" type="text/css"/> 
         <style type="text/css">
+     .tt{
+       margin: 0px auto;
+       
+     }
+     
      .product-table{
          width:400px;
         }
@@ -84,8 +89,10 @@
                 <div class="wrapper side-paddings">
                     <div class="product">
                         <div class="product-info">
+                           <div class="tt">
                             <h1>${vo.ename }</h1>
                             <h3>${vo.eename }</h3>
+                            </div>
                             <p class="text-grey">
                               <div class="product-table">
                                 <div class="product-table-cell">

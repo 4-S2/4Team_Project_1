@@ -1,22 +1,144 @@
 package com.sist.model;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.sist.controller.RequestMapping;
+import com.sist.dao.*;
+import com.sist.vo.MemberVO;
 
 public class MemberModel {
-  @RequestMapping("member/join.do")
-  public String member_join(HttpServletRequest request,HttpServletResponse response)
-  {
-	  request.setAttribute("main_jsp", "../member/join.jsp");
-	  return "../main/main.jsp";
-  }
+    @RequestMapping("member/join.do")
+    public String member_join(HttpServletRequest request, HttpServletResponse response) {
+        request.setAttribute("main_jsp", "../member/join.jsp");
+        return "../main/main.jsp";
+    }
+
   
-  @RequestMapping("member/login.do")
-  public String member_login(HttpServletRequest request,HttpServletResponse response)
-  {
-	  request.setAttribute("main_jsp", "../member/login.jsp");
-	  return "../main/main.jsp";
-  }
+    @RequestMapping("member/idcheck.do")
+    public String member_idcheck(HttpServletRequest request,
+  		  HttpServletResponse response)
+    {
+  	  return "../member/idcheck.jsp";
+    }
+    
+
+    @RequestMapping("member/idcheck_ok.do")
+    public void member_idcheck_ok(HttpServletRequest request,
+  		  HttpServletResponse response)
+    {
+  	  String id=request.getParameter("id");
+  	  MemberDAO dao=MemberDAO.newInstance();
+  	  int count=dao.memberIdCheck(id);
+  	  System.out.println("ID check:"+count);
+  	  try
+  	  {
+  		  // Ajax로 값을 전송 
+  		  PrintWriter out=response.getWriter();
+  		  out.write(String.valueOf(count));
+  	  }catch(Exception ex){}
+    }
+    
+    @RequestMapping("member/join_ok.do")
+    public String member_join_ok(HttpServletRequest request,
+  		  HttpServletResponse response)
+    {
+  	  try
+  	  {
+  		  request.setCharacterEncoding("UTF-8");
+  	  }catch(Exception ex) {}
+  	  String id=request.getParameter("id");
+  	  String pwd=request.getParameter("password");
+  	  String email=request.getParameter("email");
+  	  String name=request.getParameter("name");
+  	  String phone=request.getParameter("phone");
+  	  String postcode=request.getParameter("postal_code"); 
+  	  String addr=request.getParameter("address");
+  	  String Detail_addr=request.getParameter("detail_address");
+  	  
+  	 /*
+  	  *      ps.setString(1, vo.getId());
+	        ps.setString(2, vo.getPwd());
+	        ps.setString(3, vo.getEmail());
+	        ps.setString(4, vo.getName());
+	        ps.setString(5, vo.getPhone());
+	        ps.setString(6, vo.getPostcode());
+	        ps.setString(7, vo.getAddr());
+	        ps.setString(8, vo.getDetail_addr());
+	        ps.setString(9, vo.getAdmin());
+  	  */
+  	 
+  	  
+  	  MemberVO vo=new MemberVO();
+  	  vo.setId(id);
+  	  vo.setPwd(pwd);
+  	  vo.setEmail(email);
+  	  vo.setName(name);
+  	  vo.setPhone(phone);
+  	  vo.setPostcode(postcode);
+  	  vo.setAddr(addr);
+  	  vo.setDetail_addr(Detail_addr);
+  	  
+  	 
+  	  
+  	  MemberDAO dao=MemberDAO.newInstance();
+  	  // 회원 가입되는 메소드 호출 
+  	  dao.memberInsert(vo);
+  	  return "redirect:../main/main.do";
+    }
+    
+    
+    @RequestMapping("member/login_main.do")
+    public String member_login_main(HttpServletRequest request, HttpServletResponse response) {
+        request.setAttribute("main_jsp", "../member/login_main.jsp");
+        
+        response.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html;charset=UTF-8");
+
+        String id=request.getParameter("id");
+  	  String pwd=request.getParameter("password");
+  	
+  	  
+  	  MemberDAO dao=MemberDAO.newInstance();
+  	  MemberVO vo=dao.memberLogin(id, pwd);
+  	  if(vo.getMsg().equals("OK"))
+  	  {
+  		  // 세션에 저장 
+  		  HttpSession session=
+  				  request.getSession();
+  		  session.setAttribute("id", vo.getId());
+  		  session.setAttribute("name", vo.getName());
+  		  session.setAttribute("admin", vo.getAdmin());
+  		  session.setAttribute("address", vo.getAddr());
+  		  session.setAttribute("detail_address", vo.getDetail_addr());
+  		  session.setAttribute("postal_code", vo.getPostcode());
+  	  }
+  	  
+  	  // ajax로 전송 
+  	  try
+  	  {
+  		
+  		  PrintWriter out=response.getWriter();
+  		  out.write(vo.getMsg());
+  	  }catch(Exception ex) {}
+  	  
+  	      return "../main/main.jsp";
+    }
+    
+
+
+    @RequestMapping("member/logout.do")
+    public String member_logout(HttpServletRequest request,
+  		  HttpServletResponse response)
+    {
+  	  HttpSession session=request.getSession();
+  	  session.invalidate();
+  	  return "redirect:../main/main.do";
+    }
+    
+    
 }

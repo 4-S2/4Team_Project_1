@@ -105,7 +105,7 @@
 
     <div id="login-all-cont">
        
-        <form id="login-form-all" action="login.do" method="post">
+        <form id="login-form-all" action="member/login.do" method="post">
             <div>
                 <h2>로그인</h2>
                 <label for="id">ID</label>
@@ -124,7 +124,7 @@
             <input type="submit" value="로그인" id="login-submit-btn" />
             
             <div class="links">
-                <a href="#" class="log-link-1">회원가입</a>  
+                <a href="../member/join.do" class="log-link-1">회원가입</a>  
                 <a href="#" class="log-link-1">아이디찾기</a>  
                 <a href="#" class="log-link-1">비밀번호찾기</a>
             </div>
