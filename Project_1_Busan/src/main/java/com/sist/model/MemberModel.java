@@ -60,17 +60,7 @@ public class MemberModel {
   	  String addr=request.getParameter("address");
   	  String Detail_addr=request.getParameter("detail_address");
   	  
-  	 /*
-  	  *      ps.setString(1, vo.getId());
-	        ps.setString(2, vo.getPwd());
-	        ps.setString(3, vo.getEmail());
-	        ps.setString(4, vo.getName());
-	        ps.setString(5, vo.getPhone());
-	        ps.setString(6, vo.getPostcode());
-	        ps.setString(7, vo.getAddr());
-	        ps.setString(8, vo.getDetail_addr());
-	        ps.setString(9, vo.getAdmin());
-  	  */
+  	 
   	 
   	  
   	  MemberVO vo=new MemberVO();
@@ -88,7 +78,27 @@ public class MemberModel {
   	  MemberDAO dao=MemberDAO.newInstance();
   	  // 회원 가입되는 메소드 호출 
   	  dao.memberInsert(vo);
-  	  return "redirect:../main/main.do";
+  	  
+  	 MemberVO loginVO = dao.memberLogin(id, pwd);
+     if (loginVO.getMsg().equals("OK")) {
+         // 세션에 사용자 정보 저장
+         HttpSession session = request.getSession();
+         session.setAttribute("id", loginVO.getId());
+         session.setAttribute("email", loginVO.getEmail());
+         session.setAttribute("name", loginVO.getName());
+         session.setAttribute("phone", loginVO.getPhone());
+         session.setAttribute("postcode", loginVO.getPostcode());
+         session.setAttribute("addr", loginVO.getAddr());
+         session.setAttribute("detail_addr", loginVO.getDetail_addr());
+         session.setAttribute("admin", loginVO.getAdmin());
+         // ... 기타 필요한 세션 정보 설정 ...
+
+         // 로그인 상태 유지 및 메인 페이지로 리디렉션
+         return "redirect:../main/main.do";
+     } else {
+         // 로그인 실패 시 처리 (예: 오류 페이지로 리디렉션)
+         return "redirect:../member/login_main.do";
+     }
     }
     
     

@@ -245,6 +245,34 @@
 					    </div>
 					    <!-- <div id="reserveCont" class="tab-content" style="display: none;">
 					        예약하기 내용
+					        <div class="form-group">
+    <label for="people">인원 선택:</label>
+    <select id="people" name="people" class="form-control">
+        <%-- Options for number of people --%>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <%-- Add more options as needed --%>
+    </select>
+</div>
+
+<div class="form-group">
+    <label for="date">날짜 선택:</label>
+    <input type="date" id="date" name="date" class="form-control"/>
+</div>
+
+<c:choose>
+    <c:when test="${vo.price == 0}">
+        <%-- For free exhibitions --%>
+        <a href="#" class="btn btn-primary">예약 완료 페이지로</a>
+    </c:when>
+    <c:otherwise>
+        <%-- For paid exhibitions --%>
+        <a href="#" class="btn btn-success">결제 및 예약 완료 페이지로</a>
+    </c:otherwise>
+</c:choose>
+					        
 					        예약하기 내용을 입력하세요.
 					    </div> -->
 					</div>
