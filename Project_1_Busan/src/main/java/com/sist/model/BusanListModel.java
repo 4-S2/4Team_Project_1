@@ -176,6 +176,7 @@ public class BusanListModel {
 		  {
 			  if(word==null)
 			  {
+				 
 				  
 			  }
 			  else {
