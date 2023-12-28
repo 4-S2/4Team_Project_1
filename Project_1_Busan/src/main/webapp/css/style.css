@@ -5250,6 +5250,7 @@ ul, ol{margin: 0; list-style: none;}
 
 
 /***** detail page *****/
+
 .detail .product-top{
 	display: flex;
 	justify-content: space-between;
