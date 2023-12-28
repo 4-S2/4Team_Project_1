@@ -129,7 +129,7 @@ public class BusanListModel {
 		  List<BusanListVO> list=dao.BusanListData(curpage,"food");
 		  int totalpage=dao.BusanListTotalPage("food");
 		  
-		   final int BLOCK=5;
+		   final int BLOCK=10;
 		   int startPage=((curpage-1)/BLOCK*BLOCK)+1;
 		   int endPage=((curpage-1)/BLOCK*BLOCK)+BLOCK;
 		   
@@ -176,6 +176,7 @@ public class BusanListModel {
 		  {
 			  if(word==null)
 			  {
+				 
 				  
 			  }
 			  else {
@@ -200,6 +201,13 @@ public class BusanListModel {
 		   request.setAttribute("endPage", endPage);
 		  request.setAttribute("list", list);
 		  //3. 결과값 모아서 request에 저장 
+		  request.setAttribute("main_jsp", "../busan/food.jsp");
+		  return "../main/main.jsp";
+	}
+	@RequestMapping("busan/food_tagfind.do")
+	public String busan_food_tagfind(HttpServletRequest request,
+			  HttpServletResponse response)
+	{
 		  request.setAttribute("main_jsp", "../busan/food.jsp");
 		  return "../main/main.jsp";
 	}
