@@ -77,65 +77,70 @@
          background-color: #2b75d5;
          }
         </style>
+        <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script> -->
+        <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
         <script type="text/javascript">
-        document.addEventListener('DOMContentLoaded', function () {
-            // 초기 로딩 시 localStorage에서 선택된 태그를 읽어옴
-            var selectedTag = localStorage.getItem('selectedTag');
-            var initialLink = selectedTag ? document.getElementById(selectedTag) : document.getElementById('link1');
-            selectLink(initialLink);
+    document.addEventListener('DOMContentLoaded', function () {
+        // 초기 로딩 시 localStorage에서 선택된 태그를 읽어옴
+        var selectedTag = localStorage.getItem('selectedTag');
+        var initialLink = selectedTag ? document.getElementById(selectedTag) : document.getElementById('link1');
+        selectLink(initialLink);
 
-            // 검색 버튼 클릭 시
-            document.forms['Search-Form'].addEventListener('submit', function () {
-                // 현재 선택된 태그를 localStorage에 저장
-                var selectedButton = document.querySelector('.selected-link');
-                if (selectedButton) {
-                    localStorage.setItem('selectedTag', selectedButton.id);
-                }
-            });
+        // 검색 버튼 클릭 시
+        document.forms['Search-Form'].addEventListener('submit', function () {
+            // 현재 선택된 태그를 localStorage에 저장
+            var selectedButton = document.querySelector('.selected-link');
+            if (selectedButton) {
+                localStorage.setItem('selectedTag', selectedButton.id);
+            }
         });
-        
-        function selectLink(button) {
-            // 이전에 선택된 태그를 지움
-            var prevSelectedTag = localStorage.getItem('selectedTag');
-            if (prevSelectedTag) {
-                var prevSelectedButton = document.getElementById(prevSelectedTag);
-                if (prevSelectedButton) {
-                    prevSelectedButton.classList.remove('selected-link');
-                }
+
+        // food.do 페이지로 이동할 때 초기화
+        if (window.location.pathname.includes("/busan/food.do")) {
+            initializeHeader();
+        }
+    });
+
+    function initializeHeader() {
+        // #전체 버튼을 선택한 상태로 초기화
+        var link1Button = document.getElementById('link1');
+        selectLink(link1Button);
+    }
+
+    function goToTagList(button) {
+        window.location.href = '../busan/food_tagList.do';
+    }
+
+    function selectLink(button) {
+        // 이전에 선택된 태그를 지움
+        var prevSelectedTag = localStorage.getItem('selectedTag');
+        if (prevSelectedTag) {
+            var prevSelectedButton = document.getElementById(prevSelectedTag);
+            if (prevSelectedButton) {
+                prevSelectedButton.classList.remove('selected-link');
             }
-
-            // 현재 선택된 태그를 설정
-            button.classList.add('selected-link');
-
-            var allButtons = document.querySelectorAll('button.tag');
-            for (var i = 0; i < allButtons.length; i++) {
-                if (allButtons[i] !== button) {
-                    allButtons[i].classList.remove('selected-link');
-                }
-            }
-
-            var tagValue = button.textContent.trim().substring(1);
-            document.forms['Search-Form'].elements['tag'].value = tagValue;
-            var searchInput = document.forms['Search-Form'].elements['word'];
-            
         }
 
-        </script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-        <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
-        <script type="text/javascript">
-            window.__WEBFLOW_CURRENCY_SETTINGS = {
-                "currencyCode": "USD",
-                "$init": true,
-                "symbol": "$",
-                "decimal": ".",
-                "fractionDigits": 2,
-                "group": ",",
-                "template": "{{wf {\"path\":\"symbol\",\"type\":\"PlainText\"} }} {{wf {\"path\":\"amount\",\"type\":\"CommercePrice\"} }} {{wf {\"path\":\"currencyCode\",\"type\":\"PlainText\"} }}",
-                "hideDecimalForWholeNumbers": false
-            };
-        </script>
+        // 현재 선택된 태그를 설정
+        button.classList.add('selected-link');
+
+        var allButtons = document.querySelectorAll('button.tag');
+        for (var i = 0; i < allButtons.length; i++) {
+            if (allButtons[i] !== button) {
+                allButtons[i].classList.remove('selected-link');
+            }
+        }
+
+        var tagValue = button.textContent.trim().substring(1);
+        if(tagValue==='카페&베이커리')
+        {
+        	tagValue=tagValue.substring(0,2);
+        }
+        document.forms['Search-Form'].elements['tag'].value = tagValue;
+        var searchInput = document.forms['Search-Form'].elements['word'];
+    }
+</script>
         <!--  <link href="https://assets.website-files.com/5badda2935e11303a89a461e/5bd83035e7345f2f22c0bece_favicon.png" rel="shortcut icon" type="image/x-icon"/>
         <link href="https://assets.website-files.com/5badda2935e11303a89a461e/5bd8303816e1ea6c375be6cb_webclip.png" rel="apple-touch-icon"/> -->
     </head>
