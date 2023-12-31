@@ -157,14 +157,14 @@
                     <div class="shop-header">
                         <h3 class="no-margin w-hidden-small w-hidden-tiny">${cate}</h3>
                         <div class="shop-categories-wrapper">
-                            <a href="/catalog" aria-current="page" class="shop-category-link w--current">최신순</a>
+                            <a href="${tab }_find.do?word=${word}&sort=no" aria-current="page" class="shop-category-link w--current">최신순</a>
                             <div class="w-dyn-list">
                                 <div role="list" class="shop-categories w-dyn-items">
                                     <div role="listitem" class="w-dyn-item">
-                                        <a href="/category/wooden-toys" class="shop-category-link">조회순</a>
+                                        <a href="${tab }_find.do?word=${word}&sort=hit" class="shop-category-link">조회순</a>
                                     </div>
                                     <div role="listitem" class="w-dyn-item">
-                                        <a href="/category/stuffed-animals" class="shop-category-link">좋아요순</a>
+                                        <a href="${tab }_find.do?word=${word}&sort=heart" class="shop-category-link">좋아요순</a>
                                     </div>
                                 </div>
                             </div>
@@ -202,13 +202,13 @@
                             => &lt;
                         --%>
                         <c:if test="${startPage>1}">
-                            <li><a href="${tab }.do?page=${startPage-1}">&lt;</a></li>
+                            <li><a href="${tab }_find.do?page=${startPage-1}&word=${word}&sort=${sort}">&lt;</a></li>
                         </c:if>
                         <c:forEach var="i" begin="${startPage}" end="${endPage}">
-                            <li ${curpage==i?"class=active":""}><a href="${tab }.do?page=${i}">${i}</a></li>
+                            <li ${curpage==i?"class=active":""}><a href="${tab }_find.do?page=${i}&word=${word}&sort=${sort}">${i}</a></li>
                         </c:forEach>
                         <c:if test="${endPage<totalpage}">
-                            <li><a href="${tab }.do?page=${endPage+1}">&gt;</a></li>
+                            <li><a href="${tab }_find.do?page=${endPage+1}&word=${word}&sort=${sort}">&gt;</a></li>
                         </c:if>
                     </ul>
                 </div>

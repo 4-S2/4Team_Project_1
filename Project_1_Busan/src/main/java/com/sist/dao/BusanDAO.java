@@ -21,7 +21,7 @@ public class BusanDAO {
 		return dao;		   
    }
    
-   // 1. 기능 : 명소 => seoul_location
+   // 부산 리스트
    public List<BusanListVO> BusanListData(int page,String tab)
    {
 	   List<BusanListVO> list=new ArrayList<>();
@@ -90,9 +90,7 @@ public class BusanDAO {
 	   }
 	   return total;
    }
-   // 2. 기능 : 자연 => seoul_nature
-   // 3. 기능 : 쇼핑 => seoul_shop
-   
+
    // TOP 6 리스트 출력
    public List<BusanListVO> findTop3(String tab)
    {
@@ -201,7 +199,7 @@ public class BusanDAO {
 	   }
 	   return vo;
    }
-   //부산 상세보기
+   // 부산 상세보기
    public BusanListVO busanDetailData(int no,String tab)
    {  
 	   BusanListVO vo=new BusanListVO();
@@ -251,10 +249,13 @@ public class BusanDAO {
 	   return vo;
    }
    
-   // 검색 기능 리스트
-   public List<BusanListVO> BusanFindList(String keyword,int page,String tab)
+   // 부산 검색 리스트
+   public List<BusanListVO> BusanFindList(String keyword,int page,String tab,String sort)
    {
 	   List<BusanListVO> list=new ArrayList<>();
+	   String sort_way="ASC";
+	   if(sort.equals("heart")||sort.contains("hit"))
+		   sort_way="DESC";
 	   try
 	   {
 		   // 1. 연결 
@@ -263,7 +264,8 @@ public class BusanDAO {
 		   String sql="SELECT no,title,poster,num "
 				     +"FROM (SELECT no,title,poster,rownum as num "
 				     +"FROM (SELECT no,title,poster "
-				     +"FROM "+tab+" WHERE title LIKE '%'||?||'%' ORDER BY no ASC)) "
+				     +"FROM "+tab+" WHERE title LIKE '%'||?||'%' "
+				     +"ORDER BY " +sort+" "+sort_way+")) "
 				     +"WHERE num BETWEEN ? AND ?";
 		   // 3. 미리 전송 
 		   ps=conn.prepareStatement(sql);
@@ -300,7 +302,7 @@ public class BusanDAO {
 	   return list;
    }
    
-// 검색 리스트 총 페이지
+// 부산 검색 리스트 총 페이지
    public int BusanFindTotalPage(String keyword,String tab)
    {
 	   int total=0;
@@ -326,28 +328,31 @@ public class BusanDAO {
 	   return total;
    }
    
-   //food검색
-   public List<BusanListVO> foodFindList(String keyword,int page,String tag)
+   //food 검색 데이터
+   public List<BusanListVO> foodFindList(String keyword,int page,String tag,String sort)
    {
 	   List<BusanListVO> list=new ArrayList<>();
+	   String sort_way="ASC";
+	   if(sort.equals("heart")||sort.contains("hit"))
+		   sort_way="DESC";
 	   try
 	   {
 		   // 1. 연결 
 		   conn=dbconn.getConnection();
 		   // 2. SQL문장 전송 
-		   String sql="SELECT no,title,poster,tag,num "
-				     +"FROM (SELECT no,title,poster,tag,rownum as num "
-				     +"FROM (SELECT no,title,poster,tag "
-				     +"FROM food WHERE title LIKE '%'||?||'%' AND tag LIKE '%'||?||'%'"
-				     +"ORDER BY no ASC)) "
-				     +"WHERE num BETWEEN ? AND ?";
+		   String sql = "SELECT no, title, poster, tag, num " +
+				   "FROM (SELECT no, title, poster, tag, rownum as num " +
+				   "FROM (SELECT no, title, poster, tag, hit, heart " +
+				   "FROM food " +
+				   "WHERE title LIKE '%'||?||'%' AND tag LIKE '%'||?||'%' " +
+				   "ORDER BY " + sort + " " + sort_way + ")) " +
+				   "WHERE num BETWEEN ? AND ?";
 		   // 3. 미리 전송 
 		   ps=conn.prepareStatement(sql);
 		   // 4. 실행 요청전에 ?에 값을 채운다 
 		   int rowSize=12;
 		   int start=(rowSize*page)-(rowSize-1); // 오라클 => 1번 
 		   int end=rowSize*page;
-		   
 		   ps.setString(1, keyword);
 		   ps.setString(2, tag);
 		   ps.setInt(3, start);
@@ -377,7 +382,7 @@ public class BusanDAO {
 	   }
 	   return list;
    }
-   //food totalpage
+   //food 검색 리스트 총페이지
    public int foodFindTotalPage(String keyword,String tag)
    {
 	   int total=0;

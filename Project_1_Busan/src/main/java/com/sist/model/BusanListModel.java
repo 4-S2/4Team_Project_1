@@ -2,6 +2,7 @@ package com.sist.model;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.sist.controller.RequestMapping;
 
@@ -9,6 +10,8 @@ import java.io.UnsupportedEncodingException;
 import java.util.*;
 import com.sist.dao.*;
 import com.sist.vo.BusanListVO;
+
+import oracle.net.ns.SessionAtts;
 public class BusanListModel {
 	// => if : => 
 	
@@ -146,9 +149,9 @@ public class BusanListModel {
 		  request.setAttribute("main_jsp", "../busan/food.jsp");
 		  return "../main/main.jsp";
 	}
-	
+
 	@RequestMapping("busan/food_find.do")
-	public String busan_food_FindList(HttpServletRequest request,
+	public String busan_food_tagfind(HttpServletRequest request,
 			  HttpServletResponse response)
 	{
 		try {
@@ -159,55 +162,40 @@ public class BusanListModel {
 		  //1. 요청값 받기
 		  String page=request.getParameter("page");
 		  String word=request.getParameter("word");
-		  String tag=request.getParameter("tag");	  
-		  if(tag==null)
-			  tag="전체";
+		  String tag=request.getParameter("tag");
+		  String sort=request.getParameter("sort");
+		  if(word==null)
+			  word="";
+		  if(tag==null||tag.equals("전체"))
+			  tag="";
 		  if(page==null)
 			  page="1";
+		  if(sort==null||sort=="")
+			  sort="no";
 		  System.out.println(page);
 		  System.out.println(word);
 		  System.out.println(tag);
 		  int curpage=Integer.parseInt(page);
 		  //2. DB연동 
 		  BusanDAO dao=new BusanDAO();
-		  List<BusanListVO> list=dao.BusanListData(curpage,"food");
-		  int totalpage=dao.BusanListTotalPage("food");
-		  if(tag.equals("전체"))
-		  {
-			  if(word==null)
-			  {
-				 
-				  
-			  }
-			  else {
-				  list=dao.BusanFindList(word,curpage,"food");
-				  totalpage=dao.BusanFindTotalPage(word, "food");
-			  }		  
-		  }
-		  else {
-			  list=dao.foodFindList(word,curpage,tag);
-			  totalpage=dao.foodFindTotalPage(word, tag);
-		  }
+		  List<BusanListVO> list=dao.foodFindList(word,curpage,tag,sort);
+		  int totalpage=dao.foodFindTotalPage(word, tag);
 		   final int BLOCK=10;
 		   int startPage=((curpage-1)/BLOCK*BLOCK)+1;
 		   int endPage=((curpage-1)/BLOCK*BLOCK)+BLOCK;
 		   
 		   if(endPage>totalpage)
 			   endPage=totalpage;
-		  
+
 		  request.setAttribute("curpage", curpage);
 		  request.setAttribute("totalpage", totalpage);
 		   request.setAttribute("startPage", startPage);
 		   request.setAttribute("endPage", endPage);
 		  request.setAttribute("list", list);
+		  request.setAttribute("tag", tag);
+		  request.setAttribute("word", word);
+		  request.setAttribute("sort", sort);
 		  //3. 결과값 모아서 request에 저장 
-		  request.setAttribute("main_jsp", "../busan/food.jsp");
-		  return "../main/main.jsp";
-	}
-	@RequestMapping("busan/food_tagfind.do")
-	public String busan_food_tagfind(HttpServletRequest request,
-			  HttpServletResponse response)
-	{
 		  request.setAttribute("main_jsp", "../busan/food.jsp");
 		  return "../main/main.jsp";
 	}
@@ -223,12 +211,17 @@ public class BusanListModel {
 		  //1. 요청값 받기
 		  String page=request.getParameter("page");
 		  String word=request.getParameter("word");
+		  String sort=request.getParameter("sort");
+		  if(word==null)
+			  word="";
 		  if(page==null)
 			  page="1";
+		  if(sort==null||sort=="")
+			  sort="no";
 		  int curpage=Integer.parseInt(page);
 		  //2. DB연동 
 		  BusanDAO dao=new BusanDAO();
-		  List<BusanListVO> list=dao.BusanFindList(word,curpage,"tour");
+		  List<BusanListVO> list=dao.BusanFindList(word,curpage,"tour",sort);
 		  int totalpage=dao.BusanFindTotalPage(word, "tour");
 		  
 		   final int BLOCK=10;
@@ -246,6 +239,7 @@ public class BusanListModel {
 		  request.setAttribute("endPage", endPage);
 		  request.setAttribute("list", list);
 		  request.setAttribute("word", word);
+		  request.setAttribute("sort", sort);
 		  //3. 결과값 모아서 request에 저장 
 		  request.setAttribute("main_jsp", "../busan/busan_list.jsp");
 		  return "../main/main.jsp";
@@ -262,12 +256,17 @@ public class BusanListModel {
 		  //1. 요청값 받기
 		  String page=request.getParameter("page");
 		  String word=request.getParameter("word");
+		  String sort=request.getParameter("sort");
+		  if(word==null)
+			  word="";
 		  if(page==null)
 			  page="1";
+		  if(sort==null||sort=="")
+			  sort="no";
 		  int curpage=Integer.parseInt(page);
 		  //2. DB연동 
 		  BusanDAO dao=new BusanDAO();
-		  List<BusanListVO> list=dao.BusanFindList(word,curpage,"festival");
+		  List<BusanListVO> list=dao.BusanFindList(word,curpage,"festival",sort);
 		  int totalpage=dao.BusanFindTotalPage(word, "festival");
 		  
 		   final int BLOCK=10;
@@ -284,6 +283,7 @@ public class BusanListModel {
 		   request.setAttribute("endPage", endPage);
 		  request.setAttribute("list", list);
 		  request.setAttribute("word", word);
+		  request.setAttribute("sort", sort);
 		  //3. 결과값 모아서 request에 저장 
 		  request.setAttribute("main_jsp", "../busan/busan_list.jsp");
 		  return "../main/main.jsp";
@@ -300,12 +300,17 @@ public class BusanListModel {
 		  //1. 요청값 받기
 		  String page=request.getParameter("page");
 		  String word=request.getParameter("word");
+		  String sort=request.getParameter("sort");
+		  if(word==null)
+			  word="";
 		  if(page==null)
 			  page="1";
+		  if(sort==null||sort=="")
+			  sort="no";
 		  int curpage=Integer.parseInt(page);
 		  //2. DB연동 
 		  BusanDAO dao=new BusanDAO();
-		  List<BusanListVO> list=dao.BusanFindList(word,curpage,"activity");
+		  List<BusanListVO> list=dao.BusanFindList(word,curpage,"activity",sort);
 		  int totalpage=dao.BusanFindTotalPage(word, "activity");
 		  
 		   final int BLOCK=10;
@@ -322,6 +327,7 @@ public class BusanListModel {
 		   request.setAttribute("endPage", endPage);
 		  request.setAttribute("list", list);
 		  request.setAttribute("word", word);
+		  request.setAttribute("sort", sort);
 		  //3. 결과값 모아서 request에 저장 
 		  request.setAttribute("main_jsp", "../busan/busan_list.jsp");
 		  return "../main/main.jsp";
