@@ -75,9 +75,11 @@
 	<div class="container" id="notice">
 		<div class="row">
 			<h1 class="text-center">공지사항</h1>
+			<c:if test="${sessionScope.admin=='y'}">
 			<div id="insert">
 			    <button onclick="location.href='../board/notice_insert.do'">새글</button>
 			</div>
+			</c:if>
 			<div id="noticesearch">
 			    <input type="text" id="searchbar">
 			    <button>검색</button>

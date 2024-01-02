@@ -230,9 +230,11 @@ h4 {
                </tr>
 
                <tr>
-                  <td colspan="4" class="text-right"><a
-                     href="../board/notice_delete.do?nno=${nno }">삭제</a>&nbsp; <a
-                     href="../board/notice.do">목록</a>&nbsp;</td>
+                  <td colspan="4" class="text-right">
+                  <c:if test="${sessionScope.admin=='y'}">
+                  <a href="../board/notice_delete.do?nno=${nno }">삭제</a>
+                  </c:if>
+                  &nbsp; <a href="../board/notice.do">목록</a>&nbsp;</td>
                </tr>
 
             </table>
