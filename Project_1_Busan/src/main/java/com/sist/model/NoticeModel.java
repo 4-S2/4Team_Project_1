@@ -1,6 +1,7 @@
 package com.sist.model;
 
 import java.util.List;
+import java.util.concurrent.atomic.AtomicIntegerArray;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -58,4 +59,44 @@ public class NoticeModel {
         request.setAttribute("main_jsp", "../board/notice_detail.jsp");
         return "../main/main.jsp";
    }
+   
+   @RequestMapping("board/notice_insert.do")
+   public String notice_insert(HttpServletRequest request,
+           HttpServletResponse response)
+   {
+        
+        request.setAttribute("main_jsp", "../board/notice_insert.jsp");
+        return "../main/main.jsp";
+   }
+   
+   @RequestMapping("board/notice_insert_ok.do")
+	public String notice_insert_ok(HttpServletRequest request, HttpServletResponse response)
+	{
+		try {
+			request.setCharacterEncoding("UTF-8");
+			
+		}catch(Exception e) {}
+		String ntitle=request.getParameter("ntitle");
+		String ncont=request.getParameter("ncont");
+		/* String pwd=request.getParameter("pwd"); */
+		
+		NoticeVO vo=new NoticeVO();
+		vo.setNtitle(ntitle);
+		vo.setNcont(ncont);
+		/* vo.setPwd(pwd); */
+		
+		NoticeDAO dao=NoticeDAO.newInstance();
+		dao.noticeInsert(vo);
+		
+		return "redirect:../board/notice.do";
+	}
+   @RequestMapping("board/notice_delete.do")
+	public String notice_delete(HttpServletRequest request, HttpServletResponse response)
+	{
+	   String nno=request.getParameter("nno");
+		
+		NoticeDAO dao=NoticeDAO.newInstance();
+		dao.noticeDeleteData(Integer.parseInt(nno));
+		return "redirect:../board/notice.do";
+	}
 }

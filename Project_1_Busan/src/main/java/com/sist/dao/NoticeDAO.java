@@ -163,4 +163,37 @@ public class NoticeDAO {
          }
          return vo;
       }
+      // 글쓰기
+      public void noticeInsert(NoticeVO vo)
+      {
+      	try {
+      		conn=dbconn.getConnection();
+      		String sql="INSERT INTO notice(nno,ntitle,ncont) "
+      				+ "VALUES(notice_nno_seq.nextval,?,?)";  
+      		ps=conn.prepareStatement(sql);
+      		ps.setString(1,vo.getNtitle());
+      		ps.setString(2,vo.getNcont());
+      		ps.executeUpdate();
+      	}catch(Exception e) {
+      		e.printStackTrace();
+      	}
+      	finally {
+      		dbconn.disConnection(conn, ps);
+      	}
+      }
+      public void noticeDeleteData(int nno)
+      {
+      	try {
+      		conn=dbconn.getConnection();
+      		String sql="DELETE FROM notice "
+      				+ "WHERE nno="+nno;  
+      		ps=conn.prepareStatement(sql);
+      		ps.executeUpdate();
+      	}catch(Exception e) {
+      		e.printStackTrace();
+      	}
+      	finally {
+      		dbconn.disConnection(conn, ps);
+      	}
+      }
 }

@@ -76,7 +76,7 @@
 		<div class="row">
 			<h1 class="text-center">공지사항</h1>
 			<div id="insert">
-			    <button>새글</button>
+			    <button onclick="location.href='../board/notice_insert.do'">새글</button>
 			</div>
 			<div id="noticesearch">
 			    <input type="text" id="searchbar">
