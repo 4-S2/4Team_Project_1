@@ -36,7 +36,7 @@
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">커뮤니티<span class="caret"></span></a>
                 <ul class="dropdown-menu">
                     <li><a href="../board/notice.do">공지사항</a></li>
-                    <li><a href="#">묻고 답하기</a></li>
+                    <li><a href="../board/qnaboard.do">묻고 답하기</a></li>
                 </ul>
             </li>
         </ul>
