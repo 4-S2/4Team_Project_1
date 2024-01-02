@@ -128,4 +128,157 @@ public class QnaBoardDAO {
 			}
 			return count;
 		}
+	 //묻고 답하기 detail
+	   public QnaBoardVO QnaDetailData(int qno)
+	   {
+		     QnaBoardVO vo=new QnaBoardVO();
+	         try
+	         {
+	            conn=dbconn.getConnection();
+	            String sql="UPDATE qnaBoard SET hit=hit+1 "
+	                    +"WHERE qno="+qno;
+	            ps=conn.prepareStatement(sql);
+	            ps.executeUpdate();
+	            ps.close();
+	            
+	            sql="SELECT qno,name,subject,cont,TO_CHAR(regdate,'yyyy-mm-dd'),hit "
+	                    +"FROM qnaBoard "
+	                    +"WHERE qno="+qno;
+	            ps=conn.prepareStatement(sql);
+	            ResultSet rs=ps.executeQuery();
+	            rs.next(); // 출력 1번째 위치부터 읽기 시작 
+	            vo.setQno(rs.getInt(1));
+	            vo.setName(rs.getString(2));
+	            vo.setSubject(rs.getString(3));
+	            vo.setCont(rs.getString(4));
+	            vo.setDbday(rs.getString(5));
+	            vo.setHit(rs.getInt(6));
+	            rs.close();
+	         }catch(Exception ex)
+	         {
+	           // 에러 출력 
+	            ex.printStackTrace();
+	         }
+	         finally
+	         {
+	            // 반환 => 재사용 
+	            dbconn.disConnection(conn, ps);
+	         }
+	         return vo;
+	  }
+	 //묻고 답하기 detail
+	   public void QnaInsertData(QnaBoardVO vo)
+	   {
+	         try
+	         {
+	            conn=dbconn.getConnection();
+	            String sql="INSERT INTO qnaBoard(qno,name,subject,cont,pwd,group_id) VALUES(qb_no_seq.nextval,?,?,?,?,(SELECT MAX(group_id) FROM qnaBoard)+1)";
+	            ps=conn.prepareStatement(sql);
+	            ps.setString(1, vo.getName());
+	            ps.setString(2, vo.getSubject());
+	            ps.setString(3, vo.getCont());
+	            ps.setString(4, vo.getPwd());
+	            ps.executeUpdate();
+	            ps.close();
+
+	         }catch(Exception ex)
+	         {
+	           // 에러 출력 
+	            ex.printStackTrace();
+	         }
+	         finally
+	         {
+	            // 반환 => 재사용 
+	            dbconn.disConnection(conn, ps);
+	         }
+	  }
+	 //묻고 답하기 delete
+	   public String QnaDeleteData(int qno,String pwd)
+	   {
+	         String result="no";
+		   try
+	         {
+	            
+			    conn=dbconn.getConnection();
+			    String sql="SELECT pwd FROM qnaboard WHERE qno="+qno;
+			    ps=conn.prepareStatement(sql);
+	            ResultSet rs=ps.executeQuery();
+	            rs.next();
+	            String db_pwd=rs.getString(1);
+	            rs.close();
+	            ps.close();
+	            
+	            if(db_pwd.equals(pwd))
+	            {
+	            	result="yes";
+	            	sql="SELECT group_id FROM qnaBoard "
+		            		+ "WHERE qno="+qno;
+		            ps=conn.prepareStatement(sql);
+		            rs=ps.executeQuery();
+		            rs.next();
+		            int group_id=rs.getInt(1);
+		            rs.close();
+		            
+		            sql="DELETE FROM qnaBoard "
+		            		+ "WHERE group_id="+group_id;
+		            ps=conn.prepareStatement(sql);
+		            ps.executeUpdate();
+	            }
+	            else {
+	            	result="no";
+	            }
+	            
+	         }catch(Exception ex)
+	         {
+	           // 에러 출력 
+	            ex.printStackTrace();
+	         }
+	         finally
+	         {
+	            // 반환 => 재사용 
+	            dbconn.disConnection(conn, ps);
+	         }
+		   return result;
+	  }
+	//  수정하기 
+	   public String boardUpdate(QnaBoardVO vo)
+	   {
+		   String res="no";
+		   try
+		   {
+			   conn=dbconn.getConnection();
+			   String sql="SELECT pwd FROM qnaboard "
+					     +"WHERE qno="+vo.getQno();
+			   ps=conn.prepareStatement(sql);
+			   ResultSet rs=ps.executeQuery();
+			   rs.next();
+			   String db_pwd=rs.getString(1);
+			   rs.close();
+			   ps.close();
+			   
+			   if(db_pwd.equals(vo.getPwd()))
+			   {
+				   res="yes";
+				   sql="UPDATE qnaboard SET "
+					  +"name=?,subject=?,cont=? "
+					  +"WHERE qno=?";
+				   ps=conn.prepareStatement(sql);
+				   ps.setString(1, vo.getName());
+				   ps.setString(2, vo.getSubject());
+				   ps.setString(3, vo.getCont());
+				   ps.setInt(4, vo.getQno());
+				   ps.executeUpdate();
+				   ps.close();
+			   }
+			   
+		   }catch(Exception ex)
+		   {
+			   ex.printStackTrace();
+		   }
+		   finally
+		   {
+			   dbconn.disConnection(conn, ps);
+		   }
+		   return res;
+	   }
 }

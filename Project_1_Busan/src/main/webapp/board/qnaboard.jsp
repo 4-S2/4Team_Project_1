@@ -79,7 +79,7 @@
 		<div class="row">
 			<h1 class="text-center">Q&A 게시판</h1>
 			<div id="insert">
-			    <button onclick="location.href='../board/notice_insert.do'">작성하기</button>
+			    <button onclick="location.href='../board/qnaboard_insert.do'">작성하기</button>
 			</div>
 			<div id="noticesearch">
 			    <input type="text" id="searchbar">
@@ -98,7 +98,7 @@
 					<tr>
 						<td width=10% class="text-center">${count-(s.index)}</td>
 						<td width=55%>
-						<a href="../board/notice_detail.do?nno=${vo.qno}">
+						<a href="../board/qnaboard_detail.do?qno=${vo.qno}">
 						<c:if test="${vo.group_step>0 }"><img src="../images/re_icon.png"></c:if>
 						${vo.subject}</a></td>
 						<td width=10% class="text-center">${vo.name}</td>
