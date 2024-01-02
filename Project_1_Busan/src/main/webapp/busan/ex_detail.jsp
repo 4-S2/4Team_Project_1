@@ -38,23 +38,94 @@
 	.w-commerce-commerceaddtocartbutton {
 		vertical-align: middle;
 	}
+	.tab-content {
+    display: none;
+}
+#detailCont {
+    display: block;
+}
+	
 </style>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fce1f2ebd7aeec53bebf70c1f38c36c7&libraries=services"></script>
+
 <script type="text/javascript">
+    var mapInitialized = false;
+    var map, geocoder;
 
+    function initMap() {
+        var container = document.getElementById('kkkomap');
+        var options = {
+            center: new kakao.maps.LatLng(33.450701, 126.570667),
+            level: 3
+        };
 
-
-function showTab(tabName) {
-    var tabContents = document.getElementsByClassName('tab-content');
-    for (var i = 0; i < tabContents.length; i++) {
-        tabContents[i].style.display = 'none';
+        map = new kakao.maps.Map(container, options);
+        geocoder = new kakao.maps.services.Geocoder();
+        mapInitialized = true;
     }
 
-    var selectedTab = document.getElementById(tabName);
-    if (selectedTab) {
-        selectedTab.style.display = 'block';
+    function showMap(address) {
+        if (!mapInitialized) {
+            initMap();
+        }
+
+        map.relayout();
+        map.setCenter(new kakao.maps.LatLng(33.450701, 126.570667));
+
+        geocoder.addressSearch(address, function(result, status) {
+            if (status === kakao.maps.services.Status.OK) {
+                var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+                var marker = new kakao.maps.Marker({
+                    map: map,
+                    position: coords
+                });
+
+                var infowindow = new kakao.maps.InfoWindow({
+                    content: '<div style="width:150px;text-align:center;padding:6px 0;">${vo.ename}</div>'
+                });
+                infowindow.open(map, marker);
+                map.setCenter(coords);
+            }
+        });
     }
-}
+
+    document.addEventListener('DOMContentLoaded', function() {
+        var tabButtons = document.querySelectorAll('.tab-menu li');
+        for (var i = 0; i < tabButtons.length; i++) {
+            tabButtons[i].addEventListener('click', function(event) {
+                var tabId = event.target.id + 'Cont';
+
+                // 모든 탭 내용을 숨김
+                var tabContents = document.getElementsByClassName('tab-content');
+                for (var j = 0; j < tabContents.length; j++) {
+                    tabContents[j].style.display = 'none';
+                }
+
+                // 선택된 탭 내용만 표시
+                var selectedTabContent = document.getElementById(tabId);
+                if (selectedTabContent) {
+                    selectedTabContent.style.display = 'block';
+                }
+
+                // 지도 탭이 선택된 경우, 지도를 표시
+                if (event.target.id === 'map' && !mapInitialized) {
+                    showMap('${vo.loc}');
+                }
+            });
+        }
+    });
+
+    function showTab(tabName) {
+        var tabContents = document.getElementsByClassName('tab-content');
+        for (var i = 0; i < tabContents.length; i++) {
+            tabContents[i].style.display = 'none';
+        }
+
+        var selectedTab = document.getElementById(tabName);
+        if (selectedTab) {
+            selectedTab.style.display = 'block';
+        }
+    }
 </script>
 
 
@@ -174,7 +245,7 @@ function showTab(tabName) {
 			                    </div>
                		<div id="mapCont" class="tab-content" style="display: none;">
                		지도 표시
-                       <div id="kkomap" style="width:100%;height:350px;"></div>
+                       <div id="kkkomap" style="width:100%;height:350px;"></div>
                     </div>
 				    <div id="reviewCont" class="tab-content" style="display: none;">
 				        <!-- 리뷰 내용 -->
@@ -215,17 +286,14 @@ function showTab(tabName) {
 					    </form> -->
 				    </div>
 				    <div id="reserveCont" class="tab-content" style="display: none;">
-				       <div id="reserveCont" class="tab-content" style="display: none;">
-					        예약하기 내용
-					        <div class="form-group">
-    <label for="people">인원 선택:</label>
+				       <label for="people">인원 선택:</label>
     <select id="people" name="people" class="form-control">
-        Options for number of people
+        <%-- Options for number of people --%>
         <option value="1">1</option>
         <option value="2">2</option>
         <option value="3">3</option>
         <option value="4">4</option>
-        Add more options as needed
+        <%-- Add more options as needed --%>
     </select>
 </div>
 
@@ -236,16 +304,21 @@ function showTab(tabName) {
 
 <c:choose>
     <c:when test="${vo.price == 0}">
-        For free exhibitions
+        <%-- For free exhibitions --%>
         <a href="#" class="btn btn-primary">예약 완료 페이지로</a>
     </c:when>
     <c:otherwise>
-        For paid exhibitions
+        <%-- For paid exhibitions --%>
         <a href="#" class="btn btn-success">결제 및 예약 완료 페이지로</a>
     </c:otherwise>
 </c:choose>
 					        
 					        예약하기 내용을 입력하세요.
+					      
+	
+                         </div>
+
+
 					    </div>   
 
 				       
