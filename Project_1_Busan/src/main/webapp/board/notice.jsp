@@ -51,7 +51,8 @@
     height: 30px;
     width: 50px;
     border-radius: 50px;
-    font-weight: bold;
+    background-color: #337ab7;
+	color: white;
 }
 
 #noticesearch #searchbar{
@@ -66,8 +67,10 @@
 }
 #insert button{
     height: 30px;
-    width: 50px;
-    font-weight: bold;
+    width: 90px;
+    background-color: #337ab7;
+	color: white;
+	border-radius: 50px;
 }
 </style>
 </head>
@@ -77,7 +80,7 @@
 			<h1 class="text-center">공지사항</h1>
 			<c:if test="${sessionScope.admin=='y'}">
 			<div id="insert">
-			    <button onclick="location.href='../board/notice_insert.do'">새글</button>
+			    <button onclick="location.href='../board/notice_insert.do'">작성하기</button>
 			</div>
 			</c:if>
 			<div id="noticesearch">

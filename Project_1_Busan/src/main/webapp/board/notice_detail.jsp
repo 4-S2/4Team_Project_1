@@ -204,6 +204,7 @@ h4 {
 	font-size: 45px;
 	margin-bottom: 30px;
 }
+
 </style>
 </head>
 <body>
@@ -233,6 +234,7 @@ h4 {
                   <td colspan="4" class="text-right">
                   <c:if test="${sessionScope.admin=='y'}">
                   <a href="../board/notice_delete.do?nno=${nno }">삭제</a>
+                  &nbsp; <a href="../board/notice_update.do?nno=${nno }">수정</a>
                   </c:if>
                   &nbsp; <a href="../board/notice.do">목록</a>&nbsp;</td>
                </tr>

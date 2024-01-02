@@ -99,4 +99,39 @@ public class NoticeModel {
 		dao.noticeDeleteData(Integer.parseInt(nno));
 		return "redirect:../board/notice.do";
 	}
+   @RequestMapping("board/notice_update.do")
+	public String notice_update(HttpServletRequest request, HttpServletResponse response)
+	{
+	   // DB연동 
+	   String nno=request.getParameter("nno");
+       //1. 요청값 받기
+	   NoticeDAO dao=NoticeDAO.newInstance();
+       NoticeVO vo=dao.noticeDetailData(Integer.parseInt(nno));
+       request.setAttribute("vo", vo);
+       request.setAttribute("nno", nno);
+       //3. 결과값 모아서 request에 저장 
+       request.setAttribute("main_jsp", "../board/notice_update.jsp");
+       return "../main/main.jsp";
+	}
+   @RequestMapping("board/notice_update_ok.do")
+	public String notice_update_ok(HttpServletRequest request, HttpServletResponse response)
+	{
+	   try {
+			request.setCharacterEncoding("UTF-8");
+			
+		}catch(Exception e) {}
+	    String nno=request.getParameter("nno");
+		String ntitle=request.getParameter("ntitle");
+		String ncont=request.getParameter("ncont");
+		
+		NoticeVO vo=new NoticeVO();
+		vo.setNno(Integer.parseInt(nno));
+		vo.setNtitle(ntitle);
+		vo.setNcont(ncont);
+		
+		NoticeDAO dao=NoticeDAO.newInstance();
+		dao.noticeUpdateData(vo);
+		
+		return "redirect:../board/notice_detail.do?nno="+nno;
+	}
 }

@@ -196,4 +196,22 @@ public class NoticeDAO {
       		dbconn.disConnection(conn, ps);
       	}
       }
+      
+      public void noticeUpdateData(NoticeVO vo)
+      {
+      	try {
+      		conn=dbconn.getConnection();
+      		String sql="UPDATE notice SET ntitle=?, ncont=? "
+      				+ "WHERE nno="+vo.getNno();  
+      		ps=conn.prepareStatement(sql);
+      		ps.setString(1, vo.getNtitle());
+      		ps.setString(2, vo.getNcont());
+      		ps.executeUpdate();
+      	}catch(Exception e) {
+      		e.printStackTrace();
+      	}
+      	finally {
+      		dbconn.disConnection(conn, ps);
+      	}
+      }
 }
