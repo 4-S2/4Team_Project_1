@@ -128,9 +128,9 @@
                 <div>
                     <div class="search">
                         <div>
-                            <form name="Search-Form" method="post" class="subscribe-form" action="${tab }_find.do">
+                            <form name="Search-Form" method="post" class="subscribe-form" action="${tab }.do">
                                 <input type="text" class="input subscribe-input w-input" name="word" placeholder="검색어를 입력하세요" 
-                                id="" required style="width:500px"/>
+                                id="" required style="width:500px" value="${word }"/>
                                 <input type="submit" value="Search" class="button w-button"/>
                             </form>
                         </div>
@@ -157,14 +157,14 @@
                     <div class="shop-header">
                         <h3 class="no-margin w-hidden-small w-hidden-tiny">${cate}</h3>
                         <div class="shop-categories-wrapper">
-                            <a href="${tab }_find.do?word=${word}&sort=no" aria-current="page" class="shop-category-link w--current">최신순</a>
+                            <a href="${tab }.do?word=${word}&sort=no" aria-current="page" class="shop-category-link w--current">최신순</a>
                             <div class="w-dyn-list">
                                 <div role="list" class="shop-categories w-dyn-items">
                                     <div role="listitem" class="w-dyn-item">
-                                        <a href="${tab }_find.do?word=${word}&sort=hit" class="shop-category-link">조회순</a>
+                                        <a href="${tab }.do?word=${word}&sort=hit" class="shop-category-link">조회순</a>
                                     </div>
                                     <div role="listitem" class="w-dyn-item">
-                                        <a href="${tab }_find.do?word=${word}&sort=heart" class="shop-category-link">좋아요순</a>
+                                        <a href="${tab }.do?word=${word}&sort=heart" class="shop-category-link">좋아요순</a>
                                     </div>
                                 </div>
                             </div>
@@ -202,13 +202,13 @@
                             => &lt;
                         --%>
                         <c:if test="${startPage>1}">
-                            <li><a href="${tab }_find.do?page=${startPage-1}&word=${word}&sort=${sort}">&lt;</a></li>
+                            <li><a href="${tab }.do?page=${startPage-1}&word=${word}&sort=${sort}">&lt;</a></li>
                         </c:if>
                         <c:forEach var="i" begin="${startPage}" end="${endPage}">
-                            <li ${curpage==i?"class=active":""}><a href="${tab }_find.do?page=${i}&word=${word}&sort=${sort}">${i}</a></li>
+                            <li ${curpage==i?"class=active":""}><a href="${tab }.do?page=${i}&word=${word}&sort=${sort}">${i}</a></li>
                         </c:forEach>
                         <c:if test="${endPage<totalpage}">
-                            <li><a href="${tab }_find.do?page=${endPage+1}&word=${word}&sort=${sort}">&gt;</a></li>
+                            <li><a href="${tab }.do?page=${endPage+1}&word=${word}&sort=${sort}">&gt;</a></li>
                         </c:if>
                     </ul>
                 </div>

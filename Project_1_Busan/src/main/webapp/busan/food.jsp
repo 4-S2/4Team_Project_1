@@ -97,6 +97,7 @@
             
             // 현재 선택된 태그를 localStorage에 저장
             localStorage.setItem('selectedTag', $(this).attr('id'));
+            
           });
 
           // food.do 페이지로 이동할 때 초기화
@@ -104,7 +105,9 @@
             // #전체 버튼을 선택한 상태로 초기화
             $('.tag').removeClass('selected-link');
             $('#link1').addClass('selected-link');
+            localStorage.removeItem('selectedTag');
           }
+
         });
         </script>
         <!--  <link href="https://assets.website-files.com/5badda2935e11303a89a461e/5bd83035e7345f2f22c0bece_favicon.png" rel="shortcut icon" type="image/x-icon"/>
