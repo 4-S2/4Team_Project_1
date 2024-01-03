@@ -253,6 +253,7 @@
                             <div data-wf-sku-bindings="%5B%7B%22from%22%3A%22f_price_%22%2C%22to%22%3A%22innerHTML%22%7D%5D" class="product-card-price">$ 30.00 USD</div>
                         </a>
                     </div>
+                    
                 </div>
             </div>
         </div>
