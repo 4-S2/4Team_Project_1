@@ -8,53 +8,76 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
 <title>Busan Tour</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-<link href="../css/style.css" rel="stylesheet" type="text/css"/> 
-<style type="text/css">
-	.tt{
-		margin: 0px auto;
-	}
-	.product-table{
-		width:400px;
-	}
-	.full-width {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		text-align: center;
-	}
-	.buy-buttons {
-		margin-top: 10px; /* Adjust the margin as needed */
-	}
-	.w-commerce-commerceaddtocartquantityinput,
-	.w-commerce-commerceaddtocartbutton,
-	.w-commerce-commercebuynowbutton {
-		margin-bottom: 10px; /* Adjust the margin as needed */
-	}
-	.w-commerce-commerceaddtocartquantityinput {
-		width: 50px; /* Adjust the width as needed */
-	}
-	.w-commerce-commerceaddtocartbutton {
-		vertical-align: middle;
-	}
-</style>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
+<!-- Include Kakao Maps API -->
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fce1f2ebd7aeec53bebf70c1f38c36c7&libraries=services"></script>
+
 <script type="text/javascript">
+    var mapInitialized = false;
+    var map, geocoder;
 
+    function initMap() {
+        var container = document.getElementById('kkomap');
+        var options = {
+            center: new kakao.maps.LatLng(33.450701, 126.570667),
+            level: 3
+        };
 
-
-function showTab(tabName) {
-    var tabContents = document.getElementsByClassName('tab-content');
-    for (var i = 0; i < tabContents.length; i++) {
-        tabContents[i].style.display = 'none';
+        map = new kakao.maps.Map(container, options);
+        geocoder = new kakao.maps.services.Geocoder();
+        mapInitialized = true;
     }
 
-    var selectedTab = document.getElementById(tabName);
-    if (selectedTab) {
-        selectedTab.style.display = 'block';
+    function showMap(address) {
+        if (!mapInitialized) {
+            initMap();
+        }
+
+        map.relayout();
+        map.setCenter(new kakao.maps.LatLng(33.450701, 126.570667));
+
+        geocoder.addressSearch(address, function(result, status) {
+            if (status === kakao.maps.services.Status.OK) {
+                var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+                var marker = new kakao.maps.Marker({
+                    map: map,
+                    position: coords
+                });
+
+                var infowindow = new kakao.maps.InfoWindow({
+                    content: '<div style="width:150px;text-align:center;padding:6px 0;">${vo.loc}</div>'
+                });
+                infowindow.open(map, marker);
+                map.setCenter(coords);
+            }
+        });
     }
-}
+
+    document.addEventListener('DOMContentLoaded', function() {
+        var tabButtons = document.querySelectorAll('.tab-menu li');
+        for (var i = 0; i < tabButtons.length; i++) {
+            tabButtons[i].addEventListener('click', function(event) {
+                var tabId = event.target.id + 'Cont';
+                showTab(tabId);
+                if (event.target.id === 'map' && !mapInitialized) {
+                    showMap('${vo.loc}');
+                }
+            });
+        }
+    });
+
+    function showTab(tabName) {
+        var tabContents = document.getElementsByClassName('tab-content');
+        for (var i = 0; i < tabContents.length; i++) {
+            tabContents[i].style.display = 'none';
+        }
+
+        var selectedTab = document.getElementById(tabName);
+        if (selectedTab) {
+            selectedTab.style.display = 'block';
+        }
+    }
 </script>
 
 
@@ -85,14 +108,14 @@ function showTab(tabName) {
 	                    	<h3>${vo.eename}</h3>
 	                    	<form>
 	                    		<div class="buy-buttons">
-	                                <input type="submit" value="예약하기" class="w-commerce-commerceaddtocartbutton button add-to-cart-button"/>
-	                                <!-- <a class="w-commerce-commercebuynowbutton button buy-now-button" href="/checkout">Buy now</a> -->
+	                                <input type="submit" value="예약하기" class="w-commerce-commerceaddtocartbutton button add-to-cart-button" id="reservationButton"/>
+	                                
 	                            </div>
 	                    	</form>
 		                </div>
 	            	</div>
 	            	
-	            	<!-- 탭 메뉴 -->
+	            	 <!-- 탭 메뉴 -->
                 <div class="product-detail">
                		<ul class="tab-menu">
                			<li id="detail">상세 설명</li>
@@ -105,76 +128,88 @@ function showTab(tabName) {
 	                    <div class="shop-header-color"></div>
 	                </div> -->
 	                
-               		<!-- 테이블 -->
-			                    <div class="detail-table">
-			                    	<div class="product-table">
-				                        <div class="product-table-cell">
-				                            <div>전시 기간</div>
-				                            <div class="product-table-info">
-				                                <div data-wf-sku-bindings="%5B%7B%22from%22%3A%22f_width_%22%2C%22to%22%3A%22innerHTML%22%7D%5D">${vo.s_date}~${vo.e_date}</div>
-				                            </div>
-				                        </div>
-				                        
-				                        <div class="product-table-cell">
-				                            <div>전시 분야</div>
-				                            <div class="product-table-info">
-				                                <div data-wf-sku-bindings="%5B%7B%22from%22%3A%22f_height_%22%2C%22to%22%3A%22innerHTML%22%7D%5D">${vo.efield}</div>
-				                            </div>
-				                        </div>
-				                        
-				                        <div class="product-table-cell">
-				                            <div>전시 품목</div>
-				                            <div class="product-table-info">
-				                                <div data-wf-sku-bindings="%5B%7B%22from%22%3A%22f_length_%22%2C%22to%22%3A%22innerHTML%22%7D%5D">${vo.eitem}</div>
-				                            </div>
-				                        </div>
-				                        
-				                        <div class="product-table-cell">
-				                            <div>요금</div>
-				                            <div class="product-table-info">
-				                                <c:choose>
-											        <c:when test="${vo.price == 0}">
-											            <div>무료</div>
-											        </c:when>
-											        <c:otherwise>
-											            <div data-wf-sku-bindings="%5B%7B%22from%22%3A%22f_weight_%22%2C%22to%22%3A%22innerHTML%22%7D%5D">${vo.price} 원</div>
-											        </c:otherwise>
-											    </c:choose>
-				                            </div>
-				                        </div>
-				                        
-				                        <div class="product-table-cell">
-				                            <div>카테고리</div>
-				                            <div class="product-table-info">
-				                                <div data-wf-sku-bindings="%5B%7B%22from%22%3A%22f_length_%22%2C%22to%22%3A%22innerHTML%22%7D%5D">${vo.cate}</div>
-				                            </div>
-				                        </div>
-				                        
-				                        <div class="product-table-cell">
-				                            <div>홈페이지</div>
-				                            <div class="product-table-info">
-				                                <div data-wf-sku-bindings="%5B%7B%22from%22%3A%22f_length_%22%2C%22to%22%3A%22innerHTML%22%7D%5D">${vo.homepage}</div>
-				                            </div>
-				                        </div>
-				                        
-				                        <div class="product-table-cell">
-				                            <div>개최 장소</div>
-				                            <div class="product-table-info">
-				                                <div data-wf-sku-bindings="%5B%7B%22from%22%3A%22f_length_%22%2C%22to%22%3A%22innerHTML%22%7D%5D">${vo.loc}</div>
-				                            </div>
-				                        </div>
-				                        
-				                        <div class="product-table-cell no-border-bottom">
-				                            <div>주최</div>
-				                            <div class="product-table-info">
-				                                <div data-wf-sku-bindings="%5B%7B%22from%22%3A%22f_length_%22%2C%22to%22%3A%22innerHTML%22%7D%5D">${vo.host}</div>
-				                            </div>
-				                        </div>
-				                    </div>
+               		<div id="detailCont" class="tab-content">
+	               		<div class="detail-info">              		
+	                    	
+	                    	
+	                    	
+	                    	<!-- 테이블 -->
+		                    <div class="detail-table">
+		                    	<div class="product-table">
+			                        <div class="product-table-cell">
+			                            <div>전시회명</div>
+			                            <div class="product-table-info">
+			                                <div data-wf-sku-bindings="%5B%7B%22from%22%3A%22f_width_%22%2C%22to%22%3A%22innerHTML%22%7D%5D">${vo.ename}</div>
+			                            </div>
+			                        </div>
+			                        <div class="product-table-cell">
+			                            <div>영문명</div>
+			                            <div class="product-table-info">
+			                                <div data-wf-sku-bindings="%5B%7B%22from%22%3A%22f_height_%22%2C%22to%22%3A%22innerHTML%22%7D%5D">${vo.eename}</div>
+			                            </div>
+			                        </div>
+			                        <div class="product-table-cell">
+			                            <div>전시 분야</div>
+			                            <div class="product-table-info">
+			                                <div data-wf-sku-bindings="%5B%7B%22from%22%3A%22f_length_%22%2C%22to%22%3A%22innerHTML%22%7D%5D">${vo.efield}</div>
+			                            </div>
+			                        </div>
+			                         <div class="product-table-cell">
+			                            <div>카테고리</div>
+			                            <div class="product-table-info">
+			                                <div data-wf-sku-bindings="%5B%7B%22from%22%3A%22f_length_%22%2C%22to%22%3A%22innerHTML%22%7D%5D">${vo.eitem}</div>
+			                            </div>
+			                        </div>
+
+			                         <div class="product-table-cell">
+			                            <div>홈페이지</div>
+			                            <div class="product-table-info">
+			                                <div data-wf-sku-bindings="%5B%7B%22from%22%3A%22f_length_%22%2C%22to%22%3A%22innerHTML%22%7D%5D">${vo.homepage}</div>
+			                            </div>
+			                        </div>
+			                         <div class="product-table-cell">
+			                            <div>전시 기간</div>
+			                            <div class="product-table-info">
+			                                <div data-wf-sku-bindings="%5B%7B%22from%22%3A%22f_length_%22%2C%22to%22%3A%22innerHTML%22%7D%5D">${vo.s_date}~${vo.e_date }</div>
+			                            </div>
+			                        </div>
+			                         <div class="product-table-cell">
+			                            <div>개최 장소</div>
+			                            <div class="product-table-info">
+			                                <div data-wf-sku-bindings="%5B%7B%22from%22%3A%22f_length_%22%2C%22to%22%3A%22innerHTML%22%7D%5D">${vo.loc}</div>
+			                            </div>
+			                        </div>
+			                         <div class="product-table-cell">
+			                            <div>주관</div>
+			                            <div class="product-table-info">
+			                                <div data-wf-sku-bindings="%5B%7B%22from%22%3A%22f_length_%22%2C%22to%22%3A%22innerHTML%22%7D%5D">${vo.host}</div>
+			                            </div>
+			                        </div>
+			                       <div class="product-table-cell no-border-bottom">
+										  <div>요금</div>
+										  <div class="product-table-info">
+										    <div data-wf-sku-bindings="%5B%7B%22from%22%3A%22f_weight_%22%2C%22to%22%3A%22innerHTML%22%7D%5D">
+										      <c:choose>
+										        <c:when test="${vo.price == 0}">
+										          free
+										        </c:when>
+										        <c:otherwise>
+										          ${vo.price}원
+										        </c:otherwise>
+										      </c:choose>
+										    </div>
+										  </div>
+										</div>
+			                       
 			                    </div>
+		                    </div>
+	
+		                   
+		                </div>
+               		</div>
                		<div id="mapCont" class="tab-content" style="display: none;">
                		지도 표시
-                       <div id="kkomap" style="width:100%;height:350px;"></div>
+                 <div id="kkomap" style="width:100%;height:350px;"></div>
                     </div>
 				    <div id="reviewCont" class="tab-content" style="display: none;">
 				        <!-- 리뷰 내용 -->
@@ -215,43 +250,13 @@ function showTab(tabName) {
 					    </form> -->
 				    </div>
 				    <div id="reserveCont" class="tab-content" style="display: none;">
-				       <div id="reserveCont" class="tab-content" style="display: none;">
-					        예약하기 내용
-					        <div class="form-group">
-    <label for="people">인원 선택:</label>
-    <select id="people" name="people" class="form-control">
-        Options for number of people
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        Add more options as needed
-    </select>
-</div>
-
-<div class="form-group">
-    <label for="date">날짜 선택:</label>
-    <input type="date" id="date" name="date" class="form-control"/>
-</div>
-
-<c:choose>
-    <c:when test="${vo.price == 0}">
-        For free exhibitions
-        <a href="#" class="btn btn-primary">예약 완료 페이지로</a>
-    </c:when>
-    <c:otherwise>
-        For paid exhibitions
-        <a href="#" class="btn btn-success">결제 및 예약 완료 페이지로</a>
-    </c:otherwise>
-</c:choose>
-					        
-					        예약하기 내용을 입력하세요.
-					    </div>   
-
-				       
+				        <!-- 예약하기 내용 -->
+				        예약하기 내용을 입력하세요.
 				    </div>
 				    
                 </div>
+	            	
+	            
 	            </div>
 	        </div>
 	    </div>
@@ -283,4 +288,4 @@ function showTab(tabName) {
 <!-- <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=5badda2935e11303a89a461e" type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script> -->
 <script src="https://assets.website-files.com/5badda2935e11303a89a461e/js/webflow.9828d3d6a.js" type="text/javascript"></script>
 </body>
-</html>
+</html>htoddl aksg
