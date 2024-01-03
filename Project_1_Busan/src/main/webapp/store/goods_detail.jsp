@@ -62,10 +62,10 @@ function showTab(tabName) {
 	            
 	                <div class="product-info">
 	                    <h1>${vo.gname}</h1>
-	                    <p class="origin"><span>원산지</span></p>
-	                    <p class="manufacturer"><span>제조사</span></p>
+	                    <p class="origin"><span>원산지 </span><span class="emph"> ${vo.origin}</span></p>
+	                    <p class="manufacturer"><span>제조사 </span><span class="emph"> ${vo.manufacturer}</span></p>
 	                    <form>
-	                    	<p class="price"><span>가격</span></p>
+	                    	<p class="price"><span>가격</span><span class="emph"> ${vo.price}</span></p>
 	                    	<!-- 수량 -->
 	                    	<div class="number"> </div>
 	                    	<!-- 총 가격 -->
