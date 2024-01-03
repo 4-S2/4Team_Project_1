@@ -18,6 +18,7 @@
 	margin: 0px auto;
 	margin-top: 100px;
 	position: relative;
+	min-height: 700px;
 }
 
 #notice a {
@@ -43,10 +44,10 @@
 #noticesearch{
     position: absolute;
     right: 0%;
-    top: 22%;
+    top: 190px;
 }
 
-#noticesearch button{
+#searchBtn{
     margin-left: 5px;
     height: 30px;
     width: 50px;
@@ -63,7 +64,7 @@
 #insert{
     position: absolute;
     left: 0%;
-    top: 22%;
+    top: 190px;
 }
 #insert button{
     height: 30px;
@@ -82,8 +83,10 @@
 			    <button onclick="location.href='../board/qnaboard_insert.do'">작성하기</button>
 			</div>
 			<div id="noticesearch">
-			    <input type="text" id="searchbar">
-			    <button>검색</button>
+			  <form method="post" action="../board/qnaboard_find.do">
+			    <input type="text" id="searchbar" name="word" required>
+			    <input type="submit" id="searchBtn" value="검색">
+			  </form>
 			</div>
 			<table class="table">
 				<tr>

@@ -13,7 +13,7 @@ public class QnaBoardDAO {
 	   private Connection conn; //데이터베이스 연결
 	   private PreparedStatement ps;//SQL전송 , 결과값 
 	   private static QnaBoardDAO dao;
-	   private final int rowSize=12;
+	   private final int rowSize=10;
 	   // DBCP라이브러리 
 	   private CreateDBCPConnection dbconn=
 			        new CreateDBCPConnection();
@@ -110,6 +110,76 @@ public class QnaBoardDAO {
 	         }
 	         return list;
 	  }
+	   public List<QnaBoardVO> QnaFindListData(int page, String keyword) {
+		    List<QnaBoardVO> list = new ArrayList<>();
+		    List<Integer> groupIds = new ArrayList<>(); // 여러 개의 group_id를 저장할 리스트 추가
+
+		    try {
+		        // 1. 연결
+		        conn = dbconn.getConnection();
+
+		        String sql = "SELECT group_id FROM qnaBoard "
+		                + "WHERE subject LIKE '%'||?||'%'";
+		        ps = conn.prepareStatement(sql);
+		        ps.setString(1, keyword);
+		        ResultSet rs = ps.executeQuery();
+
+		        // 여러 개의 group_id를 리스트에 추가
+		        while (rs.next()) {
+		            int groupId = rs.getInt(1);
+		            groupIds.add(groupId);
+		            System.out.println(groupId);
+		        }
+
+		        rs.close();
+		        ps.close();
+
+		        // 2. 각 group_id에 대한 데이터 조회
+		        for (int groupId : groupIds) {
+		            sql = "SELECT qno, name, subject, TO_CHAR(regdate,'yyyy-mm-dd'), hit, group_step, num "
+		                    + "FROM (SELECT qno, name, subject, regdate, hit, group_step, rownum as num "
+		                    + "FROM (SELECT qno, name, subject, regdate, hit, group_step "
+		                    + "FROM qnaBoard WHERE group_id=? ORDER BY group_id DESC, group_step ASC)) "
+		                    + "WHERE num BETWEEN ? AND ?";
+
+		            // 3. 미리 전송
+		            ps = conn.prepareStatement(sql);
+
+		            // 4. 실행 요청 전에 ?에 값을 채운다
+		            int start = (rowSize * page) - (rowSize - 1); // 오라클 => 1번
+		            int end = rowSize * page;
+		            ps.setInt(1, groupId);
+		            ps.setInt(2, start);
+		            ps.setInt(3, end);
+
+		            rs = ps.executeQuery();
+
+		            while (rs.next()) {
+		                QnaBoardVO vo = new QnaBoardVO();
+		                vo.setQno(rs.getInt(1));
+		                vo.setName(rs.getString(2));
+		                vo.setSubject(rs.getString(3));
+		                vo.setDbday(rs.getString(4));
+		                vo.setHit(rs.getInt(5));
+		                vo.setGroup_step(rs.getInt(6));
+		                list.add(vo);
+		            }
+
+		            rs.close();
+		            ps.close();
+		        }
+
+		    } catch (Exception ex) {
+		        // 에러 출력
+		        ex.printStackTrace();
+		    } finally {
+		        // 반환 => 재사용
+		        dbconn.disConnection(conn, ps);
+		    }
+
+		    return list;
+		}
+
 	   public int qnaboardRowCount()
 		{
 			int count=0;

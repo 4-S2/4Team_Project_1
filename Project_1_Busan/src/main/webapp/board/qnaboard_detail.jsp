@@ -19,8 +19,47 @@
 	width: 80px;
 	text-align: center;
 }
+.table_content #delete{
+    border: 1px solid #337ab7;
+    display: inline-block;
+    border-radius: 25px;
+    padding: 5px 18px;
+    margin: 0px auto;
+    margin-bottom: 10px;
+    color: #337ab7;
+    width: 80px;
+    text-align: center;
+    background-color: white;
+
+}
+#delBtn{
+    border: 1px solid #337ab7;
+    display: inline-block;
+    border-radius: 25px;
+    padding: 5px 18px;
+    margin: 0px auto;
+    color: #337ab7;
+    width: 80px;
+    text-align: center;
+    background-color: white;
+}
 .table_content .text-left{
     border-bottom-style: none;
+}
+.table_content #delete:hover {
+	background-color: #2b75d5;
+    color: white;
+	text-decoration: none;
+}
+.table_content #delBtn:hover {
+	background-color: #2b75d5;
+    color: white;
+	text-decoration: none;
+}
+.table_content #delBtn:focus {
+	background-color: #2b75d5;
+    color: white;
+	text-decoration: none;
 }
 .table_content a:hover {
 	background-color: #2b75d5;
@@ -33,7 +72,6 @@
     color: white;
 	text-decoration: none;
 }
-
 div.container {
 	margin-bottom: 130px;
 }
@@ -205,6 +243,10 @@ h4 {
 	margin-bottom: 30px;
 }
 
+input::placeholder {
+    color: gray;
+    text-align: center;
+}
 </style>
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
@@ -287,14 +329,15 @@ $(function(){
 
                <tr>
                   <td colspan="4" class="text-right">
- 
+                  <c:if test="${vo.name!='관리자'}">
                   <a href="../board/qnaboard_update.do?qno=${vo.qno }">수정</a> 
-                  <input type="button" id="delete" value="삭제">  
+                  &nbsp; <input type="button" id="delete" value="삭제">  
+                  </c:if>
                   &nbsp; <a href="../board/qnaboard.do">목록</a>&nbsp;</td>
                </tr>
                <tr id="delete_area" style="display:none">
                   <td colspan="4" class="text-right">
-                  비밀번호 : <input type="password" id="pwd">  
+                  &nbsp;<input type="password" id="pwd" style="height: 25px" class="text-right" placeholder="비밀번호 입력">  
                   &nbsp; <input type="button" id="delBtn" value="삭제" data-no="${vo.qno }">&nbsp;
                   </td>
                </tr>

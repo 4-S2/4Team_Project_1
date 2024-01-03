@@ -18,6 +18,7 @@
 	margin: 0px auto;
 	margin-top: 100px;
 	position: relative;
+	min-height: 700px;
 }
 
 #notice a {
@@ -43,10 +44,10 @@
 #noticesearch{
     position: absolute;
     right: 0%;
-    top: 22%;
+    top: 190px;
 }
 
-#noticesearch button{
+#searchBtn{
     margin-left: 5px;
     height: 30px;
     width: 50px;
@@ -63,7 +64,8 @@
 #insert{
     position: absolute;
     left: 0%;
-    top: 22%;
+    /* top: 22%; */
+    top: 190px;
 }
 #insert button{
     height: 30px;
@@ -84,8 +86,11 @@
 			</div>
 			</c:if>
 			<div id="noticesearch">
-			    <input type="text" id="searchbar">
-			    <button>검색</button>
+			   <form method="post" action="../board/notice_find.do">
+			    <input type="text" id="searchbar" name="word" required>
+			    <input type="submit" id="searchBtn" value="검색">
+			   </form>
+			    <!-- <button>검색</button> -->
 			</div>
 			<table class="table">
 				<tr>
@@ -94,9 +99,9 @@
 					<th width=30% class="text-center">작성일</th>
 				</tr>
 
-				<c:forEach var="vo" items="${list}">
+				<c:forEach var="vo" items="${list}" varStatus="s">
 					<tr>
-						<td width=10% class="text-center">${vo.nno}</td>
+						<td width=10% class="text-center">${count-(s.index)}</td>
 						<td width=40%><a href="../board/notice_detail.do?nno=${vo.nno}">${vo.ntitle}</a></td>
 						<td width=20% class="text-center">${vo.dbday}</td>
 					</tr>
