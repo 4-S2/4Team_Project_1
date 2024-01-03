@@ -7,16 +7,25 @@
     <div class="swiper tourSlide">
         <div class="swiper-wrapper">
             <div class="swiper-slide slide1">
-                <h2>푸른 낭만이 있는<br>광안대교</h2>
-                <p>푸른 낭만이 있는 광안대교로 오세요</p>
+            	<div class="cover"></div>
+            	<div class="text">
+            		<h2>푸른 낭만이 있는<br>부산 여행</h2>
+                	<p>푸른 낭만이 있는 부산광역시로 놀러오세요</p>
+            	</div>
             </div>
             <div class="swiper-slide slide2">
-                <h2>푸른 낭만이 있는<br>광안대교</h2>
-                <p>푸른 낭만이 있는 광안대교로 오세요</p>
+            	<div class="cover"></div>
+            	<div class="text">
+            		<h2>푸른 낭만이 있는<br>부산 여행</h2>
+                	<p>푸른 낭만이 있는 부산광역시로 놀러오세요</p>
+            	</div>
             </div>
             <div class="swiper-slide slide3">
-                <h2>푸른 낭만이 있는<br>광안대교</h2>
-                <p>푸른 낭만이 있는 광안대교로 오세요</p>
+            	<div class="cover"></div>
+            	<div class="text">
+            		<h2>푸른 낭만이 있는<br>부산 여행</h2>
+                	<p>푸른 낭만이 있는 부산광역시로 놀러오세요</p>
+            	</div>
             </div>
         </div>
         <div class="swiper-button-next"></div>
@@ -40,6 +49,7 @@
                     <c:forEach var="vo" items="${fdtoplist}" varStatus="f">
                     <div data-w-id="86c7c915-bcbe-c30c-93c0-5bed50ef155d" style="opacity:0" role="listitem" class="product-card-wrapper w-dyn-item">
                         <a href="../busan/food_detail.do?no=${vo.no}" class="product-card w-inline-block">
+                        <div class="cover"></div>
                         <img alt="" src="${vo.poster}"/>
                         <h6 class="product-card-heading">${vo.title}</h6>
                             <%-- <div class="product-card-image-wrapper">
@@ -52,7 +62,7 @@
                              --%>
                             <!-- div data-wf-sku-bindings="%5B%7B%22from%22%3A%22f_price_%22%2C%22to%22%3A%22innerHTML%22%7D%5D" class="product-card-price">$ 30.00 USD</div> -->
                         </a>
-                    </div> 
+                    </div>
                     </c:forEach>
                 </div>
             </div>
@@ -115,6 +125,7 @@
 	            <div class="swiper-wrapper">
 	                <c:forEach var="vo" items="${ftoplist}" >
 		                <div class="swiper-slide">
+		                	<div class="cover"></div>
 		                    <img class="img" src="${vo.poster}">
 		                    <span class="badge">축제</span>
 		                	<div class="text">
@@ -138,6 +149,7 @@
 	            <div class="swiper-wrapper">
 	                <c:forEach var="vo" items="${atoplist}" >
 		                <div class="swiper-slide">
+		                	<div class="cover"></div>
 		                    <img class="img "src="${vo.poster}">
 		                    <span class="badge">체험</span>
 		                	<div class="text">

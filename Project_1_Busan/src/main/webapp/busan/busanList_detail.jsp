@@ -133,11 +133,13 @@
                		<div id="detailCont" class="tab-content">
 	               		<div class="detail-info">              		
 	               			<!-- 상세 이미지 -->
-							<c:forEach var="dimg" items="${vo.deimage}" varStatus="d">
-							    <c:if test="${d.index < fn:length(vo.deimage) - 1}">
-							        <img class="deimage" src="${dimg}" alt="상세 이미지"> 
-							    </c:if>
-							</c:forEach>
+	               			<div class="deimage-wrapper">
+								<c:forEach var="dimg" items="${vo.deimage}" varStatus="d">
+								    <c:if test="${d.index < fn:length(vo.deimage) - 1}">
+								        <img class="deimage" src="${dimg}" alt="상세 이미지"> 
+								    </c:if>
+								</c:forEach>
+							</div>
 	                    	
 	                    	<!-- 상세 설명 -->
 	                    	<p class="cont">${vo.cont}</p>
