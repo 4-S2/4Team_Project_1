@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans>
+  <bean id="main" class="com.sist.model.MainModel"/>
+  <bean id="busan" class="com.sist.model.BusanListModel"/>
+  <bean id="ex" class="com.sist.model.ExListModel"/>
+  <bean id="member" class="com.sist.model.MemberModel"/>
+  <bean id="detail" class="com.sist.model.BusanDetailModel"/>
+  <bean id="list" class="com.sist.model.BusanListModel"/>
+  <bean id="notice" class="com.sist.model.NoticeModel"/>
+  <bean id="qna" class="com.sist.model.QnaBoardModel"/>
+  <bean id="goods" class="com.sist.model.GoodsModel"/>
+  <bean id="mypage" class="com.sist.model.MypageModel"/>
+</beans>
