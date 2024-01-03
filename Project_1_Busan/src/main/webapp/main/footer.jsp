@@ -59,7 +59,7 @@
 	<c:if test="${rcntList.size() > 0 }">	
 	<h6>최근 본 목록</h6>
 	<ul>
-		<c:forEach var="vo" items="${rcntList }" begin="1" end="5" >
+		<c:forEach var="vo" items="${rcntList }" begin="0" end="4" >
 			<c:choose>
 				 <c:when test="${vo.cocate == 1 }"> 
 				 	<li><a href="../busan/tour_detail.do?no=${vo.no }"><img src="${vo.poster }"></a></li>
