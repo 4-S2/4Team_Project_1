@@ -10,4 +10,5 @@
   <bean id="notice" class="com.sist.model.NoticeModel"/>
   <bean id="qna" class="com.sist.model.QnaBoardModel"/>
   <bean id="goods" class="com.sist.model.GoodsModel"/>
+  <bean id="reserve" class="com.sist.model.ReserveModel"/>
 </beans>
