@@ -3408,7 +3408,7 @@ ul, ol{margin: 0; list-style: none;}
      width: 100%;
      height: 360px;
      /*padding: 24px 24px 32px;*/
-     padding-bottom: 20px !important;
+     /*padding-bottom: 20px !important;*/
      -webkit-box-orient: vertical;
      -webkit-box-direction: normal;
      -webkit-flex-direction: column;
@@ -4902,16 +4902,42 @@ main #mainVisual .tourSlide .slide2{
 main #mainVisual .tourSlide .slide3{
   background-image: url("../images/visual3.jpg");
 }
-main #mainVisual .swiper-slide h2{
+
+main #mainVisual .tourSlide .swiper-slide{
+	position: relative;
+}
+main #mainVisual .tourSlide .cover{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: linear-gradient(
+      315deg,
+      rgba(255, 255, 255, 0) 50%,
+/*      rgba(20, 20, 20, 0.2) 25%,*/
+      rgba(20, 20, 20, 0.3) 75%,
+     /* rgba(20, 20, 20, 0.6) 75%,*/
+      rgba(20, 20, 20, 0.6) 100%
+    );
+    background-size:cover;
+    z-index: 1;
+}
+main #mainVisual .tourSlide .text{
+	position: relative;
+	z-index: 99;
+}
+main #mainVisual .tourSlide h2{
   font-size: 44px;
   font-weight: 700;
   line-height: 1.3;
 }
-main #mainVisual .swiper-slide p{
+main #mainVisual .tourSlide p{
   margin-top: 20px;
   font-size: 18px;
   font-weight: 400;
 }
+
 :root {
     --swiper-theme-color: #fff;
 }
@@ -4963,6 +4989,23 @@ main #food .product-card{
 	height: 360px;
 	padding: 0;
 }
+main #food .product-card .cover{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0) 50%,
+	 /* rgba(20, 20, 20, 0.2) 25%,*/
+      rgba(20, 20, 20, 0.3) 75%,
+     /* rgba(20, 20, 20, 0.6) 75%,*/
+      rgba(20, 20, 20, 0.6) 100%
+    );
+    background-size:cover;
+    z-index: 1;	
+}
 main #food .product-card img{
 	width: 100%;
 	height: 100%;
@@ -4976,11 +5019,14 @@ main #food .product-card-heading{
 	font-size: 20px;
 	/*text-shadow: 6px 2px 2px gray;*/
 	font-weight: bold;
+	z-index: 99;
 }
 main #food .product-card-wrapper{
 	position: relative;
 	width: 100%;
 	height: 360px;
+	border-radius: 15px;
+	overflow: hidden;
 }
 
 main #shop{
@@ -5054,6 +5100,24 @@ main #festival_activity .swiper .swiper-slide:hover{
     transition: box-shadow 300ms ease, -webkit-transform 300ms ease;
     transition: transform 300ms ease, box-shadow 300ms ease;
     transition: transform 300ms ease, box-shadow 300ms ease, -webkit-transform 300ms ease;
+}
+
+main #festival_activity .cover{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: linear-gradient(
+      240deg,
+      rgba(255, 255, 255, 0) 50%,
+/*      rgba(20, 20, 20, 0.2) 25%,*/
+      rgba(20, 20, 20, 0.3) 75%,
+     /* rgba(20, 20, 20, 0.6) 75%,*/
+      rgba(20, 20, 20, 0.6) 100%
+    );
+    background-size:cover;
+    z-index: 1;
 }
 	
 main #festival_activity .text{
@@ -5197,9 +5261,8 @@ main #bottom .service p{
 	z-index: 999;
 	width: auto;
 	background-color: #fff;
-	border: 1px solid #eee;
 	border-radius: 10px;
-	box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.15);
+	box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.15);
 	overflow: hidden;
 }
 #cookieBar h6{
@@ -5303,7 +5366,7 @@ main #bottom .service p{
 .detail .deimage-wrapper{
 	display: flex;
 	flex-wrap: wrap;
-	justify-content: space-between;
+	justify-content: center;
 	align-items: flex-start;
 	gap: 15px;
 }
@@ -5320,7 +5383,6 @@ main #bottom .service p{
 	width: auto;
 	margin: 0 auto;
 }
-
 .detail .product-info h1{
 	font-size: 32px;
 	word-break: keep-all;
@@ -5345,6 +5407,17 @@ main #bottom .service p{
 	border: 2px solid #005eb4;
 	background-color: #005eb4;
 	color: #fff;
+}
+#goods.detail .product-info .btnWrap{
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 10px;
+}
+#goods.detail .product-info .btnWrap input[type="button"]{
+	width: 100%;
+	display: inline-block;
 }
 .detail #detailCont .detailInfo{
 	text-align: center;
@@ -5392,8 +5465,6 @@ main #bottom .service p{
 	display: inline-block;
 	margin-right: 10px;
 }
-
-
 
 /* ==========================================================================
       Media
