@@ -20,9 +20,18 @@ public class QnaBoardVO {
 	   private String cont;
 	   private String pwd;
 	   private Date regdate;
+	   private String dbday;
 	   private int hit;
 	   private int group_id;
 	   private int group_step;
+	   
+	   
+	public String getDbday() {
+		return dbday;
+	}
+	public void setDbday(String dbday) {
+		this.dbday = dbday;
+	}
 	public int getQno() {
 		return qno;
 	}

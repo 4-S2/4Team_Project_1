@@ -182,7 +182,7 @@ sessionStorage.setItem("detailAddress", detailAddress);
           <label for="id" style="display: inline">아이디 <span class="required">*</span></label>
           <input type="button" value="중복체크" style="float: right"
          class="btn-sm btn-info" id="checkBtn">
-          <input type="text" class="form-control" name="id" id="id" placeholder="아이디를 입력하세요" required>
+          <input type="text" class="form-control" name="id" id="id" placeholder="아이디를 입력하세요" required readonly>
            
         </div>
         <div class="form-group">

@@ -174,9 +174,11 @@ h4 {
 	font-size: 45px;
 	margin-bottom: 30px;
 }
+
 #notice .input-sm{
     border-radius: revert-layer;
     font-size: 14px;
+    
 }
 #notice .btn-group-sm>.btn, .btn-sm{
     font-size: 14px;
@@ -188,20 +190,21 @@ h4 {
 <body>
 	<div class="container" id="notice">
 		<div class="row">
-			<h1 class="text-center">공지사항</h1>
-			<form method="post" action="../board/notice_insert_ok.do">
+			<h1 class="text-center">공지&nbsp;수정</h1>
+			<form method="post" action="../board/notice_update_ok.do">
 			<table class="table_content" width=800>
 
 				<tr>
 					<th width=15% class="text-center">제목</th>
 					<td width="85%"><input type=text name=ntitle size=55
-						class="input-sm" required></td>
+						class="input-sm" value="${vo.ntitle }"></td>
+					<input type="hidden" name=nno value="${vo.nno }">
 				</tr>
 
 				<tr>
 					<th width=15% class="text-center">내용</th>
-					<td width="85%"><textarea rows="20" style="width:100%;height:100%" required
-							name=ncont></textarea></td>
+					<td width="85%"><textarea rows="20" style="width:100%;height:100%" 
+							name=ncont>${vo.ncont }</textarea></td>
 				</tr>
 
 				<!-- <tr>
@@ -212,7 +215,7 @@ h4 {
 
 				<tr>
 					<td colspan="2" class="text-right"><input type=submit
-						value="글쓰기" class="btn-primary btn-sm"> <input type=button
+						value="수정" class="btn-primary btn-sm"> <input type=button
 						value="취소" class="btn-primary btn-sm"
 						onclick="javacript:history.back()"></td>
 				</tr>

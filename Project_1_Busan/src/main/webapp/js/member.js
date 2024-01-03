@@ -75,7 +75,30 @@ $(document).ready(function() {
     }
   });
 
-  // Rest of your code...
+   // 페이지 로드 시 실행되는 함수
+    window.onload = function() {
+        // 로컬 스토리지에서 저장된 ID 불러오기
+        var savedId = localStorage.getItem('savedId');
+        if (savedId) {
+            document.getElementById('id').value = savedId;
+            document.getElementById('saveId').checked = true;
+        }
+    };
+
+    // 로그인 함수
+    function saveId() {
+        if (document.getElementById('saveId').checked) {
+            // 'ID 저장' 체크박스가 선택되어 있으면 ID를 로컬 스토리지에 저장
+            var userId = document.getElementById('id').value;
+            localStorage.setItem('savedId', userId);
+        } else {
+            // 'ID 저장' 체크박스가 선택되어 있지 않으면 로컬 스토리지에서 ID 제거
+            localStorage.removeItem('savedId');
+        }
+    }
+
+    // '로그인' 버튼에 이벤트 리스너 추가
+    document.getElementById('login-submit-btn').addEventListener('click', saveId);
 });
 
 });

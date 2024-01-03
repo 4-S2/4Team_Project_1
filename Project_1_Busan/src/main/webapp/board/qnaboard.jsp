@@ -77,12 +77,10 @@
 <body>
 	<div class="container" id="notice">
 		<div class="row">
-			<h1 class="text-center">공지사항</h1>
-			<c:if test="${sessionScope.admin=='y'}">
+			<h1 class="text-center">Q&A 게시판</h1>
 			<div id="insert">
-			    <button onclick="location.href='../board/notice_insert.do'">작성하기</button>
+			    <button onclick="location.href='../board/qnaboard_insert.do'">작성하기</button>
 			</div>
-			</c:if>
 			<div id="noticesearch">
 			    <input type="text" id="searchbar">
 			    <button>검색</button>
@@ -90,15 +88,22 @@
 			<table class="table">
 				<tr>
 					<th width=10% class="text-center">번호</th>
-					<th width=70% class="text-center">제목</th>
-					<th width=30% class="text-center">작성일</th>
+					<th width=55% class="text-center">제목</th>
+					<th width=10% class="text-center">작성자</th>
+					<th width=15% class="text-center">작성일</th>
+					<th width=10% class="text-center">조회수</th>
 				</tr>
 
-				<c:forEach var="vo" items="${list}">
+				<c:forEach var="vo" items="${list}" varStatus="s">
 					<tr>
-						<td width=10% class="text-center">${vo.nno}</td>
-						<td width=40%><a href="../board/notice_detail.do?nno=${vo.nno}">${vo.ntitle}</a></td>
-						<td width=20% class="text-center">${vo.dbday}</td>
+						<td width=10% class="text-center">${count-(s.index)}</td>
+						<td width=55%>
+						<a href="../board/qnaboard_detail.do?qno=${vo.qno}">
+						<c:if test="${vo.group_step>0 }"><img src="../images/re_icon.png"></c:if>
+						${vo.subject}</a></td>
+						<td width=10% class="text-center">${vo.name}</td>
+						<td width=15% class="text-center">${vo.dbday}</td>
+						<td width=10% class="text-center">${vo.hit}</td>
 					</tr>
 				</c:forEach>
 			</table>

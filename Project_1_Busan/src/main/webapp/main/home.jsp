@@ -188,7 +188,7 @@
         <div class="notice con-box">
             <div class="shop-header">
                 <h4>공지사항</h4>
-                <a href="#" class="link arrow-link">+</a>
+                <a href="../board/notice.do" class="link arrow-link">+</a>
                 <div class="shop-header-line">
                     <div class="shop-header-color"></div>
                 </div>
@@ -203,8 +203,8 @@
         </div>
         <div class="inquiry con-box">
             <div class="shop-header">
-                <h4>묻고 답하기</h4>
-                <a href="#" class="link arrow-link">+</a>
+                <h4>Q&A 게시판</h4>
+                <a href="../board/qnaboard.do" class="link arrow-link">+</a>
                 <div class="shop-header-line">
                     <div class="shop-header-color"></div>
                 </div>

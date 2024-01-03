@@ -39,28 +39,25 @@
 		vertical-align: middle;
 	}
 </style>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fce1f2ebd7aeec53bebf70c1f38c36c7&libraries=services"></script>
 <script type="text/javascript">
-    !function(o, c) {
-        var n = c.documentElement
-          , t = " w-mod-";
-        n.className += t + "js",
-        ("ontouchstart"in o || o.DocumentTouch && c instanceof DocumentTouch) && (n.className += t + "touch")
-    }(window, document);
+
+
+
+function showTab(tabName) {
+    var tabContents = document.getElementsByClassName('tab-content');
+    for (var i = 0; i < tabContents.length; i++) {
+        tabContents[i].style.display = 'none';
+    }
+
+    var selectedTab = document.getElementById(tabName);
+    if (selectedTab) {
+        selectedTab.style.display = 'block';
+    }
+}
 </script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-<script type="text/javascript">
-    window.__WEBFLOW_CURRENCY_SETTINGS = {
-        "currencyCode": "USD",
-        "$init": true,
-        "symbol": "$",
-        "decimal": ".",
-        "fractionDigits": 2,
-        "group": ",",
-        "template": "{{wf {\"path\":\"symbol\",\"type\":\"PlainText\"} }} {{wf {\"path\":\"amount\",\"type\":\"CommercePrice\"} }} {{wf {\"path\":\"currencyCode\",\"type\":\"PlainText\"} }}",
-        "hideDecimalForWholeNumbers": false
-    };
-</script>
+
+
 </head>
 <body>
 	<div id="ex" class="detail">   
@@ -96,31 +93,19 @@
 	            	</div>
 	            	
 	            	<!-- 탭 메뉴 -->
-	                <div class="product-detail">
-	               		<ul class="tab-menu">
-	               			<li id="detail">상세 설명</li>
-	               			<li id="map">지도/주변 추천</li>
-	               			<li id="review">리뷰</li>
-	               			<li id="reserve">예약하기</li>
-	               		</ul>
-	               		
-	               		<!-- <div class="shop-header-line">
-		                    <div class="shop-header-color"></div>
-		                </div> -->
-		                
-	               		<div id="detailCont" class="tab-content">
-		               		<div class="detail-info">              		
-		               			<%-- <!-- 상세 이미지 -->
-								<c:forEach var="dimg" items="${vo.deimage}" varStatus="d">
-								    <c:if test="${d.index < fn:length(vo.deimage) - 1}">
-								        <img class="deimage" src="${dimg}" alt="상세 이미지"> 
-								    </c:if>
-								</c:forEach> --%>
-		                    	
-		                    	<%-- <!-- 상세 설명 -->
-		                    	<p class="cont">${vo.cont}</p> --%>
-		                    	
-		                    	<!-- 테이블 -->
+                <div class="product-detail">
+               		<ul class="tab-menu">
+               			<li id="detail">상세 설명</li>
+               			<li id="map">지도/주변 추천</li>
+               			<li id="review">리뷰</li>
+               			<li id="reserve">예약하기</li>
+               		</ul>
+               		
+               		<!-- <div class="shop-header-line">
+	                    <div class="shop-header-color"></div>
+	                </div> -->
+	                
+               		<!-- 테이블 -->
 			                    <div class="detail-table">
 			                    	<div class="product-table">
 				                        <div class="product-table-cell">
@@ -187,73 +172,60 @@
 				                        </div>
 				                    </div>
 			                    </div>
-		
-			                    <%-- <!-- 해시 태그 -->
-			                    <div class="tag-list">
-			                    	<h5>연관 태그</h5>
-				                    <c:forEach var="tag" items="${vo.tag}">
-				                    	<a href="#"><span>${tag}</span></a>
-				                    </c:forEach>
-			                    </div> --%>
-			                </div>
-	               		</div>
-	               		
-	             		<div id="mapCont" class="tab-content" style="display: none;">
-					        <!-- 지도/주변 추천 내용 -->
-					        
-					    </div>
-					    <div id="reviewCont" class="tab-content" style="display: none;">
-					    
-					    	<!-- 리뷰 목록 -->
-					    	
-					    	
-					    	<!-- 리뷰 내용 -->
-							<!-- <form method="post" action="insert_ok.do">
-								<table class="table">
-									<tr>
-										<th width=10% class="text-center">이름</th>
-										<td width=90%>
-											<input type=text name=name size=20 required class="input-sm">
-										</td>
-									</tr>
-									<tr>
-										<th width=10% class="text-center">제목</th>
-										<td width=90%>
-											<input type=text name=subject size=55 required class="input-sm">
-										</td>
-									</tr>
-									<tr>
-										<th width=10% class="text-center">내용</th>
-										<td width=90%>
-											<textarea rows="10" cols="60" name=content required></textarea>
-										</td>
-									</tr>
-									<tr>
-										<th width=10% class="text-center">비밀번호</th>
-										<td width=90%>
-											<input type="password" name=pwd size=10 required class="input-sm">
-										</td>
-									</tr>
-									<tr>
-										<td colspan="2" class="text-center">
-											<button class="btn-sm btn-success">글쓰기</button>
-						           			<input type=button class="btn-sm btn-info" value="취소" onclick="javascript:history.back()">
-						         		</td>
-						       		</tr>
-						    	</table>
-						    </form> -->
-					    </div>
-					    <!-- <div id="reserveCont" class="tab-content" style="display: none;">
+               		<div id="mapCont" class="tab-content" style="display: none;">
+               		지도 표시
+                       <div id="kkomap" style="width:100%;height:350px;"></div>
+                    </div>
+				    <div id="reviewCont" class="tab-content" style="display: none;">
+				        <!-- 리뷰 내용 -->
+				        리뷰 내용을 입력하세요.
+				        <!-- <form method="post" action="insert_ok.do">
+							<table class="table">
+								<tr>
+									<th width=10% class="text-center">이름</th>
+									<td width=90%>
+										<input type=text name=name size=20 required class="input-sm">
+									</td>
+								</tr>
+								<tr>
+									<th width=10% class="text-center">제목</th>
+									<td width=90%>
+										<input type=text name=subject size=55 required class="input-sm">
+									</td>
+								</tr>
+								<tr>
+									<th width=10% class="text-center">내용</th>
+									<td width=90%>
+										<textarea rows="10" cols="60" name=content required></textarea>
+									</td>
+								</tr>
+								<tr>
+									<th width=10% class="text-center">비밀번호</th>
+									<td width=90%>
+										<input type="password" name=pwd size=10 required class="input-sm">
+									</td>
+								</tr>
+								<tr>
+									<td colspan="2" class="text-center">
+										<button class="btn-sm btn-success">글쓰기</button>
+					           			<input type=button class="btn-sm btn-info" value="취소" onclick="javascript:history.back()">
+					         		</td>
+					       		</tr>
+					    	</table>
+					    </form> -->
+				    </div>
+				    <div id="reserveCont" class="tab-content" style="display: none;">
+				       <div id="reserveCont" class="tab-content" style="display: none;">
 					        예약하기 내용
 					        <div class="form-group">
     <label for="people">인원 선택:</label>
     <select id="people" name="people" class="form-control">
-        <%-- Options for number of people --%>
+        Options for number of people
         <option value="1">1</option>
         <option value="2">2</option>
         <option value="3">3</option>
         <option value="4">4</option>
-        <%-- Add more options as needed --%>
+        Add more options as needed
     </select>
 </div>
 
@@ -264,18 +236,22 @@
 
 <c:choose>
     <c:when test="${vo.price == 0}">
-        <%-- For free exhibitions --%>
+        For free exhibitions
         <a href="#" class="btn btn-primary">예약 완료 페이지로</a>
     </c:when>
     <c:otherwise>
-        <%-- For paid exhibitions --%>
+        For paid exhibitions
         <a href="#" class="btn btn-success">결제 및 예약 완료 페이지로</a>
     </c:otherwise>
 </c:choose>
 					        
 					        예약하기 내용을 입력하세요.
-					    </div> -->
-					</div>
+					    </div>   
+
+				       
+				    </div>
+				    
+                </div>
 	            </div>
 	        </div>
 	    </div>

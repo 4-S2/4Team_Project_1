@@ -101,6 +101,7 @@
         	color: white;
         }
     </style>
+    <script src="../js/member.js"></script>
 </head>
 <body>
 
