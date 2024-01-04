@@ -64,7 +64,7 @@ max-width: 1280px; */
             <div class="board_filter_box filter_depth3 mypage">
                 <ul class="board_filter_in">
                     <li class="filter_box">
-                        <a href="../mypage/editProfile.do" class="menu_depth3 single">회원정보수정</a>
+                        <a href="../mypage/../mypage/main.do" class="menu_depth3 single">회원정보수정</a>
                     </li>
                     <li class="filter_box">
                         <a href="../mypage/myReserv.do" class="menu_depth3 single">예약내역</a>
@@ -80,7 +80,7 @@ max-width: 1280px; */
                     </li>
                     <li class="divider"></li>
                     <li class="filter_box">
-                        <a href="../mypage/myqInquiry.do" class="menu_depth3 single ">문의내역</a>
+                        <a href="../mypage/myInquiry.do" class="menu_depth3 single ">문의내역</a>
                     </li>
                     <li class="filter_box">
                         <a href="../mypage/unregister.do" class="menu_depth3 single ">회원탈퇴</a>

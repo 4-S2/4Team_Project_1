@@ -1784,7 +1784,7 @@ Browser				: IE9, Chrome, Firefox, iOS, Android
 .list_fliter_board.mypage .board_filter_area .board_filter_box .filter_box a.menu_depth3 {padding-right: 10px; letter-spacing: -1px;}
 .list_fliter_board.mypage .board_filter_area .board_filter_box .filter_box a.menu_depth3.active {border-bottom: 2px solid #00548b}
 .list_fliter_board.mypage .board_filter_area .board_filter_box .filter_box a.menu_depth3 span {display: none;}
-.list_fliter_board.mypage .board_filter_area .board_filter_tit {padding-top: 31px; padding-bottom: 19px;}
+.list_fliter_board.mypage .board_filter_area .board_filter_tit {padding-top: 27px; padding-bottom: 12px;}
 .list_fliter_board.mypage .board_filter_area .board_filter_tit p{
 	margin-bottom: 20px;
 }
@@ -2102,7 +2102,7 @@ Browser				: IE9, Chrome, Firefox, iOS, Android
 .button_box .btn_write2,
 /*[E]201203:異붽�*/
 .button_box .btn_modify,
-.button_box .btn_delete {min-width: 80px; height: 36px; padding: 0 20px; border-radius: 50px; font-size: 14px; text-align: center; line-height: 36px;}
+.button_box .btn_delete {min-width: 90px; height: 38px; padding: 0 20px; border-radius: 50px; font-size: 14px; text-align: center; line-height: 36px;}
 .button_box .btn_list {background-color: #00548b; color: #ffffff;}
 .button_box .btn_list2 {background-color: #ffffff; border: 1px solid #00548b; color: #00548b;}
 .button_box .btn_myreview {background-color: #00548b; color: #ffffff;}
@@ -3872,7 +3872,7 @@ Browser				: IE9, Chrome, Firefox, iOS, Android
 /*----------------------------------------------------------------MYPAGE*/
 .my_information_area .login_form_area {font-size: 0;}
 .my_information_area .login_form_area .find_label,
-.my_information_area .login_form_area .form_contbox {vertical-align: top; display: inline-block; margin-top: 30px; margin-bottom: 20px;}
+.my_information_area .login_form_area .form_contbox {vertical-align: top; display: inline-block; margin-top: 30px; /*margin-bottom: 20px;*/}
 
 .my_information_area .login_form_area .find_label {width: 154px; font-size: 16px;}
 .my_information_area .login_form_area .form_contbox {width: calc(100% - 154px); min-height: 40px; margin-top: 20px; color: #666666; font-size: 16px; line-height: 40px;}

@@ -183,6 +183,34 @@ h4 {
     border-radius: 50px;
     width: 70px;
 }
+
+input[type=file]::file-selector-button {
+    border: 1px solid #337ab7;
+	display: inline-block;
+	padding: 1px;
+	margin: 0px 0px;
+	margin-right:10px;
+	margin-bottom:50px;
+	color: #337ab7;
+	width: 80px;
+	height:25px;
+	text-align: center;
+	font-family: 'Pretendard';
+	
+}
+input[type=file]::file-selector-button:hover{
+    background-color: #337ab7;
+    color: white;
+    
+
+}
+#file:focus {
+    outline: none;
+}
+#file{
+    position: relative;
+    bottom: 3px;
+}
 </style>
 </head>
 <body>
@@ -202,7 +230,14 @@ h4 {
 					<th width=15% class="text-center">제목</th>
 					<td width="85%"><input type=text name=subject size=55
 						class="input-sm" required></td>
-				</tr>				
+				</tr>	
+				
+				<tr>
+					<th width=15% class="text-center">첨부파일</th>
+					<td width="85%"><input type=file name=upload id="file"
+						class="input-sm">
+			        </td>
+				</tr>			
 
 				<tr>
 					<th width=15% class="text-center">내용</th>
