@@ -49,9 +49,15 @@ public class GoodsModel {
 		GoodsDAO dao=new GoodsDAO();
 		GoodsVO vo=dao.goodsDetailData(Integer.parseInt(gno));
 		 
+		List<GoodsVO> list=dao.goodsRandomList();
+		request.setAttribute("list", list);
+		
 		request.setAttribute("vo", vo); 
 		request.setAttribute("main_jsp", "../store/goods_detail.jsp");
 		return "../main/main.jsp";
 	}
+
+	
+	
 
 }

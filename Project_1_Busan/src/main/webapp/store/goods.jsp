@@ -63,14 +63,14 @@
 		height: 260px;
      }
      .product-card-price{
-     	background-color: #2b75d5;
+     	background-color: #2546f3;
      }
      
      .subscribe-form{
      	margin-top: 130px;
      }
      .search .button{
-     	background-color: #2b75d5;
+     	background-color: #2546f3;
      	border: none;
      }
 </style>
