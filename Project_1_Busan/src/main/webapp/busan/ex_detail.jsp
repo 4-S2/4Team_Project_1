@@ -1,10 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <!DOCTYPE html>
 <html data-wf-page="5baddb6a35e11306e19a4806" data-wf-site="5badda2935e11303a89a461e">
@@ -12,17 +8,10 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
 <title>Busan Tour</title>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <!-- Include Kakao Maps API -->
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fce1f2ebd7aeec53bebf70c1f38c36c7&libraries=services"></script>
-
-<!-- jQuery 라이브러리 추가 -->
-<script src="//ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-<!-- FullCalendar 라이브러리 및 스타일시트 추가 -->
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.0/fullcalendar.min.css" />
-<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.0/fullcalendar.min.js"></script>
 
 <script type="text/javascript">
     var mapInitialized = false;
@@ -90,22 +79,44 @@
         }
     }
 </script>
-<script>
-    $(document).ready(function() {
-        $('#reserveButton').on('click', function() {
-            // 예약 섹션 표시 로직
-            // 예약 폼 및 달력 초기화 로직
-        });
-
-        // FullCalendar 초기화 로직
-        $('#calendar').fullCalendar({
-            // 달력 옵션 설정
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+    $('#reservationButton').click(function() {
+        $.ajax({
+            url: '/reserve/date.jsp', // 경로 수정
+            type: 'get',
+            success: function(response) {
+                // 성공적으로 페이지를 불러왔을 때의 처리
+                // 예: 모달로 표시하는 경우
+                $('#modalContainer').html(response);
+                $('#modalContainer').show();
+            },
+            error: function() {
+                alert('예약 페이지를 불러오는데 실패했습니다.');
+            }
         });
     });
+});
+
 </script>
+
+
 </head>
 <body>
-	<div id="ex" class="detail">      
+	<div id="ex" class="detail">   
+	    <!-- <div class="section no-padding-vertical">
+	        <div class="wrapper side-paddings">
+	            <div class="breadcrumbs">
+	                <a href="/" class="link-grey">Home</a>
+	                <img src="https://assets.website-files.com/5badda2935e11303a89a461e/5baf79eb570913b9781a96f2_arrow-right-mini-icon.svg" alt="" class="breadcrumbs-arrow"/>
+	                <a href="/catalog" class="link-grey">Catalog</a>
+	                <img src="https://assets.website-files.com/5badda2935e11303a89a461e/5baf79eb570913b9781a96f2_arrow-right-mini-icon.svg" alt="" class="breadcrumbs-arrow"/>
+	                <div>Teddy Bear</div>
+	            </div>
+	        </div>
+	    </div> -->
+	    
 	    <div class="section no-padding-vertical">
 	        <div class="wrapper side-paddings">
 	            <div class="product">
@@ -116,14 +127,12 @@
 		                <div class="product-info">
 		                    <h1>${vo.ename}</h1>
 	                    	<h3>${vo.eename}</h3>
-	                    	
-	                    		 <!-- 상단 버튼 -->
-     <!-- 예약하기 버튼 -->
-    <input type="button" value="예약하기" class="w-commerce-commerceaddtocartbutton button add-to-cart-button" id="reserveButton"/>
-
-   <!-- 예약 결과 표시 -->
-    </div>
-	                    	
+	                    	<form>
+	                    		<div class="buy-buttons">
+	                                <input type="submit" value="예약하기" class="w-commerce-commerceaddtocartbutton button add-to-cart-button" id="reservationButton"/>
+	                                
+	                            </div>
+	                    	</form>
 		                </div>
 	            	</div>
 	            	
@@ -136,7 +145,10 @@
                			<li id="reserve">예약하기</li>
                		</ul>
                		
-     
+               		<!-- <div class="shop-header-line">
+	                    <div class="shop-header-color"></div>
+	                </div> -->
+	                
                		<div id="detailCont" class="tab-content">
 	               		<div class="detail-info">              		
 	                    	
@@ -258,7 +270,10 @@
 					    	</table>
 					    </form> -->
 				    </div>
-				   
+				    <div id="reserveCont" class="tab-content" style="display: none; id="reservationButton">
+				        <!-- 예약하기 내용 -->
+				        예약하기 내용을 입력하세요.
+				    </div>
 				    
                 </div>
 	            	
@@ -293,7 +308,5 @@
 	</div>
 <!-- <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=5badda2935e11303a89a461e" type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script> -->
 <script src="https://assets.website-files.com/5badda2935e11303a89a461e/js/webflow.9828d3d6a.js" type="text/javascript"></script>
-<script src="https://assets.website-files.com/5badda2935e11303a89a461e/js/webflow.9828d3d6a.js" type="text/javascript"></script>
- <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.0/fullcalendar.min.js"></script>
 </body>
 </html>
