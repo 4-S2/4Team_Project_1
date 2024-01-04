@@ -39,7 +39,7 @@
                 });
 
                 var infowindow = new kakao.maps.InfoWindow({
-                    content: '<div style="width:150px;text-align:center;padding:6px 0;">${vo.title}</div>'
+                    content: '<div style="width:150px;text-align:center;padding:6px 0;">${vo.addr}</div>'
                 });
                 infowindow.open(map, marker);
                 map.setCenter(coords);
