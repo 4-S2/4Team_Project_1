@@ -79,6 +79,27 @@
         }
     }
 </script>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+    $('#reservationButton').click(function() {
+        $.ajax({
+            url: '/reserve/date.jsp', // 경로 수정
+            type: 'get',
+            success: function(response) {
+                // 성공적으로 페이지를 불러왔을 때의 처리
+                // 예: 모달로 표시하는 경우
+                $('#modalContainer').html(response);
+                $('#modalContainer').show();
+            },
+            error: function() {
+                alert('예약 페이지를 불러오는데 실패했습니다.');
+            }
+        });
+    });
+});
+
+</script>
 
 
 </head>
@@ -249,7 +270,7 @@
 					    	</table>
 					    </form> -->
 				    </div>
-				    <div id="reserveCont" class="tab-content" style="display: none;">
+				    <div id="reserveCont" class="tab-content" style="display: none; id="reservationButton">
 				        <!-- 예약하기 내용 -->
 				        예약하기 내용을 입력하세요.
 				    </div>
@@ -288,4 +309,4 @@
 <!-- <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=5badda2935e11303a89a461e" type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script> -->
 <script src="https://assets.website-files.com/5badda2935e11303a89a461e/js/webflow.9828d3d6a.js" type="text/javascript"></script>
 </body>
-</html>htoddl aksg
+</html>
