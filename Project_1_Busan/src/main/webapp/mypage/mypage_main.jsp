@@ -80,7 +80,7 @@ max-width: 1280px; */
                     </li>
                     <li class="divider"></li>
                     <li class="filter_box">
-                        <a href="../mypage/myqInquiry.do" class="menu_depth3 single ">문의내역</a>
+                        <a href="../mypage/myInquiry.do" class="menu_depth3 single ">문의내역</a>
                     </li>
                     <li class="filter_box">
                         <a href="../mypage/unregister.do" class="menu_depth3 single ">회원탈퇴</a>

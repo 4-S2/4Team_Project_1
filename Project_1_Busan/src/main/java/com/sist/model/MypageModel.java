@@ -94,7 +94,7 @@ public class MypageModel {
 	}
 	
 	// 문의내역
-	@RequestMapping("mypage/myqInquiry.do")
+	@RequestMapping("mypage/myInquiry.do")
 	public String mypage_myqInquiry(HttpServletRequest request, HttpServletResponse response)
 	{	
 		HttpSession session=request.getSession();
@@ -104,7 +104,7 @@ public class MypageModel {
 		/* MemberVO vo=dao.myprofile(id); */
 		
 		/* request.setAttribute("vo", vo); */
-		request.setAttribute("mypage_jsp", "myqInquiry.jsp");
+		request.setAttribute("mypage_jsp", "myInquiry.jsp");
 		request.setAttribute("main_jsp", "../mypage/mypage_main.jsp");
 		return "../main/main.jsp";
 	}

@@ -30,7 +30,72 @@
     #idNo1{
     	max-width: 460px;
     }
+    #pwd1{
+    	max-width: 300px;
+    }
   </style>
+  <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+  <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+  
+<script>
+    function sample6_execDaumPostcode() {
+        new daum.Postcode({
+            oncomplete: function(data) {    
+                var addr = ''; 
+                var extraAddr = '';
+                if (data.userSelectedType === 'R') { 
+                    addr = data.roadAddress;
+                } else { 
+                    addr = data.jibunAddress;
+                }
+
+                if(data.userSelectedType === 'R'){
+                   
+                    if(data.bname !== '' && /[dong|ro|ga]$/g.test(data.bname)){
+                        extraAddr += data.bname;
+                    }
+                    
+                    if(data.buildingName !== '' && data.apartment === 'Y'){
+                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                    }
+                    
+                    if(extraAddr !== ''){
+                        extraAddr = '(' + extraAddr + ')';
+                    }
+                    
+                    document.getElementById("sample6_extraAddress").value = extraAddr;
+                
+                } else {
+                    document.getElementById("sample6_extraAddress").value = '';
+                }
+
+                
+                document.getElementById('sample6_postcode').value = data.zonecode;
+                document.getElementById("sample6_address").value = addr;
+              
+                document.getElementById("sample6_detailAddress").focus();
+            }
+        }).open();
+        $(document).ready(function() {
+          
+            $("#searchZipCodeBtn").click(function() {
+              
+              sample6_execDaumPostcode();
+            });
+          });
+    }  
+</script> 
+<script type="text/javascript">
+var postalCode = data.zonecode;
+var address = addr;
+var detailAddress = document.getElementById("sample6_detailAddress").value;
+
+// Store data in session
+sessionStorage.setItem("postalCode", postalCode);
+sessionStorage.setItem("address", address);
+sessionStorage.setItem("detailAddress", detailAddress);
+</script>
+ <script src="../js/member.js"></script>
 </head>
 <body>
   <div class="editProfile">
@@ -40,12 +105,12 @@
    <div class="my_information_area">
        <form id="frmJoin" name="frmJoin" method="post" class="login_form_area find_id_pw join_form">
 	       <p class="find_label input_ta_mt80 input_ta_mb10 first ta_inblock">이름</p>
-	       		<div class="form_contbox first ta_inblock"><input type="text" id="idNo1" data-required="true" data-type="{numeric:true}" maxlength="8" title="휴대전화 첫번째 자리" value="김연수" class="required"></div>
+	       		<div class="form_contbox first ta_inblock"><input type="text" id="idNo1" data-required="true" data-type="{numeric:true}" maxlength="8" value="김연수" class="required"></div>
 	       <p class="find_label input_ta_mt80 input_ta_mb10 ta_inblock">아이디</p>
 	       		<div class="form_contbox ta_inblock">duswl@naver.com</div>
 	       <!-- <p class="find_label input_ta_mt80 input_ta_mb10 ta_first">비밀번호</p> -->
 	       	       <p class="find_label input_ta_mt80 input_ta_mb10 ta_inblock">비밀번호</p>
-	       		<div class="form_contbox ta_inblock">duswl@naver.com</div>
+	       		<div class="form_contbox ta_inblock"><input type="text" id="pwd1" data-required="true" data-type="{numeric:true}" maxlength="30" value="" class="required"></div>
 	       	<p class="find_label input_ta_mt30">휴대전화</p>
 		       	<div class="form_contbox">
 	                        <div class="clear find_birth_area phone">
@@ -68,17 +133,22 @@
 	                            </div>
 	                        </div>
 	            </div>
+	            
+<!-- 	              <label for="postal_code" style="display: inline">우편번호 <span class="required">*</span></label>
+				  <button type="button" id="searchZipCodeBtn" style="float:right" onclick="sample6_execDaumPostcode()">우편번호 찾기</button>
+				  <input type="text" class="form-control" name="postal_code" id="sample6_postcode" placeholder="우편번호를 입력하세요" readonly required>
+				  
+				</div>
+				<div class="form-group">
+				  <label for="address">주소 <span class="required">*</span></label>
+				  <input type="text" class="form-control" name="address" id="sample6_address" placeholder="주소를 입력하세요" readonly required>
+				</div>
+				<div class="form-group">
+				  <label for="detail_address">상세 주소</label>
+				  <input type="text" class="form-control" name="detail_address" id="sample6_detailAddress" placeholder="상세 주소를 입력하세요">
+				</div>	 -->            
    	   </form>
    </div>
-<!--     <form action="update_profile.jsp" method="post">
-      <label for="name">이름:</label>
-      <input type="text" id="name" name="name" placeholder="이름을 입력하세요">
-
-      <label for="email">이메일:</label>
-      <input type="text" id="email" name="email" placeholder="이메일을 입력하세요">
-
-      <input type="submit" value="프로필 저장">
-    </form> -->
   </div>
 </body>
 </html>

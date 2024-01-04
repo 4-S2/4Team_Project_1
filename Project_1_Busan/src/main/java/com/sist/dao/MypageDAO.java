@@ -3,9 +3,14 @@ package com.sist.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 import com.sist.dbcp.CreateDBCPConnection;
+import com.sist.vo.GoodsVO;
 import com.sist.vo.MemberVO;
+import com.sist.vo.QnaBoardVO;
 
 public class MypageDAO {
 	   private Connection conn; //데이터베이스 연결
@@ -107,4 +112,39 @@ public class MypageDAO {
 			}
 			return cnt;
 		}
+
+		/*
+		 * private int qno; private String subject; private Date regdate;
+		 */
+	    // 나의 문의내역
+	    public List<QnaBoardVO> getAllQnas(String id) {
+	        List<QnaBoardVO> list = new ArrayList<>();
+			try
+			{
+				conn=dbconn.getConnection();
+				String sql="SELECT qno,subject,regdate "
+						+ "FROM QnaBoard "
+						+ "WHERE id="+id;
+				ps=conn.prepareStatement(sql);
+				ResultSet rs=ps.executeQuery();
+		         while(rs.next()) // 출력 1번째 위치부터 읽기 시작 
+		         {
+		        	 QnaBoardVO vo=new QnaBoardVO();
+		            vo.setQno(rs.getInt(1));
+		            vo.setSubject(rs.getString(2));
+		            vo.setRegdate(rs.getDate(3));
+		            list.add(vo);
+		         }
+		         rs.close();
+			}catch(Exception ex)
+			{
+				ex.printStackTrace();
+			}
+			finally
+			{
+				dbconn.disConnection(conn, ps);
+			}
+			return list;
+	        
+	    }
 }
