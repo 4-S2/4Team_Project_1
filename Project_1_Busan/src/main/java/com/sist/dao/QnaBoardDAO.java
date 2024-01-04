@@ -211,7 +211,7 @@ public class QnaBoardDAO {
 	            ps.executeUpdate();
 	            ps.close();
 	            
-	            sql="SELECT qno,name,subject,cont,TO_CHAR(regdate,'yyyy-mm-dd'),hit "
+	            sql="SELECT qno,name,subject,cont,TO_CHAR(regdate,'yyyy-mm-dd'),hit,filename,filesize "
 	                    +"FROM qnaBoard "
 	                    +"WHERE qno="+qno;
 	            ps=conn.prepareStatement(sql);
@@ -223,6 +223,8 @@ public class QnaBoardDAO {
 	            vo.setCont(rs.getString(4));
 	            vo.setDbday(rs.getString(5));
 	            vo.setHit(rs.getInt(6));
+	            vo.setFilename(rs.getString(7));
+	            vo.setFilesize(rs.getInt(8));
 	            rs.close();
 	         }catch(Exception ex)
 	         {
@@ -243,30 +245,38 @@ public class QnaBoardDAO {
 	         {
 	            if(vo.getId()==null)
 	            {
-	            	conn=dbconn.getConnection();
-		            String sql="INSERT INTO qnaBoard(qno,name,subject,cont,pwd,group_id) "
-		            		+ "VALUES(qb_no_seq.nextval,?,?,?,?,(SELECT MAX(group_id) FROM qnaBoard)+1)";
-		            ps=conn.prepareStatement(sql);
-		            ps.setString(1, vo.getName());
-		            ps.setString(2, vo.getSubject());
-		            ps.setString(3, vo.getCont());
-		            ps.setString(4, vo.getPwd());
-		            //ps.setString(5, vo.getId());
-		            ps.executeUpdate();
-		            ps.close();
+	            	try {
+	            		conn=dbconn.getConnection();
+			            String sql="INSERT INTO qnaBoard(qno,name,subject,cont,pwd,filename,filesize,group_id) "
+			            		+ "VALUES(qb_no_seq.nextval,?,?,?,?,?,?,(SELECT MAX(group_id) FROM qnaBoard)+1)";
+			            ps=conn.prepareStatement(sql);
+			            ps.setString(1, vo.getName());
+			            ps.setString(2, vo.getSubject());
+			            ps.setString(3, vo.getCont());
+			            ps.setString(4, vo.getPwd());
+			            ps.setString(5, vo.getFilename());
+			            ps.setInt(6, vo.getFilesize());
+			            ps.executeUpdate();
+			            ps.close();
+	            	}catch(Exception e) {}
+	            	
 	            }
 	            else {
+	            	try {
 	            	conn=dbconn.getConnection();
-		            String sql="INSERT INTO qnaBoard(qno,name,subject,cont,pwd,id,group_id) "
-		            		+ "VALUES(qb_no_seq.nextval,?,?,?,?,?,(SELECT MAX(group_id) FROM qnaBoard)+1)";
+		            String sql="INSERT INTO qnaBoard(qno,name,subject,cont,pwd,filename,filesize,id,group_id) "
+		            		+ "VALUES(qb_no_seq.nextval,?,?,?,?,?,?,?,(SELECT MAX(group_id) FROM qnaBoard)+1)";
 		            ps=conn.prepareStatement(sql);
 		            ps.setString(1, vo.getName());
 		            ps.setString(2, vo.getSubject());
 		            ps.setString(3, vo.getCont());
 		            ps.setString(4, vo.getPwd());
-		            ps.setString(5, vo.getId());
+		            ps.setString(5, vo.getFilename());
+		            ps.setInt(6, vo.getFilesize());
+		            ps.setString(7, vo.getId());
 		            ps.executeUpdate();
 		            ps.close();
+	            	}catch(Exception e) {}
 	            }
 	        	 
 

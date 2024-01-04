@@ -1,5 +1,6 @@
 package com.sist.model;
 
+import java.io.File;
 import java.io.PrintWriter;
 import java.util.List;
 
@@ -7,6 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.sist.controller.RequestMapping;
 import com.sist.dao.QnaBoardDAO;
 import com.sist.vo.QnaBoardVO;
@@ -109,26 +112,46 @@ public class QnaBoardModel {
 	           HttpServletResponse response)
 	   {
 	        try {
+	        	
+	        	//String path="C:\\Users\\"+System.getProperty("user.name")+"\\Downloads";
 	        	request.setCharacterEncoding("UTF-8");
+	 		   String path="c:\\download";
+	 		   String enctype="UTF-8";
+	 		   int max_size=1024*1024*500;
+	 		   MultipartRequest mr=
+	 				   new MultipartRequest(request,path,max_size,enctype,
+	 						   new DefaultFileRenamePolicy());
+	 		   
+	 		    String name=mr.getParameter("name");
+			    String subject=mr.getParameter("subject");
+			    String cont=mr.getParameter("cont");
+			    String pwd=mr.getParameter("pwd");
+			    String filename=mr.getFilesystemName("upload");
+		        
+		        HttpSession session=request.getSession();
+		        String id=(String) session.getAttribute("id");
+	            if(id==null) 
+	            	id="";
+	            
+		        QnaBoardVO vo=new QnaBoardVO();
+		        vo.setName(name);
+				   vo.setCont(cont);
+				   vo.setSubject(subject);
+				   vo.setPwd(pwd);
+				   if(filename==null)
+				   {
+					   vo.setFilename("");
+					   vo.setFilesize(0);
+				   }
+				   else
+				   {
+					   File file=new File(path+"\\"+filename);
+					   vo.setFilename(filename);
+					   vo.setFilesize((int)file.length());
+				   }
+		        QnaBoardDAO dao=QnaBoardDAO.newInstance();
+		        dao.QnaInsertData(vo);
 	        }catch(Exception e) {}
-	        String name=request.getParameter("name");
-	        String subject=request.getParameter("subject");
-	        String cont=request.getParameter("cont");
-	        String pwd=request.getParameter("pwd");
-	        
-	        HttpSession session=request.getSession();
-	        
-	        String id=(String) session.getAttribute("id");
-            if(id==null) 
-            	id="";
-	        QnaBoardVO vo=new QnaBoardVO();
-	        vo.setName(name);
-	        vo.setSubject(subject);
-	        vo.setPwd(pwd);
-	        vo.setCont(cont);
-	        vo.setId(id);
-	        QnaBoardDAO dao=QnaBoardDAO.newInstance();
-	        dao.QnaInsertData(vo);
 	        
 	        return "redirect:../board/qnaboard.do";
 	   }
