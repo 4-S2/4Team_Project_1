@@ -2,7 +2,85 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fce1f2ebd7aeec53bebf70c1f38c36c7&libraries=services"></script>
 
+<script type="text/javascript">
+    var mapInitialized = false;
+    var map, geocoder;
+
+    function initMap() {
+        var container = document.getElementById('kkomap');
+        var options = {
+            center: new kakao.maps.LatLng(33.450701, 126.570667),
+            level: 3
+        };
+
+        map = new kakao.maps.Map(container, options);
+        geocoder = new kakao.maps.services.Geocoder();
+        mapInitialized = true;
+    }
+
+    function showMap(address) {
+        if (!mapInitialized) {
+            initMap();
+        }
+
+        map.relayout();
+        map.setCenter(new kakao.maps.LatLng(33.450701, 126.570667));
+
+        geocoder.addressSearch(address, function(result, status) {
+            if (status === kakao.maps.services.Status.OK) {
+                var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+                var marker = new kakao.maps.Marker({
+                    map: map,
+                    position: coords
+                });
+
+                var infowindow = new kakao.maps.InfoWindow({
+                    content: '<div style="width:150px;text-align:center;padding:6px 0;">${vo.title}</div>'
+                });
+                infowindow.open(map, marker);
+                map.setCenter(coords);
+            }
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        var tabButtons = document.querySelectorAll('.tab-menu li');
+        for (var i = 0; i < tabButtons.length; i++) {
+            tabButtons[i].addEventListener('click', function(event) {
+                var tabId = event.target.id + 'Cont';
+                showTab(tabId);
+                if (event.target.id === 'map' && !mapInitialized) {
+                    showMap('${vo.addr}');
+                }
+            });
+        }
+    });
+
+    function showTab(tabName) {
+        var tabContents = document.getElementsByClassName('tab-content');
+        for (var i = 0; i < tabContents.length; i++) {
+            tabContents[i].style.display = 'none';
+        }
+
+        var selectedTab = document.getElementById(tabName);
+        if (selectedTab) {
+            selectedTab.style.display = 'block';
+        }
+    }
+</script> 
+
+<style>
+    #mapCont {
+        display: none;
+        width: 100%;
+    }
+    #kkomap {
+        width: 100%;
+        height: 350px;
+    }
+</style>
 <div id="food" class="detail">   
     <!-- <div class="section no-padding-vertical">
         <div class="wrapper side-paddings">
@@ -106,6 +184,9 @@
                		
              		<div id="mapCont" class="tab-content" style="display: none;">
 				        <!-- 지도/주변 추천 내용 -->
+				        지도 표시
+                 <div id="kkomap" style="width:100%;height:350px;"></div>
+                    </div>
 				        
 				    </div>
 				    <div id="reviewCont" class="tab-content" style="display: none;">
