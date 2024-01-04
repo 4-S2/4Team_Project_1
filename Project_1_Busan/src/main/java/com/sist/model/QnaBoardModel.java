@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.sist.controller.RequestMapping;
 import com.sist.dao.QnaBoardDAO;
@@ -115,11 +116,17 @@ public class QnaBoardModel {
 	        String cont=request.getParameter("cont");
 	        String pwd=request.getParameter("pwd");
 	        
+	        HttpSession session=request.getSession();
+	        
+	        String id=(String) session.getAttribute("id");
+            if(id==null) 
+            	id="";
 	        QnaBoardVO vo=new QnaBoardVO();
 	        vo.setName(name);
 	        vo.setSubject(subject);
 	        vo.setPwd(pwd);
 	        vo.setCont(cont);
+	        vo.setId(id);
 	        QnaBoardDAO dao=QnaBoardDAO.newInstance();
 	        dao.QnaInsertData(vo);
 	        

@@ -24,8 +24,15 @@ public class QnaBoardVO {
 	   private int hit;
 	   private int group_id;
 	   private int group_step;
+	   private String id;
 	   
 	   
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
 	public String getDbday() {
 		return dbday;
 	}
