@@ -46,7 +46,7 @@
                 });
 
                 var infowindow = new kakao.maps.InfoWindow({
-                    content: '<div style="width:150px;text-align:center;padding:6px 0;">${vo.loc}</div>'
+                    content: '<div style="width:150px;text-align:center;padding:6px 0;">${vo.ename}</div>'
                 });
                 infowindow.open(map, marker);
                 map.setCenter(coords);
@@ -80,27 +80,6 @@
     }
 </script>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script type="text/javascript">
-$(document).ready(function(){
-    $('#reservationButton').click(function() {
-        $.ajax({
-            url: '/reserve/date.jsp', // 경로 수정
-            type: 'get',
-            success: function(response) {
-                // 성공적으로 페이지를 불러왔을 때의 처리
-                // 예: 모달로 표시하는 경우
-                $('#modalContainer').html(response);
-                $('#modalContainer').show();
-            },
-            error: function() {
-                alert('예약 페이지를 불러오는데 실패했습니다.');
-            }
-        });
-    });
-});
-
-</script>
-
 
 </head>
 <body>
@@ -290,19 +269,26 @@ $(document).ready(function(){
 	                    <div class="shop-header-color"></div>
 	                </div>
 	            </div>
-	            <div class="full-width w-dyn-list">
-	                <div role="list" class="products w-dyn-items">
-	                    <div data-w-id="df75c36d-8d89-3a15-6c0d-6078372525bd" style="opacity:0" role="listitem" class="product-card-wrapper w-dyn-item">
-	                        <a href="/product/happy-dog" class="product-card w-inline-block">
-	                            <div class="product-card-image-wrapper">
-	                                <img alt="썸네일 이미지" src="https://assets.website-files.com/5baddb6a35e113da0e9a4802/5baf5171ace69cb064b33d42_33388-1-wooden-toy-photos-min.png" data-wf-sku-bindings="%5B%7B%22from%22%3A%22f_main_image_4dr%22%2C%22to%22%3A%22src%22%7D%5D" sizes="(max-width: 479px) 73vw, (max-width: 767px) 34vw, (max-width: 991px) 33vw, 12vw" srcset="https://assets.website-files.com/5baddb6a35e113da0e9a4802/5baf5171ace69cb064b33d42_33388-1-wooden-toy-photos-min-p-500.png 500w, https://assets.website-files.com/5baddb6a35e113da0e9a4802/5baf5171ace69cb064b33d42_33388-1-wooden-toy-photos-min.png 1200w"/>
-	                            </div>
-	                            <h6 class="product-card-heading">Happy Dog</h6>
-	                            <div data-wf-sku-bindings="%5B%7B%22from%22%3A%22f_price_%22%2C%22to%22%3A%22innerHTML%22%7D%5D" class="product-card-price">$ 30.00 USD</div>
-	                        </a>
-	                    </div>
-	                </div>
-	            </div>
+	            <!-- list -->
+                    <div class="full-width w-dyn-list">
+                        <div role="list" class="products w-dyn-items">
+                            <c:forEach var="vo" items="${list}">
+                            <div role="listitem" class="product-card-wrapper w-dyn-item">
+                                <a href="../busan/ex_detail.do?eno=${vo.eno }" class="product-card w-inline-block">
+                                    <div class="product-card-image-wrapper">
+                                        <img src="${vo.poster}" alt="" sizes="(max-width: 479px) 73vw, (max-width: 767px) 34vw, (max-width: 991px) 33vw, 12vw"/>
+                                    </div>
+                                    <p>
+                                    <p>
+                                    <h6 class="product-card-heading">${vo.ename}</h6>
+                                    <br>
+                                    <div data-wf-sku-bindings="%5B%7B%22from%22%3A%22f_price_%22%2C%22to%22%3A%22innerHTML%22%7D%5D" class="product-card-price">${vo.s_date }~${vo.e_date }</div>
+                                </a>
+                            </div>
+                            </c:forEach>
+                        </div>
+                    </div>
+	         
 	        </div>
 	    </div>
 	</div>
