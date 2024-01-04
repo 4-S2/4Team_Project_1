@@ -7,7 +7,6 @@
   <meta charset="UTF-8">
   <title>프로필 수정</title>
   <style>
-    /* 간단한 스타일링을 위한 CSS */
     label {
       display: block;
       margin-bottom: 10px;
@@ -15,7 +14,7 @@
     input[type="text"] {
       width: 100%;
       padding: 8px;
-      margin-bottom: 15px;
+      margin-bottom: 0px;
     }
     input[type="submit"] {
       padding: 10px 20px;
@@ -27,12 +26,24 @@
     input[type="submit"]:hover {
       background-color: #0056b3;
     }
-    #idNo1{
+    #daddr {
     	max-width: 460px;
     }
-    #pwd1{
+    #name, #pwd, #addr, #postcode{
     	max-width: 300px;
     }
+    .p {
+    margin-bottom: 0px; 
+    font-size: 14px;
+    line-height: 24px;
+    }
+/*     .login_form_area .form_contbox {
+    vertical-align: top;
+    display: inline-block;
+    margin-top: 30px;
+     margin-bottom: 0px; 
+} */
+    
   </style>
   <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
   <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -96,45 +107,178 @@ sessionStorage.setItem("address", address);
 sessionStorage.setItem("detailAddress", detailAddress);
 </script>
  <script src="../js/member.js"></script>
+
+
+<!-- <script>
+function checkPassword() {
+    var enteredPassword = prompt("비밀번호를 입력하세요:");
+
+    // 공백 제거, 입력된 문자=>숫자 변환 (유효성 검증)
+    enteredPassword = parseInt(enteredPassword.trim());
+
+    var correctPassword = ${vo.pwd};
+    alert(correctPassword);
+    
+    if (enteredPassword === "") {
+      alert("비밀번호를 입력해주세요.");
+    } else if (enteredPassword === correctPassword) {
+    	
+    	alert("회원 정보가 수정되었습니다.");
+      	window.location.href = "http://localhost:8080/Project_1_Busan/mypage/main.do";
+    } else {
+      alert("비밀번호가 일치하지 않습니다. 다시 시도해주세요.");
+    }
+  }
+  </script> -->
+<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+<script type="text/javascript">
+/* $('#aUpdateMember').click(function(){ */
+function checkPassword() {
+	let name=$('#name').val();
+	let pwd=$('#pwd').val();
+	let telNo1=$('#telNo1').val();
+	let telNo2=$('#telNo2').val();
+	let telNo3=$('#telNo3').val();
+	let postcode=$('#postcode').val();
+	let addr=$('#addr').val();
+	let daddr=$('#daddr').val();
+		if($('#name').val().trim()==="")
+		{
+			$('#name').focus()
+			$('#updateMsg').text('이름을 입력해주세요.')
+			$('#updateMsg').attr('style','display:block; color:red; margin: 0px;')
+			return
+		}
+		if($('#pwd').val().trim()==="")
+		{
+			$('#pwd').focus()
+			$('#updateMsg').text('비밀번호를 입력해주세요.')
+			$('#updateMsg').attr('style','display:block; color:red; margin: 0px;')
+			return
+		}
+		if($('#telNo1').val().trim()==="")
+		{
+			$('#telNo1').focus()
+			$('#updateMsg').text('전화번호를 입력해주세요.')
+			$('#updateMsg').attr('style','display:block; color:red; margin: 0px;')
+			return
+		}
+		
+		if($('#telNo2').val().trim()==="")
+		{
+			$('#telNo2').focus()
+			$('#updateMsg').text('전화번호를 입력해주세요.')
+			$('#updateMsg').attr('style','display:block; color:red; margin: 0px')
+			return
+		}
+		
+		if($('#telNo3').val().trim()==="")
+		{
+			$('#telNo3').focus()
+			$('#updateMsg').text('전화번호를 입력해주세요.')
+			$('#updateMsg').attr('style','display:block; color:red; margin: 0px;')
+			return
+		}
+
+		if($('#postcode').val().trim()==="")
+		{
+			$('#postcode').focus()
+			$('#updateMsg').text('우편번호를 입력해주세요.')
+			$('#updateMsg').attr('style','display:block; color:red; margin: 0px;')
+			return
+		}
+		
+		if($('#addr').val().trim()==="")
+		{
+			$('#addr').focus()
+			$('#updateMsg').text('주소를 입력해주세요.')
+			$('#updateMsg').attr('style','display:block; color:red; margin: 0px;')
+			return
+		}
+		
+		if($('#daddr').val().trim()==="")
+		{
+			$('#daddr').focus()
+			$('#updateMsg').text('상세주소를 입력해주세요.')
+			$('#updateMsg').attr('style','display:block; color:red; margin: 0px;')
+			return
+		}
+	
+/* 	$.ajax({
+		type:'post',
+		url:"../mypage/editmyprofile.do",
+		data:{
+			"pwd":pwd,
+			"name":name,
+			"phone":telNo1+telNo2+telNo3,
+			"postcode":postcode,
+			"addr":addr,
+			"daddr":daddr,
+		},
+		success:function(result)
+		{
+			if(result=='success'){
+				alert('회원 정보가 수정되었습니다.')
+				location.href="../mypage/main.do";
+			}
+			else if (result=='fail'){
+				alert('비밀번호가 일치하지 않습니다. 다시 시도해주세요.')
+			}
+		}
+	
+	}) */
+})
+
+</script>
 </head>
 <body>
   <div class="editProfile">
   <div class="max1200 dp_pc contents_titbox">
                 <h4 class="titbox"><strong>회원정보</strong>수정</h4>
+                <p style="margin: 0px; display: none" id=updateMsg></p>
    </div>
    <div class="my_information_area">
+   
        <form id="frmJoin" name="frmJoin" method="post" class="login_form_area find_id_pw join_form">
 	       <p class="find_label input_ta_mt80 input_ta_mb10 first ta_inblock">이름</p>
-	       		<div class="form_contbox first ta_inblock"><input type="text" id="idNo1" data-required="true" data-type="{numeric:true}" maxlength="8" value="김연수" class="required"></div>
+	       		<div class="form_contbox first ta_inblock"><input type="text" id="name" name="name" data-required="true" maxlength="8" value="${vo.name }" required></div>
 	       <p class="find_label input_ta_mt80 input_ta_mb10 ta_inblock">아이디</p>
-	       		<div class="form_contbox ta_inblock">duswl@naver.com</div>
+	       		<div class="form_contbox ta_inblock">${vo.id }</div>
 	       <!-- <p class="find_label input_ta_mt80 input_ta_mb10 ta_first">비밀번호</p> -->
-	       	       <p class="find_label input_ta_mt80 input_ta_mb10 ta_inblock">비밀번호</p>
-	       		<div class="form_contbox ta_inblock"><input type="text" id="pwd1" data-required="true" data-type="{numeric:true}" maxlength="30" value="" class="required"></div>
+	       <p class="find_label input_ta_mt80 input_ta_mb10 ta_inblock">비밀번호</p>
+	       		<div class="form_contbox ta_inblock"><input type="text" id="pwd" name="pwd" maxlength="30" value="${vo.pwd}" required></div>
 	       	<p class="find_label input_ta_mt30">휴대전화</p>
 		       	<div class="form_contbox">
 	                        <div class="clear find_birth_area phone">
 	                            <div class="find_birth_box pc_mt0">
 	                                <p class="inputbox block h40 ta_h80 border_ee login_input pc_mt0">
-	                                    <input type="text" id="telNo2" data-required="true" data-type="{numeric:true}" maxlength="4" title="휴대전화 첫번째 자리" value="010" class="required">
+	                                    <input type="text" id="telNo1" name="telNo1" maxlength="4" title="휴대전화 첫번째 자리" value="${telNo1 }" required>
 	                                </p>
 	                            </div>
 	                            <span class="phone_line pc_mt0"></span>
 	                            <div class="find_birth_box pc_mt0">
 	                                <p class="inputbox block h40 ta_h80 border_ee login_input pc_mt0">
-	                                    <input type="text" id="telNo2" data-required="true" data-type="{numeric:true}" maxlength="4" title="휴대전화 두번째 자리" value="7274" class="required">
+	                                    <input type="text" id="telNo2" name="telNo2" maxlength="4" title="휴대전화 두번째 자리" value="${telNo2 }" required>
 	                                </p>
 	                            </div>
 	                            <span class="phone_line pc_mt0"></span>
 	                            <div class="find_birth_box">
 	                                <p class="inputbox block h40 ta_h80 border_ee login_input pc_mt0">
-	                                    <input type="text" id="telNo3" data-required="true" data-type="{numeric:true}" maxlength="4" title="휴대전화 마지막 자리" value="2285" class="required">
+	                                    <input type="text" id="telNo3" name="telNo3"data-required="true" maxlength="4" title="휴대전화 마지막 자리" value="${telNo3 }" required>
 	                                </p>
 	                            </div>
 	                        </div>
 	            </div>
-	            
-<!-- 	              <label for="postal_code" style="display: inline">우편번호 <span class="required">*</span></label>
+	          <p class="find_label input_ta_mt80 input_ta_mb10 ta_inblock">우편번호</p>
+	       		<div class="form_contbox ta_inblock"><input type="text" id="postcode" name="postcode" maxlength="8" value="${vo.postcode }" required>
+	       		<button type="button" id="searchZipCodeBtn" onclick="sample6_execDaumPostcode()">우편번호 찾기</button>
+	       		</div>
+	       	  <p class="find_label input_ta_mt80 input_ta_mb10 ta_inblock">주소</p>
+	       		<div class="form_contbox ta_inblock"><input type="text" id="addr" name="addr" data-required="true" maxlength="8" value="${vo.addr }" required></div>
+	       	  <p class="find_label input_ta_mt80 input_ta_mb10 ta_inblock"></p>	
+	       		<div class="form_contbox ta_inblock"><input type="text" id="daddr" name="daddr"  data-required="true" maxlength="8" value="${vo.detail_addr }" required></div>
+			
+<!-- 	      <label for="postal_code" style="display: inline">우편번호 <span class="required">*</span></label>
 				  <button type="button" id="searchZipCodeBtn" style="float:right" onclick="sample6_execDaumPostcode()">우편번호 찾기</button>
 				  <input type="text" class="form-control" name="postal_code" id="sample6_postcode" placeholder="우편번호를 입력하세요" readonly required>
 				  
@@ -148,109 +292,13 @@ sessionStorage.setItem("detailAddress", detailAddress);
 				  <input type="text" class="form-control" name="detail_address" id="sample6_detailAddress" placeholder="상세 주소를 입력하세요">
 				</div>	 -->            
    	   </form>
+   	   
+   	   <div class="pc_mb110 pc_mt30 ta_mt20 ta_mb180 ta_px18 button_box">
+                <div class="right">
+                    <button type="button" id="aUpdateMember" onclick="javacript:checkPassword()" class="ta_fl btn_button btn_myreview type4">저장<span></span></button>
+                </div>
+       </div>
    </div>
   </div>
 </body>
 </html>
-
-
-<%-- <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-
-			<h4 class="hidden">온라인학습 현황</h4>
-
-            <div class="max1200 dp_pc contents_titbox">
-                <p class="titbox"><strong>온라인학습</strong> 현황</p>
-            </div>
-            <!--TAB-->
-            <div class="pc_mt30 ta_mt40 ta_mx40 tab_area tab3 sub4 mypage">
-                <div class="tab_box">
-                    <button onclick="doSetTab(0, this, 'O'); return  false;" class="h40  on"><span>학습중</span></button>
-                    <button onclick="doSetTab(1, this, 'F'); return  false;" class="h40 "><span>학습완료</span></button>
-                    <button onclick="doSetTab(2, this, 'N'); return  false;" class="h40 "><span>미수료</span></button>
-                </div>
-            </div>
-            <!--//TAB-->
-
-            <div class="tab_contents_area">
-                <!-- 학습중 -->
-                <div class="tab_contents_box  on">
-                    <div class="max1200 clear pc_mt30 ta_mt0 ta_mx40 contents_titbox mypage">
-                    	<p>※ 강좌의 학습기간 동안에는 수료한 강좌도 모두 목록에 표시됩니다.</p>
-                        <h4 class="titbox">&nbsp;<span class="total_num_txt offline ta_px0">총 <span id="spnTotalCountO"><strong>0</strong></span>개의 강좌가 있습니다.</span></h4>
-                    </div>
- 					<!--NOTICE-->
-					<ul class="pc_mt10 ta_mx40 ta_mt10">
-					    <li class="bul_red">
-					    	<span>수료증 인쇄는 PC 버전에서만 가능합니다.</span>
-					    	<br><span id="descpc descPcO">(PC에서 수료증 항목이 안보일 경우 화면비율을 조정(축소/확대) 후 재 확인 바랍니다.)</span>
-					    </li>
-					</ul>
-					<!--//NOTICE-->
-
-               <div id="divCourseList1" style="min-height:300px">
-                        <style class="text/css">
-					@media screen and (max-width: 414px){  /*mobile.css*/
-						.lecture_info_table.tablet_type2.mypage .category {width: 14.8vw;}
-						.lecture_info_table.tablet_type2.mypage .category.ta_px10 {width: 14.8vw; padding-left:0.5vw; padding-right:0.5vw;}
-				}
-				</style>
-				<!--[S]201204:클래스추가-->
-				<table class="lecture_info_table tablet_type2 mypage pc_mt40"><!--201123:summary삭제-->
-				<!--[E]201204:클래스추가-->
-				    <caption class="hidden">온라인 학습 [학습중] 강좌의 번호, 강좌명, 진도율, 강좌수강, 학습관리, 수료증을 제공하는 리스트</caption>
-				    <thead>
-				    <tr>
-				        <th class="dp_pc num2" scope="col">번호</th>
-				        <th class="title double ta_txt_center" scope="col">강좌명</th>
-				        <th class="dp_pc writer" scope="col">진도율</th>
-				        <th class="category double" scope="col">강좌수강</th>
-				        <th class="category" scope="col" title="<의무교육> 강좌는 수강신청 후 3일이내, 진도율 10%이하 시 수강취소 가능">학습관리</th>
-				        <th class="category" scope="col">수료증</th>
-				    </tr>
-				    </thead>
-<!-- 				<tbody>
-				    	<tr>
-				            <td colspan="5" class="empty">
-				                학습중인 온라인학습이 없습니다.
-				            </td>
-				        </tr>
-				    </tbody> -->
-				    <tbody>
-					    <tr>
-					                <td class="dp_pc num2">1</td>
-					                <td class="title double ta_px20">
-					                    <a href="javascript:;" onclick="doCourseDetail('11801','1','C130', {eduTypeCode:'0002',stuSeq:'1'})" class="ellipsis" 
-					                    data-txt-origin="SNS 마케팅 마스터하기 - 블로그, 인스타그램">
-					                        SNS 마케팅 마스터하기 - 블로그, 인스타그램</a><br>
-					                    2023.12.28 ~ 2024.1.26<!--p class="dp_ta date2">2023.12.28 ~ 2024.1.26</p-->
-					                    <p class="dp_ta writer">진도율7%</p>
-					                </td>
-					                <td class="dp_pc writer">7%</td>
-					                <td class="category px_20 ta_px10">
-					                    <a href="javascript:;" title="새 창 열림" onclick="doStudyOnlineLink('11801','1','1')" class="btn_button block btn_bg h36 ta_h52 radius50 bg_blue color_white fz14 ta_fz22"> 
-						                            학습하기</a>
-					                        </td>
-					                <td class="category px_20 ta_px10">
-					                    <a href="javascript:;" onclick="doCancelCourse('11801','1','1', 'N')" class="btn_button block btn_bg h36 ta_h52 radius50 bg_666 color_white fz14 ta_fz22">목록삭제</a>
-					                    </td>
-					                <td class="category px_20 ta_px10">
-					                        
-					                        -
-					                    </td>
-					            </tr>
-					 </tbody>
-				</table>
-				</div>
-				</div>
-				</div>
-				
-</body>
-</html> --%>
