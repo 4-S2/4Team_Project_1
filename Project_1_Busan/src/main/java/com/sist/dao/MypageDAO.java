@@ -34,7 +34,7 @@ public class MypageDAO {
 			try
 			{
 				conn=dbconn.getConnection();
-				String sql="SELECT id,name, password,email,phone, postcode, addr, detail_addr "
+				String sql="SELECT id,name, password,email,phone, postcode, addr, detail_addr,email "
 						+"FROM user_ WHERE id=?";
 				ps = conn.prepareStatement(sql);
 				ps.setString(1, id);
@@ -50,6 +50,7 @@ public class MypageDAO {
 				vo.setPostcode(rs.getString(6));
 				vo.setAddr(rs.getString(7));
 				vo.setDetail_addr(rs.getString(8));
+				vo.setEmail(rs.getString(9));
 				rs.close();
 				
 			}catch(Exception ex)
