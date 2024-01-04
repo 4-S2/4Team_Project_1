@@ -43,6 +43,7 @@
 
    <ul class="navbar-user" style="float: right; margin-bottom: 0">
     <!-- Check if the user is not logged in -->
+       
     <c:if test="${sessionScope.id==null}">
         <li style="display: inline-block;"><a href="../member/login_main.do" style="padding: 0 15px; line-height: 50px;">로그인</a></li>
         <!-- Only display the Sign up link if the user is not logged in -->
