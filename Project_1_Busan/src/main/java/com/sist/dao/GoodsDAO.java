@@ -160,7 +160,7 @@ public class GoodsDAO {
 			// SQL 
 			String sql="SELECT gno, gname, poster, price "
 					  +"FROM goods "
-	                  +"ORDER BY RAND()";
+	                  +"ORDER BY DBMS_RANDOM.VALUE";
 			// 전송
 			ps=conn.prepareStatement(sql);
 	         

@@ -159,7 +159,7 @@ function showTab(tabName) {
             </div>
             <div class="full-width w-dyn-list">
                 <div role="list" class="products w-dyn-items">
-                	<c:forEach var="vo" items="${list}">
+                	<c:forEach var="vo" items="${list}" begin="0" end="7">
 	                    <div role="listitem" class="product-card-wrapper w-dyn-item">
 	                        <a href="../store/goods_detail.do?gno=${vo.gno}" class="product-card w-inline-block">
 	                            <div class="product-card-image-wrapper">
