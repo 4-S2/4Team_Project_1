@@ -21,7 +21,8 @@
    	  <div class="tab_contents_area">
    	  	<p class="titbox">&nbsp;&nbsp;<span class="total_num_txt offline ta_px0">총 <strong>${inqSize}</strong>개의 질문이 있습니다.</span></p>
    	  </div>
-		<div id="divBoardList2" ><!--TABLE-->
+		<div id="divBoardList2" >
+		<!--TABLE-->
 		<table class="lecture_info_table tablet_type2 mypage" style="width: 100%;">
 		    <thead>
 		    <tr>
