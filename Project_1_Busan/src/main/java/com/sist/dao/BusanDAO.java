@@ -218,6 +218,7 @@ public class BusanDAO {
 			   ResultSet rs=ps.executeQuery();
 			   rs.next();
 			   
+			   
 			   vo.setNo(rs.getInt(1));
 		       vo.setTitle(rs.getString(2));
 			   vo.setPoster(rs.getString(3));
