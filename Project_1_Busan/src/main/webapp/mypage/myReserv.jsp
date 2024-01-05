@@ -209,8 +209,8 @@ function toggleTab(tabIndex) {
 					                </c:if>				                
 					            </tr>
 					        </c:forEach>
-					    </c:otherwise> --%>
-<!-- 					</c:choose> -->
+					    </c:otherwise> 
+ 					</c:choose> --%>
 			    </tbody>
 			</table>
 			<!--//TABLE-->
