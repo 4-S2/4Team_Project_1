@@ -135,9 +135,90 @@ function showTab(tabName) {
 				        <!-- 지도/주변 추천 내용 -->
 				        지도/주변 추천 내용을 입력하세요.
 				    </div>
-				    <div id="reviewCont" class="tab-content" style="display: none;">
+				    
+				    <div id="reviewCont" class="tab-content" style="">
 				        <!-- 리뷰 내용 -->
-				        리뷰 내용을 입력하세요.
+				        <button value="리뷰 작성" class="btn" id="reviewInsertBtn">리뷰 작성</button>
+				        <div class="review-list">
+				        	<div class="review-profile">
+				        		<div class="profile">
+				        			<div class="profile-icon">
+				        				<img src="../images/icon_user.png" alt="프로필 이미지">
+				        			</div>
+					        		<h4>kim1234<br>
+					        			<span class="regdate">2024.01.05</span>
+					        		</h4>
+				        		</div>
+				        		<span class="score">★★★★★</span>
+				        	</div>
+				        	
+				        	<div class="review-item">
+				        		<img src="../images/visual3.jpg" class="review-img" alt="후기 이미지">
+				        		<p class="cont">9월에 별바다부산 나이트페스타에 가봤어요! 다대포의 해변공원에서 나이트뮤직캠크닉 공연이 있었어요 ㅎㅎ 저는 미리 예약하고 티켓이랑 매트, 맥주, 간식도 받았어요~ 사람들이 매트를 가지고 와서 가족과 친구들과 소풍을 하면서 공연을 봤어요~너무 좋았어요! 분위기 좋았고 노래를 들면서 저녁을 먹고 좋은 시간을 보냈어요~   	나이트뮤직캠크닉이 다음 달도 있을거니까 안 가봤으면 추천합니다!</p>
+				        	</div>
+				        	
+				        	<button value="댓글" class="btn" id="reviewCommentBtn">댓글</button>
+					        
+					        <div class="review-comment">
+					        	<ul class="review-comment-list">
+					        		<li>
+					        			<h5>lee5678<br>
+					        				<span class="regdate">2024.01.05</span>
+					        			</h5>
+					        			<p class="comment">댓글 내용 댓글 내용 댓글 내용 댓글 내용 댓글 내용 댓글 내용 댓글 내용</p>
+					        			<ul class="review-comment-reply">
+					        				<li>
+					        					<h5>park0000<br>
+					        					<span class="regdate">2024.01.05</span>
+							        			</h5>
+							        			<p class="comment">답글 내용 답글 내용 답글 내용 답글 내용 답글 내용 답글 내용</p>
+					        				</li>
+					        			</ul>
+					        		</li>
+					        	</ul>
+					        </div>
+				        </div>
+				        
+				        <div class="review-insert">
+					        <form method="post" action="">
+								<table class="table">
+									<tr>
+										<th width=10%>아이디</th>
+										<td width=90%>아이디</td>
+									</tr>
+									<tr>
+										<th width=10%>평점</th>
+										<td width=90%>
+											<input type="text" name="score" required>
+										</td>
+									</tr>
+									<tr>
+										<th width=10%>이미지 첨부</th>
+										<td width=90%>
+											<input type="file" name="img" required>
+										</td>
+									</tr>
+									<tr>
+										<th width=10%>내용</th>
+										<td width=90%>
+											<textarea rows="10" cols="60" name=content required style="resize: none"></textarea>
+										</td>
+									</tr>
+									<tr>
+										<th width=10%>비밀번호</th>
+										<td width=90%>
+											<input type="password" name="pwd" required>
+										</td>
+									</tr>
+									<tr>
+										<td colspan="2" class="text-center">
+											<button class="btn-sm btn-success" value="취소" id="reviewIsertOkBtn">글쓰기</button>
+						           			<button class="btn-sm btn-info" value="취소" id="reviewCancelBtn" onclick="javascript:history.back()">취소</button>
+						         		</td>
+						       		</tr>
+						    	</table>
+						    </form>
+					    </div>
 				    </div>
 				    <!-- <div id="reserveCont" class="tab-content" style="display: none;">
 				        예약하기 내용

@@ -3,12 +3,21 @@
    normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css 
    ========================================================================== */
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
+
+*,
+*::before,
+*::after{
+	margin : 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
 html{font-family: 'Pretendard', sans-serif; -ms-text-size-adjust:100%; -webkit-text-size-adjust:100%;}
 body{margin:0;}
 article,aside,details,figcaption,figure,footer,header,hgroup,main,menu,nav,section,summary{display:block}
 audio,canvas,progress,video{display:inline-block;vertical-align:baseline}
 audio:not([controls]){display:none;height:0}[hidden],template{display:none}
-a{background-color:transparent; color: #222;}
+a{background-color:transparent; color: inherit; text-decoration: none;}
 a:active,a:hover{outline:0; text-decoration: none;}
 abbr[title]{border-bottom:1px dotted}
 b,strong{font-weight:bold}
@@ -26,7 +35,7 @@ hr{box-sizing:content-box;height:0}
 pre{overflow:auto}
 code,kbd,pre,samp{font-family:'Pretendard',monospace,monospace;font-size:1em}
 button,input,optgroup,select,textarea{color:inherit;font:inherit;margin:0}
-button{overflow:visible}
+button{overflow:visible; background:none; color:inherit; border:none; cursor:pointer; outline:inherit;}
 button,select{text-transform:none}
 button,html input[type="button"],input[type="reset"]{-webkit-appearance:button;cursor:pointer}
 button[disabled],html input[disabled]{cursor:default}
@@ -36,6 +45,7 @@ input[type="checkbox"],input[type="radio"]{box-sizing:border-box;padding:0}
 input[type="number"]::-webkit-inner-spin-button,input[type="number"]::-webkit-outer-spin-button{height:auto}
 input[type="search"]{-webkit-appearance:none}
 input[type="search"]::-webkit-search-cancel-button,input[type="search"]::-webkit-search-decoration{-webkit-appearance:none}
+input:focus{outline: none;}
 fieldset{border:1px solid #c0c0c0;margin:0 2px;padding:.35em .625em .75em}
 legend{border:0;padding:0}
 textarea{overflow:auto}
@@ -43,6 +53,7 @@ optgroup{font-weight:bold}
 table{border-collapse:collapse;border-spacing:0}
 td,th{padding:0}
 ul, ol{margin: 0; list-style: none;}
+li{list-style: none;}
 
 /* ==========================================================================
    Start of base Webflow CSS - If you're looking for some ultra-clean CSS, skip the boilerplate and see the unminified code below.
@@ -5174,6 +5185,9 @@ main #exhibition .product-card{
 	position: relative;
 	/*height: 360px;*/
 }
+main #exhibition .product-card-image-wrapper{
+	height: 360px;
+}
 main #exhibition .product-card img{
 	/*position: absolute;*/
 	width: 100%;
@@ -5347,17 +5361,20 @@ main #bottom .service p{
 .list .products{
 	gap: 30px 20px;
 }
-
 .list .product-card-heading{
 	margin-top: 20px;
 }
-
 .list .product-card-info{
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	gap: 20px;
 	margin-bottom: 20px;
+}
+.list .product-card-info .icon{
+	max-width: 14px;
+	height: auto;
+	margin-right: 5px;
 }
 
 .list .product-card-price{
@@ -5544,6 +5561,7 @@ main #bottom .service p{
 	text-align: center;
 	font-size: 16px;
 	border-right: 1px solid #eee;
+	cursor: pointer;
 }
 .detail .tab-menu li:last-child{
 	border-right: 0;
@@ -5562,6 +5580,120 @@ main #bottom .service p{
 .detail .tag-list a{
 	display: inline-block;
 	margin-right: 10px;
+}
+
+/* reviewCont */
+.detail #reviewCont{
+	position: relative;
+	padding-top: 50px;
+}
+.detail #reviewCont #reviewInsertBtn{
+	position: absolute;
+	top: 0;
+	right: 0;
+}
+.detail #reviewCont .review-profile{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 10px 0;
+	border-top: 1px solid #eee;
+	border-bottom: 1px solid #eee;
+}
+.detail #reviewCont .profile{
+	width: 100%;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	gap: 15px;
+}
+.detail #reviewCont .profile-icon{
+	width: 40px;
+	height: 40px;
+	background-color: #2546F4;
+	border-radius: 50%;
+}
+.detail #reviewCont .profile-icon img{
+	display: block;
+	max-width: 30px;
+	margin: 4px auto;
+	filter: invert(99%) sepia(1%) saturate(0%) hue-rotate(187deg) brightness(104%) contrast(100%);
+}
+.detail #reviewCont .profile h4{
+	margin-bottom: 0;
+	font-size: 18px;
+}
+.detail #reviewCont .profile h4 .regdate{
+	color: #888;
+	font-size: 14px;
+	font-weight: normal;
+}
+.detail #reviewCont .review-profile .score{
+	color: #2546F4;
+	font-size: 20px;
+	font-weight: bold;
+	white-space: nowrap;
+	letter-spacing: 2px;
+}
+.detail #reviewCont .review-item{
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+	gap: 30px;
+	padding: 20px 0;
+	margin-bottom: 20px;
+	border-bottom: 1px solid #eee;
+}
+.detail #reviewCont .review-img{
+	width: 30%;
+	border-radius: 10px;
+	overflow: hidden;
+}
+.detail #reviewCont .review-item .cont{
+	width: 70%;
+	font-size: 15px;
+	line-height: 1.8;
+	word-break: keep-all;
+}
+
+/* review insert */
+.detail #reviewCont .review-insert input{
+	width: 100%;
+	padding: 8px;
+}
+.detail #reviewCont .review-insert input[type="file"]{
+	padding: 8px 0;
+}
+.detail #reviewCont .review-insert textarea{
+	width: 100%;
+	padding: 8px;
+}
+.detail #reviewCont .review-insert button{
+	font-size: 14px;
+}
+.detail #reviewCont .review-insert #reviewIsertOkBtn{
+	background-color: #2546F4;
+	color: #fff;
+}
+.detail #reviewCont .review-insert #reviewCancelBtn{
+	background-color: #bbb;
+	color: #fff;
+}
+
+/* review comment */
+.detail #reviewCont .review-comment h5{
+	margin-bottom: 0;
+	font-size: 16px;
+	font-weight: 600;
+}
+.detail #reviewCont .review-comment h5 .regdate{
+	color: #888;
+	font-size: 13px;
+	font-weight: normal;
+}
+.detail #reviewCont .review-comment .comment{
+	padding-top: 10px;
+	border-top: 1px solid #eee;
 }
 
 /* ==========================================================================
