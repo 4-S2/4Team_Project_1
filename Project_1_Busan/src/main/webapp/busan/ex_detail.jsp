@@ -111,6 +111,16 @@
 	                                <input type="submit" value="예약하기" class="w-commerce-commerceaddtocartbutton button add-to-cart-button" id="reservationButton"/>
 	                                
 	                            </div>
+	                            <div class="heart">
+	                    	<span><img src="like.png"></a></span>
+	                    	<span>${vo.elike }</span>
+	                    	<button id="like-btn" style="margin:auto;">좋아요</button>
+	                    </div>
+	                    <div class="jjim">
+	                    	<span><img src="jjim.png"></a></span>
+	                    	<span>${vo.jjim }</span>
+	                    	<button id="jjim-btn" style="margin:auto;">찜하기</button>
+	                    </div>
 	                    	</form>
 		                </div>
 	            	</div>
