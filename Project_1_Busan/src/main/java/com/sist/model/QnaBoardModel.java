@@ -115,7 +115,8 @@ public class QnaBoardModel {
 	        	
 	        	//String path="C:\\Users\\"+System.getProperty("user.name")+"\\Downloads";
 	        	request.setCharacterEncoding("UTF-8");
-	 		   String path="c:\\download";
+	 		   //String path="c:\\download";
+	           String path = "C:\\Users\\Public\\Downloads";
 	 		   String enctype="UTF-8";
 	 		   int max_size=1024*1024*500;
 	 		   MultipartRequest mr=

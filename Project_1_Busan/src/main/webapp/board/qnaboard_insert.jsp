@@ -217,7 +217,7 @@ input[type=file]::file-selector-button:hover{
 	<div class="container" id="notice">
 		<div class="row">
 			<h1 class="text-center">Question</h1>
-			<form method="post" action="../board/qnaboard_insert_ok.do">
+			<form method="post" action="../board/qnaboard_insert_ok.do" enctype="multipart/form-data">
 			<table class="table_content" width=800>
 
 				<tr>
