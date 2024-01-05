@@ -10,7 +10,14 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            height: 130vh;
+            height: 640px;
+        }
+
+        #login-form-all {
+            width: 500px;
+            padding: 20px;
+            border-radius: 5px;
+            border: none; /* 요청대로 테두리 제거 */
         }
 
         #log {
@@ -20,13 +27,7 @@
             margin-right: 20px;
         }
 
-        #login-form-all {
-            width: 300px;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            border: 1px solid #ddd;
-        }
+        
 
         h2 {
             text-align: center;
@@ -46,7 +47,7 @@
         input[type="submit"],
         input[type="checkbox"] {
             width: calc(100% - 16px);
-            padding: 8px;
+            padding: 12px;
             margin-bottom: 10px;
             border: 1px solid #ccc;
             border-radius: 3px;

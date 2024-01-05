@@ -76,63 +76,42 @@ public class ExListModel {
 
 		  ExDAO dao=new ExDAO();
 		  ExVO vo=dao.exDetailData(Integer.parseInt(eno));
-		 
-		  // 쿠키 저장
-		  Cookie[] cookies = request.getCookies();
-			if(cookies==null) {
-				Cookie cookie = new Cookie("exhibition_recent", String.valueOf(eno));
-				cookie.setPath("/");
-				cookie.setMaxAge(60*60*24);
-				response.addCookie(cookie);
-			}
-			else {
-				boolean hasCookie = false;
-				for(Cookie c : cookies) {
-					if(c.getName().equals("exhibition_recent")) {
-						// 중복 체크 => 꽉 찼는지 확인 후 제거 => 새로운 데이터 추가
-						StringTokenizer st = new StringTokenizer(c.getValue(), "|");
-						List<String> vals = new ArrayList<>();
-						while(st.hasMoreTokens())
-							vals.add(st.nextToken());
-
-						boolean isDup = false;
-						for(String val : vals) {
-							if(val.equals(String.valueOf(eno))) {
-								isDup = true;
-								break;
-							}
-						}
-						
-						if(!isDup) {
-							int s = (vals.size() == MAX_RECENT_COUNT) ? 1 : 0; // 쿠키가 꽉 찼으면 앞 제거 
-							String newValue = "";
-							for(int i=s;i<vals.size();i++) {
-								newValue = newValue + "|" +vals.get(i);
-							}
-							newValue = newValue + "|" + eno;
-							Cookie cookie = new Cookie("exhibition_recent", newValue);
-							cookie.setPath("/");
-							cookie.setMaxAge(60*60*24);
-							response.addCookie(cookie);
-						}
-						
-						hasCookie = true;
-						break;
-					}
-				}
-				if(!hasCookie) {
-					Cookie cookie = new Cookie("exhibition_recent", String.valueOf(eno));
-					cookie.setPath("/");
-					cookie.setMaxAge(60*60*24);
-					response.addCookie(cookie);
-				}
-			}
+		  List<ExVO> vo1=dao.exRecomendListData();
+		  
+			/*
+			 * // 쿠키 저장 Cookie[] cookies = request.getCookies(); if(cookies==null) { Cookie
+			 * cookie = new Cookie("exhibition_recent", String.valueOf(eno));
+			 * cookie.setPath("/"); cookie.setMaxAge(60*60*24); response.addCookie(cookie);
+			 * } else { boolean hasCookie = false; for(Cookie c : cookies) {
+			 * if(c.getName().equals("exhibition_recent")) { // 중복 체크 => 꽉 찼는지 확인 후 제거 =>
+			 * 새로운 데이터 추가 StringTokenizer st = new StringTokenizer(c.getValue(), "|");
+			 * List<String> vals = new ArrayList<>(); while(st.hasMoreTokens())
+			 * vals.add(st.nextToken());
+			 * 
+			 * boolean isDup = false; for(String val : vals) {
+			 * if(val.equals(String.valueOf(eno))) { isDup = true; break; } }
+			 * 
+			 * if(!isDup) { int s = (vals.size() == MAX_RECENT_COUNT) ? 1 : 0; // 쿠키가 꽉 찼으면
+			 * 앞 제거 String newValue = ""; for(int i=s;i<vals.size();i++) { newValue =
+			 * newValue + "|" +vals.get(i); } newValue = newValue + "|" + eno; Cookie cookie
+			 * = new Cookie("exhibition_recent", newValue); cookie.setPath("/");
+			 * cookie.setMaxAge(60*60*24); response.addCookie(cookie); }
+			 * 
+			 * hasCookie = true; break; } } if(!hasCookie) { Cookie cookie = new
+			 * Cookie("exhibition_recent", String.valueOf(eno)); cookie.setPath("/");
+			 * cookie.setMaxAge(60*60*24); response.addCookie(cookie); } }
+			 */
 			
 		  request.setAttribute("vo", vo);
+		  request.setAttribute("vo1", vo1);
+		  
 		  //3. 결과값 모아서 request에 저장 
 		  request.setAttribute("main_jsp", "../busan/ex_detail.jsp");
 		  return "../main/main.jsp";
 	}
+	
+	
+
 	
 	
 	

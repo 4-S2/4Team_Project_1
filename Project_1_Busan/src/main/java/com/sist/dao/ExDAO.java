@@ -209,8 +209,8 @@ public class ExDAO {
 		   String sql="SELECT eno, ename, poster, TO_CHAR(s_date, 'YYYY-MM-DD') AS s_date, TO_CHAR(e_date, 'YYYY-MM-DD') AS e_date "
 				     +"FROM (SELECT eno, ename, poster, s_date, e_date , rownum as num "
 				     +"FROM (SELECT eno, ename, poster, s_date, e_date "
-				     +"FROM exhibition ORDER BY eno DESC)) "
-				     +"WHERE num BETWEEN ? AND ?";
+				     +"FROM exhibition ORDER BY elike DESC)) "
+				     +"WHERE num BETWEEN 1 AND 8";
 		   // 3. 미리 전송 
 		   ps=conn.prepareStatement(sql);
 		   // 4. 실행 요청전에 ?에 값을 채운다 
