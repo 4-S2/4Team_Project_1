@@ -37,17 +37,11 @@
     font-size: 14px;
     line-height: 24px;
     }
-/*     .login_form_area .form_contbox {
-    vertical-align: top;
-    display: inline-block;
-    margin-top: 30px;
-     margin-bottom: 0px; 
-} */
     
   </style>
   
   
-<!-- <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
     function sample6_execDaumPostcode() {
         new daum.Postcode({
@@ -94,28 +88,8 @@
 	sessionStorage.setItem("postalCode", postalCode);
 	sessionStorage.setItem("address", address);
 	sessionStorage.setItem("detailAddress", detailAddress);
-</script> -->
+</script>
 <!-- <script src="../js/member.js"></script> -->
-
-<!-- <script>
-function checkPassword() {
-    var enteredPassword = prompt("비밀번호를 입력하세요:");
-    // 공백 제거, 입력된 문자=>숫자 변환 (유효성 검증)
-    enteredPassword = parseInt(enteredPassword.trim());
-    var correctPassword = ${vo.pwd};
-    alert(correctPassword);
-    
-    if (enteredPassword === "") {
-      alert("비밀번호를 입력해주세요.");
-    } else if (enteredPassword === correctPassword) {
-    	
-    	alert("회원 정보가 수정되었습니다.");
-      	window.location.href = "http://localhost:8080/Project_1_Busan/mypage/main.do";
-    } else {
-      alert("비밀번호가 일치하지 않습니다. 다시 시도해주세요.");
-    }
-  }
-  </script> -->
   
 <script type="text/javascript">
 /* $('#aUpdateMember').click(function(){ */

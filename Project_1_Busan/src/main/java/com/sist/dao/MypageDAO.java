@@ -26,7 +26,6 @@ public class MypageDAO {
 			return dao;		   
 	   }
 
-		
 		// 로그인 된 내정보 찾기
 		public MemberVO myprofile(String id)
 		{
@@ -83,7 +82,8 @@ public class MypageDAO {
 //				
 //				if(pwd_ck.equals(vo.getPwd()))
 //				{
-//					// 수정
+				
+				// 수정
 				conn=dbconn.getConnection();
 				String sql="UPDATE USER_ SET "
 							+ "name=?, "
@@ -125,17 +125,19 @@ public class MypageDAO {
 			try
 			{
 				conn=dbconn.getConnection();
-				String sql="SELECT qno,subject,regdate "
+				String sql="SELECT qno,subject,regdate,status "
 						+ "FROM QnaBoard "
-						+ "WHERE id="+id;
+						+ "WHERE id=?";
 				ps=conn.prepareStatement(sql);
+				ps.setString(1, id);
 				ResultSet rs=ps.executeQuery();
-		         while(rs.next()) // 출력 1번째 위치부터 읽기 시작 
+		         while(rs.next())
 		         {
 		        	 QnaBoardVO vo=new QnaBoardVO();
 		            vo.setQno(rs.getInt(1));
 		            vo.setSubject(rs.getString(2));
 		            vo.setRegdate(rs.getDate(3));
+		            vo.setStatus(rs.getInt(4));
 		            list.add(vo);
 		         }
 		         rs.close();

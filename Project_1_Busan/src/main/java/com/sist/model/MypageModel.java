@@ -11,6 +11,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.*;
 import com.sist.dao.*;
 import com.sist.vo.MemberVO;
+import com.sist.vo.QnaBoardVO;
 
 import oracle.net.ns.SessionAtts;
 
@@ -142,9 +143,9 @@ public class MypageModel {
 		String id=(String)session.getAttribute("id");
 		
 		MypageDAO dao=MypageDAO.newInstance();
-		/* MemberVO vo=dao.myprofile(id); */
+		List<QnaBoardVO> list = dao.getAllQnas(id);
 		
-		/* request.setAttribute("vo", vo); */
+		request.setAttribute("list", list); 
 		request.setAttribute("mypage_jsp", "myInquiry.jsp");
 		request.setAttribute("main_jsp", "../mypage/mypage_main.jsp");
 		return "../main/main.jsp";
