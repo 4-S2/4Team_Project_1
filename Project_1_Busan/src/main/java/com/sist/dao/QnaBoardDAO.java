@@ -211,20 +211,22 @@ public class QnaBoardDAO {
 	            ps.executeUpdate();
 	            ps.close();
 	            
-	            sql="SELECT qno,name,subject,cont,TO_CHAR(regdate,'yyyy-mm-dd'),hit,filename,filesize "
+	            sql="SELECT qno,name,subject,cont,TO_CHAR(regdate,'yyyy-mm-dd'),hit,filename,filesize,TO_CHAR(filesize, '999,999,999,999') "
 	                    +"FROM qnaBoard "
 	                    +"WHERE qno="+qno;
 	            ps=conn.prepareStatement(sql);
 	            ResultSet rs=ps.executeQuery();
-	            rs.next(); // 출력 1번째 위치부터 읽기 시작 
-	            vo.setQno(rs.getInt(1));
-	            vo.setName(rs.getString(2));
-	            vo.setSubject(rs.getString(3));
-	            vo.setCont(rs.getString(4));
-	            vo.setDbday(rs.getString(5));
-	            vo.setHit(rs.getInt(6));
-	            vo.setFilename(rs.getString(7));
-	            vo.setFilesize(rs.getInt(8));
+	            if (rs.next()) {
+	                vo.setQno(rs.getInt(1));
+	                vo.setName(rs.getString(2));
+	                vo.setSubject(rs.getString(3));
+	                vo.setCont(rs.getString(4));
+	                vo.setDbday(rs.getString(5));
+	                vo.setHit(rs.getInt(6));
+	                vo.setFilename(rs.getString(7));
+	                vo.setFilesize(rs.getInt(8));
+	                vo.setFilesize2(rs.getString(9));
+	            }
 	            rs.close();
 	         }catch(Exception ex)
 	         {
@@ -380,4 +382,6 @@ public class QnaBoardDAO {
 		   }
 		   return res;
 	   }
+
+	   
 }

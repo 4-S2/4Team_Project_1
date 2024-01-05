@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-.table_content a {
+.table_content .text-right a {
 	border: 1px solid #337ab7;
 	display: inline-block;
 	border-radius: 25px;
@@ -61,13 +61,13 @@
     color: white;
 	text-decoration: none;
 }
-.table_content a:hover {
+.table_content .text-right a:hover {
 	background-color: #2b75d5;
     color: white;
 	text-decoration: none;
 }
 
-.table_content a:focus {
+.table_content .text-right a:focus {
 	background-color: #2b75d5;
     color: white;
 	text-decoration: none;
@@ -316,6 +316,13 @@ $(function(){
                   <th width=20%>조회수</th>
                   <td width=30%>${vo.hit }</td>
                </tr>
+               
+               <c:if test="${vo.filesize>0}">
+               <tr>
+                 <th width=20%>첨부파일</th>
+                 <td colspan=3><a href="../board/download.do?fn=${vo.filename }">${vo.filename}</a> (${vo.filesize2}bytes)</td>
+               </tr>
+               </c:if>
                
                <tr>
                  <th width=20%>제목</th>
