@@ -20,9 +20,16 @@ public class MypageModel {
 		  HttpSession session=request.getSession(); 
 		  String id=(String)session.getAttribute("id");
 	  
-		  MypageDAO dao=MypageDAO.newInstance(); MemberVO vo=dao.myprofile(id);
-	  
-		  request.setAttribute("vo", vo); 
+		  MypageDAO dao=MypageDAO.newInstance(); 
+		  MemberVO vo=dao.myprofile(id);
+		  
+			String telNo1= vo.getPhone().substring(0,3);
+			String telNo2= vo.getPhone().substring(3,7);
+			String telNo3= vo.getPhone().substring(7,11);
+			request.setAttribute("vo", vo);
+			request.setAttribute("telNo1", telNo1);
+			request.setAttribute("telNo2", telNo2);
+			request.setAttribute("telNo3", telNo3);
 		  request.setAttribute("mypage_jsp","editProfile.jsp"); 
 		  request.setAttribute("main_jsp","../mypage/mypage_main.jsp"); 
 		  
@@ -37,9 +44,9 @@ public class MypageModel {
 		String id=(String)session.getAttribute("id");
 		
 		MypageDAO dao=MypageDAO.newInstance();
-		MemberVO vo=dao.myprofile(id);
+		/* MemberVO vo=dao.editProfile(); */
 		
-		request.setAttribute("vo", vo);
+		/* request.setAttribute("vo", vo); */
 		request.setAttribute("mypage_jsp", "editProfile.jsp");
 		request.setAttribute("main_jsp", "../mypage/mypage_main.jsp");
 		return "../main/main.jsp";

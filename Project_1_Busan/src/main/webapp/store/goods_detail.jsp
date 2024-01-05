@@ -1,14 +1,3 @@
-<%-- <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-	<img src="${vo.poster}" style="width:300px;height: 450px">
-	${vo.gname}
-</body>
-</html> --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -71,9 +60,9 @@ function showTab(tabName) {
 	                    	<!-- 총 가격 -->
 	                    	<div class="totalPrice"></div>
 	                    	<div class="btnWrap">
-	                    		<input type="button" value="장바구니" id="cartBtn" class="btn bnt-sm btn-info">
-	                    		<input type="button" value="구매하기" id="buyBtn" class="btn btn-sm btn-primary">
-	                    		<input type="button" value="목록" id="listBtn" class="btn btn-sm btn-default">
+	                    		<button value="장바구니" id="cartBtn" class="btn">장바구니</button>
+	                    		<button value="구매하기" id="buyBtn" class="btn">구매하기</button>
+	                    		<button value="목록" id="listBtn" class="btn">목록</button>
 	                    	</div>
 	                    </form>
 	                </div>
@@ -83,9 +72,9 @@ function showTab(tabName) {
                 <div class="product-detail">
                		<ul class="tab-menu">
                			<li id="detailBtn">상세 설명</li>
-               			<li id="mapBtn">지도/주변 추천</li>
+               			<!-- <li id="mapBtn">지도/주변 추천</li> -->
                			<li id="reviewBtn">리뷰</li>
-               			<li id="reserveBtn">예약하기</li>
+               			<li id="reserveBtn">문의하기</li>
                		</ul>
                		<!-- <div class="shop-header-line">
 	                    <div class="shop-header-color"></div>
@@ -163,22 +152,24 @@ function showTab(tabName) {
         <div class="wrapper">
             <div class="shop-header">
                 <h3>추천 상품</h3>
-                <a href="#" class="link arrow-link">전체보기</a>
+                <a href="../store/goods.do" class="link arrow-link">전체보기</a>
                 <div class="shop-header-line">
                     <div class="shop-header-color"></div>
                 </div>
             </div>
             <div class="full-width w-dyn-list">
                 <div role="list" class="products w-dyn-items">
-                    <div data-w-id="df75c36d-8d89-3a15-6c0d-6078372525bd" style="opacity:0" role="listitem" class="product-card-wrapper w-dyn-item">
-                        <a href="#" class="product-card w-inline-block">
-                            <div class="product-card-image-wrapper">
-                                <img alt="썸네일 이미지" src=""/>
-                            </div>
-                            <h6 class="product-card-heading">Happy Dog</h6>
-                            <div data-wf-sku-bindings="%5B%7B%22from%22%3A%22f_price_%22%2C%22to%22%3A%22innerHTML%22%7D%5D" class="product-card-price">$ 30.00 USD</div>
-                        </a>
-                    </div>
+                	<c:forEach var="vo" items="${list}" begin="0" end="7">
+	                    <div role="listitem" class="product-card-wrapper w-dyn-item">
+	                        <a href="../store/goods_detail.do?gno=${vo.gno}" class="product-card w-inline-block">
+	                            <div class="product-card-image-wrapper">
+	                                <img alt="" src="${vo.poster}" size="(max-width: 479px) 73vw, (max-width: 767px) 34vw, (max-width: 991px) 33vw, 12vw"/>
+	                            </div>
+	                            <h6 class="product-card-heading">${vo.gname}</h6>
+	                            <div data-wf-sku-bindings="%5B%7B%22from%22%3A%22f_price_%22%2C%22to%22%3A%22innerHTML%22%7D%5D" class="product-card-price">${vo.price}</div>
+	                        </a>
+	                    </div>
+                	</c:forEach>
                 </div>
             </div>
         </div>

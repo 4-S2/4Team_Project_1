@@ -25,7 +25,8 @@ public class MypageDAO {
 			   dao = new MypageDAO();
 			return dao;		   
 	   }
-	   
+
+		
 		// 로그인 된 내정보 찾기
 		public MemberVO myprofile(String id)
 		{
@@ -33,7 +34,7 @@ public class MypageDAO {
 			try
 			{
 				conn=dbconn.getConnection();
-				String sql="\"SELECT id,password, email, name, phone, postcode, addr, detail_addr "
+				String sql="SELECT id,name, password,email,phone, postcode, addr, detail_addr,email "
 						+"FROM user_ WHERE id=?";
 				ps = conn.prepareStatement(sql);
 				ps.setString(1, id);
@@ -49,6 +50,7 @@ public class MypageDAO {
 				vo.setPostcode(rs.getString(6));
 				vo.setAddr(rs.getString(7));
 				vo.setDetail_addr(rs.getString(8));
+				vo.setEmail(rs.getString(9));
 				rs.close();
 				
 			}catch(Exception ex)
@@ -100,8 +102,6 @@ public class MypageDAO {
 					ps.setString(7, vo.getId());
 					cnt = ps.executeUpdate();
 				}
-				
-			
 			}catch(Exception ex)
 			{
 				ex.printStackTrace();

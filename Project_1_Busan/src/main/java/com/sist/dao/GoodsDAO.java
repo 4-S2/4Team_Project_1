@@ -23,7 +23,7 @@ public class GoodsDAO {
 	}
 	
 	   
-	// TOP3 특산물 리스트 출력
+	// TOP3 상품 리스트 출력
 	public List<GoodsVO> goodsfindTop3(){
 		List<GoodsVO> list=new ArrayList<>(); // 여러 개를 출력하는 경우
 		try {
@@ -58,7 +58,7 @@ public class GoodsDAO {
 	}
 	
 	   
-	 // 특산물 리스트 출력
+	// 상품 리스트 출력
 	public List<GoodsVO> goodsListData(int page) {
 		List<GoodsVO> list=new ArrayList<>();
 		try {
@@ -120,7 +120,7 @@ public class GoodsDAO {
 	   }	   
 	   
 	
-	// 특산물 상세보기
+	// 상품 상세보기
 	public GoodsVO goodsDetailData(int gno) {
 		GoodsVO vo=new GoodsVO();
 		try {
@@ -149,5 +149,40 @@ public class GoodsDAO {
 	      }
 	      return vo;
 	   }
+	
+	
+	// 추천 상품
+	public List<GoodsVO> goodsRandomList(){
+		List<GoodsVO> list=new ArrayList<>();
+		try {
+			// 연결 
+			conn=dbconn.getConnection();
+			// SQL 
+			String sql="SELECT gno, gname, poster, price "
+					  +"FROM goods "
+	                  +"ORDER BY DBMS_RANDOM.VALUE";
+			// 전송
+			ps=conn.prepareStatement(sql);
+	         
+			// 결과값
+			ResultSet rs=ps.executeQuery();
+			while(rs.next()) { // 출력 첫번째 위치부터 읽기 시작 
+				GoodsVO vo=new GoodsVO();
+	            vo.setGno(rs.getInt(1));
+	            vo.setGname(rs.getString(2));
+	            vo.setPoster(rs.getString(3));
+	            vo.setPrice(rs.getString(4));
+	            list.add(vo);
+	         }
+	         rs.close();
+		}catch(Exception ex) {
+			ex.printStackTrace();
+		}
+		finally{
+			// 반환 => 재사용
+			dbconn.disConnection(conn, ps);
+		}
+		return list;
+	}
 	   
 }

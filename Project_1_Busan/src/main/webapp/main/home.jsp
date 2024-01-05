@@ -125,13 +125,15 @@
 	            <div class="swiper-wrapper">
 	                <c:forEach var="vo" items="${ftoplist}" >
 		                <div class="swiper-slide">
-		                	<div class="cover"></div>
-		                    <img class="img" src="${vo.poster}">
-		                    <span class="badge">축제</span>
-		                	<div class="text">
-		                		<h3>${vo.title}</h3>
-	                    		<a href="../busan/festival_detail.do?no=${vo.no}">더보기</a>
-		                	</div>
+		                	<a href="../busan/festival_detail.do?no=${vo.no}">
+			                	<div class="cover"></div>
+			                    <img class="img" src="${vo.poster}">
+			                    <span class="badge">축제</span>
+			                	<div class="text">
+			                		<h3>${vo.title}</h3>
+		                    		<!-- 더보기 -->
+			                	</div>
+		                	</a>
 		                </div>
 		             </c:forEach>
 	            </div>
@@ -149,13 +151,15 @@
 	            <div class="swiper-wrapper">
 	                <c:forEach var="vo" items="${atoplist}" >
 		                <div class="swiper-slide">
-		                	<div class="cover"></div>
-		                    <img class="img "src="${vo.poster}">
-		                    <span class="badge">체험</span>
-		                	<div class="text">
-		                		<h3>${vo.title}</h3>
-	                    		<a href="../busan/activity_detail.do?no=${vo.no}">더보기</a>
-		                	</div>
+		                	<a href="../busan/activity_detail.do?no=${vo.no}">
+			                	<div class="cover"></div>
+			                    <img class="img "src="${vo.poster}">
+			                    <span class="badge">체험</span>
+			                	<div class="text">
+			                		<h3>${vo.title}</h3>
+		                    		<!-- 더보기 -->
+			                	</div>
+		                	</a>
 		                </div>
 		             </c:forEach>
 	            </div>

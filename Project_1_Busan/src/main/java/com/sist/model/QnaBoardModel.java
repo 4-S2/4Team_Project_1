@@ -18,6 +18,7 @@ public class QnaBoardModel {
 	@RequestMapping("board/qnaboard.do")
 	   public String qnaboard_list(HttpServletRequest request,
 	           HttpServletResponse response)
+	   
 	   {
 	        // DB연동 
 	        //1. 요청값 받기
