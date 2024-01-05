@@ -82,6 +82,12 @@
         width: 100%;
         height: 350px;
     }
+    .product-card-price{
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 70%;
+    }
 </style>
 
 <div id="busan" class="detail">   
@@ -165,22 +171,34 @@
 			                                <div data-wf-sku-bindings="%5B%7B%22from%22%3A%22f_length_%22%2C%22to%22%3A%22innerHTML%22%7D%5D">${vo.bhour}</div>
 			                            </div>
 			                        </div>
+			                        <c:if test="${cate!='맛집' }">
 			                        <div class="product-table-cell no-border-bottom">
 			                            <div>요금</div>
 			                            <div class="product-table-info">
 			                                <div data-wf-sku-bindings="%5B%7B%22from%22%3A%22f_weight_%22%2C%22to%22%3A%22innerHTML%22%7D%5D">${vo.rate}</div>
 			                            </div>
 			                        </div>
+			                        </c:if>
+			                        <c:if test="${cate=='맛집' }">
+			                        <div class="product-table-cell no-border-bottom">
+			                            <div>메뉴</div>
+			                            <div class="product-table-info">
+			                                <div data-wf-sku-bindings="%5B%7B%22from%22%3A%22f_weight_%22%2C%22to%22%3A%22innerHTML%22%7D%5D">${vo.menu}</div>
+			                            </div>
+			                        </div>
+			                        </c:if>
 			                    </div>
 		                    </div>
 	
 		                    <!-- 해시 태그 -->
+		                    <c:if test="${cate!='맛집' }">
 		                    <div class="tag-list">
 		                    	<h5>연관 태그</h5>
 			                    <c:forEach var="tag" items="${vo.tag}">
 			                    	<a href="#"><span>${tag}</span></a>
 			                    </c:forEach>
 		                    </div>
+		                    </c:if>
 		                </div>
                		</div>
                		<div id="mapCont" class="tab-content" style="display: none;">
@@ -238,26 +256,26 @@
     <div class="section">
         <div class="wrapper">
             <div class="shop-header">
-                <h3>추천</h3>
-                <a href="#" class="link arrow-link">전체보기</a>
+                <h3>추천 ${cate }</h3>
+                <a href="../store/goods.do" class="link arrow-link">전체보기</a>
                 <div class="shop-header-line">
                     <div class="shop-header-color"></div>
                 </div>
             </div>
             <div class="full-width w-dyn-list">
                 <div role="list" class="products w-dyn-items">
-                    <div data-w-id="df75c36d-8d89-3a15-6c0d-6078372525bd" style="opacity:0" role="listitem" class="product-card-wrapper w-dyn-item">
-                        <a href="#" class="product-card w-inline-block">
-                            <div class="product-card-image-wrapper">
-                                <img alt="썸네일 이미지" src="https://www.lottehotelmagazine.com/resources/d434c17f-5ac2-4b98-8021-f3bdd5cc26f4_img_TRAVEL_busan_detail01.jpg" data-wf-sku-bindings="%5B%7B%22from%22%3A%22f_main_image_4dr%22%2C%22to%22%3A%22src%22%7D%5D" sizes="(max-width: 479px) 73vw, (max-width: 767px) 34vw, (max-width: 991px) 33vw, 12vw" srcset="https://assets.website-files.com/5baddb6a35e113da0e9a4802/5baf5171ace69cb064b33d42_33388-1-wooden-toy-photos-min-p-500.png 500w, https://assets.website-files.com/5baddb6a35e113da0e9a4802/5baf5171ace69cb064b33d42_33388-1-wooden-toy-photos-min.png 1200w"/>
-                            </div>
-                            <h6 class="product-card-heading">Happy Dog</h6>
-                            <div data-wf-sku-bindings="%5B%7B%22from%22%3A%22f_price_%22%2C%22to%22%3A%22innerHTML%22%7D%5D" class="product-card-price">$ 30.00 USD</div>
-                        </a>
-                    </div> 
+                	<c:forEach var="vo" items="${list}" begin="0" end="7">
+	                    <div role="listitem" class="product-card-wrapper w-dyn-item" style="height: 330px" > 
+	                        <a href="../busan/${tab}_detail.do?no=${vo.no}" class="product-card w-inline-block">
+	                            <div class="product-card-image-wrapper" style="height: 250px">
+	                                <img alt="" src="${vo.poster}" size="(max-width: 479px) 73vw, (max-width: 767px) 34vw, (max-width: 991px) 33vw, 12vw"/>
+	                            </div>
+	                            <div data-wf-sku-bindings="%5B%7B%22from%22%3A%22f_price_%22%2C%22to%22%3A%22innerHTML%22%7D%5D" class="product-card-price" style="margin-top: 25px;font-size: 15px">${vo.title}</div>
+	                        </a>
+	                    </div>
+                	</c:forEach>
                 </div>
             </div>
-            
         </div>
     </div>
 </div>

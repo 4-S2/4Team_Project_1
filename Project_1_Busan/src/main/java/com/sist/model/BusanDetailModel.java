@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.sist.controller.RequestMapping;
 import com.sist.dao.BusanDAO;
 import com.sist.vo.BusanListVO;
+import com.sist.vo.GoodsVO;
 
 public class BusanDetailModel {
 	public final int MAX_RECENT_COUNT = 5;
@@ -24,8 +25,8 @@ public class BusanDetailModel {
 		  String no=request.getParameter("no");
 
 		  BusanDAO dao=new BusanDAO();
-		  BusanListVO vo=dao.foodDetailData(Integer.parseInt(no));
-		  
+		  BusanListVO vo=dao.busanDetailData(Integer.parseInt(no), "food");
+		  List<BusanListVO> list=dao.busanRandomList("food");
 		  // 쿠키 저장
 		  Cookie[] cookies = request.getCookies();
 			if(cookies==null) {
@@ -78,8 +79,12 @@ public class BusanDetailModel {
 			}
 		 
 		  request.setAttribute("vo", vo);
+		  request.setAttribute("cate","맛집");
+		  request.setAttribute("tab","food");
+		  request.setAttribute("vo", vo);
+		  request.setAttribute("list", list);
 		  //3. 결과값 모아서 request에 저장 
-		  request.setAttribute("main_jsp", "../busan/food_detail.jsp");
+		  request.setAttribute("main_jsp", "../busan/busanList_detail.jsp");
 		  return "../main/main.jsp";
 	}
 	@RequestMapping("busan/tour_detail.do")
@@ -92,6 +97,7 @@ public class BusanDetailModel {
 
 		  BusanDAO dao = new BusanDAO();
 		  BusanListVO vo = dao.busanDetailData(Integer.parseInt(no),"tour");
+		  List<BusanListVO> list=dao.busanRandomList("tour");
 		  
 		  // 쿠키 저장
 		  Cookie[] cookies = request.getCookies();
@@ -146,7 +152,8 @@ public class BusanDetailModel {
 			
 			request.setAttribute("cate","명소");
 			request.setAttribute("vo", vo);
-		  
+			request.setAttribute("list", list);
+			request.setAttribute("tab","tour");
 		  //3. 결과값 모아서 request에 저장 
 		  request.setAttribute("main_jsp", "../busan/busanList_detail.jsp");
 		  return "../main/main.jsp";
@@ -162,6 +169,7 @@ public class BusanDetailModel {
 
 		  BusanDAO dao = new BusanDAO();
 		  BusanListVO vo = dao.busanDetailData(Integer.parseInt(no),"festival");
+		  List<BusanListVO> list=dao.busanRandomList("festival");
 		  
 		  // 쿠키 저장
 		  Cookie[] cookies = request.getCookies();
@@ -216,6 +224,8 @@ public class BusanDetailModel {
 		  
 		  request.setAttribute("cate","축제");
 		  request.setAttribute("vo", vo);
+		  request.setAttribute("list", list);
+		  request.setAttribute("tab","festival");
 		  
 		  //3. 결과값 모아서 request에 저장 
 		  request.setAttribute("main_jsp", "../busan/busanList_detail.jsp");
@@ -232,7 +242,7 @@ public class BusanDetailModel {
 
 		  BusanDAO dao = new BusanDAO();
 		  BusanListVO vo = dao.busanDetailData(Integer.parseInt(no),"activity");
-		  
+		  List<BusanListVO> list=dao.busanRandomList("activity");
 		  // 쿠키 저장
 		  Cookie[] cookies = request.getCookies();
 			if(cookies==null) {
@@ -286,6 +296,8 @@ public class BusanDetailModel {
 		  
 		  request.setAttribute("cate","체험");
 		  request.setAttribute("vo", vo);
+		  request.setAttribute("list", list);
+		  request.setAttribute("tab","activity");
 		  
 		  //3. 결과값 모아서 request에 저장 
 		  request.setAttribute("main_jsp", "../busan/busanList_detail.jsp");
