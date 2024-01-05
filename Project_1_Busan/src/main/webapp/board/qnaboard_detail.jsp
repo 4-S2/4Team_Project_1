@@ -9,36 +9,36 @@
 <title>Insert title here</title>
 <style>
 .table_content .text-right a {
-	border: 1px solid #337ab7;
+	border: 1px solid #0923A9;
 	display: inline-block;
 	border-radius: 25px;
 	padding: 5px 18px;
 	margin: 0px auto;
 	margin-bottom: 10px;
-	color: #337ab7;
+	color: #0923A9;
 	width: 80px;
 	text-align: center;
 }
 .table_content #delete{
-    border: 1px solid #337ab7;
+    border: 1px solid #0923A9;
     display: inline-block;
     border-radius: 25px;
     padding: 5px 18px;
     margin: 0px auto;
     margin-bottom: 10px;
-    color: #337ab7;
+    color: #0923A9;
     width: 80px;
     text-align: center;
     background-color: white;
 
 }
 #delBtn{
-    border: 1px solid #337ab7;
+    border: 1px solid #0923A9;
     display: inline-block;
     border-radius: 25px;
     padding: 5px 18px;
     margin: 0px auto;
-    color: #337ab7;
+    color: #0923A9;
     width: 80px;
     text-align: center;
     background-color: white;
@@ -47,28 +47,28 @@
     border-bottom-style: none;
 }
 .table_content #delete:hover {
-	background-color: #2b75d5;
+	background-color: #0923A9;
     color: white;
 	text-decoration: none;
 }
 .table_content #delBtn:hover {
-	background-color: #2b75d5;
+	background-color: #0923A9;
     color: white;
 	text-decoration: none;
 }
 .table_content #delBtn:focus {
-	background-color: #2b75d5;
+	background-color: #0923A9;
     color: white;
 	text-decoration: none;
 }
 .table_content .text-right a:hover {
-	background-color: #2b75d5;
+	background-color: #0923A9;
     color: white;
 	text-decoration: none;
 }
 
 .table_content .text-right a:focus {
-	background-color: #2b75d5;
+	background-color: #0923A9;
     color: white;
 	text-decoration: none;
 }
@@ -157,7 +157,7 @@ div.container {
 }
 
 .table_content th {
-	background-color: #337ab7;
+	background-color: #0923A9;
 	color: #fff;
 	border-bottom-width: 1px;
 	border-bottom-color: #333;
