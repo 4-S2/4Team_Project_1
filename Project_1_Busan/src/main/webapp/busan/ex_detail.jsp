@@ -114,7 +114,9 @@
 	                            <div class="heart">
 	                    	<span><img src="like.png"></a></span>
 	                    	<span>${vo.elike }</span>
-	                    	<button id="like-btn" style="margin:auto;">좋아요</button>
+	                    	<button id="like-btn" style="margin:auto;">
+	                    	<a href="../busan/like_insert.do?eno=${vo.eno }">&nbsp;좋아요</a>
+	                    	</button>
 	                    </div>
 	                    <div class="jjim">
 	                    	<span><img src="jjim.png"></a></span>
@@ -122,7 +124,13 @@
 	                    	<button id="jjim-btn" style="margin:auto;">찜하기</button>
 	                    </div>
 	                    	</form>
+		                     <div class="hit">
+	                    	<span>조회수</span>
+	                    	<span>${vo.hit } 회</span>
+	                    	
+	                    </div>
 		                </div>
+		                
 	            	</div>
 	            	
 	            	 <!-- 탭 메뉴 -->
