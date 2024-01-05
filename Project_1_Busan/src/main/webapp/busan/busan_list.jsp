@@ -47,22 +47,22 @@
          }
          .product-card-image-wrapper{
            padding:0px;
-           height: 260px;
+           /* height: 260px; */
          }
-         .product-card {
+         /* .product-card {
          overflow: hidden;
-         }
-         .product-card-wrapper{
+         } */
+         /* .product-card-wrapper{
 	     height: 360px;
-         }
+         } */
          img{
 	 	 width: 100%;
 	     height: 100%;
 	     object-fit: cover;
          }
-         .product-card{
+         /* .product-card{
 	     padding: 0px 0px 0px;
-         }
+         } */
          .subscribe-form{
          margin-top: 130px;
          }
@@ -179,13 +179,17 @@
                         <div role="list" class="products w-dyn-items">
                             <c:forEach var="vo" items="${list}">
                             <div role="listitem" class="product-card-wrapper w-dyn-item">
-                                <a href="../busan/${tab }_detail.do?no=${vo.no}" class="product-card w-inline-block">
+                                <a href="../busan/${tab}_detail.do?no=${vo.no}" class="product-card w-inline-block">
                                     <div class="product-card-image-wrapper">
                                         <img src="${vo.poster}" alt="" sizes="(max-width: 479px) 73vw, (max-width: 767px) 34vw, (max-width: 991px) 33vw, 12vw"/>
                                     </div>
                                     <h6 class="product-card-heading">${vo.title}</h6>
-                                    <div data-wf-sku-bindings="%5B%7B%22from%22%3A%22f_price_%22%2C%22to%22%3A%22innerHTML%22%7D%5D" class="product-card-price">$ 30.00 USD</div>
+                                    <!-- <div class="product-card-price"></div> -->
                                 </a>
+                                	<div class="product-card-info">
+                                    	<span>좋아요 ${vo.heart}</span>
+                                    	<span>찜 ${vo.jjim}</span>
+                                    </div>
                             </div>
                             </c:forEach>
                         </div>

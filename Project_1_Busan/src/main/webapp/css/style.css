@@ -3383,7 +3383,7 @@ ul, ol{margin: 0; list-style: none;}
      -webkit-flex-wrap: wrap;
      -ms-flex-wrap: wrap;
      flex-wrap: wrap;
-     gap: 15px;
+     gap: 20px;
    }
    
    .product-card-wrapper {
@@ -3391,7 +3391,7 @@ ul, ol{margin: 0; list-style: none;}
      display: -webkit-flex;
      display: -ms-flexbox;
      display: flex;
-     width: 24%;
+     width: 23.8%;
      /* padding: 15px; */
      -webkit-box-orient: vertical;
      -webkit-box-direction: normal;
@@ -3406,7 +3406,7 @@ ul, ol{margin: 0; list-style: none;}
      display: -ms-flexbox;
      display: flex;
      width: 100%;
-     height: 360px;
+     /*height: 360px;*/
      /*padding: 24px 24px 32px;*/
      /*padding-bottom: 20px !important;*/
      -webkit-box-orient: vertical;
@@ -3423,22 +3423,11 @@ ul, ol{margin: 0; list-style: none;}
      -ms-flex: 1;
      flex: 1;*/
      border-radius: 15px;
-     background-color: #fff;
-     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.15);
-     -webkit-transition: box-shadow 300ms ease, -webkit-transform 300ms ease;
-     transition: box-shadow 300ms ease, -webkit-transform 300ms ease;
-     transition: transform 300ms ease, box-shadow 300ms ease;
-     transition: transform 300ms ease, box-shadow 300ms ease, -webkit-transform 300ms ease;
+     /*background-color: #fff;
+     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.15);*/
      text-align: center;
      text-decoration: none;
-     overflow: hidden;
-   }
-   
-   .product-card:hover {
-     box-shadow: 0 8px 20px -4px rgba(0, 0, 0, 0.15);
-     -webkit-transform: scale(1.05) translate(0px, -2px);
-     -ms-transform: scale(1.05) translate(0px, -2px);
-     transform: scale(1.05) translate(0px, -2px);
+     /*overflow: hidden;*/
    }
    
    .product-card-image-wrapper {
@@ -3447,7 +3436,7 @@ ul, ol{margin: 0; list-style: none;}
      display: -ms-flexbox;
      display: flex;
      width: 100%;
-     /*height: 240px;*/
+     height: 308px;
      /*margin-bottom: 16px;*/
      /*padding: 20px;*/
      -webkit-box-pack: center;
@@ -3458,18 +3447,38 @@ ul, ol{margin: 0; list-style: none;}
      -webkit-align-items: center;
      -ms-flex-align: center;
      align-items: center;
+     
+     /*overflow: hidden;*/
+     /**/
+     
+     -webkit-transition: box-shadow 300ms ease, -webkit-transform 300ms ease;
+     transition: box-shadow 300ms ease, -webkit-transform 300ms ease;
+     transition: transform 300ms ease, box-shadow 300ms ease;
+     transition: transform 300ms ease, box-shadow 300ms ease, -webkit-transform 300ms ease;
+   }
+   
+   .product-card-image-wrapper:hover {
+     -webkit-transform: scale(1.025);
+     -ms-transform: scale(1.025);
+     transform: scale(1.025);
    }
    
    .product-card-image-wrapper img{
 	   width: 100%;
 	   height: 100%;
 	   object-fit: cover;
+	   border-radius: 15px;
+	   overflow: hidden;
+	   box-shadow: 0 4px 10px -2px rgba(0, 0, 0, 0.15);
+   }
+   .product-card-image-wrapper img:hover{
+	   box-shadow: 0 8px 20px -4px rgba(0, 0, 0, 0.15);
    }
    
    .product-card-heading {
 	 max-width: 280px;
 	 padding: 0 10px;
-     margin-bottom: 12px;
+     margin: 20px 0 10px 0;
      color: #111;
      overflow: hidden;
 	 white-space: nowrap;
@@ -4967,9 +4976,9 @@ main #mainVisual .swiper-button-prev {
 	background-color: #2546F4;
 }
 
-.product-card {
+/*.product-card {
     overflow: hidden;
-}
+}*/
 main #foodShop{
     display: flex;
     flex-direction: row;
@@ -5158,12 +5167,12 @@ main #festival_activity .text a{
 }
 
 main #exhibition .product-card-wrapper{
-	width: 19%;
+	width: 18.7%;
 	margin-bottom: 20px;
 }
 main #exhibition .product-card{
 	position: relative;
-	height: 360px;
+	/*height: 360px;*/
 }
 main #exhibition .product-card img{
 	/*position: absolute;*/
@@ -5196,7 +5205,7 @@ main #bottom .wrapper{
     flex-direction: row;
     justify-content: space-between;
     align-items: flex-start;
-    gap: 15px;
+    gap: 20px;
 }
 main #bottom .con-box{
     width: 33.333%;
@@ -5332,12 +5341,25 @@ main #bottom .service p{
 
 
 /***** list page *****/
-.list .product-card-image-wrapper{
-	height: 260px;
+/*.list .product-card-image-wrapper{
+	height: 308px;
+}*/
+.list .products{
+	gap: 30px 20px;
 }
+
 .list .product-card-heading{
-	margin-top: 24px;
+	margin-top: 20px;
 }
+
+.list .product-card-info{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 20px;
+	margin-bottom: 20px;
+}
+
 .list .product-card-price{
 	background-color: transparent;
 	color: #333;

@@ -53,15 +53,15 @@
      }
      .product-card {
      	padding: 0;
-     	overflow: hidden;
+     	/* overflow: hidden; */
      }
-     .product-card-wrapper{
+     /* .product-card-wrapper{
  		height: 360px;
-     }
-     .product-card-image-wrapper{
+     } */
+     /* .product-card-image-wrapper{
 		padding: 0;
 		height: 260px;
-     }
+     } */
      .product-card-price{
      	background-color: #2546f3;
      }
