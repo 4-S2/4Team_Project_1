@@ -134,108 +134,83 @@ public class BusanDAO {
    }
    
 
-   // 푸드 상세보기
-   public BusanListVO foodDetailData(int no)
-   {
-	   /*
-	    * private int no;
-		   private String title;
-		   private String poster;
-		   private int hit;
-		   private String cont;
-		   private String menu;
-		   private String addr;
-		   private String phone,restday,bhour,tag;
-		   private char jjim;
-		   private int heart;
-		   private String deimage;
-		   private String rdate;
-	    */
-	   BusanListVO vo=new BusanListVO();
-	   try
-	   {
-		   // 1. 연결 
-		   conn=dbconn.getConnection();
-		   // 2. SQL문장 전송 
-		   String sql="SELECT no,title,poster,hit,cont,menu,addr,phone,Restday,bhour,tag,jjim,heart,deimage,rdate "
-		   		+ "FROM food WHERE no="+no;
-		   // 3. 미리 전송 
-		   ps=conn.prepareStatement(sql);
-		   // 4. 실행후에 결과값을 받는다 
-		   ResultSet rs=ps.executeQuery();
-		   rs.next();
-		   
-		   vo.setNo(rs.getInt(1));
-	       vo.setTitle(rs.getString(2));
-		   vo.setPoster(rs.getString(3));
-		   vo.setHit(rs.getInt(4));
-		   vo.setCont(rs.getString(5));
-		   vo.setMenu(rs.getString(6));
-		   vo.setAddr(rs.getString(7));
-		   vo.setPhone(rs.getString(8));
-		   vo.setRestday(rs.getString(9));
-		   vo.setBhour(rs.getString(10));
-			String tag = rs.getString(11);
-			String[] tags = tag.split("#");
-		   vo.setTag(tags);
-	   // vo.setTag(rs.getString(11));
-		   vo.setJjim(rs.getString(12));
-		   vo.setHeart(rs.getInt(13));
-			String dimage = rs.getString(14);
-			String[] dimgs = dimage.split("\\^");
-		   vo.setDeimage(dimgs);
-		// vo.setDeimage(rs.getString(14));
-		   vo.setRdate(rs.getString(15));
-		   rs.close();
-	   }catch(Exception ex)
-	   {
-		  // 에러 출력 
-		   ex.printStackTrace();
-	   }
-	   finally
-	   {
-		   // 반환 => 재사용 
-		   dbconn.disConnection(conn, ps);
-	   }
-	   return vo;
-   }
    // 부산 상세보기
    public BusanListVO busanDetailData(int no,String tab)
    {  
 	   BusanListVO vo=new BusanListVO();
 	   try
 	   {
-		   // 1. 연결 
-		   conn=dbconn.getConnection();
-		   // 2. SQL문장 전송 
-		   String sql="SELECT no,title,poster,hit,cont,addr,phone,rate,bhour,jjim,heart,deimage,tag "
-		   		+ "FROM "+tab+" WHERE no="+no;
-		   // 3. 미리 전송 
-		   ps=conn.prepareStatement(sql);
-		   // 4. 실행후에 결과값을 받는다 
-		   ResultSet rs=ps.executeQuery();
-		   if(rs.next()) {
-		   vo.setNo(rs.getInt(1));
-	       vo.setTitle(rs.getString(2));
-		   vo.setPoster(rs.getString(3));
-		   vo.setHit(rs.getInt(4));
-		   vo.setCont(rs.getString(5));
-		   vo.setAddr(rs.getString(6));
-		   vo.setPhone(rs.getString(7));
-		   vo.setRate(rs.getString(8));
-		   vo.setBhour(rs.getString(9));
-		   vo.setJjim(rs.getString(10));
-		   vo.setHeart(rs.getInt(11));
-			String dimage = rs.getString(12);
-			String[] dimgs = dimage.split("\\^");
-		   vo.setDeimage(dimgs);
-		 //vo.setDeimage(rs.getString(12));
-			String tag = rs.getString(13);
-			String[] tags = tag.split("#");
-		   vo.setTag(tags);
-		 //vo.setTag(rs.getString(13));
+		   if(tab.contains("food"))
+		   {
+			// 1. 연결 
+			   conn=dbconn.getConnection();
+			   // 2. SQL문장 전송 
+			   String sql="SELECT no,title,poster,hit,cont,menu,addr,phone,Restday,bhour,tag,jjim,heart,deimage,rdate "
+			   		+ "FROM food WHERE no="+no;
+			   // 3. 미리 전송 
+			   ps=conn.prepareStatement(sql);
+			   // 4. 실행후에 결과값을 받는다 
+			   ResultSet rs=ps.executeQuery();
+			   rs.next();
+			   
+			   
+			   vo.setNo(rs.getInt(1));
+		       vo.setTitle(rs.getString(2));
+			   vo.setPoster(rs.getString(3));
+			   vo.setHit(rs.getInt(4));
+			   vo.setCont(rs.getString(5));
+			   vo.setMenu(rs.getString(6));
+			   vo.setAddr(rs.getString(7));
+			   vo.setPhone(rs.getString(8));
+			   vo.setRestday(rs.getString(9));
+			   vo.setBhour(rs.getString(10));
+				String tag = rs.getString(11);
+				String[] tags = tag.split("#");
+			   vo.setTag(tags);
+		   // vo.setTag(rs.getString(11));
+			   vo.setJjim(rs.getString(12));
+			   vo.setHeart(rs.getInt(13));
+				String dimage = rs.getString(14);
+				String[] dimgs = dimage.split("\\^");
+			   vo.setDeimage(dimgs);
+			// vo.setDeimage(rs.getString(14));
+			   vo.setRdate(rs.getString(15));
+			   rs.close();
 		   }
-		   rs.close();
+		   else {
+			// 1. 연결 
+			   conn=dbconn.getConnection();
+			   // 2. SQL문장 전송 
+			   String sql="SELECT no,title,poster,hit,cont,addr,phone,rate,bhour,jjim,heart,deimage,tag "
+			   		+ "FROM "+tab+" WHERE no="+no;
+			   // 3. 미리 전송 
+			   ps=conn.prepareStatement(sql);
+			   // 4. 실행후에 결과값을 받는다 
+			   ResultSet rs=ps.executeQuery();
+			   if(rs.next()) {
+			   vo.setNo(rs.getInt(1));
+		       vo.setTitle(rs.getString(2));
+			   vo.setPoster(rs.getString(3));
+			   vo.setHit(rs.getInt(4));
+			   vo.setCont(rs.getString(5));
+			   vo.setAddr(rs.getString(6));
+			   vo.setPhone(rs.getString(7));
+			   vo.setRate(rs.getString(8));
+			   vo.setBhour(rs.getString(9));
+			   vo.setJjim(rs.getString(10));
+			   vo.setHeart(rs.getInt(11));
+				String dimage = rs.getString(12);
+				String[] dimgs = dimage.split("\\^");
+			   vo.setDeimage(dimgs);
+			 //vo.setDeimage(rs.getString(12));
+				String tag = rs.getString(13);
+				String[] tags = tag.split("#");
+			   vo.setTag(tags);
+			 //vo.setTag(rs.getString(13));
+			   }
+			   rs.close();
+		   }
+		   
 	   }catch(Exception ex)
 	   {
 		  // 에러 출력 
@@ -408,6 +383,38 @@ public class BusanDAO {
 	   }
 	   return total;
    }
+    // 추천 상품
+	public List<BusanListVO> busanRandomList(String tab){
+		List<BusanListVO> list=new ArrayList<>();
+		try {
+			// 연결 
+			conn=dbconn.getConnection();
+			// SQL 
+			String sql="SELECT no,title,poster "
+					  +"FROM "+tab
+	                  +" ORDER BY DBMS_RANDOM.VALUE";
+			// 전송
+			ps=conn.prepareStatement(sql);
+	         
+			// 결과값
+			ResultSet rs=ps.executeQuery();
+			while(rs.next()) { // 출력 첫번째 위치부터 읽기 시작 
+				BusanListVO vo=new BusanListVO();
+				vo.setNo(rs.getInt(1));
+				vo.setTitle(rs.getString(2));
+				vo.setPoster(rs.getString(3));
+	            list.add(vo);
+	         }
+	         rs.close();
+		}catch(Exception ex) {
+			ex.printStackTrace();
+		}
+		finally{
+			// 반환 => 재사용
+			dbconn.disConnection(conn, ps);
+		}
+		return list;
+	}
 }
 
 

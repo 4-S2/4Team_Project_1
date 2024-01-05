@@ -24,7 +24,7 @@
             margin: 0px auto;
          }
          a.tag:hover{
-         color: #2b75d5;
+         color: #2546F3;
          text-decoration: none;
          }
          a.tag:focus{
@@ -38,7 +38,7 @@
          	display: inline-block;
          }
          .selected-link {
-         background-color: #2b75d5;
+         background-color: #2546F3;
          color: white;
          }
          img{
@@ -67,14 +67,14 @@
          margin-top: 130px;
          }
          .search .button{
-         background-color: #2b75d5;
+         background-color: #2546F3;
          }
          .list h6{
          margin-top: 20px;
          font-size: 16px;
          }
          .product-card-price{
-         background-color: #2b75d5;
+         background-color: #2546F3;
          }
         </style>
         <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script> -->

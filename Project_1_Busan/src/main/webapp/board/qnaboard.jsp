@@ -22,7 +22,6 @@
 }
 
 #notice a {
-	color: black;
 	text-decoration: none;
 }
 
@@ -52,7 +51,7 @@
     height: 30px;
     width: 50px;
     border-radius: 50px;
-    background-color: #337ab7;
+    background-color: #0923a9;
 	color: white;
 }
 
@@ -69,9 +68,26 @@
 #insert button{
     height: 30px;
     width: 90px;
-    background-color: #337ab7;
+    background-color: #0923a9;
 	color: white;
 	border-radius: 50px;
+}
+a.btn{
+    height: 30px;
+    width: 60px;
+    background-color: #0923a9;
+    color: white;
+    border-radius: 50px;
+    text-align: center;
+    font-size: 13px;
+    margin: 0px 10px;
+}
+a.btn:hover{
+   color: white; 
+}
+.page{
+    margin: 100px 0px;
+    
 }
 </style>
 </head>
@@ -111,24 +127,31 @@
 				</c:forEach>
 			</table>
 
-			<div class="text-center">
-				<ul class="pagination">
-					<%--
+			<div class="text-center page">
+			<tr>
+             <td colspan="5" class="text-center">
+              <a href="qnaboard.do?page=${(curpage-1)>1?curpage-1:startPage }" class="btn">이전</a>
+              ${curpage } page / ${totalpage } pages
+              <a href="qnaboard.do?page=${(curpage+1)<endPage?curpage+1:endPage }" class="btn">다음</a>
+             </td>
+            </tr>
+				<%-- <ul class="pagination">
+					
                             <!ENTITY lt "<">
                             <!ENTITY gt ">">
                             => &lt;
-                        --%>
+                       
 					<c:if test="${startPage>1}">
-						<li><a href="notice.do?page=${startPage-1}">&lt;</a></li>
+						<li><a href="qnaboard.do?page=${startPage-1}">&lt;</a></li>
 					</c:if>
 					<c:forEach var="i" begin="${startPage}" end="${endPage}">
 						<li ${curpage==i?"class=active":""}><a
-							href="notice.do?page=${i}">${i}</a></li>
+							href="qnaboard.do?page=${i}">${i}</a></li>
 					</c:forEach>
 					<c:if test="${endPage<totalpage}">
-						<li><a href="notice.do?page=${endPage+1}">&gt;</a></li>
+						<li><a href="qnaboard.do?page=${endPage+1}">&gt;</a></li>
 					</c:if>
-				</ul>
+				</ul> --%>
 			</div>
 		</div>
 	</div>

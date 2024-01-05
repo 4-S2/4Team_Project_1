@@ -6,10 +6,12 @@ import javax.servlet.http.HttpSession;
 
 import com.sist.controller.RequestMapping;
 
+import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.*;
 import com.sist.dao.*;
 import com.sist.vo.MemberVO;
+import com.sist.vo.QnaBoardVO;
 
 import oracle.net.ns.SessionAtts;
 
@@ -38,18 +40,51 @@ public class MypageModel {
 	 
 	// 회원정보수정
 	@RequestMapping("mypage/editProfile.do")
-	public String mypage_editProfile(HttpServletRequest request, HttpServletResponse response)
+	public void mypage_editProfile(HttpServletRequest request, HttpServletResponse response)
 	{
 		HttpSession session=request.getSession();
 		String id=(String)session.getAttribute("id");
 		
-		MypageDAO dao=MypageDAO.newInstance();
-		/* MemberVO vo=dao.editProfile(); */
+		try
+		{
+			request.setCharacterEncoding("UTF-8");
+		}catch(Exception ex) {}
+		String pwd=request.getParameter("pwd");
+		String name=request.getParameter("name");
+		String email=request.getParameter("email");
+		String postcode=request.getParameter("postcode");
+		String addr=request.getParameter("addr");
+		String daddr=request.getParameter("daddr");
+		String phone=request.getParameter("phone");
 		
-		/* request.setAttribute("vo", vo); */
-		request.setAttribute("mypage_jsp", "editProfile.jsp");
-		request.setAttribute("main_jsp", "../mypage/mypage_main.jsp");
-		return "../main/main.jsp";
+		MemberVO vo=new MemberVO();
+		vo.setId(id);
+		vo.setPwd(pwd);
+		vo.setName(name);
+		vo.setEmail(email);
+		vo.setPostcode(postcode);
+		vo.setAddr(addr);
+		vo.setDetail_addr(daddr);
+		vo.setPhone(phone);
+		
+		MypageDAO dao=MypageDAO.newInstance();
+		int success=dao.editProfile(vo);
+		System.out.println(success);
+		try
+		{
+			PrintWriter out=response.getWriter();
+			if(success==1)
+			{
+				out.write("success");
+			}
+			else
+			{
+				out.write("fail");
+			}
+		}catch(Exception ex) 
+		{
+			ex.printStackTrace();
+		}
 	}
 	
 	// 예약내역
@@ -108,27 +143,47 @@ public class MypageModel {
 		String id=(String)session.getAttribute("id");
 		
 		MypageDAO dao=MypageDAO.newInstance();
-		/* MemberVO vo=dao.myprofile(id); */
+		List<QnaBoardVO> list = dao.getAllQnas(id);
 		
-		/* request.setAttribute("vo", vo); */
+		request.setAttribute("list", list); 
 		request.setAttribute("mypage_jsp", "myInquiry.jsp");
 		request.setAttribute("main_jsp", "../mypage/mypage_main.jsp");
 		return "../main/main.jsp";
 	}
 	
 	// 회원탈퇴
-	@RequestMapping("mypage/unregister.do")
-	public String mypage_unregister(HttpServletRequest request, HttpServletResponse response)
+	@RequestMapping("mypage/myacc_delete.do")
+	public String mypage_myacc_delete(HttpServletRequest request, HttpServletResponse response)
 	{	
 		HttpSession session=request.getSession();
 		String id=(String)session.getAttribute("id");
 		
 		MypageDAO dao=MypageDAO.newInstance();
-		/* MemberVO vo=dao.myprofile(id); */
 		
-		/* request.setAttribute("vo", vo); */
-		request.setAttribute("mypage_jsp", "unregister.jsp");
+		request.setAttribute("mypage_jsp", "myacc_delete.jsp");
 		request.setAttribute("main_jsp", "../mypage/mypage_main.jsp");
 		return "../main/main.jsp";
+	}
+	
+	// 회원탈퇴 확인
+	@RequestMapping("mypage/myacc_delete_ok.do")
+	public void mypage_myacc_delete_ok(HttpServletRequest request, HttpServletResponse response)
+	{
+		String pwd=request.getParameter("pwd");
+		HttpSession session=request.getSession();
+		String id=(String)session.getAttribute("id");
+
+		MypageDAO dao=MypageDAO.newInstance();
+		String result=dao.memberDeleteOk(id, pwd);
+		System.out.println(result);
+		if(result.equals("OK"))
+		{
+			session.invalidate();
+		}
+		try
+		{
+			PrintWriter out=response.getWriter();
+			out.print(result);
+		}catch(Exception ex) {}
 	}
 }

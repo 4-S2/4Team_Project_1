@@ -25,10 +25,23 @@ public class QnaBoardVO {
 	   private int group_id;
 	   private int group_step;
 	   private String id;
-	   private String filename;
+	   private String filename,filesize2;
 	   private int filesize;
-	   
+	   private int status;
 	
+	   
+	public int getStatus() {
+		return status;
+	}
+	public void setStatus(int status) {
+		this.status = status;
+	}
+	public String getFilesize2() {
+		return filesize2;
+	}
+	public void setFilesize2(String filesize2) {
+		this.filesize2 = filesize2;
+	}
 	public String getFilename() {
 		return filename;
 	}

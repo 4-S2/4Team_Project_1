@@ -2518,7 +2518,7 @@ li{list-style: none;}
    }
    
    p {
-     margin-bottom: 28px;
+/*     margin-bottom: 28px;*/
      font-size: 14px;
      line-height: 24px;
    }

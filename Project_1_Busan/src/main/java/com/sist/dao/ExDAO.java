@@ -143,11 +143,15 @@ public class ExDAO {
    {
 	   ExVO vo=new ExVO();
 	   try
-	   {
-		   // 1. 연결 
-		   conn=dbconn.getConnection();
+	   {	conn=dbconn.getConnection();
+       		String sql="UPDATE exhibition SET hit=hit+1 "
+               +"WHERE eno="+eno;
+       		ps=conn.prepareStatement(sql);
+       		ps.executeUpdate();
+       		ps.close();
+		   
 		   // 2. SQL문장 전송 
-		   String sql = "SELECT eno, ename, eename, efield, eitem, cate, homepage, " +
+		   sql = "SELECT eno, ename, eename, efield, eitem, cate, homepage, " +
                    "TO_CHAR(s_date, 'YYYY-MM-DD') AS s_date, TO_CHAR(e_date, 'YYYY-MM-DD') AS e_date, " +
                    "loc, loc_detail, host, poster, elike, jjim, score, price, hit " +
                    "FROM exhibition " +
@@ -159,7 +163,7 @@ public class ExDAO {
 		  
 		   // 5. 실행후에 결과값을 받는다 
 		   ResultSet rs=ps.executeQuery();
-		   while(rs.next()) // 출력 1번째 위치부터 읽기 시작 
+		   if(rs.next()) // 출력 1번째 위치부터 읽기 시작 
 		   {
 			   
 			   vo.setEno(rs.getInt(1));
@@ -209,8 +213,8 @@ public class ExDAO {
 		   String sql="SELECT eno, ename, poster, TO_CHAR(s_date, 'YYYY-MM-DD') AS s_date, TO_CHAR(e_date, 'YYYY-MM-DD') AS e_date "
 				     +"FROM (SELECT eno, ename, poster, s_date, e_date , rownum as num "
 				     +"FROM (SELECT eno, ename, poster, s_date, e_date "
-				     +"FROM exhibition ORDER BY eno DESC)) "
-				     +"WHERE num BETWEEN ? AND ?";
+				     +"FROM exhibition ORDER BY elike DESC)) "
+				     +"WHERE num BETWEEN 1 AND 8";
 		   // 3. 미리 전송 
 		   ps=conn.prepareStatement(sql);
 		   // 4. 실행 요청전에 ?에 값을 채운다 

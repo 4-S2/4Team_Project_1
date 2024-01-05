@@ -9,7 +9,7 @@
 <title>Insert title here</title>
 <style>
 .table_content a {
-	border: 1px solid #337ab7;
+	border: 1px solid #0923A9;
 	display: inline-block;
 	border-radius: 25px;
 	padding: 5px 18px;
@@ -25,13 +25,13 @@
 }
 
 .table_content a:hover {
-	background-color: #2b75d5;
+	background-color: #0923A9;
 	color: white;
 	text-decoration: none;
 }
 
 .table_content a:focus {
-	background-color: #2b75d5;
+	background-color: #0923A9;
 	color: white;
 	text-decoration: none;
 }
@@ -120,7 +120,7 @@ div.container {
 }
 
 .table_content th {
-	background-color: #337ab7;
+	background-color: #0923A9;
 	color: #fff;
 	border-bottom-width: 1px;
 	border-bottom-color: #333;
@@ -182,6 +182,14 @@ h4 {
     font-size: 14px;
     border-radius: 50px;
     width: 70px;
+}
+.btn-primary{
+    background-color: #0923A9;
+    border-color: black;
+}
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active{
+   background-color: #0923A9 !important;
+   border-color: black !important;
 }
 </style>
 </head>

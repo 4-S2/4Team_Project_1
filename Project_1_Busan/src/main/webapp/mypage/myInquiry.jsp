@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,22 +32,32 @@
 		    </tr>
 		    </thead>
 		    <tbody>
-<!-- 		    <tr>
-		                <td colspan="4" class="empty">
-		                    등록된 내용이 없습니다.</td>
-		        </tr> -->
-		        
-		    <tr>
-                <td class="dp_pc num2">1</td>
-                <td class="title double ta_px20">
-                    <a href="#" class="ellipsis">SNS 마케팅 마스터하기 - 블로그, 인스타그램</a><br>
-                    2023.12.28 ~ 2024.1.26
-                </td>
-                <td class="dp_pc writer">7%</td>
-                <td class="category px_20 ta_px10">
-                        -
-                </td>
-            </tr>
+				<c:choose>
+				    <c:when test="${empty list}">
+				        <tr>
+				            <td colspan="4" class="empty">
+				                등록된 내용이 없습니다.
+				            </td>
+				        </tr>
+				    </c:when>
+				    <c:otherwise>
+				        <c:forEach var="vo" items="${list}">
+				            <tr>
+				                <td class="dp_pc num2">${vo.qno}</td>
+				                <td class="title double ta_px20">
+				                    <a href="../board/qnaboard_detail.do?qno=${vo.qno}" class="ellipsis">${vo.subject}</a>
+				                </td>
+				                <td class="dp_pc writer">${vo.regdate}</td>
+				                <c:if test="${vo.status == 0 }">
+				                	<td class="category px_20 ta_px10">답변대기</td>
+				                </c:if>
+				                <c:if test="${vo.status == 1 }">
+				                	<td class="category px_20 ta_px10"><strong>답변완료</strong></td>
+				                </c:if>				                
+				            </tr>
+				        </c:forEach>
+				    </c:otherwise>
+				</c:choose>
 		    </tbody>
 		</table>
 		<!--//TABLE-->

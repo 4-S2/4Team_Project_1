@@ -28,6 +28,13 @@ public class ExReserveModel {
 	  
 	  int lastday=cal.getActualMaximum(Calendar.DATE);
 	  
+	  request.setAttribute("week", week);
+	  request.setAttribute("lastday", lastday);
+	  request.setAttribute("year", year);
+	  request.setAttribute("month", month);
+	  request.setAttribute("day", day);
+	  request.setAttribute("strWeek", strWeek);
+	  
 	  
 	  request.setAttribute("main_jsp", "../reserve/ex_reserve.jsp");
 	  return "../main/main.jsp";

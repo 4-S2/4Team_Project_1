@@ -1,7 +1,11 @@
 package com.sist.model;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.PrintWriter;
+import java.net.URLEncoder;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -116,7 +120,12 @@ public class QnaBoardModel {
 	        	
 	        	//String path="C:\\Users\\"+System.getProperty("user.name")+"\\Downloads";
 	        	request.setCharacterEncoding("UTF-8");
-	 		   String path="c:\\download";
+	 		   //String path="c:\\download";
+	           String path = "C:\\download";
+	           File downloadDirectory = new File(path);
+	           if (!downloadDirectory.exists()) {
+	               downloadDirectory.mkdirs();
+	           }
 	 		   String enctype="UTF-8";
 	 		   int max_size=1024*1024*500;
 	 		   MultipartRequest mr=
@@ -139,6 +148,7 @@ public class QnaBoardModel {
 				   vo.setCont(cont);
 				   vo.setSubject(subject);
 				   vo.setPwd(pwd);
+				   vo.setId(id);
 				   if(filename==null)
 				   {
 					   vo.setFilename("");
@@ -212,7 +222,19 @@ public class QnaBoardModel {
       
       QnaBoardDAO dao=QnaBoardDAO.newInstance();
       String result=dao.QnaDeleteData(Integer.parseInt(qno), pwd);
-      
+      QnaBoardVO vo=dao.QnaDetailData(Integer.parseInt(qno));
+      System.out.println(vo.getFilesize());
+      if(vo.getFilesize()>0)
+      {
+    	  try
+		   {   
+    		   String filePath = "c:\\download\\" + vo.getFilename();
+    		   System.out.println(filePath);
+			   File file=new File(filePath);
+			   file.delete();
+
+		   }catch(Exception ex){}
+      }
       
       try {
      	 PrintWriter out=response.getWriter();
@@ -220,4 +242,36 @@ public class QnaBoardModel {
       }catch(Exception e) {}
 
 	   }
+	@RequestMapping("board/download.do")
+	   public void qnaboard_download(HttpServletRequest request,
+	           HttpServletResponse response)
+	   {
+		try {
+        	request.setCharacterEncoding("UTF-8");
+        }catch(Exception e) {}
+        String fn=request.getParameter("fn");
+        
+        try {
+        	File file=new File("c:\\download\\"+fn);
+        	response.setHeader("Content-Disposition","Attachment;filename="+URLEncoder.encode(fn, "UTF-8"));
+        	response.setContentLength((int)file.length());
+        	
+        	BufferedInputStream bis=new BufferedInputStream(new FileInputStream(file));
+        	BufferedOutputStream bos=new BufferedOutputStream(response.getOutputStream());
+        	
+        	byte[] buffer=new byte[1024];
+        	int i=0;
+        	while((i=bis.read(buffer,0,1024))!=-1)
+        	{
+        		bos.write(buffer,0,i);
+        	}
+        	bis.close();
+        	bos.close();
+        }catch(Exception e)
+        {
+        	e.printStackTrace();
+        }
+
+	   }
+	
 }

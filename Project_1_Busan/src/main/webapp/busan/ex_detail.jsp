@@ -111,8 +111,26 @@
 	                                <input type="submit" value="예약하기" class="w-commerce-commerceaddtocartbutton button add-to-cart-button" id="reservationButton"/>
 	                                
 	                            </div>
+	                            <div class="heart">
+	                    	<span><img src="like.png"></a></span>
+	                    	<span>${vo.elike }</span>
+	                    	<button id="like-btn" style="margin:auto;">
+	                    	<a href="../busan/like_insert.do?eno=${vo.eno }">&nbsp;좋아요</a>
+	                    	</button>
+	                    </div>
+	                    <div class="jjim">
+	                    	<span><img src="jjim.png"></a></span>
+	                    	<span>${vo.jjim }</span>
+	                    	<button id="jjim-btn" style="margin:auto;">찜하기</button>
+	                    </div>
 	                    	</form>
+		                     <div class="hit">
+	                    	<span>조회수</span>
+	                    	<span>${vo.hit } 회</span>
+	                    	
+	                    </div>
 		                </div>
+		                
 	            	</div>
 	            	
 	            	 <!-- 탭 메뉴 -->
@@ -255,42 +273,36 @@
 				    </div>
 				    
                 </div>
-	            	
+	              <div class="section">
+        <div class="wrapper">
+            <div class="shop-header">
+                <h3>추천 전시</h3>
+                <a href="../store/goods.do" class="link arrow-link">전체보기</a>
+                <div class="shop-header-line">
+                    <div class="shop-header-color"></div>
+                </div>
+            </div>
+            <div class="full-width w-dyn-list">
+                <div role="list" class="products w-dyn-items">
+                	<c:forEach var="vo1" items="${vo1}" begin="0" end="7">
+	                    <div role="listitem" class="product-card-wrapper w-dyn-item" style="height: 330px" > 
+	                        <a href="../busan/ex_detail.do?eno=${vo1.eno}" class="product-card w-inline-block">
+	                            <div class="product-card-image-wrapper" style="height: 250px">
+	                                <img alt="" src="${vo1.poster}" size="(max-width: 479px) 73vw, (max-width: 767px) 34vw, (max-width: 991px) 33vw, 12vw"/>
+	                            </div>
+	                            <div data-wf-sku-bindings="%5B%7B%22from%22%3A%22f_price_%22%2C%22to%22%3A%22innerHTML%22%7D%5D" class="product-card-price" style="margin-top: 25px;font-size: 15px">${vo1.ename}</div>
+	                        </a>
+	                    </div>
+                	</c:forEach>
+                </div>
+            </div>
+        </div>
+    </div>	
 	            
 	            </div>
 	        </div>
 	    </div>
-	    <div class="section">
-	        <div class="wrapper">
-	            <div class="shop-header">
-	                <h3>추천 전시</h3>
-	                <a href="#" class="link arrow-link">전체보기</a>
-	                <div class="shop-header-line">
-	                    <div class="shop-header-color"></div>
-	                </div>
-	            </div>
-	            <!-- list -->
-                    <div class="full-width w-dyn-list">
-                        <div role="list" class="products w-dyn-items">
-                            <c:forEach var="vo" items="${list}">
-                            <div role="listitem" class="product-card-wrapper w-dyn-item">
-                                <a href="../busan/ex_detail.do?eno=${vo.eno }" class="product-card w-inline-block">
-                                    <div class="product-card-image-wrapper">
-                                        <img src="${vo.poster}" alt="" sizes="(max-width: 479px) 73vw, (max-width: 767px) 34vw, (max-width: 991px) 33vw, 12vw"/>
-                                    </div>
-                                    <p>
-                                    <p>
-                                    <h6 class="product-card-heading">${vo.ename}</h6>
-                                    <br>
-                                    <div data-wf-sku-bindings="%5B%7B%22from%22%3A%22f_price_%22%2C%22to%22%3A%22innerHTML%22%7D%5D" class="product-card-price">${vo.s_date }~${vo.e_date }</div>
-                                </a>
-                            </div>
-                            </c:forEach>
-                        </div>
-                    </div>
-	         
-	        </div>
-	    </div>
+	   
 	</div>
 <!-- <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=5badda2935e11303a89a461e" type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script> -->
 <script src="https://assets.website-files.com/5badda2935e11303a89a461e/js/webflow.9828d3d6a.js" type="text/javascript"></script>

@@ -37,17 +37,11 @@
     font-size: 14px;
     line-height: 24px;
     }
-/*     .login_form_area .form_contbox {
-    vertical-align: top;
-    display: inline-block;
-    margin-top: 30px;
-     margin-bottom: 0px; 
-} */
     
   </style>
-  <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
-  <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
   
+  
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
     function sample6_execDaumPostcode() {
         new daum.Postcode({
@@ -59,175 +53,146 @@
                 } else { 
                     addr = data.jibunAddress;
                 }
-
                 if(data.userSelectedType === 'R'){
-                   
                     if(data.bname !== '' && /[dong|ro|ga]$/g.test(data.bname)){
                         extraAddr += data.bname;
                     }
-                    
                     if(data.buildingName !== '' && data.apartment === 'Y'){
                         extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
                     }
-                    
                     if(extraAddr !== ''){
                         extraAddr = '(' + extraAddr + ')';
                     }
-                    
                     document.getElementById("sample6_extraAddress").value = extraAddr;
-                
                 } else {
                     document.getElementById("sample6_extraAddress").value = '';
                 }
-
-                
                 document.getElementById('sample6_postcode').value = data.zonecode;
                 document.getElementById("sample6_address").value = addr;
-              
                 document.getElementById("sample6_detailAddress").focus();
             }
         }).open();
         $(document).ready(function() {
-          
             $("#searchZipCodeBtn").click(function() {
-              
               sample6_execDaumPostcode();
             });
           });
     }  
 </script> 
 <script type="text/javascript">
-var postalCode = data.zonecode;
-var address = addr;
-var detailAddress = document.getElementById("sample6_detailAddress").value;
-
-// Store data in session
-sessionStorage.setItem("postalCode", postalCode);
-sessionStorage.setItem("address", address);
-sessionStorage.setItem("detailAddress", detailAddress);
+	var postalCode = data.zonecode;
+	var address = addr;
+	var detailAddress = document.getElementById("sample6_detailAddress").value;
+	
+	// Store data in session
+	sessionStorage.setItem("postalCode", postalCode);
+	sessionStorage.setItem("address", address);
+	sessionStorage.setItem("detailAddress", detailAddress);
 </script>
- <script src="../js/member.js"></script>
-
-
-<!-- <script>
-function checkPassword() {
-    var enteredPassword = prompt("비밀번호를 입력하세요:");
-
-    // 공백 제거, 입력된 문자=>숫자 변환 (유효성 검증)
-    enteredPassword = parseInt(enteredPassword.trim());
-
-    var correctPassword = ${vo.pwd};
-    alert(correctPassword);
-    
-    if (enteredPassword === "") {
-      alert("비밀번호를 입력해주세요.");
-    } else if (enteredPassword === correctPassword) {
-    	
-    	alert("회원 정보가 수정되었습니다.");
-      	window.location.href = "http://localhost:8080/Project_1_Busan/mypage/main.do";
-    } else {
-      alert("비밀번호가 일치하지 않습니다. 다시 시도해주세요.");
-    }
-  }
-  </script> -->
-<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+<!-- <script src="../js/member.js"></script> -->
+  
 <script type="text/javascript">
 /* $('#aUpdateMember').click(function(){ */
 function checkPassword() {
 	let name=$('#name').val();
 	let pwd=$('#pwd').val();
+	let email=$('#email').val();
 	let telNo1=$('#telNo1').val();
 	let telNo2=$('#telNo2').val();
 	let telNo3=$('#telNo3').val();
 	let postcode=$('#postcode').val();
 	let addr=$('#addr').val();
 	let daddr=$('#daddr').val();
-		if($('#name').val().trim()==="")
-		{
+		if(name.trim()===""){
 			$('#name').focus()
 			$('#updateMsg').text('이름을 입력해주세요.')
 			$('#updateMsg').attr('style','display:block; color:red; margin: 0px;')
 			return
 		}
-		if($('#pwd').val().trim()==="")
-		{
+		if(email.trim()===""){
+			$('#email').focus()
+			$('#updateMsg').text('이메일을 입력해주세요.')
+			$('#updateMsg').attr('style','display:block; color:red; margin: 0px;')
+			return
+		}
+		if(pwd.trim()===""){
 			$('#pwd').focus()
 			$('#updateMsg').text('비밀번호를 입력해주세요.')
 			$('#updateMsg').attr('style','display:block; color:red; margin: 0px;')
 			return
 		}
-		if($('#telNo1').val().trim()==="")
-		{
+		if(telNo1.trim()===""){
 			$('#telNo1').focus()
 			$('#updateMsg').text('전화번호를 입력해주세요.')
 			$('#updateMsg').attr('style','display:block; color:red; margin: 0px;')
 			return
 		}
 		
-		if($('#telNo2').val().trim()==="")
-		{
+		if(telNo2.trim()===""){
 			$('#telNo2').focus()
 			$('#updateMsg').text('전화번호를 입력해주세요.')
 			$('#updateMsg').attr('style','display:block; color:red; margin: 0px')
 			return
 		}
-		
-		if($('#telNo3').val().trim()==="")
-		{
+		if(telNo3.trim()===""){
 			$('#telNo3').focus()
 			$('#updateMsg').text('전화번호를 입력해주세요.')
 			$('#updateMsg').attr('style','display:block; color:red; margin: 0px;')
 			return
 		}
-
-		if($('#postcode').val().trim()==="")
-		{
+		if(postcode.trim()===""){
 			$('#postcode').focus()
 			$('#updateMsg').text('우편번호를 입력해주세요.')
 			$('#updateMsg').attr('style','display:block; color:red; margin: 0px;')
 			return
 		}
-		
-		if($('#addr').val().trim()==="")
-		{
+		if(addr.trim()===""){
 			$('#addr').focus()
 			$('#updateMsg').text('주소를 입력해주세요.')
 			$('#updateMsg').attr('style','display:block; color:red; margin: 0px;')
 			return
-		}
-		
-		if($('#daddr').val().trim()==="")
-		{
+		}		
+		if(daddr.trim()===""){
 			$('#daddr').focus()
 			$('#updateMsg').text('상세주소를 입력해주세요.')
 			$('#updateMsg').attr('style','display:block; color:red; margin: 0px;')
 			return
 		}
-	
-/* 	$.ajax({
-		type:'post',
-		url:"../mypage/editmyprofile.do",
-		data:{
-			"pwd":pwd,
-			"name":name,
-			"phone":telNo1+telNo2+telNo3,
-			"postcode":postcode,
-			"addr":addr,
-			"daddr":daddr,
-		},
-		success:function(result)
-		{
-			if(result=='success'){
-				alert('회원 정보가 수정되었습니다.')
-				location.href="../mypage/main.do";
-			}
-			else if (result=='fail'){
-				alert('비밀번호가 일치하지 않습니다. 다시 시도해주세요.')
-			}
-		}
-	
-	}) */
-})
+	    var enteredPassword = prompt("비밀번호를 입력하세요:");
+	    // 공백 제거, 입력된 문자=>숫자 변환 (유효성 검증)
+	    enteredPassword = parseInt(enteredPassword.trim());
+	    var correctPassword = ${vo.pwd}
+	    if (enteredPassword === "") {
+	        alert("비밀번호를 입력해주세요.");
+	      } else if (enteredPassword === correctPassword) {
+	    	 	$.ajax({
+	    			type:'post',
+	    			url:'../mypage/editProfile.do',
+	    			data:{
+	    				"pwd":pwd,
+	    				"name":name,
+	    				"email":email,
+	    				"phone":telNo1+telNo2+telNo3,
+	    				"postcode":postcode,
+	    				"addr":addr,
+	    				"daddr":daddr,
+	    			},
+	    			success:function(result)
+	    			{
+	    				if(result==='success'){
+	    					alert('회원 정보가 수정되었습니다.')
+	    					location.href="../mypage/main.do";
+	    				}
+	    			},
+	    			error:function(e){
+	    				console.log(e)
+	    			}
+	    		
+	    		}) 
+	      } else {
+	        alert("비밀번호가 일치하지 않습니다. 다시 시도해주세요.");
+	      }
+}
 
 </script>
 </head>
@@ -246,9 +211,10 @@ function checkPassword() {
 	       		<div class="form_contbox ta_inblock">${vo.id }</div>
 	       <!-- <p class="find_label input_ta_mt80 input_ta_mb10 ta_first">비밀번호</p> -->
 	       <p class="find_label input_ta_mt80 input_ta_mb10 ta_inblock">비밀번호</p>
-	       		<div class="form_contbox ta_inblock"><input type="text" id="pwd" name="pwd" maxlength="30" value="${vo.pwd}" required></div>
+	       		<div class="form_contbox ta_inblock"><input type="password" id="pwd" name="pwd" style="padding: 8px;" value="${vo.pwd}" required></div>
 	       <p class="find_label input_ta_mt80 input_ta_mb10 ta_inblock">이메일</p>
-	       		<div class="form_contbox ta_inblock"><input type="text" id="email" name="email" maxlength="30" value="${vo.email}" required></div>
+	       		<div class="form_contbox ta_inblock"><input type="text" id="email" name="email"  value="${vo.email}" required >
+</div>
 
 	       	<p class="find_label input_ta_mt30">휴대전화</p>
 		       	<div class="form_contbox">
@@ -273,13 +239,13 @@ function checkPassword() {
 	                        </div>
 	            </div>
 	          <p class="find_label input_ta_mt80 input_ta_mb10 ta_inblock">우편번호</p>
-	       		<div class="form_contbox ta_inblock"><input type="text" id="postcode" name="postcode" maxlength="8" value="${vo.postcode }" required>
+	       		<div class="form_contbox ta_inblock"><input type="text" id="postcode" name="postcode" maxlength="10" value="${vo.postcode }" required>
 	       		<button type="button" id="searchZipCodeBtn" onclick="sample6_execDaumPostcode()">우편번호 찾기</button>
 	       		</div>
 	       	  <p class="find_label input_ta_mt80 input_ta_mb10 ta_inblock">주소</p>
-	       		<div class="form_contbox ta_inblock"><input type="text" id="addr" name="addr" data-required="true" maxlength="8" value="${vo.addr }" required></div>
+	       		<div class="form_contbox ta_inblock"><input type="text" id="addr" name="addr" value="${vo.addr }" required></div>
 	       	  <p class="find_label input_ta_mt80 input_ta_mb10 ta_inblock"></p>	
-	       		<div class="form_contbox ta_inblock"><input type="text" id="daddr" name="daddr"  data-required="true" maxlength="8" value="${vo.detail_addr }" required></div>
+	       		<div class="form_contbox ta_inblock"><input type="text" id="daddr" name="daddr" value="${vo.detail_addr }" required></div>
 			
 <!-- 	      <label for="postal_code" style="display: inline">우편번호 <span class="required">*</span></label>
 				  <button type="button" id="searchZipCodeBtn" style="float:right" onclick="sample6_execDaumPostcode()">우편번호 찾기</button>

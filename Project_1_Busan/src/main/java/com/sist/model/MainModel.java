@@ -109,7 +109,7 @@ public class MainModel {
                       if (!token.isEmpty()) { // 빈 문자열이 아닌 경우에만 처리합니다.
                           System.out.println("food"+token);
                           int no = Integer.parseInt(token);
-                          BusanListVO vo = topdao.foodDetailData(no);
+                          BusanListVO vo = topdao.busanDetailData(no, "food");
                           vo.setCocate(4);
                           rcntList.add(vo);
                           System.out.println(i+"번째 출력:"+token);
@@ -161,7 +161,7 @@ public class MainModel {
                
                while(st.hasMoreTokens()) {
                   int no = Integer.parseInt(st.nextToken());
-                  BusanListVO vo = topdao.foodDetailData(no);
+                  BusanListVO vo = topdao.busanDetailData(no, "food");
                   vo.setCocate(4);
                   rcntList.add(vo);
                }

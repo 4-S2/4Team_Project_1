@@ -9,13 +9,13 @@
 <title>Insert title here</title>
 <style>
 .table_content a {
-	border: 1px solid #337ab7;
+	border: 1px solid #0923A9;
 	display: inline-block;
 	border-radius: 25px;
 	padding: 5px 18px;
 	margin: 0px auto;
 	margin-bottom: 10px;
-	color: #337ab7;
+	color: #0923A9;
 	width: 80px;
 	text-align: center;
 }
@@ -25,13 +25,13 @@
 }
 
 .table_content a:hover {
-	background-color: #2b75d5;
+	background-color: #0923A9;
 	color: white;
 	text-decoration: none;
 }
 
 .table_content a:focus {
-	background-color: #2b75d5;
+	background-color: #0923A9;
 	color: white;
 	text-decoration: none;
 }
@@ -120,7 +120,7 @@ div.container {
 }
 
 .table_content th {
-	background-color: #337ab7;
+	background-color: #0923A9;
 	color: #fff;
 	border-bottom-width: 1px;
 	border-bottom-color: #333;
@@ -161,7 +161,7 @@ center {
 }
 
 #cont {
-	height: 400px;
+	height: 300px;
 }
 
 #cont>pre {
@@ -185,13 +185,13 @@ h4 {
 }
 
 input[type=file]::file-selector-button {
-    border: 1px solid #337ab7;
+    border: 1px solid #0923A9;
 	display: inline-block;
 	padding: 1px;
 	margin: 0px 0px;
 	margin-right:10px;
 	margin-bottom:50px;
-	color: #337ab7;
+	color: #0923A9;
 	width: 80px;
 	height:25px;
 	text-align: center;
@@ -199,7 +199,7 @@ input[type=file]::file-selector-button {
 	
 }
 input[type=file]::file-selector-button:hover{
-    background-color: #337ab7;
+    background-color: #0923A9;
     color: white;
     
 
@@ -211,13 +211,21 @@ input[type=file]::file-selector-button:hover{
     position: relative;
     bottom: 3px;
 }
+.btn-primary{
+    background-color: #0923A9;
+    border-color: black;
+}
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active{
+   background-color: #0923A9 !important;
+   border-color: black !important;
+}
 </style>
 </head>
 <body>
 	<div class="container" id="notice">
 		<div class="row">
 			<h1 class="text-center">Question</h1>
-			<form method="post" action="../board/qnaboard_insert_ok.do">
+			<form method="post" action="../board/qnaboard_insert_ok.do" enctype="multipart/form-data">
 			<table class="table_content" width=800>
 
 				<tr>
@@ -239,7 +247,7 @@ input[type=file]::file-selector-button:hover{
 			        </td>
 				</tr>			
 
-				<tr>
+				<tr id=cont>
 					<th width=15% class="text-center">내용</th>
 					<td width="85%"><textarea rows="20" style="width:100%;height:100%" required
 							name=cont></textarea></td>

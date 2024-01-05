@@ -10,67 +10,68 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            height: 130vh;
+            height: 800px;
         }
 
-        #log {
+        #login-all-cont #login-form-all {
+            width: 500px;
+            padding: 20px;
+            border-radius: 5px;
+            border: none; /* 요청대로 테두리 제거 */
+        }
+
+        #login-all-cont #log {
             width: 500px;
             height: auto;
             border-radius: 5px;
             margin-right: 20px;
         }
 
-        #login-form-all {
-            width: 300px;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            border: 1px solid #ddd;
-        }
+        
 
-        h2 {
+        #login-all-cont h2 {
             text-align: center;
             color: #3498db;
             margin-bottom: 20px;
         }
 
-        label {
+        #login-all-cont label {
             display: block;
             margin-bottom: 5px;
             color: #3498db;
             width: 70px;
         }
 
-        input[type="text"],
-        input[type="password"],
-        input[type="submit"],
-        input[type="checkbox"] {
+        #login-all-cont input[type="text"],
+        #login-all-cont input[type="password"],
+        #login-all-cont input[type="submit"],
+        #login-all-cont input[type="checkbox"] {
             width: calc(100% - 16px);
-            padding: 8px;
+            padding: 12px;
             margin-bottom: 10px;
             border: 1px solid #ccc;
             border-radius: 3px;
             display: inline-block;
         }
 
-        input[type="checkbox"] {
+        #login-all-cont input[type="checkbox"] {
             width: auto; /* Auto width for checkbox */
             margin-right: 5px; /* Add some space to the right of the checkbox */
         }
 
-        input[type="submit"] {
+        #login-all-cont input[type="submit"] {
             background-color: transparent;
             color: #3498db;
             cursor: pointer;
             border: none;
         }
 
-        input[type="submit"]:hover {
+        #login-all-cont input[type="submit"]:hover {
             background-color: transparent;
             color: #2980b9;
         }
 
-        a {
+        #login-all-cont a {
             display: inline-block;
             margin: 10px;
             text-decoration: none;
@@ -78,30 +79,30 @@
             border-radius: 1px;
         }
 
-        a:hover {
+        #login-all-cont a:hover {
             text-decoration: underline;
         }
 
-        div.checkbox-container {
+        #login-all-cont div.checkbox-container {
             display: flex;
             align-items: center;
             margin-bottom: 10px;
         }
         
-        div.links {
+        #login-all-cont div.links {
             text-align: center;
         }
 
-        a.log-link-1 {
+        #login-all-cont a.log-link-1 {
             margin: 0 10px;
         }
-        #login-submit-btn
+        #login-all-cont #login-submit-btn
         {
         	background-color: #3498db;
         	color: white;
         }
     </style>
-    <script src="../js/member.js"></script>
+    
 </head>
 <body>
 
