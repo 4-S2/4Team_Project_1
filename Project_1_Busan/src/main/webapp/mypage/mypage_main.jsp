@@ -5,25 +5,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-        <!--기본 CSS-->
-<!--         <link rel="stylesheet" type="text/css" href="../css/reset.css" />
-        <link rel="stylesheet" type="text/css" href="../css/pc.css" /> -->
-
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-    const menuItems = document.querySelectorAll('.board_filter_in .filter_box');
-
-    menuItems.forEach(item => {
-        item.addEventListener('click', function() {
-            menuItems.forEach(item => {
-                item.classList.remove('active');
-            });
-            this.classList.add('active');
-        });
-    });
-});
-</script>
-
 <style>
 .active {
     /* background-color: #f0f0f0; /* 변경할 색상을 여기에 추가하세요 */ */
@@ -41,7 +22,21 @@ padding:0;
 max-width: 1280px; */
 }
 </style>
-        
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const menuItems = document.querySelectorAll('.board_filter_in .filter_box');
+
+    menuItems.forEach(item => {
+        item.addEventListener('click', function() {
+            menuItems.forEach(item => {
+                item.classList.remove('active');
+            });
+            this.classList.add('active');
+        });
+    });
+});
+</script>
+
 </head>
 <body>
 <body data="mypage"><div id="divLoading"><div class="loading-fixed"><i></i><i></i><i></i><i></i></div></div>
@@ -70,7 +65,7 @@ max-width: 1280px; */
                         <a href="../mypage/myReserv.do" class="menu_depth3 single">예약내역</a>
                     </li>
                     <li class="filter_box">
-                        <a href="../mypage/mypurchase.do" class="menu_depth3 single ">구매내역</a>
+                        <a href="../mypage/myPurchase.do" class="menu_depth3 single ">구매내역</a>
                     </li>                      
                     <li class="filter_box">
                         <a href="../mypage/myCart.do" class="menu_depth3 single ">장바구니</a>

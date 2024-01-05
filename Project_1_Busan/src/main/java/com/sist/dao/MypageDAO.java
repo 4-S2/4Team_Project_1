@@ -91,7 +91,7 @@ public class MypageDAO {
 							+ "phone=?, "
 							+ "postcode=?, "
 							+ "addr=?, "
-							+ "detail_addr=? "
+							+ "detail_addr=?, "
 							+ "password=? "
 							+ "WHERE id=?";
 					ps=conn.prepareStatement(sql);
@@ -150,12 +150,6 @@ public class MypageDAO {
 			return list;
 	        
 	    }
-
-
-		public String myaccDeleteOk(String id, String pwd) {
-			// TODO Auto-generated method stub
-			return null;
-		}
 		
 		// 회원 탈퇴하기
 		// 연결된 테이블: reservation, jjim, heart, review, review_reply, order 
@@ -165,7 +159,7 @@ public class MypageDAO {
 			   try
 			   {
 				   conn=dbconn.getConnection();
-				   conn.setAutoCommit(false);
+				   
 				   String sql="SELECT password FROM user_ "
 						     +"WHERE id=?";
 				   ps=conn.prepareStatement(sql);
@@ -176,7 +170,7 @@ public class MypageDAO {
 				   rs.close();
 				   if(db_pwd.equals(pwd))
 				   {
-					      
+					   conn.setAutoCommit(false);
 						   sql="DELETE FROM reservation "
 							  +"WHERE id=?";
 						   ps=conn.prepareStatement(sql);
@@ -233,12 +227,15 @@ public class MypageDAO {
 						   
 						   result="OK";
 						   conn.commit();
+				   }else {
+					   result="NO";
 				   }
 			   }catch(Exception ex){
 				   ex.printStackTrace();
 				   try{
 					   conn.rollback();
 				   }catch(Exception e) {}
+				   
 			   	}finally{
 				   dbconn.disConnection(conn, ps);
 				   try{

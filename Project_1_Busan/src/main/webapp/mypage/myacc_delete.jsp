@@ -80,21 +80,6 @@
     text-align:left;
 }
 
-.metammm .fa {
-  color: #555555;
-  font-size: 40px;
-  font-weight: 400;
-}
-
-.metammm .a {
-  color: #555555;
-  font-size: 20px;
-  font-weight: 200;
-}
-
-#book-table th, #book-table td{
-	vertical-align: middle;
-}
 
 /* ADMINPAGE */
 .span-btn{
@@ -108,28 +93,6 @@
     padding: 6px 10px;
 }
 
-.radio-btn{
-	display:inline-block;
-	width:20px;
-}
-
-.pet-poster-size{
-	height:250px;	
-}
-
-.petDeleteBtn{
-	position:absolute;
-	bottom: 40px;
-	left:40%;
-}
-
-.delete-title {
-        padding-top: 40px;
-        color: black;
-        font-family: 'Noto Sans KR', sans-serif;
-        font-weight: bold;
-        font-size: 23px;
-    }
 
 .delete-to-confirm-submit {
     cursor: pointer;
@@ -204,6 +167,7 @@
 }
 
 </style>
+<!-- <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script> -->
 <script type="text/javascript">
 $(function(){
 	$('#delAccBtn').click(function(){
@@ -215,26 +179,28 @@ $(function(){
 		}
 		$.ajax({
 			type:'post',
-			url:'deletemyaccount_confirm.do',
+			url:'myacc_delete_ok.do',
 			data:{"pwd":pwd},
 			success:function(result)
 			{
 				let res=result.trim();
-				if(res==='no')
+				if(res==='NO')
 			    {
 					alert("비밀번호가 틀립니다. 다시 확인해주세요.");
 					$('#pwdInput').val("");
 					$('#pwdInput').focus();
 				}
-				else if(res==='yes')
+				else if(res==='OK')
 				{
-					alert("회원 탈퇴 완료되었습니다.");
+					alert("회원 탈퇴가 완료되었습니다.");
 					location.href="../main/main.do";
 				}
-				else if(res=='fail'){
+				else if(res==='fail'){
 					alert('회원 탈퇴에 실패했습니다');
 					location.href="../main/main.do";
 				}
+			},error:function(e){
+				console.log(e)
 			}
 			
 		})

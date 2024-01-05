@@ -68,7 +68,7 @@ public class MypageModel {
 		
 		MypageDAO dao=MypageDAO.newInstance();
 		int success=dao.editProfile(vo);
-
+		System.out.println(success);
 		try
 		{
 			PrintWriter out=response.getWriter();
@@ -158,9 +158,7 @@ public class MypageModel {
 		String id=(String)session.getAttribute("id");
 		
 		MypageDAO dao=MypageDAO.newInstance();
-		/* MemberVO vo=dao.myprofile(id); */
 		
-		/* request.setAttribute("vo", vo); */
 		request.setAttribute("mypage_jsp", "myacc_delete.jsp");
 		request.setAttribute("main_jsp", "../mypage/mypage_main.jsp");
 		return "../main/main.jsp";
@@ -175,7 +173,8 @@ public class MypageModel {
 		String id=(String)session.getAttribute("id");
 
 		MypageDAO dao=MypageDAO.newInstance();
-		String result=dao.myaccDeleteOk(id, pwd);
+		String result=dao.memberDeleteOk(id, pwd);
+		System.out.println(result);
 		if(result.equals("OK"))
 		{
 			session.invalidate();

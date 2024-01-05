@@ -187,8 +187,7 @@ function checkPassword() {
 	    var enteredPassword = prompt("비밀번호를 입력하세요:");
 	    // 공백 제거, 입력된 문자=>숫자 변환 (유효성 검증)
 	    enteredPassword = parseInt(enteredPassword.trim());
-	    var correctPassword = parseInt(pwd.trim()); 
-	    alert(correctPassword)
+	    var correctPassword = ${vo.pwd}
 	    if (enteredPassword === "") {
 	        alert("비밀번호를 입력해주세요.");
 	      } else if (enteredPassword === correctPassword) {
@@ -238,9 +237,10 @@ function checkPassword() {
 	       		<div class="form_contbox ta_inblock">${vo.id }</div>
 	       <!-- <p class="find_label input_ta_mt80 input_ta_mb10 ta_first">비밀번호</p> -->
 	       <p class="find_label input_ta_mt80 input_ta_mb10 ta_inblock">비밀번호</p>
-	       		<div class="form_contbox ta_inblock"><input type="text" id="pwd" name="pwd" maxlength="30" value="${vo.pwd}" required></div>
+	       		<div class="form_contbox ta_inblock"><input type="password" id="pwd" name="pwd" style="padding: 8px;" value="${vo.pwd}" required></div>
 	       <p class="find_label input_ta_mt80 input_ta_mb10 ta_inblock">이메일</p>
-	       		<div class="form_contbox ta_inblock"><input type="text" id="email" name="email" maxlength="30" value="${vo.email}" required></div>
+	       		<div class="form_contbox ta_inblock"><input type="text" id="email" name="email"  value="${vo.email}" required >
+</div>
 
 	       	<p class="find_label input_ta_mt30">휴대전화</p>
 		       	<div class="form_contbox">
