@@ -144,7 +144,9 @@ public class MypageModel {
 		
 		MypageDAO dao=MypageDAO.newInstance();
 		List<QnaBoardVO> list = dao.getAllQnas(id);
+		int inqSize = list.size();
 		
+		request.setAttribute("inqSize", inqSize); 
 		request.setAttribute("list", list); 
 		request.setAttribute("mypage_jsp", "myInquiry.jsp");
 		request.setAttribute("main_jsp", "../mypage/mypage_main.jsp");
