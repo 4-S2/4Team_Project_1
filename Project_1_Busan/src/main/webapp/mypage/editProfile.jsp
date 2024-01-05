@@ -5,7 +5,7 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>프로필 수정</title>
+  <title>회원정보수정</title>
   <style>
     label {
       display: block;
@@ -29,7 +29,7 @@
     #daddr {
     	max-width: 460px;
     }
-    #name, #pwd, #addr, #postcode{
+    #name, #pwd, #addr, #postcode, #email{
     	max-width: 300px;
     }
     .p {
@@ -247,6 +247,9 @@ function checkPassword() {
 	       <!-- <p class="find_label input_ta_mt80 input_ta_mb10 ta_first">비밀번호</p> -->
 	       <p class="find_label input_ta_mt80 input_ta_mb10 ta_inblock">비밀번호</p>
 	       		<div class="form_contbox ta_inblock"><input type="text" id="pwd" name="pwd" maxlength="30" value="${vo.pwd}" required></div>
+	       <p class="find_label input_ta_mt80 input_ta_mb10 ta_inblock">이메일</p>
+	       		<div class="form_contbox ta_inblock"><input type="text" id="email" name="email" maxlength="30" value="${vo.email}" required></div>
+
 	       	<p class="find_label input_ta_mt30">휴대전화</p>
 		       	<div class="form_contbox">
 	                        <div class="clear find_birth_area phone">
