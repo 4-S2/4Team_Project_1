@@ -69,9 +69,9 @@ max-width: 1280px; */
                     <li class="filter_box">
                         <a href="../mypage/myReserv.do" class="menu_depth3 single">예약내역</a>
                     </li>
-<!--                     <li class="filter_box">
-                        <a href="../mypage/mybuy.do" class="menu_depth3 single ">구매내역</a>
-                    </li>    -->                   
+                    <li class="filter_box">
+                        <a href="../mypage/mypurchase.do" class="menu_depth3 single ">구매내역</a>
+                    </li>                      
                     <li class="filter_box">
                         <a href="../mypage/myCart.do" class="menu_depth3 single ">장바구니</a>
                     </li>  
@@ -83,7 +83,7 @@ max-width: 1280px; */
                         <a href="../mypage/myInquiry.do" class="menu_depth3 single ">문의내역</a>
                     </li>
                     <li class="filter_box">
-                        <a href="../mypage/unregister.do" class="menu_depth3 single ">회원탈퇴</a>
+                        <a href="../mypage/myacc_delete.do" class="menu_depth3 single ">회원탈퇴</a>
                     </li>
                 </ul>
             </div>
