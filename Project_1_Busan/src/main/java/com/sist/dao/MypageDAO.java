@@ -67,31 +67,33 @@ public class MypageDAO {
 		// 회원정보 수정
 		public int editProfile(MemberVO vo)
 		{
-			int cnt = 0;
+			int success = 0;
 			try
 			{
+//				conn=dbconn.getConnection();
+//				String sql="SELECT password "
+//						+ "FROM member "
+//						+ "WHERE user_id=?";
+//				ps=conn.prepareStatement(sql);
+//				ps.setString(1, vo.getId());
+//				ResultSet rs=ps.executeQuery();
+//				rs.next();
+//				String pwd_ck=rs.getString(1);
+//				rs.close();
+//				
+//				if(pwd_ck.equals(vo.getPwd()))
+//				{
+//					// 수정
 				conn=dbconn.getConnection();
-				String sql="SELECT password "
-						+ "FROM member "
-						+ "WHERE user_id=?";
-				ps=conn.prepareStatement(sql);
-				ps.setString(1, vo.getId());
-				ResultSet rs=ps.executeQuery();
-				rs.next();
-				String pwd_ck=rs.getString(1);
-				rs.close();
-				
-				if(pwd_ck.equals(vo.getPwd()))
-				{
-					// 수정
-					sql="UPDATE USER_ SET "
-							+ "user_name=?, "
+				String sql="UPDATE USER_ SET "
+							+ "name=?, "
 							+ "email=?, "
 							+ "phone=?, "
 							+ "postcode=?, "
 							+ "addr=?, "
 							+ "detail_addr=? "
-							+ "WHERE user_id=?";
+							+ "password=? "
+							+ "WHERE id=?";
 					ps=conn.prepareStatement(sql);
 					ps.setString(1, vo.getName());
 					ps.setString(2, vo.getEmail());
@@ -99,9 +101,10 @@ public class MypageDAO {
 					ps.setString(4, vo.getPostcode());
 					ps.setString(5, vo.getAddr());
 					ps.setString(6, vo.getDetail_addr());
-					ps.setString(7, vo.getId());
-					cnt = ps.executeUpdate();
-				}
+					ps.setString(7, vo.getPwd());
+					ps.setString(8, vo.getId());
+					success = ps.executeUpdate();
+				
 			}catch(Exception ex)
 			{
 				ex.printStackTrace();
@@ -110,7 +113,7 @@ public class MypageDAO {
 			{
 				dbconn.disConnection(conn, ps);
 			}
-			return cnt;
+			return success;
 		}
 
 		/*
@@ -147,4 +150,101 @@ public class MypageDAO {
 			return list;
 	        
 	    }
+
+
+		public String myaccDeleteOk(String id, String pwd) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+		
+		// 회원 탈퇴하기
+		// 연결된 테이블: reservation, jjim, heart, review, review_reply, order 
+		 public String memberDeleteOk(String id,String pwd)
+		   {
+			   String result="fail";
+			   try
+			   {
+				   conn=dbconn.getConnection();
+				   conn.setAutoCommit(false);
+				   String sql="SELECT password FROM user_ "
+						     +"WHERE id=?";
+				   ps=conn.prepareStatement(sql);
+				   ps.setString(1, id);
+				   ResultSet rs=ps.executeQuery();
+				   rs.next();
+				   String db_pwd=rs.getString(1);
+				   rs.close();
+				   if(db_pwd.equals(pwd))
+				   {
+					      
+						   sql="DELETE FROM reservation "
+							  +"WHERE id=?";
+						   ps=conn.prepareStatement(sql);
+						   ps.setString(1, id);
+						   ps.executeUpdate();
+						   
+						   sql="DELETE FROM jjim  "
+								   +"WHERE id=?";
+						   ps=conn.prepareStatement(sql);
+						   ps.setString(1, id);
+						   ps.executeUpdate();
+						   
+						   sql="DELETE FROM heart  "
+								   +"WHERE id=?";
+						   ps=conn.prepareStatement(sql);
+						   ps.setString(1, id);
+						   ps.executeUpdate();
+						   
+						   sql="DELETE FROM qnaboard "
+								   +"WHERE id=?";
+						   ps=conn.prepareStatement(sql);
+						   ps.setString(1, id);
+						   ps.executeUpdate();
+						   
+						   sql="DELETE FROM review "
+								   +"WHERE id=?";
+						   ps=conn.prepareStatement(sql);
+						   ps.setString(1, id);
+						   ps.executeUpdate();
+
+						   sql="DELETE FROM review "
+							  +"WHERE id=?";
+						   ps=conn.prepareStatement(sql);
+						   ps.setString(1, id);
+						   ps.executeUpdate();
+						   
+						   sql="DELETE FROM review_reply "
+							  +"WHERE id=?";
+						   ps=conn.prepareStatement(sql);
+						   ps.setString(1, id);
+						   ps.executeUpdate();
+						   
+						   sql="DELETE FROM order "
+							  +"WHERE id=?";
+						   ps=conn.prepareStatement(sql);
+						   ps.setString(1, id);
+						   ps.executeUpdate();
+						   
+						   sql="DELETE FROM uesr_ "
+								   +"WHERE id=?";
+						   ps=conn.prepareStatement(sql);
+						   ps.setString(1, id);
+						   ps.executeUpdate();
+						   
+						   result="OK";
+						   conn.commit();
+				   }
+			   }catch(Exception ex){
+				   ex.printStackTrace();
+				   try{
+					   conn.rollback();
+				   }catch(Exception e) {}
+			   	}finally{
+				   dbconn.disConnection(conn, ps);
+				   try{
+					   conn.setAutoCommit(true);
+				   }catch(Exception ex) {}
+			   }
+			   return result;
+		   }
 }
