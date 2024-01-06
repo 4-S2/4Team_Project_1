@@ -10,6 +10,8 @@ import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.*;
 import com.sist.dao.*;
+import com.sist.vo.BusanListVO;
+import com.sist.vo.JjimVO;
 import com.sist.vo.MemberVO;
 import com.sist.vo.QnaBoardVO;
 
@@ -127,9 +129,14 @@ public class MypageModel {
 		String id=(String)session.getAttribute("id");
 		
 		MypageDAO dao=MypageDAO.newInstance();
-		/* MemberVO vo=dao.myprofile(id); */
+		JjimDAO jdao = JjimDAO.newInstance();
+		
+		System.out.println(id);
+		// 명소 찜 리스트
+		List<JjimVO> list = jdao.busanjjimListData(id, "tour");
 		
 		/* request.setAttribute("vo", vo); */
+		request.setAttribute("list",list);
 		request.setAttribute("mypage_jsp", "myJjim.jsp");
 		request.setAttribute("main_jsp", "../mypage/mypage_main.jsp");
 		return "../main/main.jsp";

@@ -3,7 +3,16 @@ package com.sist.vo;
 public class JjimVO {
 	private int jno,no,cateno;
 	private MemberVO mvo = new MemberVO();
+	private BusanListVO bvo = new BusanListVO();
 	
+	
+	
+	public BusanListVO getBvo() {
+		return bvo;
+	}
+	public void setBvo(BusanListVO bvo) {
+		this.bvo = bvo;
+	}
 	public int getJno() {
 		return jno;
 	}
