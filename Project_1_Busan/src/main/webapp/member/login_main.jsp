@@ -129,8 +129,8 @@
             
             <div class="links">
                 <a href="../member/join.do" class="log-link-1">회원가입</a>  
-                <a href="#" class="log-link-1">아이디찾기</a>  
-                <a href="#" class="log-link-1">비밀번호찾기</a>
+                <a href="../member/find_id.do" class="log-link-1">아이디찾기</a>  
+                <a href="../member/find_password.do" class="log-link-1">비밀번호찾기</a>
             </div>
             
         </form>

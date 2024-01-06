@@ -15,6 +15,7 @@ public class LikeModel {
 		HttpSession session=request.getSession();
 		String id=(String)session.getAttribute("id");
 		System.out.println(id);
+		System.out.println(eno);
 		
 		LikeVO vo=new LikeVO();
 	    vo.getDvo().getId();

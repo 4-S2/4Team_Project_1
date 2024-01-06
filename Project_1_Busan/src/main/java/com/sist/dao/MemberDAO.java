@@ -3,6 +3,9 @@ import java.util.*;
 import java.sql.*;
 import com.sist.vo.*;
 import com.sist.dbcp.*;
+import javax.mail.*;
+import javax.mail.internet.*;
+
 public class MemberDAO {
    private Connection conn;
    private PreparedStatement ps;
@@ -120,6 +123,187 @@ public class MemberDAO {
 	    return vo;
 	}
    
+   public String memeberId_EmailFind(String email)
+   {
+	   String result="";
+	   try
+	   {
+		   conn=dbconn.getConnection();
+		   String sql="SELECT COUNT(*) FROM user_ "
+		   		+ "WHERE email=?";
+		   ps=conn.prepareStatement(sql);
+		   ps.setString(1, email);
+		   ResultSet rs = ps.executeQuery();
+		   rs.next();
+		   int count=rs.getInt(1);
+		   rs.close();
+		   if(count==0) // email이 없는 상태
+		   {
+			   result="NO";
+		   }
+		   else // email이 존재
+		   {
+			   sql="SELECT RPAD(SUBSTR(id,1,1),LENGTH(id),'*') "
+			   		+ "FROM user_ "
+			   		+ "WHERE email=?";
+			   //s***
+			   ps=conn.prepareStatement(sql);
+			   ps.setString(1, email);
+			   rs = ps.executeQuery();
+			   rs.next();
+			   result=rs.getString(1);
+			   rs.close();
+			   
+		   }
+	   }catch(Exception ex)
+	   {
+		   ex.printStackTrace();
+	   }
+	   finally
+	   {
+		   dbconn.disConnection(conn, ps);
+	   }
+	   return result;
+   }
+   public String memberPasswordFind(String id,String email)
+   {
+	   String result="";
+	   try
+	   {
+		   conn=dbconn.getConnection();
+		   String sql="SELECT COUNT(*) FROM user_ "
+		   		+ "WHERE id=? AND email=?";
+		   ps=conn.prepareStatement(sql);
+		   ps.setString(1, id);
+		   ps.setString(2, email);
+		   ResultSet rs = ps.executeQuery();
+		   rs.next();
+		   int count =rs.getInt(1);
+		   rs.close();
+		   if(count ==0)
+		   {
+			   result="NO";
+		   }
+		   else
+		   {
+			   sql="SELECT RPAD(SUBSTR(password,1,1),LENGTH(password),'*') "
+			   		+ "FROM user_ "
+			   		+ "WHERE id=? AND email=?";
+			   ps=conn.prepareStatement(sql);
+			   ps.setString(1, id);
+			   ps.setString(2, email);
+			   rs=ps.executeQuery();
+			   rs.next();
+			   result=rs.getString(1);
+			   rs.close();
+		   }
+			   
+	   }catch(Exception ex)
+	   {
+		   ex.printStackTrace();
+		  
+	   }
+	   finally
+	   {
+		   dbconn.disConnection(conn, ps);
+	   }
+	   return result;
+   }
+	public String memberPasswordPhoneFind(String id,String phone)
+	{
+		String result="";
+		try
+		{
+			conn=dbconn.getConnection();
+			String sql="SELECT COUNT(*) FROM user_ "
+					+ "WHERE id=? AND phone=?";
+			ps=conn.prepareStatement(sql);
+			ps.setString(1, id);
+			ps.setString(2, phone);
+			ResultSet rs = ps.executeQuery();
+			rs.next();
+			int count =rs.getInt(1);
+			rs.close();
+			if(count ==0)
+			{
+				result="NO";
+			}
+			else
+			{
+				sql="SELECT RPAD(SUBSTR(password,1,1),LENGTH(password),'*') "
+						+ "FROM user_ "
+						+ "WHERE id=? AND phone=?";
+				ps=conn.prepareStatement(sql);
+				ps.setString(1, id);
+				ps.setString(2, phone);
+				rs=ps.executeQuery();
+				rs.next();
+				result=rs.getString(1);
+				rs.close();
+			}
+			
+		}catch(Exception ex)
+		{
+			ex.printStackTrace();
+			
+		}
+		finally
+		{
+			dbconn.disConnection(conn, ps);
+		}
+		return result;
+	}
+	public boolean sendPasswordToEmail(String id, String email, String password) {
+	    boolean sent = false;
+	    try {
+	        // 메일 서버의 설정을 지정합니다.
+	        Properties props = new Properties();
+	        props.put("mail.smtp.host", "smtp.naver.com");
+	        props.put("mail.smtp.socketFactory.port", "465");
+	        props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+	        props.put("mail.smtp.auth", "true");
+	        props.put("mail.smtp.port", "465");
+
+	        // 세션을 생성하고 메시지를 준비합니다.
+	        Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
+	            protected PasswordAuthentication getPasswordAuthentication() {
+	                return new PasswordAuthentication("네이버아이디", "네이버 비밀번호"); // 네이버 아이디와 비밀번호 입력
+	            }
+	        });
+	        MimeMessage message = new MimeMessage(session);
+	        message.setFrom(new InternetAddress("보내는 사람 email")); // 보내는 사람 이메일 주소 설정
+	        message.addRecipient(Message.RecipientType.TO, new InternetAddress(email)); // 받는 사람 이메일 주소 설정
+	        message.setSubject("Busan Tour 비밀번호"); // 메일 제목 설정
+	        message.setText("회원님의 비밀번호는 " + password); // 메일 본문 설정
+
+	        // 메일을 발송합니다.
+	        Transport.send(message);
+	        sent = true;
+	    } catch(Exception ex) {
+	        ex.printStackTrace();
+	    }
+	    return sent;
+	}
+
+	public String getOriginalPassword(String id, String email) {
+	    try {
+	        conn = dbconn.getConnection();
+	        String sql = "SELECT password FROM user_ WHERE id=? AND email=?";
+	        ps = conn.prepareStatement(sql);
+	        ps.setString(1, id);
+	        ps.setString(2, email);
+	        ResultSet rs = ps.executeQuery();
+	        if(rs.next()) {
+	            return rs.getString("password");
+	        }
+	        rs.close();
+	    } catch(Exception ex) {
+	        ex.printStackTrace();
+	    } finally {
+	        dbconn.disConnection(conn, ps);
+	    }
+	    return null; // 일치하는 사용자가 없으면 null 반환
+	}
 
 }
    

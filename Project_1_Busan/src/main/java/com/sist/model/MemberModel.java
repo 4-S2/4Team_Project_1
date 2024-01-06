@@ -137,9 +137,6 @@ public class MemberModel {
         }
     }
     
-    
-    
-
 
     @RequestMapping("member/logout.do")
     public String member_logout(HttpServletRequest request,
@@ -149,6 +146,81 @@ public class MemberModel {
   	  session.invalidate();
   	  return "redirect:../main/main.do";
     }
+    
+    // 아이디 찾기 요청 매핑
+    @RequestMapping("member/find_id.do")
+    public String member_find_id(HttpServletRequest request, HttpServletResponse response) {
+        // 아이디 찾기 관련 로직 처리
+        
+    	request.setAttribute("main_jsp", "../member/find_id.jsp");
+    	return "../main/main.jsp";
+    }
+
+    // 아이디 찾기 결과 처리 요청 매핑
+	@RequestMapping("member/idfind_ok.do")
+	public void memberIdFindOk(HttpServletRequest request,HttpServletResponse response)
+	{
+		String email=request.getParameter("email");
+		//DAO 연동
+		MemberDAO dao = MemberDAO.newInstance();
+		String res = dao.memeberId_EmailFind(email);
+		try
+		{
+			// Ajax에 값을 전송 => NO, s***
+			PrintWriter out = response.getWriter();
+			out.println(res);
+		}catch(Exception ex) {}
+	}
+    
+
+    @RequestMapping("member/find_password.do")
+    public String member_password_id(HttpServletRequest request, HttpServletResponse response) {
+        // 아이디 찾기 관련 로직 처리
+        
+    	request.setAttribute("main_jsp", "../member/find_password.jsp");
+    	return "../main/main.jsp";
+    }
+    
+    // 비밀번호 찾기 결과 처리 요청 매핑
+    @RequestMapping("member/passwordfindOk.do")
+    public void passwordfindOk(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String id = request.getParameter("id");
+        String email = request.getParameter("email");
+
+        MemberDAO dao = MemberDAO.newInstance();
+        String password = dao.getOriginalPassword(id, email); // 원래 비밀번호 가져오기
+
+        if(password != null) {
+            boolean emailSent = dao.sendPasswordToEmail(id, email, password); // 이메일 발송
+            if(emailSent) {
+                response.getWriter().print("YES");
+            } else {
+                response.getWriter().print("EMAIL_SEND_FAIL");
+            }
+        } else {
+            response.getWriter().print("NO");
+        }
+    }
+
+    @RequestMapping("member/passwordfindOk2.do")
+	public void memeberPasswordOk2(HttpServletRequest request,HttpServletResponse response)
+	{
+		try
+		{
+			request.setCharacterEncoding("UTF-8");
+		}catch(Exception ex) {}
+		String id= request.getParameter("id");
+		String phone= request.getParameter("phone");
+		//DAO 연동
+		MemberDAO dao=MemberDAO.newInstance();
+		String res = dao.memberPasswordPhoneFind(id, phone);
+		try
+		{
+			//Spring => @RestController
+			PrintWriter out = response.getWriter();
+			out.println(res);
+		}catch(Exception ex) {}
+	}
     
     
 }
