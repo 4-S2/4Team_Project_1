@@ -32,7 +32,7 @@ public class JjimDAO {
 	    * 
 	    */
 	// 찜한 명소,축제,맛집,체험 목록 -> 마이페이지
-	public List<JjimVO> busanjjimListData(String id,String tab) {
+	public List<JjimVO> busanjjimListData(String id,String tab,int cateno) {
 		List<JjimVO> list = new ArrayList<>();
 		try {
 			conn=dbconn.getConnection();
@@ -40,8 +40,8 @@ public class JjimDAO {
 					+ "FROM user_ u "
 					+ "JOIN jjim j ON u.id = j.id "
 					+ "JOIN "+tab+" ON j.no = "+tab+".NO "
-					+ "WHERE u.id=? "
-					+ "ORDER BY j.jno DESC";
+					+ "WHERE u.id=? AND j.CATENO = "+cateno
+					+ " ORDER BY j.jno DESC";
 			ps=conn.prepareStatement(sql);
 			ps.setString(1, id);
 			ResultSet rs=ps.executeQuery();
@@ -50,6 +50,37 @@ public class JjimDAO {
 				vo.setJno(rs.getInt(1));
 				vo.getBvo().setPoster(rs.getString(2));
 				vo.getBvo().setTitle(rs.getString(3));
+				vo.setNo(rs.getInt(4));
+				list.add(vo);
+			}
+			rs.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			dbconn.disConnection(conn, ps);
+		}
+		return list;
+	}
+	
+	// 찜한 전시회 목록 -> 마이페이지
+	public List<JjimVO> exjjimListData(String id) {
+		List<JjimVO> list = new ArrayList<>();
+		try {
+			conn=dbconn.getConnection();
+			String sql="SELECT j.jno, e.poster, e.ename, j.no "
+					+ "FROM user_ u "
+					+ "JOIN jjim j ON u.id = j.id "
+					+ "JOIN EXHIBITION e ON j.no = e.eNO "
+					+ "WHERE u.id=? "
+					+ "ORDER BY j.jno DESC";
+			ps=conn.prepareStatement(sql);
+			ps.setString(1, id);
+			ResultSet rs=ps.executeQuery();
+			while(rs.next()) {
+				JjimVO vo = new JjimVO();
+				vo.setJno(rs.getInt(1));
+				vo.getEvo().setPoster(rs.getString(2));
+				vo.getEvo().setEname(rs.getString(3));
 				vo.setNo(rs.getInt(4));
 				list.add(vo);
 			}

@@ -109,13 +109,13 @@ function toggleTab(tabIndex) {
         document.getElementById('table2').classList.remove('hidden');
         buttons[tabIndex].classList.add('on');
     }else if (tabIndex === 2) {
-        document.getElementById('table2').classList.remove('hidden');
+        document.getElementById('table3').classList.remove('hidden');
         buttons[tabIndex].classList.add('on');
     }else if (tabIndex === 3) {
-        document.getElementById('table2').classList.remove('hidden');
+        document.getElementById('table4').classList.remove('hidden');
         buttons[tabIndex].classList.add('on');
     }else if (tabIndex === 4) {
-        document.getElementById('table2').classList.remove('hidden');
+        document.getElementById('table5').classList.remove('hidden');
         buttons[tabIndex].classList.add('on');
     }
 }
@@ -142,123 +142,161 @@ function toggleTab(tabIndex) {
 
         <!--  명소 찜 목록 -->
         <div id="table1" class="">
+		   <c:choose>
+			 <c:when test="${empty list}">
+				                등록된 내용이 없습니다.
+			 </c:when>
+			<c:otherwise>        
         	<div class="col-sm-8 col-md-12">
-	<div class="row">
-		<c:forEach var="vo" items="${list }">
-			<div class="col-md-4">
-				<div class="single-blog">
-					<div class="content fix">
-						<a class="image fix" href="../busan/tour_detail.do?no=${vo.no}"><img
-							src="${vo.bvo.poster }" width="100%" height="220px" /></a>
-						<div class="metammm" style="position: relative">
-							<div style="display: inline-block">
-								<h2>
-									<a style="text-decoration: none"
-										href="#">${vo.jno}</a>
-								</h2>
-								<a class="title" href="../busan/tour_detail.do?no=${vo.no}">${vo.bvo.title}</a>
-							</div>
-							<div style="display: inline-block; float: right; margin-top: 22px; cursor: pointer;" onclick="">
-								<img src="" style="width: 30px;">
+				<div class="row">
+					<c:forEach var="vo" items="${list }">
+						<div class="col-md-4">
+							<div class="single-blog">
+								<div class="content fix">
+									<a class="image fix" href="../busan/tour_detail.do?no=${vo.no}"><img
+										src="${vo.bvo.poster }" width="100%" height="220px" /></a>
+									<div class="metammm" style="position: relative">
+										<div style="display: inline-block">
+											<h2>
+												<a style="text-decoration: none"
+													href="#">${vo.jno}</a>
+											</h2>
+											<a class="title" href="../busan/tour_detail.do?no=${vo.no}">${vo.bvo.title}</a>
+										</div>
+										<div style="display: inline-block; float: right; margin-top: 22px; cursor: pointer;" onclick="">
+											<img src="" style="width: 30px;">
+										</div>
+									</div>
+								</div>
 							</div>
 						</div>
-					</div>
+					</c:forEach>
 				</div>
 			</div>
-		</c:forEach>
-	</div>
-</div>
-<%-- 	        <!--TABLE-->
-			<table class="lecture_info_table tablet_type2 mypage" style="width: 100%;">
-			    <thead>
-			    <tr>
-			        <th class="dp_pc num2" scope="col">번호</th>
-			        <th class="title double ta_txt_center" scope="col" style="text-align: center;">이름</th>
-			        <th class="dp_pc reserve_date" scope="col">예약일시</th>
-			        <th class="dp_pc num2" scope="col">인원</th>
-			        <th class="write_date" scope="col">승인상태</th>
-			    </tr>
-			    </thead>
-			    <tbody>
-					<c:choose>
-					    <c:when test="${empty list}">
-					        <tr>
-					            <td colspan="4" class="empty">
-					                예약내역이 없습니다.
-					            </td>
-					        </tr>
-					    </c:when>
-					    <c:otherwise>
-					        <c:forEach var="vo" items="${list}">
-					            <tr>
-					                <td class="dp_pc num2">${vo.qno}</td>
-					                <td class="title double ta_px20">
-					                    <a href="../board/qnaboard_detail.do?qno=${vo.qno}" class="ellipsis">${vo.subject}</a>
-					                </td>
-					                <td class="dp_pc writer">${vo.regdate}</td>
-					                <c:if test="${vo.status == 0 }">
-					                	<td class="category px_20 ta_px10">답변대기</td>
-					                </c:if>
-					                <c:if test="${vo.status == 1 }">
-					                	<td class="category px_20 ta_px10"><strong>답변완료</strong></td>
-					                </c:if>				                
-					            </tr>
-					        </c:forEach>
-					    </c:otherwise> 
- 					</c:choose>
-			    </tbody>
-			</table>
-			<!--//TABLE--> --%>
+			</c:otherwise>
+			</c:choose>
         </div>
         
-		<!--  전시회 예약 -->
+		<!--  맛집 찜목록 -->
 		<div id="table2" class="hidden">
-	        <!--TABLE-->
-			<table class="lecture_info_table tablet_type2 mypage" style="width: 100%;">
-			    <thead>
-			    <tr>
-			        <th class="dp_pc num2" scope="col">번호</th>
-			        <th class="title double ta_txt_center" scope="col" style="text-align: center;">전시회명</th>
-			        <th class="dp_pc reserve_date" scope="col">예약일시</th>
-			        <th class="dp_pc num2" scope="col">인원</th>
-			        <th class="dp_pc reserve_date" scope="col">결제상태</th>
-			        <th class="write_date" scope="col">승인상태</th>
-			    </tr>
-			    </thead>
-			    <tbody>
-<%-- 					<c:choose>
-					    <c:when test="${empty list}"> --%>
-					        <tr>
-					            <td colspan="4" class="empty">
-					                예약내역이 없습니다.
-					            </td>
-					        </tr>
-<%-- 					    </c:when>
-					    <c:otherwise>
-					        <c:forEach var="vo" items="${list}">
-					            <tr>
-					                <td class="dp_pc num2">${vo.qno}</td>
-					                <td class="title double ta_px20">
-					                    <a href="../board/qnaboard_detail.do?qno=${vo.qno}" class="ellipsis">${vo.subject}</a>
-					                </td>
-					                <td class="dp_pc writer">${vo.regdate}</td>
-					                <c:if test="${vo.status == 0 }">
-					                	<td class="category px_20 ta_px10">답변대기</td>
-					                </c:if>
-					                <c:if test="${vo.status == 1 }">
-					                	<td class="category px_20 ta_px10"><strong>답변완료</strong></td>
-					                </c:if>				                
-					            </tr>
-					        </c:forEach>
-					    </c:otherwise> 
- 					</c:choose> --%>
-			    </tbody>
-			</table>
-			<!--//TABLE-->
-			
+        	<div class="col-sm-8 col-md-12">
+				<div class="row">
+					<c:forEach var="vo" items="${fdlist }">
+						<div class="col-md-4">
+							<div class="single-blog">
+								<div class="content fix">
+									<a class="image fix" href="../busan/food_detail.do?no=${vo.no}"><img
+										src="${vo.bvo.poster }" width="100%" height="220px" /></a>
+									<div class="metammm" style="position: relative">
+										<div style="display: inline-block">
+											<h2>
+												<a style="text-decoration: none"
+													href="#">${vo.jno}</a>
+											</h2>
+											<a class="title" href="../busan/food_detail.do?no=${vo.no}">${vo.bvo.title}</a>
+										</div>
+										<div style="display: inline-block; float: right; margin-top: 22px; cursor: pointer;" onclick="">
+											<img src="" style="width: 30px;">
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</c:forEach>
+				</div>
+			</div>
+       </div>
+       
+        <!--  축제 찜 목록 -->
+        <div id="table3" class="hidden">
+        	<div class="col-sm-8 col-md-12">
+				<div class="row">
+					<c:forEach var="vo" items="${flist }">
+						<div class="col-md-4">
+							<div class="single-blog">
+								<div class="content fix">
+									<a class="image fix" href="../busan/festival_detail.do?no=${vo.no}"><img
+										src="${vo.bvo.poster }" width="100%" height="220px" /></a>
+									<div class="metammm" style="position: relative">
+										<div style="display: inline-block">
+											<h2>
+												<a style="text-decoration: none"
+													href="#">${vo.jno}</a>
+											</h2>
+											<a class="title" href="../busan/festival_detail.do?no=${vo.no}">${vo.bvo.title}</a>
+										</div>
+										<div style="display: inline-block; float: right; margin-top: 22px; cursor: pointer;" onclick="">
+											<img src="" style="width: 30px;">
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</c:forEach>
+				</div>
+			</div>
         </div>
-     </div>
         
+        <!--  체험 찜 목록 -->
+        <div id="table4" class="hidden">
+        	<div class="col-sm-8 col-md-12">
+				<div class="row">
+					<c:forEach var="vo" items="${alist }">
+						<div class="col-md-4">
+							<div class="single-blog">
+								<div class="content fix">
+									<a class="image fix" href="../busan/activity_detail.do?no=${vo.no}"><img
+										src="${vo.bvo.poster }" width="100%" height="220px" /></a>
+									<div class="metammm" style="position: relative">
+										<div style="display: inline-block">
+											<h2>
+												<a style="text-decoration: none"
+													href="#">${vo.jno}</a>
+											</h2>
+											<a class="title" href="../busan/activity_detail.do?no=${vo.no}">${vo.bvo.title}</a>
+										</div>
+										<div style="display: inline-block; float: right; margin-top: 22px; cursor: pointer;" onclick="">
+											<img src="" style="width: 30px;">
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</c:forEach>
+				</div>
+			</div>
+        </div>
+        
+        <!--  전시회 찜 목록 -->
+        <div id="table5" class="hidden">
+        	<div class="col-sm-8 col-md-12">
+				<div class="row">
+					<c:forEach var="vo" items="${elist }">
+						<div class="col-md-4">
+							<div class="single-blog">
+								<div class="content fix">
+									<a class="image fix" href="../busan/exhibition_detail.do?eno=${vo.no}"><img
+										src="${vo.evo.poster }" width="100%" height="220px" /></a>
+									<div class="metammm" style="position: relative">
+										<div style="display: inline-block">
+											<h2>
+												<a style="text-decoration: none"
+													href="#">${vo.jno}</a>
+											</h2>
+											<a class="title" href="../busan/exhibition_detail.do?eno=${vo.no}">${vo.evo.ename}</a>
+										</div>
+										<div style="display: inline-block; float: right; margin-top: 22px; cursor: pointer;" onclick="">
+											<img src="" style="width: 30px;">
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</c:forEach>
+				</div>
+			</div>
+        </div>
+        </div>
 
 </body>
 </html>

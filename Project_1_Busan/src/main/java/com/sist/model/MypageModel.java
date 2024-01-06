@@ -131,12 +131,17 @@ public class MypageModel {
 		MypageDAO dao=MypageDAO.newInstance();
 		JjimDAO jdao = JjimDAO.newInstance();
 		
-		System.out.println(id);
-		// 명소 찜 리스트
-		List<JjimVO> list = jdao.busanjjimListData(id, "tour");
+		List<JjimVO> list = jdao.busanjjimListData(id, "tour",1);
+		List<JjimVO> fdlist = jdao.busanjjimListData(id, "food",2);
+		List<JjimVO> flist = jdao.busanjjimListData(id, "festival",3);
+		List<JjimVO> alist = jdao.busanjjimListData(id, "activity",4);
+		List<JjimVO> elist = jdao.exjjimListData(id);
 		
-		/* request.setAttribute("vo", vo); */
 		request.setAttribute("list",list);
+		request.setAttribute("fdlist",fdlist);
+		request.setAttribute("flist",flist);
+		request.setAttribute("alist",alist);
+		request.setAttribute("elist",elist);
 		request.setAttribute("mypage_jsp", "myJjim.jsp");
 		request.setAttribute("main_jsp", "../mypage/mypage_main.jsp");
 		return "../main/main.jsp";
