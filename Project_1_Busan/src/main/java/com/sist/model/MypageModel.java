@@ -7,15 +7,12 @@ import javax.servlet.http.HttpSession;
 import com.sist.controller.RequestMapping;
 
 import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
 import java.util.*;
 import com.sist.dao.*;
-import com.sist.vo.BusanListVO;
 import com.sist.vo.JjimVO;
 import com.sist.vo.MemberVO;
 import com.sist.vo.QnaBoardVO;
 
-import oracle.net.ns.SessionAtts;
 
 public class MypageModel {
 	// 마이페이지 메인 (회원정보수정)

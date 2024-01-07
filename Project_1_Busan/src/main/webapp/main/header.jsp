@@ -57,7 +57,7 @@
 
         <!-- Further check if the user is an administrator -->
         <c:if test="${sessionScope.admin=='y'}">
-            <li style="display: inline-block;"><a href="#" style="padding: 0 15px; line-height: 50px;">관리자페이지</a></li>
+            <li style="display: inline-block;"><a href="../admin/admin_main.do" style="padding: 0 15px; line-height: 50px;">관리자페이지</a></li>
         </c:if>
 
         <!-- Check if the user is a regular user -->
