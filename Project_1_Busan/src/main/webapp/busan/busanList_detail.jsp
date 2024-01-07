@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <!-- Include Kakao Maps API -->
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fce1f2ebd7aeec53bebf70c1f38c36c7&libraries=services"></script>
+<script type="text/javascript"
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fce1f2ebd7aeec53bebf70c1f38c36c7&libraries=services"></script>
 
 <script type="text/javascript">
     var mapInitialized = false;
@@ -71,27 +72,112 @@
             selectedTab.style.display = 'block';
         }
     }
-</script> 
+
+/*     $(function(){
+        $('.reUp').click(function(){
+        	$(this).text('취소'); 
+        	$('.update').show();
+        });
+    }); */
+    
+    $(function(){
+        $('.reUp').click(function(){
+            var buttonText = $(this).text();
+            
+            if(buttonText === '취소') {
+                // '취소'일 때의 동작
+                $(this).text('수정');
+                $('.update').hide();
+            } else {
+                // '취소'가 아닐 때의 동작
+                $(this).text('취소');
+                $('.update').show();
+            }
+        });
+    });
+    $(function(){
+        $('.replyBtn').click(function(){
+            var buttonText = $(this).text();
+            
+            if(buttonText === '취소') {
+                // '취소'일 때의 동작
+                $(this).text('답글쓰기');
+                $('.reply').hide();
+            } else {
+                // '취소'가 아닐 때의 동작
+                $(this).text('취소');
+                $('.reply').show();
+            }
+        });
+    });
+    /* let bCheck=false;
+    $(function(){
+    	$('.reUp').click(function(){
+    		if(bCheck===false)
+    		{
+    			bCheck=true;
+    			$('.update').show();
+    			$(this).text('취소');
+    			
+    		}
+    		else{
+    			bCheck=false;
+    			$('.update').show();
+    			$(this).text('수정'); 
+    			
+    		}
+    	}); */
+</script>
 
 <style>
-    #mapCont {
-        display: none;
-        width: 100%;
-    }
-    #kkomap {
-        width: 100%;
-        height: 350px;
-    }
-    .product-card-price{
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        max-width: 70%;
-    }
+#mapCont {
+	display: none;
+	width: 100%;
+}
+
+#kkomap {
+	width: 100%;
+	height: 350px;
+}
+
+.product-card-price {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	max-width: 70%;
+}
+.comment{
+    display: inline-block;
+    min-width: 60%;
+}
+.reUpBtn, .replyInsertBtn{
+    height: 60px;
+    width: 9.6%;
+    padding: 20px;
+}
+.upBox, .replyBox{
+    min-width: 90%;
+    height: 60px;
+}
+.reUp, .reUpBtn, .reDel, .reInBtn, .reBack, .replyBtn, .replyInsertBtn {
+    background-color: #2546F4;
+    color: #fff;
+}
+.btn.focus, .btn:focus, .btn:hover{
+color: #fff;
+}
+.reUp, .reDel {
+    width:49px;
+}
+.btnTo{
+    display: inline-block;
+    float: right;
+    margin-top: 7px;
+}
 </style>
 
-<div id="busan" class="detail">   
-    <!-- <div class="section no-padding-vertical">
+<div id="busan" class="detail">
+	<!-- <div class="section no-padding-vertical">
         <div class="wrapper side-paddings">
             <div class="breadcrumbs">
                 <a href="/" class="link-grey">Home</a>
@@ -102,180 +188,264 @@
             </div>
         </div>
     </div> -->
-    
-    <div class="section no-padding-vertical">
-        <div class="wrapper side-paddings">
-            <div class="product">
-            	<div class="product-top">
-            		<div class="product-poster">
-	                    <img alt="대표 이미지" src="${vo.poster}" sizes="(max-width: 479px) 83vw, (max-width: 767px) 75vw, (max-width: 991px) 76vw, 32vw" />
-	                </div>
-	                <div class="product-info">
-	                    <h1>${vo.title}</h1>
-	                    <div class="heart">
-	                    	<span>좋아요 수</span>
-	                    	<button>좋아요</button>
-	                    </div>
-	                    <div class="jjim">
-	                    	<span>찜하기 수</span>
-	                    	<button>찜하기</button>
-	                    </div>
-	                </div>
-            	</div>
 
-                <!-- 탭 메뉴 -->
-                <div class="product-detail">
-               		<ul class="tab-menu">
-               			<li id="detail">상세 설명</li>
-               			<li id="map">지도/주변 추천</li>
-               			<li id="review">리뷰</li>
-               			<li id="reserve">예약하기</li>
-               		</ul>
-               		
-               		<!-- <div class="shop-header-line">
+	<div class="section no-padding-vertical">
+		<div class="wrapper side-paddings">
+			<div class="product">
+				<div class="product-top">
+					<div class="product-poster">
+						<img alt="대표 이미지" src="${vo.poster}"
+							sizes="(max-width: 479px) 83vw, (max-width: 767px) 75vw, (max-width: 991px) 76vw, 32vw" />
+					</div>
+					<div class="product-info">
+						<h1>${vo.title}</h1>
+						<div class="heart">
+							<span>좋아요 수</span>
+							<button>좋아요</button>
+						</div>
+						<div class="jjim">
+							<span>찜하기 수</span>
+							<button>찜하기</button>
+						</div>
+					</div>
+				</div>
+
+				<!-- 탭 메뉴 -->
+				<div class="product-detail">
+					<ul class="tab-menu">
+						<li id="detail">상세 설명</li>
+						<li id="map">지도/주변 추천</li>
+						<li id="review">리뷰</li>
+						<li id="reserve">예약하기</li>
+					</ul>
+
+					<!-- <div class="shop-header-line">
 	                    <div class="shop-header-color"></div>
 	                </div> -->
-	                
-               		<div id="detailCont" class="tab-content">
-	               		<div class="detail-info">              		
-	               			<!-- 상세 이미지 -->
-	               			<div class="deimage-wrapper">
+
+					<div id="detailCont" class="tab-content">
+						<div class="detail-info">
+							<!-- 상세 이미지 -->
+							<div class="deimage-wrapper">
 								<c:forEach var="dimg" items="${vo.deimage}" varStatus="d">
-								    <c:if test="${d.index < fn:length(vo.deimage) - 1}">
-								        <img class="deimage" src="${dimg}" alt="상세 이미지"> 
-								    </c:if>
+									<c:if test="${d.index < fn:length(vo.deimage) - 1}">
+										<img class="deimage" src="${dimg}" alt="상세 이미지">
+									</c:if>
 								</c:forEach>
 							</div>
-	                    	
-	                    	<!-- 상세 설명 -->
-	                    	<p class="cont">${vo.cont}</p>
-	                    	
-	                    	<!-- 테이블 -->
-		                    <div class="detail-table">
-		                    	<div class="product-table">
-			                        <div class="product-table-cell">
-			                            <div>주소</div>
-			                            <div class="product-table-info">
-			                                <div data-wf-sku-bindings="%5B%7B%22from%22%3A%22f_width_%22%2C%22to%22%3A%22innerHTML%22%7D%5D">${vo.addr}</div>
-			                            </div>
-			                        </div>
-			                        <div class="product-table-cell">
-			                            <div>전화번호</div>
-			                            <div class="product-table-info">
-			                                <div data-wf-sku-bindings="%5B%7B%22from%22%3A%22f_height_%22%2C%22to%22%3A%22innerHTML%22%7D%5D">${vo.phone}</div>
-			                            </div>
-			                        </div>
-			                        <div class="product-table-cell">
-			                            <div>운영시간</div>
-			                            <div class="product-table-info">
-			                                <div data-wf-sku-bindings="%5B%7B%22from%22%3A%22f_length_%22%2C%22to%22%3A%22innerHTML%22%7D%5D">${vo.bhour}</div>
-			                            </div>
-			                        </div>
-			                        <c:if test="${cate!='맛집' }">
-			                        <div class="product-table-cell no-border-bottom">
-			                            <div>요금</div>
-			                            <div class="product-table-info">
-			                                <div data-wf-sku-bindings="%5B%7B%22from%22%3A%22f_weight_%22%2C%22to%22%3A%22innerHTML%22%7D%5D">${vo.rate}</div>
-			                            </div>
-			                        </div>
-			                        </c:if>
-			                        <c:if test="${cate=='맛집' }">
-			                        <div class="product-table-cell no-border-bottom">
-			                            <div>메뉴</div>
-			                            <div class="product-table-info">
-			                                <div data-wf-sku-bindings="%5B%7B%22from%22%3A%22f_weight_%22%2C%22to%22%3A%22innerHTML%22%7D%5D">${vo.menu}</div>
-			                            </div>
-			                        </div>
-			                        </c:if>
-			                    </div>
-		                    </div>
-	
-		                    <!-- 해시 태그 -->
-		                    <c:if test="${cate!='맛집' }">
-		                    <div class="tag-list">
-		                    	<h5>연관 태그</h5>
-			                    <c:forEach var="tag" items="${vo.tag}">
-			                    	<a href="#"><span>${tag}</span></a>
-			                    </c:forEach>
-		                    </div>
-		                    </c:if>
-		                </div>
-               		</div>
-               		<div id="mapCont" class="tab-content" style="display: none;">
-               		지도 표시
-                 <div id="kkomap" style="width:100%;height:350px;"></div>
-                    </div>
-				    <div id="reviewCont" class="tab-content" style="display: none;">
-				        <!-- 리뷰 내용 -->
-				        리뷰 내용을 입력하세요.
-				        <!-- <form method="post" action="insert_ok.do">
-							<table class="table">
-								<tr>
-									<th width=10% class="text-center">이름</th>
-									<td width=90%>
-										<input type=text name=name size=20 required class="input-sm">
-									</td>
-								</tr>
-								<tr>
-									<th width=10% class="text-center">제목</th>
-									<td width=90%>
-										<input type=text name=subject size=55 required class="input-sm">
-									</td>
-								</tr>
-								<tr>
-									<th width=10% class="text-center">내용</th>
-									<td width=90%>
-										<textarea rows="10" cols="60" name=content required></textarea>
-									</td>
-								</tr>
-								<tr>
-									<th width=10% class="text-center">비밀번호</th>
-									<td width=90%>
-										<input type="password" name=pwd size=10 required class="input-sm">
-									</td>
-								</tr>
-								<tr>
-									<td colspan="2" class="text-center">
-										<button class="btn-sm btn-success">글쓰기</button>
-					           			<input type=button class="btn-sm btn-info" value="취소" onclick="javascript:history.back()">
-					         		</td>
-					       		</tr>
-					    	</table>
-					    </form> -->
-				    </div>
-				    <div id="reserveCont" class="tab-content" style="display: none;">
-				        <!-- 예약하기 내용 -->
-				        예약하기 내용을 입력하세요.
-				    </div>
-				    
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <div class="section">
-        <div class="wrapper">
-            <div class="shop-header">
-                <h3>추천 ${cate }</h3>
-                <a href="../store/goods.do" class="link arrow-link">전체보기</a>
-                <div class="shop-header-line">
-                    <div class="shop-header-color"></div>
-                </div>
-            </div>
-            <div class="full-width w-dyn-list">
-                <div role="list" class="products w-dyn-items">
-                	<c:forEach var="vo" items="${list}" begin="0" end="7">
-	                    <div role="listitem" class="product-card-wrapper w-dyn-item" style="height: 330px" > 
-	                        <a href="../busan/${tab}_detail.do?no=${vo.no}" class="product-card w-inline-block">
-	                            <div class="product-card-image-wrapper" style="height: 250px">
-	                                <img alt="" src="${vo.poster}" size="(max-width: 479px) 73vw, (max-width: 767px) 34vw, (max-width: 991px) 33vw, 12vw"/>
-	                            </div>
-	                            <div data-wf-sku-bindings="%5B%7B%22from%22%3A%22f_price_%22%2C%22to%22%3A%22innerHTML%22%7D%5D" class="product-card-price" style="margin-top: 25px;font-size: 15px">${vo.title}</div>
-	                        </a>
-	                    </div>
-                	</c:forEach>
-                </div>
-            </div>
-        </div>
-    </div>
+
+							<!-- 상세 설명 -->
+							<p class="cont">${vo.cont}</p>
+
+							<!-- 테이블 -->
+							<div class="detail-table">
+								<div class="product-table">
+									<div class="product-table-cell">
+										<div>주소</div>
+										<div class="product-table-info">
+											<div
+												data-wf-sku-bindings="%5B%7B%22from%22%3A%22f_width_%22%2C%22to%22%3A%22innerHTML%22%7D%5D">${vo.addr}</div>
+										</div>
+									</div>
+									<div class="product-table-cell">
+										<div>전화번호</div>
+										<div class="product-table-info">
+											<div
+												data-wf-sku-bindings="%5B%7B%22from%22%3A%22f_height_%22%2C%22to%22%3A%22innerHTML%22%7D%5D">${vo.phone}</div>
+										</div>
+									</div>
+									<div class="product-table-cell">
+										<div>운영시간</div>
+										<div class="product-table-info">
+											<div
+												data-wf-sku-bindings="%5B%7B%22from%22%3A%22f_length_%22%2C%22to%22%3A%22innerHTML%22%7D%5D">${vo.bhour}</div>
+										</div>
+									</div>
+									<c:if test="${cate!='맛집' }">
+										<div class="product-table-cell no-border-bottom">
+											<div>요금</div>
+											<div class="product-table-info">
+												<div
+													data-wf-sku-bindings="%5B%7B%22from%22%3A%22f_weight_%22%2C%22to%22%3A%22innerHTML%22%7D%5D">${vo.rate}</div>
+											</div>
+										</div>
+									</c:if>
+									<c:if test="${cate=='맛집' }">
+										<div class="product-table-cell no-border-bottom">
+											<div>메뉴</div>
+											<div class="product-table-info">
+												<div
+													data-wf-sku-bindings="%5B%7B%22from%22%3A%22f_weight_%22%2C%22to%22%3A%22innerHTML%22%7D%5D">${vo.menu}</div>
+											</div>
+										</div>
+									</c:if>
+								</div>
+							</div>
+
+							<!-- 해시 태그 -->
+							<c:if test="${cate!='맛집' }">
+								<div class="tag-list">
+									<h5>연관 태그</h5>
+									<c:forEach var="tag" items="${vo.tag}">
+										<a href="#"><span>${tag}</span></a>
+									</c:forEach>
+								</div>
+							</c:if>
+						</div>
+					</div>
+					<div id="mapCont" class="tab-content" style="display: none;">
+						지도 표시
+						<div id="kkomap" style="width: 100%; height: 350px;"></div>
+					</div>
+					<div id="reviewCont" class="tab-content" style="">
+						<!-- 리뷰 내용 -->
+						<button value="리뷰 작성" class="btn" id="reviewInsertBtn">리뷰
+							작성</button>
+						<div class="review-list">
+							<div class="review-profile">
+								<div class="profile">
+									<div class="profile-icon">
+										<img src="../images/icon_user.png" alt="프로필 이미지">
+									</div>
+									<h4>
+										kim1234<br> <span class="regdate">2024.01.05</span>
+									</h4>
+								</div>
+								<span class="score">★★★★★</span>
+							</div>
+
+							<div class="review-item">
+								<img src="../images/visual3.jpg" class="review-img" alt="후기 이미지">
+								<p class="cont">9월에 별바다부산 나이트페스타에 가봤어요! 다대포의 해변공원에서 나이트뮤직캠크닉
+									공연이 있었어요 ㅎㅎ 저는 미리 예약하고 티켓이랑 매트, 맥주, 간식도 받았어요~ 사람들이 매트를 가지고 와서
+									가족과 친구들과 소풍을 하면서 공연을 봤어요~너무 좋았어요! 분위기 좋았고 노래를 들면서 저녁을 먹고 좋은 시간을
+									보냈어요~ 나이트뮤직캠크닉이 다음 달도 있을거니까 안 가봤으면 추천합니다!</p>
+							</div>
+
+							<button value="댓글" class="btn" id="reviewCommentBtn">댓글</button>
+
+							
+							  <div class="review-comment">
+							       <h5>lee5678<span class="regdate">&nbsp;(2024.01.05)</span></h5>
+							       <div class="review-comment-list" style="border-top: 1px solid #eee">
+							         <p class="comment" style="border-top: 0px">답글 내용 답글 내용 답글 내용 답글 내용 답글 내용 답글 내용</p>
+							         <div class="btnTo">
+							         <button class="btn btn-sm reUp">수정</button>
+							         <a href="" class="btn btn-sm reDel">삭제</a>
+							         <button class="btn btn-sm replyBtn">답글달기</button>
+							         </div>
+							       </div>
+							       <div class="update" style="display: none">
+							         <input type=text class="upBox">
+							         <a href="" class="btn btn-sm reUpBtn">수정</a>
+							       </div>
+							       <div class="reply" style="display: none">
+							         <h5>아이디</h5>
+							         <input type=text class="replyBox">
+							         <a href="" class="btn btn-sm replyInsertBtn">등록</a>
+							       </div>
+							  </div>
+							</div>
+						</div>
+						<div class="reply-insert">
+						<form method="post" action="">
+								<table class="table">
+							        
+									<tr>
+										
+										<td style="position: relative; max-width: 100%;">
+										<h5>lee5678</h5>
+										<textarea rows="10" cols="60" name=content
+												required style="resize: none"></textarea><br>
+												<button class="btn-sm btn reInBtn" value="등록"
+												id="replyInsert" style="position: relative;left:323px">등록</button>
+											<button class="btn-sm btn reBack" value="취소"
+												id="replyCancel" onclick="javascript:history.back()" style="position: relative;left:323px">취소</button>
+												</td>		
+									</tr>
+									
+								</table>
+							</form>
+						</div>
+					
+						<div class="review-insert">
+							<form method="post" action="">
+								<table class="table">
+									<tr>
+										<th width=10%>아이디</th>
+										<td width=90%>아이디</td>
+									</tr>
+									<tr>
+										<th width=10%>평점</th>
+										<td width=90%><input type="text" name="score" required>
+										</td>
+									</tr>
+									<tr>
+										<th width=10%>이미지 첨부</th>
+										<td width=90%><input type="file" name="img" required>
+										</td>
+									</tr>
+									<tr>
+										<th width=10%>내용</th>
+										<td width=90%><textarea rows="10" cols="60" name=content
+												required style="resize: none"></textarea></td>
+									</tr>
+									<tr>
+										<th width=10%>비밀번호</th>
+										<td width=90%><input type="password" name="pwd" required>
+										</td>
+									</tr>
+									<tr>
+										<td colspan="2" class="text-center">
+											<button class="btn-sm btn-success" value="취소"
+												id="reviewIsertOkBtn">글쓰기</button>
+											<button class="btn-sm btn-info" value="취소"
+												id="reviewCancelBtn" onclick="javascript:history.back()">취소</button>
+										</td>
+									</tr>
+								</table>
+							</form>
+						</div>
+					</div>
+					<div id="reserveCont" class="tab-content" style="display: none;">
+						<!-- 예약하기 내용 -->
+						예약하기 내용을 입력하세요.
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="section">
+		<div class="wrapper">
+			<div class="shop-header">
+				<h3>추천 ${cate }</h3>
+				<a href="../store/goods.do" class="link arrow-link">전체보기</a>
+				<div class="shop-header-line">
+					<div class="shop-header-color"></div>
+				</div>
+			</div>
+			<div class="full-width w-dyn-list">
+				<div role="list" class="products w-dyn-items">
+					<c:forEach var="vo" items="${list}" begin="0" end="7">
+						<div role="listitem" class="product-card-wrapper w-dyn-item"
+							style="height: 330px">
+							<a href="../busan/${tab}_detail.do?no=${vo.no}"
+								class="product-card w-inline-block">
+								<div class="product-card-image-wrapper" style="height: 250px">
+									<img alt="" src="${vo.poster}"
+										size="(max-width: 479px) 73vw, (max-width: 767px) 34vw, (max-width: 991px) 33vw, 12vw" />
+								</div>
+								<div
+									data-wf-sku-bindings="%5B%7B%22from%22%3A%22f_price_%22%2C%22to%22%3A%22innerHTML%22%7D%5D"
+									class="product-card-price"
+									style="margin-top: 25px; font-size: 15px">${vo.title}</div>
+							</a>
+						</div>
+					</c:forEach>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>

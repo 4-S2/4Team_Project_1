@@ -9,10 +9,10 @@ public class ReviewReplyVO {
 	private int group_id;
 	private int group_step;
 	private int group_tab,root,depth;
-	public int getRnvo() {
+	public int getRrno() {
 		return rrno;
 	}
-	public void setRrvo(int rrno) {
+	public void setRrno(int rrno) {
 		this.rrno = rrno;
 	}
 	public int getRno() {
