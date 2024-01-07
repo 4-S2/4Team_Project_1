@@ -127,7 +127,8 @@ public class MypageDAO {
 				conn=dbconn.getConnection();
 				String sql="SELECT qno,subject,regdate,status "
 						+ "FROM QnaBoard "
-						+ "WHERE id=?";
+						+ "WHERE id=? "
+						+ "ORDER BY qno DESC";
 				ps=conn.prepareStatement(sql);
 				ps.setString(1, id);
 				ResultSet rs=ps.executeQuery();

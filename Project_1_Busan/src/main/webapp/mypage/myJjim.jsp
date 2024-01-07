@@ -128,7 +128,7 @@ function toggleTab(tabIndex) {
                 <h4 class="titbox">나의<strong>찜목록</strong></h4>
    	  </div>
    	 <div class="tab_contents_area">
-   	  	<p class="titbox">&nbsp;&nbsp;<span class="total_num_txt offline ta_px0">총 <strong>0</strong>개의 찜이 있습니다.</span></p>
+   	  	<p class="titbox">&nbsp;&nbsp;<span class="total_num_txt offline ta_px0">총 <strong>${totalJjim}</strong>개의 찜 내역이 있습니다.</span></p>
    	  </div>
 		<div class="pc_mt30 ta_mt40 ta_mx40 tab_area tab5 sub4 mypage">
 		    <div class="tab_box">
@@ -143,13 +143,22 @@ function toggleTab(tabIndex) {
         <!--  명소 찜 목록 -->
         <div id="table1" class="">
 		   <c:choose>
-			 <c:when test="${empty list}">
-				                등록된 내용이 없습니다.
+			 <c:when test="${empty tlist}">
+			 		<!--TABLE-->
+			  <table class="lecture_info_table tablet_type2 mypage" style="width: 100%;">
+				    <tbody>
+						        <tr>
+						            <td colspan="4" class="empty">
+						                등록된 찜 목록이 없습니다.
+						            </td>
+						        </tr>
+					 </tbody>
+				 </table>
 			 </c:when>
 			<c:otherwise>        
         	<div class="col-sm-8 col-md-12">
 				<div class="row">
-					<c:forEach var="vo" items="${list }">
+					<c:forEach var="vo" items="${tlist }">
 						<div class="col-md-4">
 							<div class="single-blog">
 								<div class="content fix">
@@ -179,6 +188,20 @@ function toggleTab(tabIndex) {
         
 		<!--  맛집 찜목록 -->
 		<div id="table2" class="hidden">
+		   <c:choose>
+			 <c:when test="${empty fdlist}">
+			 		<!--TABLE-->
+		<table class="lecture_info_table tablet_type2 mypage" style="width: 100%;">
+		    <tbody>
+				        <tr>
+				            <td colspan="4" class="empty">
+				                등록된 찜 목록이 없습니다.
+				            </td>
+				        </tr>
+			 </tbody>
+			 </table>
+			 </c:when>
+			<c:otherwise>   		
         	<div class="col-sm-8 col-md-12">
 				<div class="row">
 					<c:forEach var="vo" items="${fdlist }">
@@ -205,10 +228,26 @@ function toggleTab(tabIndex) {
 					</c:forEach>
 				</div>
 			</div>
+			</c:otherwise>
+			</c:choose>
        </div>
        
         <!--  축제 찜 목록 -->
         <div id="table3" class="hidden">
+		   <c:choose>
+			 <c:when test="${empty flist}">
+			 <!--TABLE-->
+			  <table class="lecture_info_table tablet_type2 mypage" style="width: 100%;">
+				    <tbody>
+						        <tr>
+						            <td colspan="4" class="empty">
+						                등록된 찜 목록이 없습니다.
+						            </td>
+						        </tr>
+					 </tbody>
+				 </table>
+			 </c:when>
+			<c:otherwise>        
         	<div class="col-sm-8 col-md-12">
 				<div class="row">
 					<c:forEach var="vo" items="${flist }">
@@ -235,10 +274,26 @@ function toggleTab(tabIndex) {
 					</c:forEach>
 				</div>
 			</div>
+			</c:otherwise>
+			</c:choose>
         </div>
         
         <!--  체험 찜 목록 -->
         <div id="table4" class="hidden">
+		   <c:choose>
+			 <c:when test="${empty alist}">
+			 <!--TABLE-->
+			  <table class="lecture_info_table tablet_type2 mypage" style="width: 100%;">
+				    <tbody>
+						        <tr>
+						            <td colspan="4" class="empty">
+						                등록된 찜 목록이 없습니다.
+						            </td>
+						        </tr>
+					 </tbody>
+				 </table>
+			 </c:when>
+			<c:otherwise>          
         	<div class="col-sm-8 col-md-12">
 				<div class="row">
 					<c:forEach var="vo" items="${alist }">
@@ -265,17 +320,33 @@ function toggleTab(tabIndex) {
 					</c:forEach>
 				</div>
 			</div>
+			</c:otherwise>
+			</c:choose>
         </div>
         
         <!--  전시회 찜 목록 -->
         <div id="table5" class="hidden">
+		   <c:choose>
+			 <c:when test="${empty elist}">
+			 <!--TABLE-->
+			  <table class="lecture_info_table tablet_type2 mypage" style="width: 100%;">
+				    <tbody>
+						        <tr>
+						            <td colspan="4" class="empty">
+						                등록된 찜 목록이 없습니다.
+						            </td>
+						        </tr>
+					 </tbody>
+				 </table>
+			 </c:when>
+			<c:otherwise>          
         	<div class="col-sm-8 col-md-12">
 				<div class="row">
 					<c:forEach var="vo" items="${elist }">
 						<div class="col-md-4">
 							<div class="single-blog">
 								<div class="content fix">
-									<a class="image fix" href="../busan/exhibition_detail.do?eno=${vo.no}"><img
+									<a class="image fix" href="../busan/ex_detail.do?eno=${vo.no}"><img
 										src="${vo.evo.poster }" width="100%" height="220px" /></a>
 									<div class="metammm" style="position: relative">
 										<div style="display: inline-block">
@@ -283,7 +354,7 @@ function toggleTab(tabIndex) {
 												<a style="text-decoration: none"
 													href="#">${vo.jno}</a>
 											</h2>
-											<a class="title" href="../busan/exhibition_detail.do?eno=${vo.no}">${vo.evo.ename}</a>
+											<a class="title" href="../busan/ex_detail.do?eno=${vo.no}">${vo.evo.ename}</a>
 										</div>
 										<div style="display: inline-block; float: right; margin-top: 22px; cursor: pointer;" onclick="">
 											<img src="" style="width: 30px;">
@@ -295,6 +366,8 @@ function toggleTab(tabIndex) {
 					</c:forEach>
 				</div>
 			</div>
+			</c:otherwise>
+			</c:choose>
         </div>
         </div>
 

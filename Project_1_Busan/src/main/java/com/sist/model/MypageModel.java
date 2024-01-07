@@ -105,7 +105,7 @@ public class MypageModel {
 		return "../main/main.jsp";
 	}
 	
-	// 구매내역
+	// 장바구니
 	@RequestMapping("mypage/myCart.do")
 	public String mypage_myCart(HttpServletRequest request, HttpServletResponse response)
 	{	
@@ -121,6 +121,22 @@ public class MypageModel {
 		return "../main/main.jsp";
 	}
 	
+	// 구매내역
+	@RequestMapping("mypage/myPurchase.do")
+	public String mypage_myPurchase(HttpServletRequest request, HttpServletResponse response)
+	{	
+		HttpSession session=request.getSession();
+		String id=(String)session.getAttribute("id");
+		
+		MypageDAO dao=MypageDAO.newInstance();
+		/* MemberVO vo=dao.myprofile(id); */
+		
+		/* request.setAttribute("vo", vo); */
+		request.setAttribute("mypage_jsp", "myPurchase.jsp");
+		request.setAttribute("main_jsp", "../mypage/mypage_main.jsp");
+		return "../main/main.jsp";
+	}
+	
 	// 찜목록
 	@RequestMapping("mypage/myJjim.do")
 	public String mypage_myJjim(HttpServletRequest request, HttpServletResponse response)
@@ -131,17 +147,31 @@ public class MypageModel {
 		MypageDAO dao=MypageDAO.newInstance();
 		JjimDAO jdao = JjimDAO.newInstance();
 		
-		List<JjimVO> list = jdao.busanjjimListData(id, "tour",1);
+		List<JjimVO> tlist = jdao.busanjjimListData(id, "tour",1);
 		List<JjimVO> fdlist = jdao.busanjjimListData(id, "food",2);
 		List<JjimVO> flist = jdao.busanjjimListData(id, "festival",3);
 		List<JjimVO> alist = jdao.busanjjimListData(id, "activity",4);
 		List<JjimVO> elist = jdao.exjjimListData(id);
 		
-		request.setAttribute("list",list);
+		int tSize = tlist.size();
+		int fdSize = fdlist.size();
+		int fSize = flist.size();
+		int aSize = alist.size();
+		int eSize = elist.size();
+		int totalJjim = tSize+fdSize+fSize+aSize+eSize;
+		  
+			/*
+			 * request.setAttribute("tSize",tSize); request.setAttribute("fdSize",fdSize);
+			 * request.setAttribute("fSize",fSize); request.setAttribute("aSize",aSize);
+			 * request.setAttribute("eSize",eSize);
+			 */
+		 
+		request.setAttribute("tlist",tlist); 
 		request.setAttribute("fdlist",fdlist);
-		request.setAttribute("flist",flist);
+		request.setAttribute("flist",flist); 
 		request.setAttribute("alist",alist);
-		request.setAttribute("elist",elist);
+		request.setAttribute("elist",elist);		
+		request.setAttribute("totalJjim",totalJjim);
 		request.setAttribute("mypage_jsp", "myJjim.jsp");
 		request.setAttribute("main_jsp", "../mypage/mypage_main.jsp");
 		return "../main/main.jsp";
