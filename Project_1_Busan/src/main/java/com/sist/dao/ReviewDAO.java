@@ -57,13 +57,11 @@ public class ReviewDAO {
              list.add(vo);
           }
           rs.close();
-       }catch(Exception ex)
-       {
+       }catch(Exception ex){
          // 에러 출력 
           ex.printStackTrace();
        }
-       finally
-       {
+       finally{
           // 반환 => 재사용 
           dbconn.disConnection(conn, ps);
        }
@@ -71,41 +69,40 @@ public class ReviewDAO {
     }
     
     
+    // 총페이지
+    public int ReviewRowCount(){
+ 	   int total=0;
+ 	   try{
+ 		   conn=dbconn.getConnection();
+ 		   String sql="SELECT COUNT(*) FROM review";
+ 		   ps=conn.prepareStatement(sql);
+ 		   ResultSet rs=ps.executeQuery();
+ 		   rs.next();
+ 		   total=rs.getInt(1);
+ 		   rs.close();
+ 	   }catch(Exception ex){
+ 		   ex.printStackTrace();
+ 	   }
+ 	   finally{
+ 		   dbconn.disConnection(conn, ps);
+ 	   }
+ 	   return total;
+    }
+    
+    
     // 리뷰 작성
     public void reviewInsert(ReviewVO vo) {
     	try {
-    		
-    		if(vo.getId()==null) {
-    			try {
-    				conn=dbconn.getConnection();
-    	    		String sql="INSERT INTO review(rno, score, cateno, id, cont, password, img "
-    	    				 + "VALUES(REVIEW_RNO_SEQ.NEXTVAL,?,?,?,?,?,?,?)";
-    	    		ps=conn.prepareStatement(sql);
-    	    		ps.setInt(1, vo.getRno());
-    	    		ps.setInt(2, vo.getScore());
-    	    		ps.setInt(3,  vo.getCateno());
-    	    		ps.setString(4, vo.getId());
-    	    		ps.setString(5, vo.getCont());
-    	    		ps.setString(6, vo.getPassword());
-    	    		ps.setString(7, vo.getImg());
-    	    		ps.close();
-    			}catch(Exception ex) {}
-    		}else {
-    			try {
-	            	conn=dbconn.getConnection();
-	            	String sql="INSERT INTO review(rno, score, cateno, id, cont, password, img "
-   	    				 	   + "VALUES(REVIEW_RNO_SEQ.NEXTVAL,?,?,?,?,?,?,?)";
-	            	ps=conn.prepareStatement(sql);
-    	    		ps.setInt(1, vo.getRno());
-    	    		ps.setInt(2, vo.getScore());
-    	    		ps.setInt(3,  vo.getCateno());
-    	    		ps.setString(4, vo.getId());
-    	    		ps.setString(5, vo.getCont());
-    	    		ps.setString(6, vo.getPassword());
-    	    		ps.setString(7, vo.getImg());
-    	    		ps.close();
-    			}catch(Exception e) {}
-    		}
+    		conn=dbconn.getConnection();
+    		String sql="INSERT INTO review(rno, score, cont, password, img) "
+    				 + "VALUES(?,?,?)";
+    		ps=conn.prepareStatement(sql);
+    		ps.setInt(1, vo.getRno());
+    		ps.setInt(2, vo.getScore());
+    		ps.setString(3, vo.getCont());
+    		ps.setString(4, vo.getPassword());
+    		ps.setString(5, vo.getImg());
+    		ps.executeUpdate();
     	}catch(Exception ex) {
     		ex.printStackTrace();
     	}finally {
@@ -113,38 +110,80 @@ public class ReviewDAO {
     	}
     }
     
+    
     // 리뷰 삭제
-    public void reviewDeleteData(int rno, String pwd) {
+    public String reviewDeleteData(int rno, String pwd) {
+    	String result="";
     	try {
       		conn=dbconn.getConnection();
-      		String sql="DELETE FROM review "
+      		String sql="DELETE password FROM review "
       				 + "WHERE rno="+rno; 
       		ps=conn.prepareStatement(sql);
-      		ps.executeUpdate();
-      	}catch(Exception e) {
-      		e.printStackTrace();
+      		ResultSet rs=ps.executeQuery();
+      		rs.next();
+      		String db_pwd=rs.getString(1);
+      		rs.close();
+      		ps.close();
+      		
+      		if(db_pwd.equals(pwd)){
+      			result="yes";
+      			sql="DELETE FROM review "
+      			   +"WHERE rno="+rno;
+      			ps=conn.prepareStatement(sql);
+      			ps.executeUpdate();
+      			ps.close();
+      			
+      			sql="DELETE FROM review "
+      			   +"WHERE rno="+rno;
+      			ps=conn.prepareStatement(sql);
+      			ps.executeUpdate();
+      			ps.close();
+      		}else {
+      			result="no";
+      		}
+      	}catch(Exception ex) {
+      		ex.printStackTrace();
       	}
       	finally {
       		dbconn.disConnection(conn, ps);
       	}
+    	return result;
     }
     
+    
     // 리뷰 수정
-    public void reviewUpdateData(ReviewVO vo) {
+    public String reviewUpdateData(ReviewVO vo) {
+    	String res="no";
     	try {
       		conn=dbconn.getConnection();
-      		String sql="UPDATE review SET score=?, cont=?, img=? "
-      				+ "WHERE rno="+vo.getRno();  
+      		String sql="SELECT pwd FROM review "
+      				  +"WHERE no="+vo.getRno();
+      		ps=conn.prepareStatement(sql);
+      		ResultSet rs=ps.executeQuery();
+      		rs.next();
+      		String db_pwd=rs.getString(1);
+      		rs.close();
+      		ps.close();
+      		
+      		if(db_pwd.equals(vo.getPassword())) {
+      			res="yes";
+      			sql="UPDATE review SET "
+      			   +"score=?, cont=?, img=? "
+      			   +"WHERE rno=?";
+      		}
       		ps=conn.prepareStatement(sql);
       		ps.setInt(1, vo.getScore());
       		ps.setString(2, vo.getCont());
       		ps.setString(3, vo.getImg());
+      		ps.setInt(4, vo.getRno());
       		ps.executeUpdate();
-      	}catch(Exception e) {
-      		e.printStackTrace();
+      		ps.close();
+      	}catch(Exception ex) {
+      		ex.printStackTrace();
       	}
       	finally {
       		dbconn.disConnection(conn, ps);
       	}
+    	return res;
     }
 }
