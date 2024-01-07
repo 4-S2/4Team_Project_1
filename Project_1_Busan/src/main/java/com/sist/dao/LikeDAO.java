@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.*;
 import com.sist.dbcp.CreateDBCPConnection;
-import com.sist.vo.LikeVO;
+import com.sist.vo.HeartVO;
 
 	public class LikeDAO {
 		   private Connection conn; //데이터베이스 연결
@@ -20,14 +20,14 @@ import com.sist.vo.LikeVO;
 				return dao;		   
 		   }
 		   
-		   public void LikeInsert(LikeVO vo) {
+		   public void LikeInsert(HeartVO vo) {
 				try {
 					conn=dbconn.getConnection();
 					String sql="INSERT INTO heart VALUES("
-							+ "heart_eno_seq.nextval,?,?)";
+							+ "heart_hno_seq.nextval,?,?)";
 					ps=conn.prepareStatement(sql);
-					ps.setString(1, vo.getDvo().getId()); 
-					ps.setInt(2, vo.getEno());
+					ps.setString(1, vo.getMvo().getId()); 
+					ps.setInt(2, vo.getHno());
 					ps.executeUpdate();
 				} catch (Exception ex) {
 					ex.printStackTrace();
@@ -36,14 +36,14 @@ import com.sist.vo.LikeVO;
 				}
 			}
 		   
-		   public int LikeOk(int eno,String id) {
+		   public int LikeOk(int hno,String id) {
 				int like_ok=0;
 				try {
 					conn=dbconn.getConnection();
 					String sql="SELECT COUNT(*) FROM heart "
-							+ "WHERE eno=? AND id=?";
+							+ "WHERE hno=? AND id=?";
 					ps=conn.prepareStatement(sql);
-					ps.setInt(1, eno);
+					ps.setInt(1, hno);
 					ps.setString(2, id);
 					ResultSet rs=ps.executeQuery();
 					rs.next();
@@ -58,14 +58,14 @@ import com.sist.vo.LikeVO;
 			}
 		   
 		// like취소
-			public void LikeCancle(String id, int eno) {
+			public void LikeCancle(String id, int hno) {
 				try {
 					conn=dbconn.getConnection();
-					String sql="DELETE FROM heart WHERE id=? AND eno=?";
+					String sql="DELETE FROM heart WHERE id=? AND hno=?";
 					
 					ps=conn.prepareStatement(sql);
 					ps.setString(1, id);
-					ps.setInt(2, eno);
+					ps.setInt(2, hno);
 					ps.executeUpdate();
 				} catch (Exception ex) {
 					ex.printStackTrace();

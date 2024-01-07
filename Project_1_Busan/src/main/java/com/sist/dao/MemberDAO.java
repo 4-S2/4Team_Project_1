@@ -5,6 +5,7 @@ import com.sist.vo.*;
 import com.sist.dbcp.*;
 import javax.mail.*;
 import javax.mail.internet.*;
+import javax.net.*;
 
 public class MemberDAO {
    private Connection conn;
@@ -267,11 +268,11 @@ public class MemberDAO {
 	        // 세션을 생성하고 메시지를 준비합니다.
 	        Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
 	            protected PasswordAuthentication getPasswordAuthentication() {
-	                return new PasswordAuthentication("네이버아이디", "네이버 비밀번호"); // 네이버 아이디와 비밀번호 입력
+	                return new PasswordAuthentication("네이버 아이디", "비밀번호"); // 네이버 아이디와 비밀번호 입력
 	            }
 	        });
 	        MimeMessage message = new MimeMessage(session);
-	        message.setFrom(new InternetAddress("보내는 사람 email")); // 보내는 사람 이메일 주소 설정
+	        message.setFrom(new InternetAddress("발신자 이메일")); // 보내는 사람 이메일 주소 설정
 	        message.addRecipient(Message.RecipientType.TO, new InternetAddress(email)); // 받는 사람 이메일 주소 설정
 	        message.setSubject("Busan Tour 비밀번호"); // 메일 제목 설정
 	        message.setText("회원님의 비밀번호는 " + password); // 메일 본문 설정

@@ -27,6 +27,10 @@ public class HeartVO {
 	public void setMvo(MemberVO mvo) {
 		this.mvo = mvo;
 	}
+	public void setMvo(String id) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	
 }

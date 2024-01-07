@@ -209,7 +209,7 @@
 										    <div data-wf-sku-bindings="%5B%7B%22from%22%3A%22f_weight_%22%2C%22to%22%3A%22innerHTML%22%7D%5D">
 										      <c:choose>
 										        <c:when test="${vo.price == 0}">
-										          free
+										          무료
 										        </c:when>
 										        <c:otherwise>
 										          ${vo.price}원

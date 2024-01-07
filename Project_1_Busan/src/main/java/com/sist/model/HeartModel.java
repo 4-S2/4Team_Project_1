@@ -7,19 +7,21 @@ import javax.servlet.http.HttpSession;
 import com.sist.controller.RequestMapping;
 import com.sist.dao.*;
 import com.sist.vo.*;
-public class LikeModel {
-	@RequestMapping("like/like_insert.do")
-	public String like_insert(HttpServletRequest request,HttpServletResponse response) {
-		
+public class HeartModel {
+	@RequestMapping("like/ex_like_insert.do")
+	public String food_like_insert(HttpServletRequest request,HttpServletResponse response) {
 		String eno=request.getParameter("eno");
 		HttpSession session=request.getSession();
 		String id=(String)session.getAttribute("id");
+		
+		HeartVO vo=new HeartVO();
+		
+	    vo.setMvo(id);
+		vo.setHno(Integer.parseInt(eno));
+		
 		System.out.println(id);
 		System.out.println(eno);
 		
-		LikeVO vo=new LikeVO();
-	    vo.getDvo().getId();
-		vo.setEno(Integer.parseInt(eno));
 		
 		LikeDAO dao=LikeDAO.newInstance();
 		dao.LikeInsert(vo);
@@ -27,7 +29,7 @@ public class LikeModel {
 		return "redirect:../busan/ex_detail.do?eno="+eno;
 	}
 	
-	@RequestMapping("like/like_cancle.do")
+	@RequestMapping("Like/like_cancle.do")
 	public String like_cancle(HttpServletRequest request,HttpServletResponse response) {
 		String eno=request.getParameter("eno");
 		HttpSession session=request.getSession();
