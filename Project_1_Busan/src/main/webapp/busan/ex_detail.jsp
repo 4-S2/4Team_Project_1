@@ -106,11 +106,11 @@
 		                <div class="product-info">
 		                    <h1>${vo.ename}</h1>
 	                    	<h3>${vo.eename}</h3>
+	                    	<a href="../reserve/ex_reserve.do">
+        					<input type="submit" value="예약하기" class="w-commerce-commerceaddtocartbutton button add-to-cart-button" id="reservationButton" />
+    						</a>
 	                    	<form>
-	                    		<div class="buy-buttons">
-	                                <input type="submit" value="예약하기" class="w-commerce-commerceaddtocartbutton button add-to-cart-button" id="reservationButton"/>
-	                                
-	                            </div>
+	                    	
 	                            <div class="heart">
 	                    	<span><img src="like.png"></a></span>
 	                    	<span>${vo.elike }</span>
@@ -267,7 +267,7 @@
 					    	</table>
 					    </form> -->
 				    </div>
-				    <div id="reserveCont" class="tab-content" style="display: none; id="reservationButton">
+				    <div id="reserveCont" class="tab-content" style="display: none;">
 				        <!-- 예약하기 내용 -->
 				        예약하기 내용을 입력하세요.
 				    </div>
@@ -277,7 +277,7 @@
         <div class="wrapper">
             <div class="shop-header">
                 <h3>추천 전시</h3>
-                <a href="../store/goods.do" class="link arrow-link">전체보기</a>
+                <a href="../busan/ex.do" class="link arrow-link">전체보기</a>
                 <div class="shop-header-line">
                     <div class="shop-header-color"></div>
                 </div>

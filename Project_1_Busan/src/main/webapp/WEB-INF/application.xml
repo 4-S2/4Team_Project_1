@@ -12,5 +12,5 @@
   <bean id="goods" class="com.sist.model.GoodsModel"/>
   <bean id="mypage" class="com.sist.model.MypageModel"/>
   <bean id="exreserve" class="com.sist.model.ExReserveModel"/>
-  <bean id="like" class="com.sist.model.LikeModel"/>
+  <bean id="heart" class="com.sist.model.HeartModel"/>
 </beans>

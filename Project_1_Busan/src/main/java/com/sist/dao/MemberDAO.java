@@ -305,6 +305,34 @@ public class MemberDAO {
 	    }
 	    return null; // 일치하는 사용자가 없으면 null 반환
 	}
+	
+	// 사용자 조회
+	public MemberVO memberSearch(String id) {
+		MemberVO vo = new MemberVO();
+		
+		try {
+			conn = dbconn.getConnection();
+			String sql = "SELECT email, postcode, addr, detail_addr, phone "
+						+"FROM user_ "
+						+"WHERE id = ?";
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, id);
+			ResultSet rs = ps.executeQuery();
+			rs.next();
+			vo.setEmail(rs.getString(1));
+			vo.setPostcode(rs.getString(2));
+			vo.setAddr(rs.getString(3));
+			vo.setDetail_addr(rs.getString(4));
+			vo.setPhone(rs.getString(5));
+			rs.close();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			dbconn.disConnection(conn, ps);
+		}
+		
+		return vo;
+	}
 
 }
    

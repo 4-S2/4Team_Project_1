@@ -3,8 +3,12 @@ package com.sist.model;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.sist.controller.RequestMapping;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import com.sist.dao.*;
 import com.sist.vo.*;
@@ -109,6 +113,47 @@ public class ExListModel {
 		  request.setAttribute("main_jsp", "../busan/ex_detail.jsp");
 		  return "../main/main.jsp";
 	}
+	
+	@RequestMapping("reserve/ex_reserve.do")
+	public String ex_reserve(HttpServletRequest request, HttpServletResponse response) {
+	    // reserve/ex_reserve.do 요청 처리 메소드
+	    String frno = request.getParameter("frno");
+	    String date = request.getParameter("date");
+	    String formattedDate = "";
+	    if (date == null)
+	        date = "";
+	    if (!date.equals("")) {
+	        DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+	        DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("yyyy년 MM월 dd일 (E)", Locale.KOREAN);
+	        LocalDate dateStr = LocalDate.parse(date, inputFormatter);
+	        formattedDate = dateStr.format(outputFormatter);
+	    }
+
+	    String inwon = request.getParameter("inwon");
+	    int people = Integer.parseInt(inwon);
+	    HttpSession session = request.getSession();
+	    String id = (String) session.getAttribute("id");
+	    String name = (String) session.getAttribute("name");
+
+	    ExDAO dao = ExDAO.newInstance();
+	    ExVO vo = dao.exDetailData(Integer.parseInt(frno));
+	    if (vo.getPoster() == null)
+	        vo.setPoster(vo.getPoster());
+
+	    MemberDAO mdao = MemberDAO.newInstance();
+	    MemberVO mvo = mdao.memberSearch(id);
+
+	    request.setAttribute("mvo", mvo);
+	    request.setAttribute("id", id);
+	    request.setAttribute("name", name);
+	    request.setAttribute("date", formattedDate);
+	    request.setAttribute("inwon", people);
+	    request.setAttribute("vo", vo);
+	    request.setAttribute("main_jsp", "../reserve/ex_reserve.jsp");
+
+	    return "../main/main.jsp";
+	}
+
 	
 	
 
