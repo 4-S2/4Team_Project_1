@@ -105,25 +105,7 @@ public class ReserveModel {
 	  {
 		  return "../reserve/inwon.jsp";
 	  }
-	  @RequestMapping("reserve/time.do")
-	  public String reserve_time(HttpServletRequest request,
-			  HttpServletResponse response)
-	  {
-		  String day=request.getParameter("day");
-		  ReserveDAO dao=ReserveDAO.newInstance();
-		  String times=dao.reserve_day_time(Integer.parseInt(day));
-		  StringTokenizer st=new StringTokenizer(times,",");
-		  List<String> list=new ArrayList<String>();
-		  while(st.hasMoreTokens())
-		  {
-			  String time=dao.reserve_get_time(
-					  Integer.parseInt(st.nextToken()));
-			  list.add(time);
-		  }
-		  
-		  request.setAttribute("list", list);
-		  return "../reserve/time.jsp";
-	  }
+	  
 	  @RequestMapping("reserve/reserve_ok.do")
 	  public String reserve_ok(HttpServletRequest request,HttpServletResponse response)
 	  {

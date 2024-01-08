@@ -57,7 +57,7 @@ public class ReserveDAO {
 	   try
 	   {
 		   conn=dbconn.getConnection();
-		   String sql="SELECT  FROM exhibition "
+		   String sql="SELECT rday FROM exhibition "
 				     +"WHERE eno=?";
 		   ps=conn.prepareStatement(sql);
 		   ps.setInt(1, eno);
@@ -75,54 +75,7 @@ public class ReserveDAO {
 	   }
 	   return result;
    }
-   public String reserve_day_time(int tno)
-   {
-	   String result="";
-	   try
-	   {
-		   conn=dbconn.getConnection();
-		   String sql="SELECT time FROM reserve_day "
-				     +"WHERE rno=?";
-		   ps=conn.prepareStatement(sql);
-		   ps.setInt(1, tno);
-		   ResultSet rs=ps.executeQuery();
-		   rs.next();
-		   result=rs.getString(1);
-		   rs.close();
-	   }catch(Exception ex)
-	   {
-		   ex.printStackTrace();
-	   }
-	   finally
-	   {
-		   dbconn.disConnection(conn, ps);
-	   }
-	   return result;
-   }
-   public String reserve_get_time(int tno)
-   {
-	   String result="";
-	   try
-	   {
-		   conn=dbconn.getConnection();
-		   String sql="SELECT time FROM reserve_time "
-				     +"WHERE tno=?";
-		   ps=conn.prepareStatement(sql);
-		   ps.setInt(1, tno);
-		   ResultSet rs=ps.executeQuery();
-		   rs.next();
-		   result=rs.getString(1);
-		   rs.close();
-	   }catch(Exception ex)
-	   {
-		   ex.printStackTrace();
-	   }
-	   finally
-	   {
-		   dbconn.disConnection(conn, ps);
-	   }
-	   return result;
-   }
+   
    // 예약 등록 
    /*
     *   no NUMBER,
@@ -141,13 +94,13 @@ public class ReserveDAO {
 	   {
 		   conn=dbconn.getConnection();
 		   String sql="INSERT INTO reserve_info VALUES("
-				     +"ri_no_seq.nextval,?,?,?,?,?,'n',SYSDATE)";
+				     +"SEQ_NO_eres.nextval,?,?,?,?,?,'n',SYSDATE)";
 		   ps=conn.prepareStatement(sql);
 		   ps.setString(1, vo.getId());
 		   ps.setInt(2, vo.getEno());
 		   ps.setString(3, vo.getRday());
-		   ps.setString(4, vo.getRtime());
-		   ps.setString(5, vo.getInwon());
+		   ps.setString(4, vo.getInwon());
+		   ps.setDate(5, null);
 		   ps.executeUpdate();
 	   }catch(Exception ex)
 	   {
