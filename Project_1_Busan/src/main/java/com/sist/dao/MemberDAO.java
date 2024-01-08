@@ -256,33 +256,38 @@ public class MemberDAO {
 	}
 	public boolean sendPasswordToEmail(String id, String email, String password) {
 	    boolean sent = false;
-	    try {
-	        // 메일 서버의 설정을 지정합니다.
-	        Properties props = new Properties();
-	        props.put("mail.smtp.host", "smtp.naver.com");
-	        props.put("mail.smtp.socketFactory.port", "465");
-	        props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
-	        props.put("mail.smtp.auth", "true");
-	        props.put("mail.smtp.port", "465");
 
-	        // 세션을 생성하고 메시지를 준비합니다.
+	    try {
+	        // Set the properties for Google's SMTP server.
+	        Properties props = new Properties();
+	        props.put("mail.smtp.host", "smtp.gmail.com"); 
+	        props.put("mail.smtp.port", 465); 
+	        props.put("mail.smtp.auth", "true"); 
+	        props.put("mail.smtp.ssl.enable", "true"); 
+	        props.put("mail.smtp.ssl.trust", "smtp.gmail.com");
+	        props.put("mail.smtp.ssl.protocols", "TLSv1.2");
+
+	        // Create a session with an authenticator for Google's SMTP.
 	        Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
 	            protected PasswordAuthentication getPasswordAuthentication() {
-	                return new PasswordAuthentication("네이버 아이디", "비밀번호"); // 네이버 아이디와 비밀번호 입력
+	                return new PasswordAuthentication("ksssk9696", "urey yucx hjxk phzc"); // Enter Google ID and password
 	            }
 	        });
-	        MimeMessage message = new MimeMessage(session);
-	        message.setFrom(new InternetAddress("발신자 이메일")); // 보내는 사람 이메일 주소 설정
-	        message.addRecipient(Message.RecipientType.TO, new InternetAddress(email)); // 받는 사람 이메일 주소 설정
-	        message.setSubject("Busan Tour 비밀번호"); // 메일 제목 설정
-	        message.setText("회원님의 비밀번호는 " + password); // 메일 본문 설정
 
-	        // 메일을 발송합니다.
+	        // Prepare the email message.
+	        MimeMessage message = new MimeMessage(session);
+	        message.setFrom(new InternetAddress("ksssk9696@gmail.com")); // Set sender email address
+	        message.addRecipient(Message.RecipientType.TO, new InternetAddress(email)); // Set recipient email address
+	        message.setSubject("Your Password"); // Set email subject
+	        message.setText("Your password is " + password); // Set email body
+
+	        // Send the email.
 	        Transport.send(message);
 	        sent = true;
-	    } catch(Exception ex) {
+	    } catch (Exception ex) {
 	        ex.printStackTrace();
 	    }
+
 	    return sent;
 	}
 

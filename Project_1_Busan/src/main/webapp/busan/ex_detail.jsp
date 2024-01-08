@@ -131,7 +131,7 @@
 		                <div class="product-info">
 		                    <h1>${vo.ename}</h1>
 	                    	<h3>${vo.eename}</h3>
-	                    	<a href="../busan/ex_reserve.do">
+	                    	<a href="../reserve/reserve_main.do">
         					<input type="submit" value="예약하기" class="w-commerce-commerceaddtocartbutton button add-to-cart-button" id="reservationButton" />
     						</a>
     						
