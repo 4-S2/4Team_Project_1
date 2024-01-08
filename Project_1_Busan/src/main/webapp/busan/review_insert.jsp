@@ -23,30 +23,30 @@
         <form method="post" action="../busan/review.do">
 			<table class="table">
 				<tr>
-					<th width=10%>아이디</th>
-					<td width=90%>${sessionScope.id}</td>
+					<th width=15%>아이디</th>
+					<td width=85%>${sessionScope.id}</td>
 				</tr>
 				<tr>
-					<th width=10%>평점</th>
-					<td width=90%>
-						<input type="text" name="score" required>
+					<th width=15%>평점</th>
+					<td width=85%>
+						<input type="text" name="score" placeholder="1~5까지의 숫자만 입력하세요." required>
 					</td>
 				</tr>
 				<tr>
-					<th width=10%>이미지</th>
-					<td width=90%>
+					<th width=15%>이미지</th>
+					<td width=85%>
 						<input type="file" name="img" required>
 					</td>
 				</tr>
 				<tr>
-					<th width=10%>내용</th>
-					<td width=90%>
+					<th width=15%>내용</th>
+					<td width=85%>
 						<textarea rows="10" cols="60" name="cont" required style="resize: none"></textarea>
 					</td>
 				</tr>
 				<tr>
-					<th width=10%>비밀번호</th>
-					<td width=90%>
+					<th width=15%>비밀번호</th>
+					<td width=85%>
 						<input type="password" name="pwd" required>
 					</td>
 				</tr>

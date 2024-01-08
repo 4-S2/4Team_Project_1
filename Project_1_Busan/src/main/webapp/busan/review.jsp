@@ -15,13 +15,6 @@
 	background-color: #fff;
 }
 
-#sb-body form input{
-	width: 100%;
-}
-#sb-body form textarea{
-	width: 100%;
-}
-
 
 </style>
 
