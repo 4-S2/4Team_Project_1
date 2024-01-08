@@ -23,7 +23,7 @@ public class ReserveDAO {
 	   try
 	   {
 		   conn=dbconn.getConnection();
-		   String sql="SELECT poster,ename,Homepage,rday,eno "
+		   String sql="SELECT poster,ename,eename,rday,eno "
 				     +"FROM exhibition";
 				     
 		   ps=conn.prepareStatement(sql);
@@ -34,7 +34,7 @@ public class ReserveDAO {
 			   
 			   vo.setPoster(rs.getString(1));
 			   vo.setEname(rs.getString(2));
-			   vo.setHomepage(rs.getString(3));
+			   vo.setEename(rs.getString(3));
 			   vo.setRday(rs.getString(4));
 			   vo.setEno(rs.getInt(5));
 			   list.add(vo);

@@ -30,11 +30,11 @@
           </td>
          </tr>
          <tr>
-          <th width=20% class="text-center">전화</th>
-          <td width=80%>${evo.homepage }</td>
+          <th width=20% class="text-center">영문명</th>
+          <td width=80%>${evo.eename }</td>
          </tr>
          <tr>
-          <th width=20% class="text-center">음식종류</th>
+          <th width=20% class="text-center">전시분야</th>
           <td width=80%>${evo.cate }</td>
          </tr>
          <tr>

@@ -35,8 +35,8 @@ $(function(){
   <table class="table">
     <tr>
      <th class="text-center"></th>
-     <th class="text-center">업체명</th>
-     <th class="text-center">전화</th>
+     <th class="text-center">전시회명</th>
+     <th class="text-center">영문명</th>
     </tr>
     <c:forEach var="vo" items="${list }">
      <tr class="ex_select" data-poster="${vo.poster }" 
@@ -45,7 +45,7 @@ $(function(){
         <img src="${vo.poster }" style="width: 30px;height: 30px">
       </td>
       <td>${vo.ename }</td>
-      <td class="text-center">${vo.homepage }</td>
+      <td class="text-center">${vo.eename }</td>
      </tr>
     </c:forEach>
   </table>

@@ -19,7 +19,7 @@ $(function(){
 			url:'inwon.do',
 			success:function(result)
 			{
-				$('#ex_inwon').html(result);
+				$('#ex_time').html(result);
 			}
 		})
 		

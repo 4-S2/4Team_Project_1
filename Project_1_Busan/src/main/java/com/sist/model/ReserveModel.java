@@ -133,6 +133,8 @@ public class ReserveModel {
 		  ReserveDAO dao=ReserveDAO.newInstance();
 		  dao.reserve_ok(vo);
 		  System.out.println(rday);
+		  System.out.println(id);
+		  System.out.println(inwon);
 		  return "redirect:../mypage/myReserv.do";
 	  }
 	  @RequestMapping("reserve/reserve_info.do")

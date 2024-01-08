@@ -26,7 +26,7 @@ $(function(){
    <div class="row">
     <table class="table" height=700>
       <tr>
-        <td width=20% height="580" class="danger">
+        <td width=20% height="580" class="info">
           <table class="table">
            <caption><h3>전시회 정보</h3></caption>
            <tr>
@@ -42,7 +42,7 @@ $(function(){
            </tr>
           </table>
         </td>
-        <td width=45% height="580" class="success">
+        <td width=45% height="580" class="info">
          <table class="table">
            <caption><h3>예약일 정보</h3></caption>
            <tr>
@@ -104,15 +104,15 @@ $(function(){
         </td>
       </tr>
       <tr>
-        <td width=35% height="120" class="warning">
+        <td width=35% height="120" class="info">
           <table class="table">
-           <caption><h3>예약시간 정보</h3></caption>
+           <caption><h3>인원 정보</h3></caption>
            <tr>
              <td id="ex_time"></td>
            </tr>
           </table>
         </td>
-        <td width=30% height="120" class="default">
+        <td width=30% height="120" class="info">
           <table class="table">
            <caption><h3>인원 정보</h3></caption>
            <tr>
