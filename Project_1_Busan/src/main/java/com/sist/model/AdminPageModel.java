@@ -16,46 +16,32 @@ public class AdminPageModel {
 	// 회원 관리
 	@RequestMapping("admin/main.do")
 	public String admin_main(HttpServletRequest request,HttpServletResponse response) throws Exception {
-		System.out.println("관리자모델 실행");
-/*		HttpSession session = request.getSession();
-		if(session.getAttribute("id")==null) {
-			return "redirect:../main/main.do";
-		}
-
-		String user_id = (String)session.getAttribute("id");
-		
-		if(user_id.equals("admin")) {
-			List<ReserveVO> list=dao.admin_booking_list();
-			request.setAttribute("list", list);
-			request.setAttribute("admin_jsp", "../admin/admin_booking.jsp");
-			request.setAttribute("main_jsp", "../admin/admin_main.jsp");
-			return "../jsp/main/main.jsp";
-		}
-
-		return "redirect:../main/main.do";*/
-		
-/*
- * try { request.setCharacterEncoding("UTF-8"); } catch (Exception e) {}
- * System.out.println("관리자모델 실행");
- */
-		request.setAttribute("admin_jsp", "../admin/admin_member.jsp");
-		request.setAttribute("main_jsp", "../admin/admin_main.jsp");
-		return "../main/main.jsp";
+		try { 
+			request.setCharacterEncoding("UTF-8"); 
+		} catch (Exception e) {}
+ 
 		//관리자 예외처리
-		/*HttpSession session = request.getSession();
+		HttpSession session = request.getSession();
 		if(session.getAttribute("id")==null) {
 			return "redirect:../main/main.do";
 		}
 		String admin = (String)session.getAttribute("admin");
 		if(admin.equals("y")) {
+			 AdminDAO dao=AdminDAO.newInstance(); 
 			List<MemberVO> mlist = dao.memberListData();
+			int mSize = mlist.size();
 		  
+			for (MemberVO VO : mlist) {
+				System.out.println(VO.getId());
+			} 
+			
+			request.setAttribute("mSize", mSize);
 			request.setAttribute("mlist", mlist);
 			request.setAttribute("admin_jsp", "../admin/admin_member.jsp");
 			request.setAttribute("main_jsp", "../admin/admin_main.jsp");
 			return "../main/main.jsp";
 		}
-		return "redirect:../main/main.do";*/
+		return "redirect:../main/main.do";
 	}
 	
 	//회원 탈퇴

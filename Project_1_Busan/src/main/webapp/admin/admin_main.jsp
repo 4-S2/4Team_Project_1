@@ -59,21 +59,21 @@ document.addEventListener("DOMContentLoaded", function() {
             <div class="board_filter_box filter_depth3 mypage">
                 <ul class="board_filter_in">
                     <li class="filter_box">
-                        <a href="../mypage/admin_main.do" class="menu_depth3 single">회원관리</a>
+                        <a href="../admin/main.do" class="menu_depth3 single">회원관리</a>
                     </li>
                     <li class="filter_box">
-                        <a href="../mypage/admin_reserv.do" class="menu_depth3 single">예약현황</a>
+                        <a href="../admin/admin_reserv.do" class="menu_depth3 single">예약현황</a>
                     </li>
                     <li class="divider"></li>
                     <li class="filter_box">
-                        <a href="../mypage/admin_goods.do" class="menu_depth3 single ">특산물관리</a>
+                        <a href="../admin/admin_goods.do" class="menu_depth3 single ">특산물관리</a>
                     </li>
                     <li class="divider"></li>                      
                     <li class="filter_box">
-                        <a href="../mypage/admin_notice.do" class="menu_depth3 single ">공지사항</a>
+                        <a href="../admin/admin_notice.do" class="menu_depth3 single ">공지사항</a>
                     </li>  
                     <li class="filter_box">
-                        <a href="../mypage/admin_qna.do" class="menu_depth3 single ">문의내역관리</a>
+                        <a href="../admin/admin_qna.do" class="menu_depth3 single ">문의내역관리</a>
                     </li>
                 </ul>
             </div>
