@@ -9,11 +9,9 @@ import com.sist.controller.RequestMapping;
 import java.io.PrintWriter;
 import java.util.*;
 import com.sist.dao.*;
-import com.sist.vo.JjimVO;
-import com.sist.vo.MemberVO;
-import com.sist.vo.QnaBoardVO;
+import com.sist.vo.*;
 public class AdminModel {
-	AdminDAO dao=AdminDAO.newInstance();
+	 AdminDAO dao=AdminDAO.newInstance(); 
 	
 	// 회원 관리
 	@RequestMapping("admin/admin_main.do")
@@ -34,10 +32,10 @@ public class AdminModel {
 		}
 
 		return "redirect:../main/main.do";*/
-		System.out.println(12345);
+		
+		System.out.println("관리자모델 실행");
 		List<MemberVO> mlist = dao.memberListData();
-		
-		
+	  
 		request.setAttribute("mlist", mlist);
 		request.setAttribute("admin_jsp", "admin_member.jsp");
 		request.setAttribute("main_jsp", "../admin/admin_main.jsp");
