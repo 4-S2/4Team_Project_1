@@ -229,7 +229,7 @@ color: #fff;
 						<li id="detail">상세 설명</li>
 						<li id="map">지도/주변 추천</li>
 						<li id="review">리뷰</li>
-						<li id="reserve" data-no="${vo.no }">예약하기</li>
+						<li id="reserve">예약하기</li>
 					</ul>
 
 					<!-- <div class="shop-header-line">
@@ -389,7 +389,11 @@ color: #fff;
 					<!-- <div id="reserveCont" class="tab-content"> -->
 					<div id="reserveCont" class="tab-content">
 						<!-- 예약하기 내용 -->
-						<%-- <jsp:include page="../reserve/foodreserve_main.jsp"></jsp:include> --%>
+						<jsp:include page="../reserve/foodreserve_main.jsp">
+						  <jsp:param name="no" value="${vo.no }"/>
+						  <jsp:param name="poster" value="${vo.poster }"/>
+						  <jsp:param name="title" value="${URLEncoder.encode(vo.title, 'UTF-8')}"/>
+						</jsp:include>
 					</div>
 
 				</div>
