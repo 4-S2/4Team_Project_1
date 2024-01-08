@@ -387,7 +387,7 @@ color: #fff;
 						
 					</div>
 					<!-- <div id="reserveCont" class="tab-content"> -->
-					<div id="reserveCont" class="tab-content">
+					<div id="reserveCont" class="tab-content" style="display: none">
 						<!-- 예약하기 내용 -->
 						<jsp:include page="../reserve/foodreserve_main.jsp">
 						  <jsp:param name="no" value="${vo.no }"/>
