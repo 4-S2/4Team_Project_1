@@ -24,7 +24,7 @@ public class ReviewDAO {
     
     // 리뷰 목록 출력
     public List<ReviewVO> reviewListData(int page){
-       List<ReviewVO> list=new ArrayList<ReviewVO>();
+       List<ReviewVO> rlist=new ArrayList<ReviewVO>();
        try{
           // 1. 연결
           conn=dbconn.getConnection();
@@ -55,7 +55,7 @@ public class ReviewDAO {
              vo.setPassword(rs.getString(6));
              vo.setImg(rs.getString(7));
              vo.setRegdate(rs.getDate(8));
-             list.add(vo);
+             rlist.add(vo);
           }
           rs.close();
        }catch(Exception ex){
@@ -66,7 +66,7 @@ public class ReviewDAO {
           // 반환 => 재사용 
           dbconn.disConnection(conn, ps);
        }
-       return list;
+       return rlist;
     }
     
     
@@ -120,7 +120,7 @@ public class ReviewDAO {
     	try {
       		conn=dbconn.getConnection();
       		String sql="SELECT password FROM review "
-      				 + "WHERE rno="+rno; 
+      				 + "WHERE rno=?"; 
       		ps=conn.prepareStatement(sql);
       		ResultSet rs=ps.executeQuery();
       		rs.next();
@@ -131,7 +131,7 @@ public class ReviewDAO {
       		if(db_pwd.equals(pwd)){
       			result="yes";
       			sql="DELETE FROM review "
-      			   +"WHERE rno="+rno;
+      			   +"WHERE rno=?";
       			ps=conn.prepareStatement(sql);
       			ps.executeUpdate();
       			ps.close();
@@ -160,7 +160,7 @@ public class ReviewDAO {
     	try {
       		conn=dbconn.getConnection();
       		String sql="SELECT password FROM review "
-      				  +"WHERE no="+vo.getRno();
+      				  +"WHERE rno=?";
       		ps=conn.prepareStatement(sql);
       		ResultSet rs=ps.executeQuery();
       		rs.next();

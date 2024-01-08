@@ -74,7 +74,7 @@ public class ReviewModel {
 		vo.setRno(Integer.parseInt(rno));
 		vo.setScore(Integer.parseInt(score));
 		vo.setCateno(Integer.parseInt(cateno));
-		/* vo.setId(id); */
+		vo.setId(id);
 		vo.setCont(cont);
 		vo.setImg(img);
 		vo.setPassword(pwd);
