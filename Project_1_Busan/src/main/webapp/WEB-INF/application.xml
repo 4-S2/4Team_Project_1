@@ -13,4 +13,5 @@
   <bean id="reserve" class="com.sist.model.ReserveModel"/>
   <bean id="heart" class="com.sist.model.HeartModel"/>
   <bean id="admin" class="com.sist.model.AdminPageModel"/>
+  <bean id="review" class="com.sist.model.ReviewModel"/>
 </beans>

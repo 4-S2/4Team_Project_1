@@ -14,9 +14,20 @@ import java.util.*;
 
 public class ReviewVO {
 	private int rno, score, cateno;
-	private String id, cont, password, img;
+	private String cont, password, img;
 	private Date regdate;
+	private MemberVO mvo;
 	
+    public ReviewVO() {
+        mvo=new MemberVO();
+    }
+	
+	public MemberVO getMvo() {
+		return mvo;
+	}
+	public void setMvo(MemberVO mvo) {
+		this.mvo = mvo;
+	}
 	public int getRno() {
 		return rno;
 	}
@@ -34,12 +45,6 @@ public class ReviewVO {
 	}
 	public void setCateno(int cateno) {
 		this.cateno = cateno;
-	}
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
 	}
 	public String getCont() {
 		return cont;

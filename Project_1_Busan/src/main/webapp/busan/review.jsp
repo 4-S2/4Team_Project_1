@@ -53,23 +53,23 @@ $(document).ready(function(){
 </head>
 <body>
 	<button value="리뷰 작성" class="btn" id="reviewInsertBtn">리뷰 작성</button>
-	<c:forEach var="vo" items="${list}" begin="0" end="4">
+	<c:forEach var="vo" items="${rlist}" begin="0" end="3">
         <div class="review-list">
         	<div class="review-profile">
         		<div class="profile">
         			<div class="profile-icon">
         				<img src="../images/icon_user.png" alt="프로필 이미지">
         			</div>
-	        		<h4><br>
-	        			<span class="regdate"></span>
+	        		<h4>${vo.mvo.id}<br>
+	        			<span class="regdate">${vo.regdate}</span>
 	        		</h4>
         		</div>
-        		<span class="score"></span>
+        		<span class="score">${vo.score}</span>
         	</div>
         	
         	<div class="review-item">
-        		<img src="../images/visual3.jpg" class="review-img" alt="후기 이미지">
-        		<p class="cont"></p>
+        		<img src="${vo.img}" class="review-img" alt="후기 이미지">
+        		<p class="cont">${vo.cont}</p>
         	</div>
         	
         	<div class="btn-wrapper">
