@@ -29,7 +29,7 @@ $(function(){
 </head>
 <body>
   <c:forEach var="time" items="${list }">
-    <span class="btn btn-xs btn-danger times">${time }</span>
+    <span class="btn btn-xs btn-info times">${time }</span>
   </c:forEach>
 </body>
 </html>

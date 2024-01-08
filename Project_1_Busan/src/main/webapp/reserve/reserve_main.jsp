@@ -22,7 +22,7 @@ $(function(){
 <body>
   <div class="wrapper row3">
    <main class="container clear">
-   <h2 class="sectiontitle">맛집 예약</h2>
+   <h2 class="sectiontitle">전시회 예약</h2>
    <div class="row">
     <table class="table" height=700>
       <tr>
@@ -31,7 +31,7 @@ $(function(){
            <caption><h3>전시회 정보</h3></caption>
            <tr>
              <td>
-              <span class="btn btn-xs btn-danger exs">전시회</span>
+              <span class="btn btn-xs btn-info exs">전시회</span>
               
              </td>
            </tr>
@@ -55,7 +55,7 @@ $(function(){
            <caption><h3>예약 정보</h3></caption>
            <tr>
              <td colspan="2" class="text-center">
-              <img src="default.png" style="width: 200px;height: 220px" id="ex_img">
+              <img src="noimage.png" style="width: 200px;height: 220px" id="ex_img">
              </td>
            </tr>
            <tr>
@@ -96,7 +96,7 @@ $(function(){
                 <input type=hidden name="rtime" id="r_time"/>
                 <input type=hidden name="inwon" id="r_inwon"/>
                 <input type=submit value="예약"
-                class="btn btn-lg btn-primary">
+                class="btn btn-lg btn-info">
               </form>
              </td>
            </tr>
