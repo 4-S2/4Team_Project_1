@@ -23,7 +23,7 @@
 			<table class="table">
 				<tr>
 					<th width=10%>아이디</th>
-					<td width=90%>${vo.mvo.id}</td>
+					<td width=90%>${sessionScope.id}</td>
 				</tr>
 				<tr>
 					<th width=10%>평점</th>

@@ -70,18 +70,18 @@ public class ReviewModel {
 		String img=request.getParameter("img");
 		String pwd=request.getParameter("pwd");
 		
-		ReviewVO vo=new ReviewVO();
-		vo.setRno(Integer.parseInt(rno));
-		vo.setScore(Integer.parseInt(score));
-		vo.setCateno(Integer.parseInt(cateno));
-		vo.setId(id);
-		vo.setCont(cont);
-		vo.setImg(img);
-		vo.setPassword(pwd);
+		ReviewVO rvo=new ReviewVO();
+		rvo.setRno(Integer.parseInt(rno));
+		rvo.setScore(Integer.parseInt(score));
+		rvo.setCateno(Integer.parseInt(cateno));
+		rvo.setId(id);
+		rvo.setCont(cont);
+		rvo.setImg(img);
+		rvo.setPassword(pwd);
 		
 		// 데이터베이스 연결 
 		ReviewDAO dao=ReviewDAO.newInstance();
-		dao.reviewInsert(vo);		
+		dao.reviewInsert(rvo);		
 		return "redirect:../busan/review.do";
 	}
 	
@@ -112,15 +112,15 @@ public class ReviewModel {
 			String img=request.getParameter("img");
 			String pwd=request.getParameter("pwd");
 			
-			ReviewVO vo=new ReviewVO();
-			vo.setRno(Integer.parseInt(rno));
-			vo.setScore(Integer.parseInt(score));
-			vo.setCont(cont);
-			vo.setImg(img);
-			vo.setPassword(pwd);
+			ReviewVO rvo=new ReviewVO();
+			rvo.setRno(Integer.parseInt(rno));
+			rvo.setScore(Integer.parseInt(score));
+			rvo.setCont(cont);
+			rvo.setImg(img);
+			rvo.setPassword(pwd);
 		   
 			ReviewDAO dao=ReviewDAO.newInstance();
-			String res=dao.reviewUpdateData(vo);
+			String res=dao.reviewUpdateData(rvo);
 			try {
 				PrintWriter out=response.getWriter();
 				out.write(res);
