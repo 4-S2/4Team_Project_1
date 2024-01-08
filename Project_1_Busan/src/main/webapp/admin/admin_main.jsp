@@ -41,8 +41,7 @@ document.addEventListener("DOMContentLoaded", function() {
 <body>
 <body data="mypage"><div id="divLoading"><div class="loading-fixed"><i></i><i></i><i></i><i></i></div></div>
 <!-- Contents -->
-관리자페이지
-<%--          <div id="myPage" class="container">
+         <div id="myPage" class="container">
             <!--CONTENTS_AREA-->
             <div class="contents_area">
                 <!--FILTER_LIST_BOARD-->
@@ -88,6 +87,6 @@ document.addEventListener("DOMContentLoaded", function() {
     </div>
     </div>
     </div>
-    --%>
+   
 </body>
 </html>

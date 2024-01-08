@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.sist.dbcp.CreateDBCPConnection;
+import com.sist.vo.ExReserveVO;
 import com.sist.vo.MemberVO;
 import com.sist.vo.QnaBoardVO;
 
@@ -113,6 +114,7 @@ public class MypageDAO {
 			}
 			return success;
 		}
+
 
 		/*
 		 * private int qno; private String subject; private Date regdate;
