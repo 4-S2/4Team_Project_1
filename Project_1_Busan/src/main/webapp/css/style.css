@@ -3402,7 +3402,7 @@ li{list-style: none;}
      display: -webkit-flex;
      display: -ms-flexbox;
      display: flex;
-     width: 23.8%;
+     width: 23.6%;
      /* padding: 15px; */
      -webkit-box-orient: vertical;
      -webkit-box-direction: normal;
@@ -3488,7 +3488,7 @@ li{list-style: none;}
    
    .product-card-heading {
 	 max-width: 280px;
-	 padding: 0 10px;
+	 /*padding: 0 10px;*/
      margin: 20px 0 10px 0;
      color: #111;
      overflow: hidden;
@@ -5695,6 +5695,7 @@ main #bottom .service p{
 	padding-top: 10px;
 	border-top: 1px solid #eee;
 }
+
 
 /* ==========================================================================
       Media

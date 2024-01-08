@@ -9,13 +9,14 @@
 <link href="../css/style.css" rel="stylesheet" type="text/css"/>
 <link rel="stylesheet" href="../shadow/css/shadowbox.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript" src="../shadow/js/shadowbox.js"></script>
 <script type="text/javascript">
 
 </script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
 	<div class="review-insert">
@@ -23,7 +24,7 @@
 			<table class="table">
 				<tr>
 					<th width=10%>아이디</th>
-					<td width=90%>${vo.mvo.id}</td>
+					<td width=90%>${sessionScope.id}</td>
 				</tr>
 				<tr>
 					<th width=10%>평점</th>
