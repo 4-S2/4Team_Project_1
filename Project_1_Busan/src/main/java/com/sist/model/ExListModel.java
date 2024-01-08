@@ -114,10 +114,10 @@ public class ExListModel {
 		  return "../main/main.jsp";
 	}
 	
-	@RequestMapping("reserve/ex_reserve.do")
+	@RequestMapping("busan/ex_reserve.do")
 	public String ex_reserve(HttpServletRequest request, HttpServletResponse response) {
 	    // reserve/ex_reserve.do 요청 처리 메소드
-	    String frno = request.getParameter("frno");
+	    String eno = request.getParameter("eno");
 	    String date = request.getParameter("date");
 	    String formattedDate = "";
 	    if (date == null)
@@ -136,7 +136,7 @@ public class ExListModel {
 	    String name = (String) session.getAttribute("name");
 
 	    ExDAO dao = ExDAO.newInstance();
-	    ExVO vo = dao.exDetailData(Integer.parseInt(frno));
+	    ExVO vo = dao.exDetailData(Integer.parseInt(eno));
 	    if (vo.getPoster() == null)
 	        vo.setPoster(vo.getPoster());
 
@@ -149,7 +149,7 @@ public class ExListModel {
 	    request.setAttribute("date", formattedDate);
 	    request.setAttribute("inwon", people);
 	    request.setAttribute("vo", vo);
-	    request.setAttribute("main_jsp", "../reserve/ex_reserve.jsp");
+	    request.setAttribute("main_jsp", "../busan/ex_reserve.jsp");
 
 	    return "../main/main.jsp";
 	}

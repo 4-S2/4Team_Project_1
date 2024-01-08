@@ -251,27 +251,7 @@ public class ExDAO {
 	   return list;
    }
    
-// 예약하기
-   public void hotelReserveOk(ExReserveVO vo) {
-	    try {
-	        conn = dbconn.getConnection();
-	        String sql = "INSERT INTO exhibition_reserve ("
-	                    + "er_no, eno, rno, user_id, erdate, inwon, buy_ok) "
-	                    + "VALUES ("
-	                    + "er_erno_seq.nextval, ?, ?, ?, SYSDATE, ?, ?)";
-	        ps = conn.prepareStatement(sql);
-	        ps.setInt(1, vo.getEno());
-	        ps.setInt(2, vo.getRno());
-	        ps.setString(3, vo.getUser_id());
-	        ps.setString(4, vo.getInwon());
-	        ps.setString(5, vo.getBuy_ok());
-	        ps.executeUpdate();
-	    } catch (Exception ex) {
-	        ex.printStackTrace();
-	    } finally {
-	        dbconn.disConnection(conn, ps);
-	    }
-	}
+
    
 }
 
