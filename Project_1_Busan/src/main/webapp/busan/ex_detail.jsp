@@ -9,7 +9,13 @@
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
 <title>Busan Tour</title>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<style type="text/css">
+#reserveCont
+{
+  height: 1000px;
+}
 
+</style>
 <!-- Include Kakao Maps API -->
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fce1f2ebd7aeec53bebf70c1f38c36c7&libraries=services"></script>
 
@@ -80,7 +86,26 @@
     }
 </script>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script type="text/javascript">
+	$(function() {
 
+		$('#realbuy').click(
+				function() {
+					var inwon = $('#inwon').val();
+					var date = $('#datepicker').val();
+					var eno = $('#eno').val(); // 선택한 방 ID 가져오기 (버튼에 data-속성으로 저장하는 방법도 있음)
+
+					if (date === '') {
+						alert('날짜를 선택해주세요.'); // 입력 요청 알림
+						return; // 화면을 유지하기 위해 return 문 사용
+					}
+
+					// 예약 페이지로 이동하면서 선택한 값을 전달
+					location.href = '../busan/actex_reserve.do?eno='
+							+ eno + '&inwon=' + inwon + '&date=' + date;
+				});
+	});
+</script>
 </head>
 <body>
 	<div id="ex" class="detail">   
@@ -106,9 +131,11 @@
 		                <div class="product-info">
 		                    <h1>${vo.ename}</h1>
 	                    	<h3>${vo.eename}</h3>
-	                    	<a href="../reserve/ex_reserve.do">
+	                    	<a href="../reserve/reserve_main.do">
         					<input type="submit" value="예약하기" class="w-commerce-commerceaddtocartbutton button add-to-cart-button" id="reservationButton" />
     						</a>
+    						
+    						
 	                    	<form>
 	                    	
 	                            <div class="heart">
@@ -267,12 +294,11 @@
 					    	</table>
 					    </form> -->
 				    </div>
-				    <div id="reserveCont" class="tab-content" style="display: none;">
-				        <!-- 예약하기 내용 -->
-				        예약하기 내용을 입력하세요.
-				    </div>
-				    
-                </div>
+				 <div id="reserveCont" class="tab-content" style="display: none;">
+    				<!-- 예약하기 내용 -->
+			  
+			     </div>
+		            
 	              <div class="section">
         <div class="wrapper">
             <div class="shop-header">
@@ -306,5 +332,6 @@
 	</div>
 <!-- <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=5badda2935e11303a89a461e" type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script> -->
 <script src="https://assets.website-files.com/5badda2935e11303a89a461e/js/webflow.9828d3d6a.js" type="text/javascript"></script>
+
 </body>
 </html>

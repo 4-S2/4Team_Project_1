@@ -59,7 +59,7 @@ document.addEventListener("DOMContentLoaded", function() {
             <div class="board_filter_box filter_depth3 mypage">
                 <ul class="board_filter_in">
                     <li class="filter_box">
-                        <a href="../mypage/../mypage/main.do" class="menu_depth3 single">회원정보수정</a>
+                        <a href="../mypage/main.do" class="menu_depth3 single">회원정보수정</a>
                     </li>
                     <li class="filter_box">
                         <a href="../mypage/myReserv.do" class="menu_depth3 single">예약내역</a>
@@ -73,10 +73,10 @@ document.addEventListener("DOMContentLoaded", function() {
                     <li class="filter_box">
                         <a href="../mypage/myJjim.do" class="menu_depth3 single ">찜목록</a>
                     </li>
-                    <li class="divider"></li>
                     <li class="filter_box">
                         <a href="../mypage/myInquiry.do" class="menu_depth3 single ">문의내역</a>
                     </li>
+                    <li class="divider"></li>
                     <li class="filter_box">
                         <a href="../mypage/myacc_delete.do" class="menu_depth3 single ">회원탈퇴</a>
                     </li>

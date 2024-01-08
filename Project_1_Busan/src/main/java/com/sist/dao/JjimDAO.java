@@ -71,7 +71,7 @@ public class JjimDAO {
 					+ "FROM user_ u "
 					+ "JOIN jjim j ON u.id = j.id "
 					+ "JOIN EXHIBITION e ON j.no = e.eNO "
-					+ "WHERE u.id=? "
+					+ "WHERE u.id=? AND j.CATENO = 5 "
 					+ "ORDER BY j.jno DESC";
 			ps=conn.prepareStatement(sql);
 			ps.setString(1, id);

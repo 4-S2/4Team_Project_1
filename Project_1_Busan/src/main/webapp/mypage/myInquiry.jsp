@@ -29,7 +29,7 @@
 		        <th class="dp_pc num2" scope="col">번호</th>
 		        <th class="title double ta_txt_center" scope="col" style="text-align: center;">제목</th>
 		        <th class="dp_pc reserve_date" scope="col">등록일</th>
-		        <th class="write_date" scope="col">처리 상태</th>
+		        <th class="write_date" scope="col">처리상태</th>
 		    </tr>
 		    </thead>
 		    <tbody>

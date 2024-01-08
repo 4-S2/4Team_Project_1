@@ -210,7 +210,9 @@ $(function(){
 </head>
 <body>
   <div class="unregister">
-    <h1>회원탈퇴</h1>
+      <div class="max1200 dp_pc contents_titbox">
+                <h4 class="titbox">회원<strong>탈퇴</strong></h4>
+   	  </div>
 <div class="delete-main">
       <p class="delete-before">비밀번호 확인  </p> 
       <input class="delete-password" type="password" align="center" placeholder="" id="pwdInput">

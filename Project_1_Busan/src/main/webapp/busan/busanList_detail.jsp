@@ -109,6 +109,19 @@
                 $('.reply').show();
             }
         });
+        
+        /* $('#reserve').click(function(){
+        	let no=$('#reserveCont').attr("data-no");
+        	$.ajax({
+        		type:'post',
+        		url:'../reserve/foodreserve_main.do',
+        		data{'no',no},
+        		success:function(result){
+        			$('#reserveCont').html(result);
+        		}
+        		
+        	})
+        }) */
     });
     /* let bCheck=false;
     $(function(){
@@ -345,9 +358,8 @@ color: #fff;
 							         <a href="" class="btn btn-sm replyInsertBtn">등록</a>
 							       </div>
 							  </div>
-							</div>
-						</div>
-						<div class="reply-insert">
+							  
+							  <div class="reply-insert">
 						<form method="post" action="">
 								<table class="table">
 							        
@@ -367,49 +379,21 @@ color: #fff;
 								</table>
 							</form>
 						</div>
-					
-						<div class="review-insert">
-							<form method="post" action="">
-								<table class="table">
-									<tr>
-										<th width=10%>아이디</th>
-										<td width=90%>아이디</td>
-									</tr>
-									<tr>
-										<th width=10%>평점</th>
-										<td width=90%><input type="text" name="score" required>
-										</td>
-									</tr>
-									<tr>
-										<th width=10%>이미지 첨부</th>
-										<td width=90%><input type="file" name="img" required>
-										</td>
-									</tr>
-									<tr>
-										<th width=10%>내용</th>
-										<td width=90%><textarea rows="10" cols="60" name=content
-												required style="resize: none"></textarea></td>
-									</tr>
-									<tr>
-										<th width=10%>비밀번호</th>
-										<td width=90%><input type="password" name="pwd" required>
-										</td>
-									</tr>
-									<tr>
-										<td colspan="2" class="text-center">
-											<button class="btn-sm btn-success" value="취소"
-												id="reviewIsertOkBtn">글쓰기</button>
-											<button class="btn-sm btn-info" value="취소"
-												id="reviewCancelBtn" onclick="javascript:history.back()">취소</button>
-										</td>
-									</tr>
-								</table>
-							</form>
+							  
+							</div>
 						</div>
+						
+					
+						
 					</div>
-					<div id="reserveCont" class="tab-content" style="display: none;">
+					<!-- <div id="reserveCont" class="tab-content"> -->
+					<div id="reserveCont" class="tab-content" style="display: none">
 						<!-- 예약하기 내용 -->
-						예약하기 내용을 입력하세요.
+						<jsp:include page="../reserve/foodreserve_main.jsp">
+						  <jsp:param name="no" value="${vo.no }"/>
+						  <jsp:param name="poster" value="${vo.poster }"/>
+						  <jsp:param name="title" value="${URLEncoder.encode(vo.title, 'UTF-8')}"/>
+						</jsp:include>
 					</div>
 
 				</div>

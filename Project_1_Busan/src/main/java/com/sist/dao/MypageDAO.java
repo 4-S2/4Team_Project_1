@@ -4,11 +4,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import com.sist.dbcp.CreateDBCPConnection;
-import com.sist.vo.GoodsVO;
+import com.sist.vo.ExReserveVO;
 import com.sist.vo.MemberVO;
 import com.sist.vo.QnaBoardVO;
 
@@ -116,6 +115,7 @@ public class MypageDAO {
 			return success;
 		}
 
+
 		/*
 		 * private int qno; private String subject; private Date regdate;
 		 */
@@ -127,7 +127,8 @@ public class MypageDAO {
 				conn=dbconn.getConnection();
 				String sql="SELECT qno,subject,regdate,status "
 						+ "FROM QnaBoard "
-						+ "WHERE id=?";
+						+ "WHERE id=? "
+						+ "ORDER BY qno DESC";
 				ps=conn.prepareStatement(sql);
 				ps.setString(1, id);
 				ResultSet rs=ps.executeQuery();

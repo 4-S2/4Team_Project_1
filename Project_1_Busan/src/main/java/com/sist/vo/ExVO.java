@@ -22,7 +22,14 @@ public class ExVO {
 		this.cocate = cocate;
 	}
 
-	private String ename,eename,efield,eitem,cate,homepage,s_date,e_date,loc,loc_detail,host,poster;
+	private String ename,eename,efield,eitem,cate,homepage,s_date,e_date,loc,loc_detail,host,poster,rday;
+	public String getRday() {
+		return rday;
+	}
+	public void setRday(String rday) {
+		this.rday = rday;
+	}
+
 	private double score;
 	public int getEno() {
 		return eno;
