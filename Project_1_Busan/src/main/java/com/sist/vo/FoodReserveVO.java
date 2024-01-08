@@ -2,7 +2,15 @@ package com.sist.vo;
 
 public class FoodReserveVO {
 	private int rno,fno,inwon,ok;
-	private String rdate,rtime;
+	private String day,time,id;
+	private BusanListVO fvo=new BusanListVO();
+	
+	public BusanListVO getFvo() {
+		return fvo;
+	}
+	public void setFvo(BusanListVO fvo) {
+		this.fvo = fvo;
+	}
 	public int getRno() {
 		return rno;
 	}
@@ -27,17 +35,29 @@ public class FoodReserveVO {
 	public void setOk(int ok) {
 		this.ok = ok;
 	}
-	public String getRdate() {
-		return rdate;
+	public String getDay() {
+		return day;
 	}
-	public void setRdate(String rdate) {
-		this.rdate = rdate;
+	public void setDay(String day) {
+		this.day = day;
 	}
-	public String getRtime() {
-		return rtime;
+	public String getTime() {
+		return time;
 	}
-	public void setRtime(String rtime) {
-		this.rtime = rtime;
+	public void setTime(String time) {
+		this.time = time;
 	}
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return fno+" "+day+" "+time+" "+inwon+" "+id;
+	}
+	
 	
 }
