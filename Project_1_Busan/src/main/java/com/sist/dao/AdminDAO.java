@@ -32,7 +32,8 @@ public class AdminDAO {
 				conn=dbconn.getConnection();
 				String sql = "SELECT id, name, email, phone, addr "
 						   + "FROM user_ "
-						   + "WHERE admin ='n'";
+						   + "WHERE admin ='n' "
+						   + "ORDER BY id ASC";
 				ps=conn.prepareStatement(sql);
 				ResultSet rs=ps.executeQuery();
 				while(rs.next()) {
