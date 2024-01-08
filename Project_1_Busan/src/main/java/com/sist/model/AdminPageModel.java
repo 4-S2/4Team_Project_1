@@ -15,33 +15,33 @@ public class AdminPageModel {
 	
 	// 회원 관리
 	@RequestMapping("admin/main.do")
-	public String admin_main(HttpServletRequest request,HttpServletResponse response) throws Exception {
-		try { 
-			request.setCharacterEncoding("UTF-8"); 
-		} catch (Exception e) {}
- 
-		//관리자 예외처리
-		HttpSession session = request.getSession();
-		if(session.getAttribute("id")==null) {
-			return "redirect:../main/main.do";
-		}
-		String admin = (String)session.getAttribute("admin");
-		if(admin.equals("y")) {
-			 AdminDAO dao=AdminDAO.newInstance(); 
-			List<MemberVO> mlist = dao.memberListData();
-			int mSize = mlist.size();
-		  
-			for (MemberVO VO : mlist) {
-				System.out.println(VO.getId());
-			} 
-			
-			request.setAttribute("mSize", mSize);
-			request.setAttribute("mlist", mlist);
-			request.setAttribute("admin_jsp", "../admin/admin_member.jsp");
-			request.setAttribute("main_jsp", "../admin/admin_main.jsp");
-			return "../main/main.jsp";
-		}
-		return "redirect:../main/main.do";
+	public String admin_main(HttpServletRequest request,HttpServletResponse response) {
+		List<MemberVO> mlist = dao.memberListData();
+		int mSize = mlist.size();
+	  
+		/*
+		 * for (MemberVO VO : mlist) { Systㄴem.out.println(VO.getId()); }
+		 */
+		
+		request.setAttribute("mSize", mSize);
+		request.setAttribute("mlist", mlist);
+		request.setAttribute("admin_jsp", "../admin/admin_member.jsp");
+		request.setAttribute("main_jsp", "../admin/admin_main.jsp");
+		return "../main/main.jsp";
+		/*
+		 * try { request.setCharacterEncoding("UTF-8"); } catch (Exception e) {}
+		 */
+		/*
+		 * //관리자 예외처리 HttpSession session = request.getSession();
+		 * if(session.getAttribute("id")==null) { return "redirect:../main/main.do"; }
+		 * String admin = (String)session.getAttribute("admin"); if(admin.equals("y")) {
+		 * List<MemberVO> mlist = dao.memberListData(); int mSize = mlist.size();
+		 * 
+		 * request.setAttribute("mSize", mSize); request.setAttribute("mlist", mlist);
+		 * request.setAttribute("admin_jsp", "../admin/admin_member.jsp");
+		 * request.setAttribute("main_jsp", "../admin/admin_main.jsp"); return
+		 * "../main/main.jsp"; } return "redirect:../main/main.do"; }
+		 */
 	}
 	
 	//회원 탈퇴
