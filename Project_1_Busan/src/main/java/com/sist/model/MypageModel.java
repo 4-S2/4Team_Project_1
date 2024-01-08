@@ -41,6 +41,8 @@ public class MypageModel {
 	@RequestMapping("mypage/editProfile.do")
 	public void mypage_editProfile(HttpServletRequest request, HttpServletResponse response)
 	{
+        response.setContentType("text/html;charset=UTF-8");
+        
 		HttpSession session=request.getSession();
 		String id=(String)session.getAttribute("id");
 		
