@@ -104,11 +104,6 @@ public class MypageModel {
 			page="1";
 		int curpage=Integer.parseInt(page);
 		
-		/*
-		 * String fdpage=request.getParameter("fdpage"); if(fdpage==null) fdpage="1";
-		 * int fdcurpage=Integer.parseInt(fdpage);
-		 */
-		
 	    // 탭에 대한 정보를 파라미터로 받아옴 (예: tab=1, tab=2 등)
 		String tab = request.getParameter("tab");
 		if(tab==null)

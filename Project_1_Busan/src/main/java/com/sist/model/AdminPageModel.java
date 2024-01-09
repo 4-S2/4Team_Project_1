@@ -123,6 +123,58 @@ public class AdminPageModel {
 		}
 	}
 	
+//----------------------
+	// 예약 목록
+	@RequestMapping("admin/admin_reserv.do")
+	public String admin_reserv(HttpServletRequest request,HttpServletResponse response) {
+			String page=request.getParameter("page");
+			if(page==null)
+				page="1";
+			int curpage=Integer.parseInt(page);
+			
+		    // 탭에 대한 정보를 파라미터로 받아옴 (예: tab=1, tab=2 등)
+			String tab = request.getParameter("tab");
+			if(tab==null)
+				tab="1";
+		    
+		    int startPage=0, endPage=0, totalpage=0;
+			
+			  if ("2".equals(tab)) {
+			        // 전시회
+			        totalpage = dao.adreservationRowCount();
+			        final int BLOCK = 5;
+			        startPage = ((curpage - 1) / BLOCK * BLOCK) + 1;
+			        endPage = ((curpage - 1) / BLOCK * BLOCK) + BLOCK;
+			        if (endPage > totalpage) endPage = totalpage;
+			        
+			        List<ReserveInfoVO> rlist = dao.adExReserveList(curpage);
+			        
+					request.setAttribute("rlist", rlist);
+			    } else if ("1".equals(tab)) {
+			        // 맛집
+			        totalpage = dao.adfdreservationRowCount();
+			        final int BLOCK = 5;
+			        startPage = ((curpage - 1) / BLOCK * BLOCK) + 1;
+			        endPage = ((curpage - 1) / BLOCK * BLOCK) + BLOCK;
+			        if (endPage > totalpage) endPage = totalpage;
+			        
+			        List<FoodReserveVO> flist = dao.adFdReserveList(curpage);
+			        
+			        request.setAttribute("flist", flist);
+			    }
+			
+			int rSize = dao.adTotalresCount();
+			request.setAttribute("rSize",rSize);  
+		  
+			request.setAttribute("curpage", curpage);
+			request.setAttribute("totalpage", totalpage);
+			request.setAttribute("startPage", startPage);
+			request.setAttribute("endPage", endPage);
+			request.setAttribute("admin_jsp", "../admin/admin_reserv.jsp");
+			request.setAttribute("main_jsp", "../admin/admin_main.jsp");
+			return "../main/main.jsp";
+	}
+	
 	// 특산물 리스트
 	@RequestMapping("admin/admin_goods.do")
 	public String admin_goods(HttpServletRequest request,HttpServletResponse response) {

@@ -4,7 +4,15 @@ public class FoodReserveVO {
 	private int rno,fno,inwon,ok;
 	private String day,time,id;
 	private BusanListVO fvo=new BusanListVO();
+	private MemberVO mvo = new MemberVO();
 	
+	
+	public MemberVO getMvo() {
+		return mvo;
+	}
+	public void setMvo(MemberVO mvo) {
+		this.mvo = mvo;
+	}
 	public BusanListVO getFvo() {
 		return fvo;
 	}

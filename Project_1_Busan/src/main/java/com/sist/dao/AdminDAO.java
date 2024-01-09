@@ -388,7 +388,67 @@ public class AdminDAO {
 		}
 //----------------------- END OF 특산물 관리 
 
-//----------------------- 맛집 예약 관리(reservation)		
+//----------------------- 맛집 예약 관리(reservation)
+		// 맛집예약 목록 => 맛집번호,맛집명,예약일,예약시간,인원,승인상태,아이디,이름,예약번호
+		public List<FoodReserveVO> adFdReserveList(int page){
+			List<FoodReserveVO> list=new ArrayList<>();
+			try {
+				conn=dbconn.getConnection();
+				String sql="SELECT f.no, f.title, r.day, r.time, r.inwon, r.ok, r.id,u.name,r.frno "
+						+ "FROM food f "
+						+ "JOIN (SELECT res.*, ROWNUM AS num "
+						+ "FROM reservation res) "
+						+ "r ON f.no = r.fno "
+						+ "JOIN user_ u ON r.id = u.id "
+						+ "WHERE r.num BETWEEN ? AND ?"
+						+ "ORDER BY r.frno DESC";
+				ps=conn.prepareStatement(sql);
+				int rowSize=5;
+				int start=(rowSize*page)-(rowSize-1);
+				int end=rowSize*page;
+				ps.setInt(1, start);
+				ps.setInt(2, end);
+				ResultSet rs=ps.executeQuery();
+				while(rs.next()) {			   	
+					FoodReserveVO vo=new FoodReserveVO();
+					vo.setFno(rs.getInt(1));
+					vo.getFvo().setTitle(rs.getString(2));
+					vo.setDay(rs.getString(3));
+					vo.setTime(rs.getString(4));
+					vo.setInwon(rs.getInt(5));
+					vo.setOk(rs.getInt(6));
+					vo.setId(rs.getString(7));
+					vo.getMvo().setName(rs.getString(8));
+					vo.setRno(rs.getInt(9));
+					list.add(vo);
+				}
+				rs.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}finally {
+				dbconn.disConnection(conn, ps);
+			}
+			return list;
+		}
+		// 맛집예약 총페이지
+		public int adfdreservationRowCount() {
+			int total=0;
+			try {
+				conn=dbconn.getConnection();
+				String sql="SELECT CEIL(COUNT(*)/5.0) FROM reservation";
+				ps=conn.prepareStatement(sql);
+				ResultSet rs=ps.executeQuery();
+				rs.next();
+				total=rs.getInt(1);
+				rs.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}finally {
+				dbconn.disConnection(conn, ps);
+			}
+			return total;
+		}
+		
 		// 관리자 예약 상태 변경
 		public void admin_booking_confirm(int frno, int ok)
 		{
@@ -408,5 +468,88 @@ public class AdminDAO {
 			{
 				dbconn.disConnection(conn, ps);
 			}
+		}
+		
+		//전시회,맛집 총 예약수
+		public int adTotalresCount() {
+			int total=0;
+			try {
+				conn=dbconn.getConnection();
+				String sql="SELECT "
+						+ "(SELECT COUNT(*) FROM reservation WHERE ok = 0) + "
+						+ "(SELECT COUNT(*) FROM reserve_Info WHERE rok = 0) AS combined_count "
+						+ "FROM dual";
+				ps=conn.prepareStatement(sql);
+				ResultSet rs=ps.executeQuery();
+				rs.next();
+				total=rs.getInt(1);
+				rs.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}finally {
+				dbconn.disConnection(conn, ps);
+			}
+			return total;
+		}
+//----------------------- 맛집 예약 관리(reservation)		
+		
+//----------------------- 전시회 예약 관리(reserveInfo)		
+		// 전시예약 목록( => 전시번호,전시회명,예약일,인원,승인상태,아이디,이름,예약번호
+		public List<ReserveInfoVO> adExReserveList(int page){
+			List<ReserveInfoVO> list=new ArrayList<ReserveInfoVO>();
+			try {
+				conn=dbconn.getConnection();
+				String sql="SELECT e.eno, e.ename, ri.day, ri.inwon, ri.rok, ri.id,u.name, ri.no  "
+						+ "FROM exhibition e "
+						+ "JOIN (SELECT ri.*, ROWNUM AS num "
+						+ "FROM reserve_info ri) ri "
+						+  "ON e.eno = ri.eno "
+						+ "JOIN user_ u ON ri.id = u.id "
+						+ "WHERE ri.num BETWEEN ? AND ? "
+						+ "ORDER BY ri.no DESC";
+				ps=conn.prepareStatement(sql);
+				int rowSize=5;
+				int start=(rowSize*page)-(rowSize-1);
+				int end=rowSize*page;
+				ps.setInt(1, start);
+				ps.setInt(2, end);
+				ResultSet rs=ps.executeQuery();
+				while(rs.next()) {
+					ReserveInfoVO vo=new ReserveInfoVO();
+					vo.getEvo().setEno(rs.getInt(1));
+					vo.getEvo().setEname(rs.getString(2));
+					vo.setDay(rs.getString(3));
+					vo.setInwon(rs.getString(4));
+					vo.setRok(rs.getInt(5));
+					vo.getMvo().setId(rs.getString(6));
+					vo.getMvo().setName(rs.getString(7));
+					vo.setNo(rs.getInt(8));
+					list.add(vo);
+				}
+				rs.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}finally {
+				dbconn.disConnection(conn, ps);
+			}
+			return list;
+		}
+		// 전시회예약 총페이지
+		public int adreservationRowCount() {
+			int total=0;
+			try {
+				conn=dbconn.getConnection();
+				String sql="SELECT CEIL(COUNT(*)/5.0) FROM reserve_info";
+				ps=conn.prepareStatement(sql);
+				ResultSet rs=ps.executeQuery();
+				rs.next();
+				total=rs.getInt(1);
+				rs.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}finally {
+				dbconn.disConnection(conn, ps);
+			}
+			return total;
 		}
 }

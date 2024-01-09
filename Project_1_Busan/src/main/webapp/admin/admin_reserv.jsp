@@ -129,7 +129,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 </script>
-
+<script type="text/javascript">
+$(function(){
+	  $("#myTable tr").click(function(){
+			let x=(document.body.offsetWidth/2)-(750/2)
+			let y=(window.screen.height/2)-(500/2)-50
+			let frno=$(this).attr('data-frno')
+			window.open("../admin/member_detail.do?id="+id,"",'width=650, height=350, left='+x+', top='+y)
+	  })
+	  
+	});
+</script>
 </head>
 <body>
   <div class="myReserv">
@@ -137,7 +147,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 <h4 class="titbox">나의<strong>예약내역</strong></h4>
    	  </div>
    	 <div class="tab_contents_area">
-   	  	<p class="titbox">&nbsp;&nbsp;<span class="total_num_txt offline ta_px0">총 <strong>${rSize }</strong>개의 예약내역이 있습니다.</span></p>
+   	  	<p class="titbox">&nbsp;&nbsp;<span class="total_num_txt offline ta_px0">총 <strong>${rSize }</strong>개의 미승인된 예약내역이 있습니다.</span></p>
    	  </div>
 		<div class="pc_mt30 ta_mt40 ta_mx40 tab_area tab2 sub4 mypage">
 		    <div class="tab_box">
@@ -154,13 +164,14 @@ document.addEventListener('DOMContentLoaded', function() {
 			    <tr>
 			        <th class="dp_pc num2" scope="col">번호</th>
 			        <th class="title double ta_txt_center" scope="col" style="text-align: center;">식당명</th>
+			        <th class="dp_pc reserve_date" scope="col">예약자</th>
+			        <th class="dp_pc reserve_date" scope="col">예약자ID</th>
 			        <th class="dp_pc reserve_date" scope="col">예약일시</th>
 			        <th class="dp_pc num2" scope="col">인원</th>
 			        <th class="write_date" scope="col">승인상태</th>
-			        <th class="dp_pc reserve_date" scope="col">예약취소</th> 
 			    </tr>
 			    </thead>
-			    <tbody>
+			    <tbody id=myTable>
  					<c:choose>
 					    <c:when test="${empty flist}"> 
 					        <tr>
@@ -171,11 +182,13 @@ document.addEventListener('DOMContentLoaded', function() {
  					    </c:when>
 					    <c:otherwise> 
 					        <c:forEach var="vo" items="${flist}" varStatus="r">
-					            <tr>
+					            <tr data-id="${vo.rno}" id=food>
 					                <td class="dp_pc num2">${r.index +1}</td>
 					                <td class="title double ta_px20" style="text-align: center;">
 					                    <a href="../busan/food_detail.do?no=${vo.fno}" class="ellipsis">${vo.fvo.title}</a>
 					                </td>
+					                <td class="dp_pc writer">${vo.mvo.name}</td>
+					                <td class="dp_pc writer">${vo.id}</td>
 					                <td class="dp_pc writer">${vo.day}<br>${vo.time}</td>
 					                 <td class="dp_pc num2">${vo.inwon}명</td>
 					                <c:if test="${vo.ok == 0 }">
@@ -183,10 +196,7 @@ document.addEventListener('DOMContentLoaded', function() {
 					                </c:if>
 					                <c:if test="${vo.ok == 1 }">
 					                	<td class="category px_20 ta_px10"><strong>승인완료</strong></td>
-					                </c:if>
-					                 <td class="dp_pc writer">
-										<input type="button" value="예약취소" onclick="cancelReservation()" class="cancel-button">
-									 </td>		                
+					                </c:if>	                
 					            </tr>
 					        </c:forEach>
 					    </c:otherwise> 
@@ -199,13 +209,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 <div class="text-center">
                     <ul class="pagination">
                         <c:if test="${startPage>1}">
-                            <li><a href="myReserv.do?page=${startPage-1}&tab=1">&lt;</a></li>
+                            <li><a href="admin_reserv.do?page=${startPage-1}&tab=1">&lt;</a></li>
                         </c:if>
                         <c:forEach var="i" begin="${startPage}" end="${endPage}">
-                            <li ${curpage==i?"class=active":""}><a href="myReserv.do?page=${i}&tab=1">${i}</a></li>
+                            <li ${curpage==i?"class=active":""}><a href="admin_reserv.do?page=${i}&tab=1">${i}</a></li>
                         </c:forEach>
                         <c:if test="${endPage<totalpage}">
-                            <li><a href="myReserv.do?page=${endPage+1}&tab=1">&gt;</a></li>
+                            <li><a href="admin_reserv.do?page=${endPage+1}&tab=1">&gt;</a></li>
                         </c:if>
                     </ul>
                 </div>
@@ -221,13 +231,14 @@ document.addEventListener('DOMContentLoaded', function() {
 			    <tr>
 			        <th class="dp_pc num2" scope="col">번호</th>
 			        <th class="title double ta_txt_center" scope="col" style="text-align: center;">전시회명</th>
+			        <th class="dp_pc reserve_date" scope="col">예약자</th>
+			        <th class="dp_pc reserve_date" scope="col">예약자ID</th>
 			        <th class="dp_pc reserve_date" scope="col">예약일</th>
 			        <th class="dp_pc num2" scope="col">인원</th>
 			        <th class="write_date" scope="col">승인상태</th>
-			        <th class="dp_pc reserve_date" scope="col">예약취소</th> 
 			    </tr>
 			    </thead>
-			    <tbody>
+			    <tbody id=myTable>
  					<c:choose>
 					    <c:when test="${empty rlist}"> 
 					        <tr>
@@ -238,11 +249,13 @@ document.addEventListener('DOMContentLoaded', function() {
  					    </c:when>
 					    <c:otherwise> <!-- e.eno, e.ename, ri.day, ri.inwon, ri.rok, ri.id " -->
 					        <c:forEach var="vo" items="${rlist}" varStatus="r">
-					            <tr>
+					            <tr data-id="${vo.no}" id=ex>
 					                <td class="dp_pc num2">${r.index +1}</td>
 					                <td class="title double ta_px20" style="text-align: center;">
 					                    <a href="../busan/ex_detail.do?eno=${vo.evo.eno}" class="ellipsis">${vo.evo.ename}</a>
 					                </td>
+					                 <td class="dp_pc writer">${vo.mvo.name}</td>
+					                 <td class="dp_pc writer">${vo.mvo.id}</td>
 					                <td class="dp_pc writer">${vo.day}</td>
 					                 <td class="dp_pc num2">${vo.inwon}</td>
 					                <c:if test="${vo.rok == 0 }">
@@ -250,10 +263,7 @@ document.addEventListener('DOMContentLoaded', function() {
 					                </c:if>
 					                <c:if test="${vo.rok == 1 }">
 					                	<td class="category px_20 ta_px10"><strong>승인완료</strong></td>
-					                </c:if>
-					                 <td class="dp_pc writer">
-										<input type="button" value="예약취소" onclick="cancelReservation()" class="cancel-button">
-									 </td>		                
+					                </c:if>	                
 					            </tr>
 					        </c:forEach>
 					    </c:otherwise> 
@@ -266,13 +276,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 <div class="text-center">
                     <ul class="pagination">
                         <c:if test="${startPage>1}">
-                            <li><a href="myReserv.do?page=${startPage-1}&tab=2">&lt;</a></li>
+                            <li><a href="admin_reserv.do?page=${startPage-1}&tab=2">&lt;</a></li>
                         </c:if>
                         <c:forEach var="i" begin="${startPage}" end="${endPage}">
-                            <li ${curpage==i?"class=active":""}><a href="myReserv.do?page=${i}&tab=2">${i}</a></li>
+                            <li ${curpage==i?"class=active":""}><a href="admin_reserv.do?page=${i}&tab=2">${i}</a></li>
                         </c:forEach>
                         <c:if test="${endPage<totalpage}">
-                            <li><a href="myReserv.do?page=${endPage+1}&tab=2">&gt;</a></li>
+                            <li><a href="admin_reserv.do?page=${endPage+1}&tab=2">&gt;</a></li>
                         </c:if>
                     </ul>
                 </div>
