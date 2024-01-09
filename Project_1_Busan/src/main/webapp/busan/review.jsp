@@ -14,8 +14,6 @@
 	border-radius: 15px;
 	background-color: #fff;
 }
-
-
 </style>
 
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>

@@ -3,6 +3,109 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+<script type="text/javascript">
+	<!-- 결제 API -->
+	var IMP = window.IMP; // 생략 가능
+	IMP.init("imp80485780"); // 예: imp00000000 
+	function requestPay() {
+		console.log('clicked');
+	  // IMP.request_pay(param, callback) 결제창 호출
+		IMP.request_pay({
+		    pg : 'html5_inicis', // version 1.1.0부터 지원.
+		    
+		        /*
+		            'kakaopay':카카오페이,
+		            'inicis':이니시스, 'html5_inicis':이니시스(웹표준결제),
+		            'nice':나이스,
+		            'jtnet':jtnet,
+		            'uplus':LG유플러스
+		        */
+		        
+		    // 출력할 내용을 Session에 등록하기
+		    pay_method : 'card', // 'card' : 신용카드 | 'trans' : 실시간계좌이체 | 'vbank' : 가상계좌 | 'phone' : 휴대폰소액결제
+		    merchant_uid : 'merchant_' + new Date().getTime(),
+		    name : $('#title').text(), /* $('#title').text(), */
+		    amount : $('#price').attr("data-price"), /* $('#price').attr('data-price'), */
+		    buyer_email : 'iamport@siot.do',
+		    buyer_name : '구매자이름',
+		    buyer_tel : '010-1234-5678',
+		    buyer_addr : '서울특별시 강남구 삼성동',
+		    buyer_postcode : '123-456',
+		    app_scheme : 'iamporttest' // in app browser결제에서만 사용 
+		}, function(rsp) {
+		    if ( rsp.success ) {
+		        var msg = '결제가 완료되었습니다.';
+		        msg += '고유ID : ' + rsp.imp_uid;
+		        msg += '상점 거래ID : ' + rsp.merchant_uid;
+		        msg += '결제 금액 : ' + rsp.paid_amount;
+		        msg += '카드 승인번호 : ' + rsp.apply_num;s
+		    } else {
+		        var msg = '결제에 실패하였습니다.';
+		        msg += '에러내용 : ' + rsp.error_msg;
+		        
+		        let price=$('#price').attr("data-price")
+				let count=$('#sel').val()
+				let no=$('#cart').attr("data-no")
+				let type=$('#cart').attr("data-type")
+				
+				$.ajax({
+					type:'post',
+					url:'../goods/cart_buy.do',
+					data:{"no":no, "count":count, "price":price}, 
+					success:function(result){
+						// 마이페이지 이동
+						if(result=='yes'){
+							location.href="../mypage/mypage_buy.do"	
+						} else {
+							alert("구매에 실패했습니다.")
+						}
+					}
+				})
+		    }
+		})
+	}
+
+
+	$(function(){
+		$('#sel').change(function(){
+			let price=$('#price').attr("data-price")
+			let count=$(this).val()
+			let total=Number(price)*count;
+			$('#total').text(total)
+		})
+		
+		$('#cartBtn').click(function(){
+			let price=$('#price').attr("data-price")
+			let count=$('#sel').val()
+			let no=$(this).attr("data-no")
+			/* let msg="가격:"+price+"\n"
+					+"수량:"+count+"\n"
+					+"상품번호:"+no+"\n"
+			alert(msg) */
+			
+			$.ajax({
+				type:'post',
+				url:'../goods/cart_insert.do',
+				data:{"no":no, "count":count, "price":price}, 
+				success:function(result){
+					// 마이페이지 이동
+					if(result=='yes'){
+						location.href="../mypage/mypage_cart.do"	
+					} else {
+						alert("장바구니에 추가가 불가합니다.")
+					}
+				}
+			})
+		})
+		
+		$('#buyBtn').click(function(){
+			requestPay()
+		})
+	})
+</script>
+
 <!-- JavaScript 코드 -->
 <script type="text/javascript">
 document.addEventListener('DOMContentLoaded', function() {
@@ -27,6 +130,9 @@ function showTab(tabName) {
     }
 }
 </script>
+
+
+
 
 <div id="goods" class="detail">
     <!-- <div class="section no-padding-vertical">
@@ -53,16 +159,38 @@ function showTab(tabName) {
 	                    <h1>${vo.gname}</h1>
 	                    <p class="origin"><span>원산지 </span><span class="emph"> ${vo.origin}</span></p>
 	                    <p class="manufacturer"><span>제조사 </span><span class="emph"> ${vo.manufacturer}</span></p>
+	                    <p class="delivery-info"><span>배송</span><span class="emph"> 무료 배송</span></p>
 	                    <form>
-	                    	<p class="price"><span>가격</span><span class="emph"> ${vo.price}</span></p>
+	                    	<p class="price"><span>가격 </span><span class="emph" id="price" data-price="${vo.price}"> ${vo.price}원</span></p>
 	                    	<!-- 수량 -->
-	                    	<div class="number"> </div>
-	                    	<!-- 총 가격 -->
-	                    	<div class="totalPrice"></div>
+	                    	<div class="number">
+	                    		<span>수량 </span>
+	                    		<span class="emph">
+									<select id="sel">
+										<option value="1">1개</option>
+										<option value="2">2개</option>
+									 	<option value="3">3개</option>
+									 	<option value="4">4개</option>
+									 	<option value="5">5개</option>
+									 	<option value="6">6개</option>
+									 	<option value="7">7개</option>
+										<option value="8">8개</option>
+									 	<option value="9">9개</option>
+									 	<option value="10">10개</option>
+									</select>
+								</span>
+	                    	</div>
+	                    	<!-- 총 금액 -->
+	                    	<div class="totalPrice">
+	                    		<span>총 금액</span>
+	                    		<span id="total" class="emph">${vo.price}</span>원
+	                    	</div>
 	                    	<div class="btnWrap">
-	                    		<button value="장바구니" id="cartBtn" class="btn">장바구니</button>
-	                    		<button value="구매하기" id="buyBtn" class="btn">구매하기</button>
-	                    		<button value="목록" id="listBtn" class="btn">목록</button>
+	                    		<button value="장바구니" id="cartBtn" class="btn" data-no="${vo.gno}">장바구니</button>
+	                    		<c:if test="${sessionScope!=null}">
+	                    			<button value="구매하기" id="buyBtn" class="btn">구매하기</button>
+	                    		</c:if>
+	                    		<button value="목록" id="listBtn" class="btn" onclick="javascript:history.back()">목록</button>
 	                    	</div>
 	                    </form>
 	                </div>
@@ -136,7 +264,7 @@ function showTab(tabName) {
 				        지도/주변 추천 내용을 입력하세요.
 				    </div> -->
 				    
-				    <div id="reviewCont" class="tab-content" style="">
+				    <div id="reviewCont" class="tab-content" style="display:none">
 				        <!-- 리뷰 내용 -->
 				        <jsp:include page="../busan/review.jsp"></jsp:include>
 				    </div>

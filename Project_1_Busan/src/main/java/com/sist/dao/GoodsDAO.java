@@ -204,14 +204,13 @@ public class GoodsDAO {
 	            vo.setDimage(rs.getString(7));
 			}
 			rs.close();
-	      }catch(Exception ex) {
-	         ex.printStackTrace();
-	      }
-	      finally {
-	         dbconn.disConnection(conn, ps);
-	      }
-	      return vo;
-	   }
+		} catch(Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			dbconn.disConnection(conn, ps);
+		}
+		return vo;
+	}
 	
 	
 	// 추천 상품
@@ -247,5 +246,147 @@ public class GoodsDAO {
 		}
 		return list;
 	}
-	   
+	
+	
+	
+	// 존재하는 상품 확인
+	public int goodsCartCount(CartVO vo) {
+		int count=0;
+		try {
+			conn=dbconn.getConnection();
+			
+			String sql="SELECT COUNT(*) "
+				      +"FROM cart "
+				      +"WHERE gno=? AND issale!=1 AND id=?";
+			ps=conn.prepareStatement(sql);
+			ps.setInt(1, vo.getGno());
+	        ps.setString(2, vo.getId());
+	        
+	        ResultSet rs=ps.executeQuery();
+			if(rs.next()) {
+				count=rs.getInt(1);
+			}
+			rs.close();
+		} catch(Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			dbconn.disConnection(conn, ps);
+		}
+		return count;
+	}
+	
+	
+	public void cartGoodsUpdate(CartVO vo) {
+	    try {
+	        conn=dbconn.getConnection();
+	        String sql="UPDATE cart SET amount=amount+? "
+	                  +"WHERE gno=? AND id=?";
+	        ps=conn.prepareStatement(sql);
+	        ps.setInt(1, vo.getAmount());
+	        ps.setInt(2, vo.getGno());
+	        ps.setString(3, vo.getId());
+
+	        ps.executeUpdate();
+	    } catch (Exception ex) {
+	        ex.printStackTrace();
+	    } finally {
+	        dbconn.disConnection(conn, ps);
+	    }
+	}
+	
+
+	public void cartGoodsInsert(CartVO vo) {
+	    try {
+	        conn=dbconn.getConnection();
+	        String sql ="SELECT COUNT(*) "
+	        		   +"FROM cart "
+	        		   +"WHERE gno=? AND id=? AND issale!=1";
+	        ps=conn.prepareStatement(sql);
+	        ps.setInt(1, vo.getGno());
+	        ps.setString(2, vo.getId());
+	        ResultSet rs=ps.executeQuery();
+	        rs=ps.executeQuery();
+	        if (rs.next()) {
+	            int count=rs.getInt(1);
+
+	            // 구매가 안된 상품이 있는지 확인 
+	            if (count!=0) {
+	                // 존재한다면 => 수량만 증가 
+	                sql="UPDATE cart SET "
+	                   +"amount=amount+? "
+	                   +"WHERE gno=? AND id=?";
+	                ps=conn.prepareStatement(sql);
+	                ps.setInt(1, vo.getAmount());
+	                ps.setInt(2, vo.getGno());
+	                ps.setString(3, vo.getId());
+	                ps.executeUpdate();
+	            } else {
+	                // 없다면 => 추가 
+	                sql="INSERT INTO cart VALUES("
+	                   +"(SELECT NVL(MAX(cart_no) + 1, 1) "
+	                   +"FROM cart), ?, ?, ?, ?, 0, 0, SYSDATE)";
+	                ps = conn.prepareStatement(sql);
+	                ps.setInt(1, vo.getGno());
+	                ps.setInt(2, vo.getAmount());
+	                ps.setInt(3, vo.getPrice());
+	                ps.setString(4, vo.getId());
+	                ps.executeUpdate();
+	            }
+	        }
+	    } catch (Exception ex) {
+	        ex.printStackTrace();
+	    } finally {
+	        dbconn.disConnection(conn, ps);
+	    }
+	}
+	
+	
+	// mypageList(cart)
+	public CartVO myCartGoodsData(String id) {
+		CartVO vo=new CartVO();
+		
+		try {
+	        conn=dbconn.getConnection();
+	        String sql="SELECT cart_no, gno, amount, regdate, issale, ischeck, price, "
+	        		  +"(SELECT poster FROM goods WHERE no=cart.gno) as poster, "
+	                  +"(SELECT gname FROM goods WHERE no=cart.gno) as gname, "
+	                  +"(SELECT price FROM goods WHERE no=cart.gno) as price "
+	                  +"FROM cart "
+	                  +"WHERE id=? AND issale!=1 "
+	                  +"ORDER BY cart_no DESC";
+	        ps=conn.prepareStatement(sql);
+	        ps.setString(1, vo.getId());
+
+	        ResultSet rs=ps.executeQuery();
+	        rs=ps.executeQuery();
+	    } catch (Exception ex) {
+	        ex.printStackTrace();
+	    } finally {
+	        dbconn.disConnection(conn, ps);
+	    }
+		
+		return vo;
+	}
+	
+	
+	public void cartGoodsBuyInsert(CartVO vo) {
+		try {
+			conn=dbconn.getConnection();
+	        String sql="INSERT INTO cart VALUES( "
+	        		  +"(SELECT NVL(MAX(cart_no)+1,1) FROM cart), "
+	        		  +"?, ?, ?, ?, 0, 1, SYSDATE)";
+	        ps=conn.prepareStatement(sql);
+	        ps.setInt(1, vo.getGno());
+	        ps.setInt(2, vo.getAmount());
+	        ps.setInt(3, vo.getPrice());
+	        ps.setString(4, vo.getId());
+			ResultSet rs=ps.executeQuery();
+	        rs=ps.executeQuery();
+		} catch (Exception ex) {
+	        ex.printStackTrace();
+	    } finally {
+	        dbconn.disConnection(conn, ps);
+	    }
+	}
+   
 }

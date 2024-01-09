@@ -82,17 +82,17 @@ public class ReviewModel {
 		// 데이터베이스 연결 
 		ReviewDAO dao=ReviewDAO.newInstance();
 		dao.reviewInsert(rvo);		
+		
 		return "redirect:../busan/review.do";
 	}
 	
 	// 삭제
-	@RequestMapping("busan/review_delete.do")
+	@RequestMapping("busan/review_delete_ok.do")
 	public void review_delete(HttpServletRequest request, HttpServletResponse response) {
 		String rno=request.getParameter("rno");
 		String pwd=request.getParameter("pwd");
 		ReviewDAO dao=ReviewDAO.newInstance();
 		String result=dao.reviewDeleteData(Integer.parseInt(rno), pwd);
-		
 		try {
 			PrintWriter out=response.getWriter();
 			out.write(result);
@@ -101,30 +101,42 @@ public class ReviewModel {
 	
 	// 수정
 	@RequestMapping("busan/review_update.do")
-	public void review_update(HttpServletRequest request, HttpServletResponse response) {
+	public String review_update(HttpServletRequest request, HttpServletResponse response) {
+		
+		String rno=request.getParameter("rno");
+		ReviewDAO dao=ReviewDAO.newInstance();
+		ReviewVO rvo=new ReviewVO();
+		request.setAttribute("rvo", rvo);
+		request.setAttribute("main_jsp", "../busan/update.jsp");
+		
+		return "../main/main.jsp";
+	}
+	
+	@RequestMapping("busan/review_update_ok.do")
+	public void review_update_ok(HttpServletRequest request, HttpServletResponse response) {
 		
 		try {
 			request.setCharacterEncoding("UTF-8");
 		}catch(Exception ex) {}
-			String rno=request.getParameter("rno");
-			String score=request.getParameter("score");
-			String cont=request.getParameter("cont");
-			String img=request.getParameter("img");
-			String pwd=request.getParameter("pwd");
-			
-			ReviewVO rvo=new ReviewVO();
-			rvo.setRno(Integer.parseInt(rno));
-			rvo.setScore(Integer.parseInt(score));
-			rvo.setCont(cont);
-			rvo.setImg(img);
-			rvo.setPassword(pwd);
-		   
-			ReviewDAO dao=ReviewDAO.newInstance();
-			String res=dao.reviewUpdateData(rvo);
-			try {
-				PrintWriter out=response.getWriter();
-				out.write(res);
-			}catch(Exception ex) {}
+		String rno=request.getParameter("rno");
+		String score=request.getParameter("score");
+		String cont=request.getParameter("cont");
+		String img=request.getParameter("img");
+		String pwd=request.getParameter("pwd");
+		
+		ReviewVO rvo=new ReviewVO();
+		rvo.setRno(Integer.parseInt(rno));
+		rvo.setScore(Integer.parseInt(score));
+		rvo.setCont(cont);
+		rvo.setImg(img);
+		rvo.setPassword(pwd);
+	   
+		ReviewDAO dao=ReviewDAO.newInstance();
+		String res=dao.reviewUpdateData(rvo);
+		try {
+			PrintWriter out=response.getWriter();
+			out.write(res);
+		} catch(Exception ex) {}
 	}
 	
 }

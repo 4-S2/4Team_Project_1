@@ -1,12 +1,15 @@
 package com.sist.model;
 
+import java.io.PrintWriter;
 import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.sist.controller.RequestMapping;
 import com.sist.dao.GoodsDAO;
+import com.sist.vo.CartVO;
 import com.sist.vo.GoodsVO;
 
 public class GoodsModel {
@@ -97,11 +100,14 @@ public class GoodsModel {
 		List<GoodsVO> list=dao.goodsRandomList();
 		request.setAttribute("list", list);
 		
+		String price=vo.getPrice();
+		price=price.replaceAll("[^0-9]","");
+		
+		vo.setPrice(price);
 		request.setAttribute("vo", vo); 
 		request.setAttribute("main_jsp", "../store/goods_detail.jsp");
 		return "../main/main.jsp";
 	}
-
 	
 	
 
