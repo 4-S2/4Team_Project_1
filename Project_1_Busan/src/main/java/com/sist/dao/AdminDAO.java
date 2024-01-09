@@ -24,17 +24,23 @@ public class AdminDAO {
 	   }
 	   
 //----------------------- 회원관리(member)
-		//회원 리스트
-		public List<MemberVO> memberListData(){
+		//회원 목록
+		public List<MemberVO> memberListData(int page){
 			List<MemberVO> list = new ArrayList<MemberVO>();
-			
 			try {
 				conn=dbconn.getConnection();
-				String sql = "SELECT id, name, email, phone, addr "
-						   + "FROM user_ "
-						   + "WHERE admin ='n' "
-						   + "ORDER BY id ASC";
+				String sql = "SELECT id, name, email, phone, addr, num "
+							+"FROM (SELECT id, name, email, phone, addr, rownum AS num "
+							+"FROM (SELECT id, name, email, phone, addr "
+							+"FROM user_ WHERE admin ='n' ORDER BY id ASC)) " 
+							+"WHERE rownum BETWEEN ? AND ?";
 				ps=conn.prepareStatement(sql);
+				   int rowSize=5;
+				   int start=(rowSize*page)-(rowSize-1); // 오라클 => 1번 
+				   int end=rowSize*page;
+				   
+				   ps.setInt(1, start);
+				   ps.setInt(2, end);
 				ResultSet rs=ps.executeQuery();
 				while(rs.next()) {
 					MemberVO vo=new MemberVO();
@@ -52,6 +58,24 @@ public class AdminDAO {
 				dbconn.disConnection(conn, ps);
 			}
 			return list;
+		}
+		// 회원 목록 총페이지
+		public int memberListTotalPage() {
+			int total=0;
+			try {
+				conn=dbconn.getConnection();
+				String sql="SELECT CEIL(COUNT(*) / 5.0) FROM user_ WHERE ADMIN ='n'";
+				ps=conn.prepareStatement(sql);
+				ResultSet rs=ps.executeQuery();
+				rs.next();
+				total=rs.getInt(1);
+				rs.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}finally {
+				dbconn.disConnection(conn, ps);
+			}
+			return total;
 		}
 		//회원 상세
 		public MemberVO memberDetailData(String id){
@@ -86,7 +110,7 @@ public class AdminDAO {
 			return vo;
 		}
 		
-		// 회원 수정 => 마이페이지랑 메소드 겹치면 거기꺼 쓸까??
+		// 회원 수정
 		public int adEditProfile(MemberVO vo)
 		{
 			int success = 0;
@@ -124,24 +148,16 @@ public class AdminDAO {
 			}
 			return success;
 		}
-		
-		 public String memberDeleteOk(String id)
+		// 회원 삭제
+		 public int memberDeleteOk(String id)
 		   {
-			   String result="fail";
+			 int success = 0;
 			   try
 			   {
 				   conn=dbconn.getConnection();
 				   
-				   String sql="SELECT password FROM user_ "
-						     +"WHERE id=?";
-				   ps=conn.prepareStatement(sql);
-				   ps.setString(1, id);
-				   ResultSet rs=ps.executeQuery();
-				   rs.next();
-				   String db_pwd=rs.getString(1);
-				   rs.close();
 					   conn.setAutoCommit(false);
-						   sql="DELETE FROM reservation "
+					   String sql="DELETE FROM reservation "
 							  +"WHERE id=?";
 						   ps=conn.prepareStatement(sql);
 						   ps.setString(1, id);
@@ -183,19 +199,19 @@ public class AdminDAO {
 						   ps.setString(1, id);
 						   ps.executeUpdate();
 						   
-						   sql="DELETE FROM order "
+						   sql="DELETE FROM cart "
 							  +"WHERE id=?";
 						   ps=conn.prepareStatement(sql);
 						   ps.setString(1, id);
 						   ps.executeUpdate();
 						   
-						   sql="DELETE FROM uesr_ "
+						   sql="DELETE FROM user_ "
 								   +"WHERE id=?";
 						   ps=conn.prepareStatement(sql);
 						   ps.setString(1, id);
 						   ps.executeUpdate();
 						   
-						   result="OK";
+						   success=1;
 						   conn.commit();
 			   }catch(Exception ex){
 				   ex.printStackTrace();
@@ -209,7 +225,7 @@ public class AdminDAO {
 					   conn.setAutoCommit(true);
 				   }catch(Exception ex) {}
 			   }
-			   return result;
+			   return success;
 		   }
 //----------------------- END OF 회원관리
 
@@ -370,5 +386,27 @@ public class AdminDAO {
 			}
 			return success;
 		}
-		//----------------------- END OF 특산물 관리 
+//----------------------- END OF 특산물 관리 
+
+//----------------------- 맛집 예약 관리(reservation)		
+		// 관리자 예약 상태 변경
+		public void admin_booking_confirm(int frno, int ok)
+		{
+			try
+			{
+				conn=dbconn.getConnection();
+				String sql="UPDATE reservation SET ok=? WHERE frno=?";
+				ps=conn.prepareStatement(sql);
+				ps.setInt(1, ok);
+				ps.setInt(2, frno);
+				ps.executeUpdate();
+			}catch(Exception ex)
+			{
+				ex.printStackTrace();
+			}
+			finally
+			{
+				dbconn.disConnection(conn, ps);
+			}
+		}
 }

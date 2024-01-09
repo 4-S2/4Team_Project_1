@@ -13,7 +13,7 @@ import com.sist.vo.*;
 public class AdminPageModel {
 	 AdminDAO dao=AdminDAO.newInstance(); 
 	
-	// 회원 관리
+	// 회원 관리 => 회원정보목록
 	@RequestMapping("admin/main.do")
 	public String admin_main(HttpServletRequest request,HttpServletResponse response) {
 		  try { request.setCharacterEncoding("UTF-8"); 
@@ -27,9 +27,28 @@ public class AdminPageModel {
 		  }
 		  String admin = (String)session.getAttribute("admin"); 
 		  if(admin.equals("y")) {
-			  List<MemberVO> mlist = dao.memberListData(); 
+			  String page=request.getParameter("page");
+			  if(page==null)
+				  page="1";
+			  int curpage=Integer.parseInt(page);
+			  
+			  List<MemberVO> mlist = dao.memberListData(curpage);
 			  int mSize = mlist.size();
 			  
+			  int totalpage=dao.memberListTotalPage();
+			  System.out.println(totalpage);
+			  
+				final int BLOCK=10;
+				int startPage=((curpage-1)/BLOCK)*BLOCK+1;
+				int endPage=((curpage-1)/BLOCK)*BLOCK+BLOCK;
+				if(totalpage<endPage) 
+					endPage=totalpage;
+				
+			  
+			  request.setAttribute("curpage", curpage);
+			  request.setAttribute("totalpage", totalpage);
+			  request.setAttribute("startPage", startPage);
+			  request.setAttribute("endPage", endPage);
 			  request.setAttribute("mSize", mSize); 
 			  request.setAttribute("mlist", mlist);
 			  request.setAttribute("admin_jsp", "../admin/admin_member.jsp");
@@ -39,6 +58,7 @@ public class AdminPageModel {
 		  return "redirect:../main/main.do"; 
 	}
 	
+	// 회원정보 상세
 	@RequestMapping("admin/member_detail.do")
 	public String memberDetail(HttpServletRequest request, HttpServletResponse response) {
 		String id=request.getParameter("id");
@@ -47,6 +67,7 @@ public class AdminPageModel {
 		return "../admin/admin_member_detail.jsp";
 	}
 	
+	// 회원정보 수정
 	@RequestMapping("admin/member_detail_edit.do")
 	public void memberModify(HttpServletRequest request, HttpServletResponse response) {
 		try {
@@ -63,7 +84,6 @@ public class AdminPageModel {
 			vo.setAdmin(request.getParameter("admin"));
 		
 		int success=dao.adEditProfile(vo);
-		System.out.println(success);
 		try
 		{
 			PrintWriter out=response.getWriter();
@@ -85,7 +105,22 @@ public class AdminPageModel {
 	@RequestMapping("admin/member_delete.do")
 	public void member_delete(HttpServletRequest request, HttpServletResponse response) {
 		String id=request.getParameter("id");
-		dao.memberDeleteOk(id);
+		int success= dao.memberDeleteOk(id);
+		try
+		{
+			PrintWriter out=response.getWriter();
+			if(success==1)
+			{
+				out.write("success");
+			}
+			else
+			{
+				out.write("fail");
+			}
+		}catch(Exception ex) 
+		{
+			ex.printStackTrace();
+		}
 	}
 	
 	// 특산물 리스트

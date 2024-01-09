@@ -14,6 +14,10 @@
     th {
       text-align: center; 
     }
+    .table.table-bordered th {
+  background-color: #0923a9;
+  color: white;
+}
   </style>
   <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
   <script type="text/javascript">
@@ -29,12 +33,12 @@
   				url:"../admin/member_detail_edit.do",
   				type:"post",
   				data:formData,
-  				success:function(response){
-  					if(result==='success'){
+  				success:function(res){
+  					if(res==='success'){
     					alert('회원 정보가 수정되었습니다.')
       					opener.location.reload();
       	  		        window.close();
-    				}else if (result==='fail') {
+    				}else if (res==='fail') {
     					alert('회원 정보 수정에 실패했습니다.')
 					}
   				}
@@ -43,15 +47,18 @@
   		})
   		
   		$('#deleteBtn').click(function(){
-  			alert('${vo.id}')
   			$.ajax({
   				url:"../admin/member_delete.do",
   				type:"post",
   				data:{"id":'${vo.id}'},
-  				success:function(response){
-  					alert('회원 삭제가 완료됐습니다.')
-  					opener.location.reload();
-  	  		        window.close();
+  				success:function(res){
+  					if(res==='success'){
+    					alert('회원 삭제가 완료됐습니다.')
+      					opener.location.reload();
+      	  		        window.close();
+    				}else if (res==='fail') {
+    					alert('회원 삭제에 실패했습니다.')
+					}
   				}
   			}) 
   		})
@@ -61,7 +68,7 @@
 <body>
 	<div class="container">
 		<div class=row>
-			<h2 style="text-align: center;">${vo.name }님의 정보</h2>
+			<h2 style="text-align: center;"><strong>${vo.name }</strong>님의 정보</h2>
 			<div style="height:30px;"></div>
 			<form method="post" id="frm">
 				<table class="table table-bordered">
@@ -92,7 +99,7 @@
 					</tr>
 					<tr>
 						<th>상세주소</th>
-						<td><input type=text name=daddrd value="${vo.detail_addr }"></td>
+						<td><input type=text name=daddr value="${vo.detail_addr }"></td>
 					</tr>
 					<tr>
 												<th>관리자여부</th>

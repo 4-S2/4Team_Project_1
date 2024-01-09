@@ -13,12 +13,12 @@
 
 </style>
 <script type="text/javascript">
-$(function(){../admin/member_detail.do?id=${vo.id}
-	  $("#mypage tr").click(function(){
+$(function(){
+	  $("#myTable tr").click(function(){
 			let x=(document.body.offsetWidth/2)-(750/2)
 			let y=(window.screen.height/2)-(500/2)-50
 			let id=$(this).attr('data-id')
-			window.open("../admin/member_detail.do?id="+id,"",'width=750, height=500, left='+x+', top='+y)
+			window.open("../admin/member_detail.do?id="+id,"",'width=650, height=350, left='+x+', top='+y)
 	  })
 	});
 </script>
@@ -46,7 +46,7 @@ $(function(){../admin/member_detail.do?id=${vo.id}
 <!-- 		        <th class="write_date" scope="col">처리상태</th> -->
 		    </tr>
 		    </thead>
-		    <tbody>
+		    <tbody id=myTable>
 				<c:choose>
 				    <c:when test="${empty mlist}">
 				        <tr>
@@ -61,11 +61,11 @@ $(function(){../admin/member_detail.do?id=${vo.id}
 				    <c:otherwise>
 				        <c:forEach var="vo" items="${mlist}" varStatus="m">
 				             <tr data-id="${vo.id}"><%--<a href="#" class="ellipsis">--%>
-				                <td class="dp_pc num2"><a href="#"> ${m.index + 1}</a></td>
-				                <td class="category px_20 ta_px10"><a href="../admin/member_detail.do?id=${vo.id}">${vo.id}</a></td>
-				                <td class="category px_20 ta_px10"><a href="#">${vo.name}</a></td>
-				                <td class="category px_20 ta_px10"><a href="#">${vo.phone}</a></td>
-				                <td class="category px_20 ta_px10"><a href="#">${vo.email}</a></td>                       
+				                <td class="dp_pc num2"> ${m.index + 1}</td>
+				                <td class="category px_20 ta_px10">${vo.id}</td>
+				                <td class="category px_20 ta_px10">${vo.name}</td>
+				                <td class="category px_20 ta_px10">${vo.phone}</td>
+				                <td class="category px_20 ta_px10">${vo.email}</td>                       
 				                <td class="title double ta_px20" style="text-align: center;">
 				                    <a href="#">${vo.addr}</a> 
 				                     <%-- <a href="../board/qnaboard_detail.do?qno=${vo.qno}" class="ellipsis">${vo.subject}</a> --%>
@@ -94,7 +94,22 @@ $(function(){../admin/member_detail.do?id=${vo.id}
 			}
 		</script> -->
 		</div>
-		<!--//PAGING-->
+		<!--//PAGINATION-->
+			 <div class="row">
+                <div class="text-center">
+                    <ul class="pagination">
+                        <c:if test="${startPage>1}">
+                            <li><a href="main.do?page=${startPage-1}">&lt;</a></li>
+                        </c:if>
+                        <c:forEach var="i" begin="${startPage}" end="${endPage}">
+                            <li ${curpage==i?"class=active":""}><a href="main.do?page=${i}">${i}</a></li>
+                        </c:forEach>
+                        <c:if test="${endPage<totalpage}">
+                            <li><a href="main.do?page=${endPage+1}">&gt;</a></li>
+                        </c:if>
+                    </ul>
+                </div>
+            </div>	
 		</div>   	  
 </body>
 </html>

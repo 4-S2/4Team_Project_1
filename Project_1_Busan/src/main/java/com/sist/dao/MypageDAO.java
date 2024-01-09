@@ -383,27 +383,6 @@ ORDER BY r.frno DESC;
 			}
 			return total;
 		}
-//		
-//		//맛집 총 예약수
-//		public int reservationTotalRowCount(String id) {
-//			int total=0;
-//			try {
-//				conn=dbconn.getConnection();
-//				String sql="SELECT COUNT(*) AS total_rows "
-//						+ "FROM reservation";
-//				ps=conn.prepareStatement(sql);
-//				ps.setString(1, id);
-//				ResultSet rs=ps.executeQuery();
-//				rs.next();
-//				total=rs.getInt(1);
-//				rs.close();
-//			} catch (Exception e) {
-//				e.printStackTrace();
-//			}finally {
-//				dbconn.disConnection(conn, ps);
-//			}
-//			return total;
-//		}
 		
 		// 회원 탈퇴하기
 		// 연결된 테이블: reservation, jjim, heart, review, review_reply, order 

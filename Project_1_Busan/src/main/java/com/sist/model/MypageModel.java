@@ -130,7 +130,6 @@ public class MypageModel {
 				request.setAttribute("totalpage", totalpage);
 				request.setAttribute("startPage", startPage);
 				request.setAttribute("endPage", endPage);
-				request.setAttribute("endPage", endPage);
 				request.setAttribute("rlist", rlist);
 		    } else if ("1".equals(tab)) {
 		        // 맛집
