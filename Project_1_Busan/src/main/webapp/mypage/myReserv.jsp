@@ -141,7 +141,7 @@ document.addEventListener('DOMContentLoaded', function() {
    	  </div>
 		<div class="pc_mt30 ta_mt40 ta_mx40 tab_area tab2 sub4 mypage">
 		    <div class="tab_box">
-		        <button onclick="toggleTab(0)" class="h40 on"><a href="myReserv.do?fdpage=1&tab=1"><span>맛집</span></a></button>
+		        <button onclick="toggleTab(0)" class="h40 on"><a href="myReserv.do?page=1&tab=1"><span>맛집</span></a></button>
 		        <button onclick="toggleTab(1)" class="h40"><a href="myReserv.do?page=1&tab=2"><span>전시회</span></a></button>
 		    </div>
 		</div>

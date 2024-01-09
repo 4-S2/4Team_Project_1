@@ -16,32 +16,69 @@ public class AdminPageModel {
 	// 회원 관리
 	@RequestMapping("admin/main.do")
 	public String admin_main(HttpServletRequest request,HttpServletResponse response) {
-		List<MemberVO> mlist = dao.memberListData();
-		int mSize = mlist.size();
-	  
-		/*
-		 * for (MemberVO VO : mlist) { Systㄴem.out.println(VO.getId()); }
-		 */
+		  try { request.setCharacterEncoding("UTF-8"); 
+		  	}catch (Exception e) {}
+		  HttpSession session=request.getSession();
+			String id=(String)session.getAttribute("id");
 		
-		request.setAttribute("mSize", mSize);
-		request.setAttribute("mlist", mlist);
-		request.setAttribute("admin_jsp", "../admin/admin_member.jsp");
-		request.setAttribute("main_jsp", "../admin/admin_main.jsp");
-		return "../main/main.jsp";
-		/*
-		 * try { request.setCharacterEncoding("UTF-8"); } catch (Exception e) {}
-		 */
-		/*
-		 * //관리자 예외처리 HttpSession session = request.getSession();
-		 * if(session.getAttribute("id")==null) { return "redirect:../main/main.do"; }
-		 * String admin = (String)session.getAttribute("admin"); if(admin.equals("y")) {
-		 * List<MemberVO> mlist = dao.memberListData(); int mSize = mlist.size();
-		 * 
-		 * request.setAttribute("mSize", mSize); request.setAttribute("mlist", mlist);
-		 * request.setAttribute("admin_jsp", "../admin/admin_member.jsp");
-		 * request.setAttribute("main_jsp", "../admin/admin_main.jsp"); return
-		 * "../main/main.jsp"; } return "redirect:../main/main.do"; }
-		 */
+		  //관리자 예외처리 
+		  if(session.getAttribute("id")==null) {
+			  return "redirect:../main/main.do"; 
+		  }
+		  String admin = (String)session.getAttribute("admin"); 
+		  if(admin.equals("y")) {
+			  List<MemberVO> mlist = dao.memberListData(); 
+			  int mSize = mlist.size();
+			  
+			  request.setAttribute("mSize", mSize); 
+			  request.setAttribute("mlist", mlist);
+			  request.setAttribute("admin_jsp", "../admin/admin_member.jsp");
+			  request.setAttribute("main_jsp", "../admin/admin_main.jsp"); 
+			  return "../main/main.jsp"; 
+		  } 
+		  return "redirect:../main/main.do"; 
+	}
+	
+	@RequestMapping("admin/member_detail.do")
+	public String memberDetail(HttpServletRequest request, HttpServletResponse response) {
+		String id=request.getParameter("id");
+		MemberVO vo=dao.memberDetailData(id);
+		request.setAttribute("vo", vo);
+		return "../admin/admin_member_detail.jsp";
+	}
+	
+	@RequestMapping("admin/member_detail_edit.do")
+	public void memberModify(HttpServletRequest request, HttpServletResponse response) {
+		try {
+	        response.setContentType("text/html;charset=UTF-8");
+		}catch (Exception e) {}
+			MemberVO vo=new MemberVO();
+			vo.setId(request.getParameter("id"));
+			vo.setName(request.getParameter("name"));
+			vo.setEmail(request.getParameter("email"));
+			vo.setPostcode(request.getParameter("postcode"));
+			vo.setAddr(request.getParameter("addr"));
+			vo.setDetail_addr(request.getParameter("daddr"));
+			vo.setPhone(request.getParameter("phone"));
+			vo.setAdmin(request.getParameter("admin"));
+		
+		int success=dao.adEditProfile(vo);
+		System.out.println(success);
+		try
+		{
+			PrintWriter out=response.getWriter();
+			if(success==1)
+			{
+				out.write("success");
+			}
+			else
+			{
+				out.write("fail");
+			}
+		}catch(Exception ex) 
+		{
+			ex.printStackTrace();
+		}
 	}
 	
 	//회원 탈퇴
@@ -145,7 +182,7 @@ public class AdminPageModel {
 	}
 	
 	// 특산물 삭제
-	@RequestMapping("adminpage/goodsDelete.do")
+	@RequestMapping("admin/goodsDelete.do")
 	public void goodsDelete(HttpServletRequest request, HttpServletResponse response) {
 		String gno=request.getParameter("gno");
 		

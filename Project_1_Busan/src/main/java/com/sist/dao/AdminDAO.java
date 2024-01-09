@@ -60,7 +60,7 @@ public class AdminDAO {
 			try {
 				conn=dbconn.getConnection();
 				String sql = "SELECT id,password, email, name, phone, postcode, addr, detail_addr, admin "
-						   + "FROM member "
+						   + "FROM user_ "
 						   + "WHERE id=?";
 				ps=conn.prepareStatement(sql);
 				ps.setString(1, id);
@@ -87,7 +87,7 @@ public class AdminDAO {
 		}
 		
 		// 회원 수정 => 마이페이지랑 메소드 겹치면 거기꺼 쓸까??
-		public int editProfile(MemberVO vo)
+		public int adEditProfile(MemberVO vo)
 		{
 			int success = 0;
 			try
@@ -101,7 +101,7 @@ public class AdminDAO {
 							+ "postcode=?, "
 							+ "addr=?, "
 							+ "detail_addr=?, "
-							+ "password=? "
+							+ "admin=? "
 							+ "WHERE id=?";
 					ps=conn.prepareStatement(sql);
 					ps.setString(1, vo.getName());
@@ -110,7 +110,7 @@ public class AdminDAO {
 					ps.setString(4, vo.getPostcode());
 					ps.setString(5, vo.getAddr());
 					ps.setString(6, vo.getDetail_addr());
-					ps.setString(7, vo.getPwd());
+					ps.setString(7, vo.getAdmin());
 					ps.setString(8, vo.getId());
 					success = ps.executeUpdate();
 				

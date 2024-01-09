@@ -12,6 +12,16 @@
 }
 
 </style>
+<script type="text/javascript">
+$(function(){../admin/member_detail.do?id=${vo.id}
+	  $("#mypage tr").click(function(){
+			let x=(document.body.offsetWidth/2)-(750/2)
+			let y=(window.screen.height/2)-(500/2)-50
+			let id=$(this).attr('data-id')
+			window.open("../admin/member_detail.do?id="+id,"",'width=750, height=500, left='+x+', top='+y)
+	  })
+	});
+</script>
 </head>
 <body>
   <div class="myInquiry">
@@ -50,9 +60,9 @@
 				    </c:when>
 				    <c:otherwise>
 				        <c:forEach var="vo" items="${mlist}" varStatus="m">
-				             <tr><%--<a href="#" class="ellipsis">--%>
+				             <tr data-id="${vo.id}"><%--<a href="#" class="ellipsis">--%>
 				                <td class="dp_pc num2"><a href="#"> ${m.index + 1}</a></td>
-				                <td class="category px_20 ta_px10"><a href="#">${vo.id}</a></td>
+				                <td class="category px_20 ta_px10"><a href="../admin/member_detail.do?id=${vo.id}">${vo.id}</a></td>
 				                <td class="category px_20 ta_px10"><a href="#">${vo.name}</a></td>
 				                <td class="category px_20 ta_px10"><a href="#">${vo.phone}</a></td>
 				                <td class="category px_20 ta_px10"><a href="#">${vo.email}</a></td>                       

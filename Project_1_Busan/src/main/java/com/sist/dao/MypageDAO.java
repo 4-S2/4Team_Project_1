@@ -467,13 +467,13 @@ ORDER BY r.frno DESC;
 						   ps.setString(1, id);
 						   ps.executeUpdate();
 						   
-						   sql="DELETE FROM order "
+						   sql="DELETE FROM cart "
 							  +"WHERE id=?";
 						   ps=conn.prepareStatement(sql);
 						   ps.setString(1, id);
 						   ps.executeUpdate();
 						   
-						   sql="DELETE FROM uesr_ "
+						   sql="DELETE FROM user_ "
 								   +"WHERE id=?";
 						   ps=conn.prepareStatement(sql);
 						   ps.setString(1, id);
