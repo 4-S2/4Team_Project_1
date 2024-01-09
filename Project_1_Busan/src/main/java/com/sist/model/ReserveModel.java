@@ -124,9 +124,10 @@ public class ReserveModel {
 		  HttpSession session=request.getSession();
 		  String id=(String)session.getAttribute("id");
 		  
-		  ReserveVO vo=new ReserveVO();
+		  ReserveInfoVO vo=new ReserveInfoVO();
+		 
 		  vo.setEno(Integer.parseInt(eno));
-		  vo.setId(id);
+		  vo.getMvo().setId(id);
 		  vo.setRday(rday);
 		  vo.setInwon(inwon);
 		  
@@ -145,7 +146,7 @@ public class ReserveModel {
 		  String eno=request.getParameter("eno"); // 맛집 정보 읽기
 		  // DataBase 
 		  ReserveDAO dao=ReserveDAO.newInstance();
-		  ReserveVO rvo=dao.reserveInfoData(Integer.parseInt(no));
+		  ReserveInfoVO rvo=dao.reserveInfoData(Integer.parseInt(no));
 		  ExVO evo=dao.reserveexInfoData(Integer.parseInt(eno));
 		  request.setAttribute("evo", evo);
 		  request.setAttribute("rvo", rvo);

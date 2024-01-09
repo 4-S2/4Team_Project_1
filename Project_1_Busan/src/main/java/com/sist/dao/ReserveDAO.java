@@ -16,7 +16,7 @@ public class ReserveDAO {
 		   dao=new ReserveDAO();
 	   return dao;
    }
-   // 맛집 읽기 
+   
    public List<ExVO> exReserveData()
    {
 	   List<ExVO> list=new ArrayList<ExVO>();
@@ -88,15 +88,16 @@ public class ReserveDAO {
 	   regdate DATE DEFAULT SYSDATE,
     */
    //JDBC => 성공(commit) => 실패 (rollback)
-   public void reserve_ok(ReserveVO vo)
+   public void reserve_ok(ReserveInfoVO vo)
    {
 	   try
 	   {
+		   
 		   conn=dbconn.getConnection();
 		   String sql="INSERT INTO reserve_info VALUES("
 				     +"SEQ_NO_eres.nextval,?,?,?,?,SYSDATE,'0')";
 		   ps=conn.prepareStatement(sql);
-		   ps.setString(1, vo.getId());
+		   ps.setString(1, vo.getMvo().getId());
 		   ps.setInt(2, vo.getEno());
 		   ps.setString(3, vo.getRday());
 		   ps.setString(4, vo.getInwon());
@@ -111,9 +112,9 @@ public class ReserveDAO {
 	   }
    }
    // 예약현황 출력 
-   public List<ReserveInfoVO> resrveInfoData(String id)
+   public List<ReserveInfoVO> reserveInfoData(String id)
    {
-	   List<ReserveInfoVO> list=new ArrayList<ReserveInfo VO>();
+	   List<ReserveInfoVO> list=new ArrayList<ReserveInfoVO>();
 	   try
 	   {
 		   conn=dbconn.getConnection();
@@ -127,18 +128,18 @@ public class ReserveDAO {
 		   ResultSet rs=ps.executeQuery();
 		   while(rs.next())
 		   {
-			   ReserveVO vo=new ReserveVO();
+			   ReserveInfoVO vo=new ReserveInfoVO();
+			  
 			   vo.setNo(rs.getInt(1));
 			   vo.setEno(rs.getInt(2));
-			   vo.setRday(rs.getString(3));
-			   vo.setRtime(rs.getString(4));
+			   vo.setDay(rs.getString(3));
 			   vo.setInwon(rs.getString(5));
-			   vo.setDbday(rs.getString(6));
+			   vo.setRday(rs.getString(6));
 			   vo.setPoster(rs.getString(7));
-			   vo.setName(rs.getString(8));
-			   vo.setHomepage(rs.getString(9));
-			   vo.setRok(rs.getString(10));
-			   vo.setId(rs.getString(11));
+			   vo.getMvo().setName(rs.getString(8));
+			   vo.getEvo().setHomepage(rs.getString(9));
+			   vo.setRok(rs.getInt(10));
+			   vo.getMvo().setId(rs.getString(11));
 			   list.add(vo);
 		   }
 		   rs.close();
@@ -169,7 +170,7 @@ public class ReserveDAO {
 		   while(rs.next())
 		   {
 			   ReserveInfoVO vo=new ReserveInfoVO();
-			   MemberVO mvo = new MemberVO();
+			   
 			   
 			   vo.setNo(rs.getInt(1));
 			   vo.setEno(rs.getInt(2));
@@ -179,7 +180,7 @@ public class ReserveDAO {
 			   vo.setDay(rs.getString(6));
 			   vo.setInwon(rs.getString(7));
 			   vo.setRok(rs.getInt(8));
-			   mvo.setId(rs.getString(9));
+			   vo.getMvo().setId(rs.getString(9));
 			   vo.setRegdate(rs.getString(10));
 			   
 			   
@@ -217,9 +218,9 @@ public class ReserveDAO {
 	   }
    }
    // 예약 정보 
-   public ReserveVO reserveInfoData(int no)
+   public ReserveInfoVO reserveInfoData(int no)
    {
-	   ReserveVO vo=new ReserveVO();
+	   ReserveInfoVO vo=new ReserveInfoVO();
 	   try
 	   {
 		   conn=dbconn.getConnection();
@@ -232,9 +233,8 @@ public class ReserveDAO {
 		   rs.next();
 		   vo.setNo(rs.getInt(1));
 		   vo.setRday(rs.getString(2));
-		   vo.setRtime(rs.getString(3));
 		   vo.setInwon(rs.getString(4));
-		   vo.setDbday(rs.getString(5));
+		   vo.setDay(rs.getString(5));
 		   rs.close();
 	   }catch(Exception ex)
 	   {

@@ -2,7 +2,13 @@ package com.sist.vo;
 
 public class ReserveInfoVO {
 	private int no,eno,rok;
-	private String ename,eename,poster,day,regdate,inwon;
+	private String ename,eename,poster,day,regdate,inwon,rday;
+	public String getRday() {
+		return rday;
+	}
+	public void setRday(String rday) {
+		this.rday = rday;
+	}
 	private MemberVO mvo = new MemberVO();
 	private ExVO evo = new ExVO();
 	public String getInwon() {
