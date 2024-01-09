@@ -152,32 +152,35 @@ public class ReserveDAO {
 	   }
 	   return list;
    }
-   public List<ReserveVO> reserveAdminData()
+   public List<ReserveInfoVO> reserveAdminData()
    {
-	   List<ReserveVO> list=new ArrayList<ReserveVO>();
+	   List<ReserveInfoVO> list=new ArrayList<ReserveInfoVO>();
 	   try
 	   {
 		   conn=dbconn.getConnection();
-		   String sql="SELECT no,eno,rday,rtime,inwon,TO_CHAR(regdate,'yyyy-MM-dd hh24:mi:ss'),"
-				     +"exGetPoster(eno),exGetName(eno),exGetHomepage(eno),ok,id "
-				     +"FROM reserve_info "
-				     +"ORDER BY no DESC";
+		   String sql="SELECT ri.no, e.eno, e.ename , e.eeName , e.poster, ri.day, ri.inwon , "
+		   		   +"ri.rok, ri.id, "
+		   		   +"TO_CHAR(ri.regdate, 'yyyy-MM-dd hh24:mi:ss') AS regdate "
+				   +"FROM exhibition e"
+				   +"JOIN reserve_info ri ON e.eno = ri.eno "
+				   +"ORDER BY ri.no DESC";
 		   ps=conn.prepareStatement(sql);
 		   ResultSet rs=ps.executeQuery();
 		   while(rs.next())
 		   {
-			   ReserveVO vo=new ReserveVO();
+			   ReserveInfoVO vo=new ReserveInfoVO();
 			   vo.setNo(rs.getInt(1));
 			   vo.setEno(rs.getInt(2));
-			   vo.setRday(rs.getString(3));
-			   vo.setRtime(rs.getString(4));
-			   vo.setInwon(rs.getString(5));
-			   vo.setDbday(rs.getString(6));
-			   vo.setPoster(rs.getString(7));
-			   vo.setName(rs.getString(8));
-			   vo.setHomepage(rs.getString(9));
-			   vo.setRok(rs.getString(10));
-			   vo.setId(rs.getString(11));
+			   vo.setEname(rs.getString(3));
+			   vo.setEename(rs.getString(4));
+			   vo.setPoster(rs.getString(5));
+			   vo.setDay(rs.getString(6));
+			   vo.setInwon(rs.getString(7));
+			   vo.setRok(rs.getInt(8));
+			   vo.setId(rs.getString(9));
+			   vo.setRegdate(rs.getString(10));
+			   
+			   
 			   list.add(vo);
 		   }
 		   rs.close();
@@ -197,7 +200,7 @@ public class ReserveDAO {
 	   {
 		   conn=dbconn.getConnection();
 		   String sql="UPDATE reserve_info SET "
-				     +"ok='y' "
+				     +"rok='1' "
 				     +"WHERE no=?";
 		   ps=conn.prepareStatement(sql);
 		   ps.setInt(1, no);
@@ -218,7 +221,7 @@ public class ReserveDAO {
 	   try
 	   {
 		   conn=dbconn.getConnection();
-		   String sql="SELECT no,day,time,inwon,TO_CHAR(regdate,'YYYY-MM-DD HH24:MI:SS') "
+		   String sql="SELECT no,day,inwon,TO_CHAR(regdate,'YYYY-MM-DD HH24:MI:SS') "
 				     +"FROM reserve_info "
 				     +"WHERE no=?";
 		   ps=conn.prepareStatement(sql);
