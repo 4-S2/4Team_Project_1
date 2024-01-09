@@ -10,6 +10,7 @@ import java.io.PrintWriter;
 import java.util.*;
 import com.sist.dao.*;
 import com.sist.vo.BusanListVO;
+import com.sist.vo.FoodReserveVO;
 import com.sist.vo.JjimVO;
 import com.sist.vo.MemberVO;
 import com.sist.vo.QnaBoardVO;
@@ -103,21 +104,53 @@ public class MypageModel {
 			page="1";
 		int curpage=Integer.parseInt(page);
 		
-		int totalpage=dao.reservationRowCount(id);
-		  
-		final int BLOCK=5;
-		int startPage=((curpage-1)/BLOCK*BLOCK)+1;
-		int endPage=((curpage-1)/BLOCK*BLOCK)+BLOCK;
-		if(endPage>totalpage)
-			endPage=totalpage;
+		/*
+		 * String fdpage=request.getParameter("fdpage"); if(fdpage==null) fdpage="1";
+		 * int fdcurpage=Integer.parseInt(fdpage);
+		 */
 		
-		List<ReserveInfoVO> rlist = dao.myExReserveList(id,curpage);
-
-		request.setAttribute("curpage", curpage);
-		request.setAttribute("totalpage", totalpage);
-		request.setAttribute("startPage", startPage);
-		request.setAttribute("endPage", endPage);
-		request.setAttribute("rlist", rlist);
+	    // 탭에 대한 정보를 파라미터로 받아옴 (예: tab=1, tab=2 등)
+		String tab = request.getParameter("tab");
+		if(tab==null)
+			tab="1";
+	    
+	    int startPage, endPage, totalpage;
+		
+		  if ("2".equals(tab)) {
+		        // 전시회
+		        totalpage = dao.reservationRowCount(id);
+		        final int BLOCK = 5;
+		        startPage = ((curpage - 1) / BLOCK * BLOCK) + 1;
+		        endPage = ((curpage - 1) / BLOCK * BLOCK) + BLOCK;
+		        if (endPage > totalpage) endPage = totalpage;
+		        
+		        List<ReserveInfoVO> rlist = dao.myExReserveList(id,curpage);
+		        
+				request.setAttribute("curpage", curpage);
+				request.setAttribute("totalpage", totalpage);
+				request.setAttribute("startPage", startPage);
+				request.setAttribute("endPage", endPage);
+				request.setAttribute("endPage", endPage);
+				request.setAttribute("rlist", rlist);
+		    } else if ("1".equals(tab)) {
+		        // 맛집
+		        totalpage = dao.fdreservationRowCount(id);
+		        final int BLOCK = 5;
+		        startPage = ((curpage - 1) / BLOCK * BLOCK) + 1;
+		        endPage = ((curpage - 1) / BLOCK * BLOCK) + BLOCK;
+		        if (endPage > totalpage) endPage = totalpage;
+		        
+		        List<FoodReserveVO> flist = dao.myFdReserveList(id, curpage);
+		        
+				request.setAttribute("curpage", curpage);
+				request.setAttribute("totalpage", totalpage);
+				request.setAttribute("startPage", startPage);
+				request.setAttribute("endPage", endPage);
+		        request.setAttribute("flist", flist);
+		    }
+		
+		int rSize = dao.TotalresCount(id);
+		request.setAttribute("rSize",rSize);  
 		request.setAttribute("mypage_jsp", "myReserv.jsp");
 		request.setAttribute("main_jsp", "../mypage/mypage_main.jsp");
 		return "../main/main.jsp";

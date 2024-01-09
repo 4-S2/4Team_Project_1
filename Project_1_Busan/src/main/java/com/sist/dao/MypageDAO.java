@@ -198,7 +198,7 @@ public class MypageDAO {
 			}
 			return list;
 		}
-
+		// 전시회예약 총페이지
 		public int reservationRowCount(String id) {
 			int total=0;
 			try {
@@ -289,6 +289,121 @@ public class MypageDAO {
 		 * ex.printStackTrace(); } finally { db.disConnection(conn, ps); } return vo; }
 		 */
 
+		/*
+		 * SELECT f.no, f.title, r.day, r.time, r.inwon, r.ok, r.id
+FROM food f
+JOIN (
+    SELECT res.*, ROWNUM AS num
+    FROM reservation res
+    WHERE res.id = :1
+) r ON f.no = r.fno
+WHERE r.num BETWEEN :2 AND :3
+ORDER BY r.frno DESC;
+
+		 */
+		// 맛집예약 목록 => 맛집번호,맛집명,예약일,예약시간,인원,승인상태,아이디
+		public List<FoodReserveVO> myFdReserveList(String id, int page){
+			List<FoodReserveVO> list=new ArrayList<>();
+			try {
+				conn=dbconn.getConnection();
+				String sql="SELECT f.no, f.title, r.day, r.time, r.inwon, r.ok, r.id "
+						+ "FROM food f "
+						+ "JOIN (SELECT res.*, ROWNUM AS num "
+						+ "FROM reservation res "
+						+ "WHERE res.id = ?) r ON f.no = r.fno "
+						+ "WHERE r.num BETWEEN ? AND ?"
+						+ "ORDER BY r.frno DESC";
+				ps=conn.prepareStatement(sql);
+				ps.setString(1, id);
+				int rowSize=5;
+				int start=(rowSize*page)-(rowSize-1);
+				int end=rowSize*page;
+				ps.setInt(2, start);
+				ps.setInt(3, end);
+				ResultSet rs=ps.executeQuery();
+				while(rs.next()) {			   	
+					FoodReserveVO vo=new FoodReserveVO();
+					vo.setFno(rs.getInt(1));
+					vo.getFvo().setTitle(rs.getString(2));
+					vo.setDay(rs.getString(3));
+					vo.setTime(rs.getString(4));
+					vo.setInwon(rs.getInt(5));
+					vo.setOk(rs.getInt(6));
+					vo.setId(rs.getString(7));
+					list.add(vo);
+				}
+				rs.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}finally {
+				dbconn.disConnection(conn, ps);
+			}
+			return list;
+		}
+		// 맛집예약 총페이지
+		public int fdreservationRowCount(String id) {
+			int total=0;
+			try {
+				conn=dbconn.getConnection();
+				String sql="SELECT CEIL(COUNT(*)/5.0) FROM reservation WHERE id=?";
+				ps=conn.prepareStatement(sql);
+				ps.setString(1, id);
+				ResultSet rs=ps.executeQuery();
+				rs.next();
+				total=rs.getInt(1);
+				rs.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}finally {
+				dbconn.disConnection(conn, ps);
+			}
+			return total;
+		}
+		
+		//전시회,맛집 총 예약수
+		public int TotalresCount(String id) {
+			int total=0;
+			try {
+				conn=dbconn.getConnection();
+				String sql="SELECT COUNT(*) AS total_count FROM( "
+						+ "SELECT id FROM reservation WHERE id = ? "
+						+ "UNION ALL "
+						+ "SELECT id FROM reserve_info WHERE id = ?) combined_data";
+				ps=conn.prepareStatement(sql);
+				ps.setString(1, id);
+				ps.setString(2, id);
+				ResultSet rs=ps.executeQuery();
+				rs.next();
+				total=rs.getInt(1);
+				rs.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}finally {
+				dbconn.disConnection(conn, ps);
+			}
+			return total;
+		}
+//		
+//		//맛집 총 예약수
+//		public int reservationTotalRowCount(String id) {
+//			int total=0;
+//			try {
+//				conn=dbconn.getConnection();
+//				String sql="SELECT COUNT(*) AS total_rows "
+//						+ "FROM reservation";
+//				ps=conn.prepareStatement(sql);
+//				ps.setString(1, id);
+//				ResultSet rs=ps.executeQuery();
+//				rs.next();
+//				total=rs.getInt(1);
+//				rs.close();
+//			} catch (Exception e) {
+//				e.printStackTrace();
+//			}finally {
+//				dbconn.disConnection(conn, ps);
+//			}
+//			return total;
+//		}
 		
 		// 회원 탈퇴하기
 		// 연결된 테이블: reservation, jjim, heart, review, review_reply, order 

@@ -85,6 +85,12 @@
     left: 0;
     content: '';
 }
+
+.cancel-button {
+        padding: 3px 5px; /* 버튼 내부의 여백 조절 */
+        /* 또는 */
+        /* margin: 5px; */ /* 버튼 주변의 여백 조절 */
+    }
 </style>
 <script type="text/javascript">
 //toggleTab 함수 수정
@@ -123,6 +129,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 </script>
+
 </head>
 <body>
   <div class="myReserv">
@@ -130,16 +137,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 <h4 class="titbox">나의<strong>예약내역</strong></h4>
    	  </div>
    	 <div class="tab_contents_area">
-   	  	<p class="titbox">&nbsp;&nbsp;<span class="total_num_txt offline ta_px0">총 <strong>0</strong>개의 예약내역이 있습니다.</span></p>
+   	  	<p class="titbox">&nbsp;&nbsp;<span class="total_num_txt offline ta_px0">총 <strong>${rSize }</strong>개의 예약내역이 있습니다.</span></p>
    	  </div>
 		<div class="pc_mt30 ta_mt40 ta_mx40 tab_area tab2 sub4 mypage">
 		    <div class="tab_box">
-		        <button onclick="toggleTab(0)" class="h40 on"><span>맛집</span></button>
-		        <button onclick="toggleTab(1)" class="h40"><span>전시회</span></button>
+		        <button onclick="toggleTab(0)" class="h40 on"><a href="myReserv.do?fdpage=1&tab=1"><span>맛집</span></a></button>
+		        <button onclick="toggleTab(1)" class="h40"><a href="myReserv.do?page=1&tab=2"><span>전시회</span></a></button>
 		    </div>
 		</div>
 
-        <!--  맛집 예약 -->
+        <!--  맛집 예약 => 최신예약 순 출력-->
         <div id="table1" class="">
 	        <!--TABLE-->
 			<table class="lecture_info_table tablet_type2 mypage" style="width: 100%;">
@@ -150,41 +157,63 @@ document.addEventListener('DOMContentLoaded', function() {
 			        <th class="dp_pc reserve_date" scope="col">예약일시</th>
 			        <th class="dp_pc num2" scope="col">인원</th>
 			        <th class="write_date" scope="col">승인상태</th>
+			        <th class="dp_pc reserve_date" scope="col">예약취소</th> 
 			    </tr>
 			    </thead>
 			    <tbody>
-<%-- 					<c:choose>
-					    <c:when test="${empty list}"> --%>
+ 					<c:choose>
+					    <c:when test="${empty flist}"> 
 					        <tr>
 					            <td colspan="4" class="empty">
 					                예약내역이 없습니다.
 					            </td>
 					        </tr>
-<%-- 					    </c:when>
-					    <c:otherwise>
-					        <c:forEach var="vo" items="${list}">
+ 					    </c:when>
+					    <c:otherwise> 
+					        <c:forEach var="vo" items="${flist}" varStatus="r">
 					            <tr>
-					                <td class="dp_pc num2">${vo.qno}</td>
-					                <td class="title double ta_px20">
-					                    <a href="../board/qnaboard_detail.do?qno=${vo.qno}" class="ellipsis">${vo.subject}</a>
+					                <td class="dp_pc num2">${r.index +1}</td>
+					                <td class="title double ta_px20" style="text-align: center;">
+					                    <a href="../busan/food_detail.do?no=${vo.fno}" class="ellipsis">${vo.fvo.title}</a>
 					                </td>
-					                <td class="dp_pc writer">${vo.regdate}</td>
-					                <c:if test="${vo.status == 0 }">
-					                	<td class="category px_20 ta_px10">답변대기</td>
+					                <td class="dp_pc writer">${vo.day}<br>${vo.time}</td>
+					                 <td class="dp_pc num2">${vo.inwon}명</td>
+					                <c:if test="${vo.ok == 0 }">
+					                	<td class="category px_20 ta_px10">승인대기</td>
 					                </c:if>
-					                <c:if test="${vo.status == 1 }">
-					                	<td class="category px_20 ta_px10"><strong>답변완료</strong></td>
-					                </c:if>				                
+					                <c:if test="${vo.ok == 1 }">
+					                	<td class="category px_20 ta_px10"><strong>승인완료</strong></td>
+					                </c:if>
+					                 <td class="dp_pc writer">
+										<input type="button" value="예약취소" onclick="cancelReservation()" class="cancel-button">
+									 </td>		                
 					            </tr>
 					        </c:forEach>
 					    </c:otherwise> 
- 					</c:choose> --%>
+ 					</c:choose> 
 			    </tbody>
 			</table>
 			<!--//TABLE-->
+			<!--//PAGINATION-->
+			 <div class="row">
+                <div class="text-center">
+                    <ul class="pagination">
+                        <c:if test="${startPage>1}">
+                            <li><a href="myReserv.do?page=${startPage-1}&tab=1">&lt;</a></li>
+                        </c:if>
+                        <c:forEach var="i" begin="${startPage}" end="${endPage}">
+                            <li ${curpage==i?"class=active":""}><a href="myReserv.do?page=${i}&tab=1">${i}</a></li>
+                        </c:forEach>
+                        <c:if test="${endPage<totalpage}">
+                            <li><a href="myReserv.do?page=${endPage+1}&tab=1">&gt;</a></li>
+                        </c:if>
+                    </ul>
+                </div>
+            </div>			
         </div>
+        <!--  맛집 예약 -->
         
-		<!--  전시회 예약 -->
+		<!--  전시회 예약 => 최신예약 순 출력-->
 		<div id="table2" class="hidden">
 	        <!--TABLE-->
 			<table class="lecture_info_table tablet_type2 mypage" style="width: 100%;">
@@ -194,8 +223,8 @@ document.addEventListener('DOMContentLoaded', function() {
 			        <th class="title double ta_txt_center" scope="col" style="text-align: center;">전시회명</th>
 			        <th class="dp_pc reserve_date" scope="col">예약일</th>
 			        <th class="dp_pc num2" scope="col">인원</th>
-			        <!-- <th class="dp_pc reserve_date" scope="col">결제상태</th> -->
 			        <th class="write_date" scope="col">승인상태</th>
+			        <th class="dp_pc reserve_date" scope="col">예약취소</th> 
 			    </tr>
 			    </thead>
 			    <tbody>
@@ -221,7 +250,10 @@ document.addEventListener('DOMContentLoaded', function() {
 					                </c:if>
 					                <c:if test="${vo.rok == 1 }">
 					                	<td class="category px_20 ta_px10"><strong>승인완료</strong></td>
-					                </c:if>				                
+					                </c:if>
+					                 <td class="dp_pc writer">
+										<input type="button" value="예약취소" onclick="cancelReservation()" class="cancel-button">
+									 </td>		                
 					            </tr>
 					        </c:forEach>
 					    </c:otherwise> 
@@ -229,21 +261,24 @@ document.addEventListener('DOMContentLoaded', function() {
 			    </tbody>
 			</table>
 			<!--//TABLE-->
-			 <div class="row">
+			<!--//PAGINATION-->
+			<div class="row">
                 <div class="text-center">
                     <ul class="pagination">
                         <c:if test="${startPage>1}">
-                            <li><a href="myReserv.do?page=${startPage-1}">&lt;</a></li>
+                            <li><a href="myReserv.do?page=${startPage-1}&tab=2">&lt;</a></li>
                         </c:if>
                         <c:forEach var="i" begin="${startPage}" end="${endPage}">
-                            <li ${curpage==i?"class=active":""}><a href="myReserv.do?page=${i}">${i}</a></li>
+                            <li ${curpage==i?"class=active":""}><a href="myReserv.do?page=${i}&tab=2">${i}</a></li>
                         </c:forEach>
                         <c:if test="${endPage<totalpage}">
-                            <li><a href="myReserv.do?page=${endPage+1}">&gt;</a></li>
+                            <li><a href="myReserv.do?page=${endPage+1}&tab=2">&gt;</a></li>
                         </c:if>
                     </ul>
                 </div>
             </div>
+        </div>
+        <!--  전시회 예약 -->
         </div>
 
 </body>
