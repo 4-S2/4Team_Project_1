@@ -40,6 +40,9 @@
 				<c:choose>
 				    <c:when test="${empty mlist}">
 				        <tr>
+				        
+				        
+				        
 				            <td colspan="6" class="empty">
 				                등록된 회원이 없습니다.
 				            </td>
