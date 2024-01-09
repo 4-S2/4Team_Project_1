@@ -31,7 +31,7 @@
 				<th class="dp_pc reserve_date" scope="col">아이디</th>
 		        <th class="dp_pc reserve_date" scope="col">이름</th>
 		        <th class="dp_pc reserve_date" scope="col">전화번호</th>
-		        <th class="dp_pc reserve_date" scope="col">이메일</th>
+		        <th class="title double ta_txt_center" style="text-align: center;" scope="col">이메일</th>
 		        <th class="title double ta_txt_center" scope="col" style="text-align: center;">주소</th>
 <!-- 		        <th class="write_date" scope="col">처리상태</th> -->
 		    </tr>
@@ -49,22 +49,23 @@
 				        </tr>
 				    </c:when>
 				    <c:otherwise>
-				        <c:forEach var="vo" items="${mlist} " varStatus="m">
-				            <!-- <a href=#" class="ellipsis"> --><tr>
- 				                <td class="dp_pc num2">${m.count}</td>
-				                	<td class="category px_20 ta_px10">${vo.id}</td>
-				                	<td class="category px_20 ta_px10">${vo.name}</td>
-				                	<td class="category px_20 ta_px10">${vo.phone}</td>	
-				                	<td class="category px_20 ta_px10">${vo.email}</td>			                
-				                <td class="title double ta_px20">
-				                	${vo.addr} 
-				                    <%-- <a href="../board/qnaboard_detail.do?qno=${vo.qno}" class="ellipsis">${vo.subject}</a> --%>
-			                	</td> 
-<%-- 				                <td class="dp_pc writer">${vo.regdate}</td>  --%>
-				            </tr><!-- </a> -->
+				        <c:forEach var="vo" items="${mlist}" varStatus="m">
+				             <tr><%--<a href="#" class="ellipsis">--%>
+				                <td class="dp_pc num2"><a href="#"> ${m.index + 1}</a></td>
+				                <td class="category px_20 ta_px10"><a href="#">${vo.id}</a></td>
+				                <td class="category px_20 ta_px10"><a href="#">${vo.name}</a></td>
+				                <td class="category px_20 ta_px10"><a href="#">${vo.phone}</a></td>
+				                <td class="category px_20 ta_px10"><a href="#">${vo.email}</a></td>                       
+				                <td class="title double ta_px20" style="text-align: center;">
+				                    <a href="#">${vo.addr}</a> 
+				                     <%-- <a href="../board/qnaboard_detail.do?qno=${vo.qno}" class="ellipsis">${vo.subject}</a> --%>
+				                </td> 
+<%-- 				                <td class="dp_pc writer">${vo.regdate}</td>  --%>				                
+				            </tr>
 				        </c:forEach>
 				    </c:otherwise>
 				</c:choose>
+
 		    </tbody>
 		</table>
 		<!--//TABLE-->
@@ -85,6 +86,5 @@
 		</div>
 		<!--//PAGING-->
 		</div>   	  
-  </div>
 </body>
 </html>

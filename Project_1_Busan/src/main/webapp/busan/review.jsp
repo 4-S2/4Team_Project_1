@@ -7,6 +7,17 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="../shadow/css/shadowbox.css">
+
+<style type="text/css">
+#sb-body{
+	padding: 20px;
+	border-radius: 15px;
+	background-color: #fff;
+}
+
+
+</style>
+
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript" src="../shadow/js/shadowbox.js"></script>
 <script type="text/javascript">
@@ -21,7 +32,7 @@ $(document).ready(function(){
 			player:'iframe',
 			title:'리뷰 작성',
 			width: 640,
-			height: 480
+			height: 500
 		})
 	})
 	
@@ -31,7 +42,7 @@ $(document).ready(function(){
 			player:'iframe',
 			title:'리뷰 삭제',
 			width: 640,
-			height: 480
+			height: 500
 		})
 	})
 	
@@ -41,7 +52,7 @@ $(document).ready(function(){
 			player:'iframe',
 			title:'리뷰 수정',
 			width: 640,
-			height: 480
+			height: 500
 		})
 	})
 	

@@ -21,8 +21,8 @@ $(function(){
 </head>
 <body>
   <c:forEach var="i" begin="1" end="10">
-    <span class="btn btn-xs btn-success inwons">${i }명</span>
+    <span class="btn btn-xs btn-info inwons">${i }명</span>
   </c:forEach>
-    <span class="btn btn-xs btn-success inwons">단체</span>
+    <span class="btn btn-xs btn-info inwons">단체</span>
 </body>
 </html>

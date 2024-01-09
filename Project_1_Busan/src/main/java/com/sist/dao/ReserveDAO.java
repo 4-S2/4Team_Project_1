@@ -23,7 +23,7 @@ public class ReserveDAO {
 	   try
 	   {
 		   conn=dbconn.getConnection();
-		   String sql="SELECT poster,ename,Homepage,rday,eno "
+		   String sql="SELECT poster,ename,eename,rday,eno "
 				     +"FROM exhibition";
 				     
 		   ps=conn.prepareStatement(sql);
@@ -34,7 +34,7 @@ public class ReserveDAO {
 			   
 			   vo.setPoster(rs.getString(1));
 			   vo.setEname(rs.getString(2));
-			   vo.setHomepage(rs.getString(3));
+			   vo.setEename(rs.getString(3));
 			   vo.setRday(rs.getString(4));
 			   vo.setEno(rs.getInt(5));
 			   list.add(vo);
@@ -94,13 +94,12 @@ public class ReserveDAO {
 	   {
 		   conn=dbconn.getConnection();
 		   String sql="INSERT INTO reserve_info VALUES("
-				     +"SEQ_NO_eres.nextval,?,?,?,?,?,'n',SYSDATE)";
+				     +"SEQ_NO_eres.nextval,?,?,?,?,SYSDATE,'0')";
 		   ps=conn.prepareStatement(sql);
 		   ps.setString(1, vo.getId());
 		   ps.setInt(2, vo.getEno());
 		   ps.setString(3, vo.getRday());
 		   ps.setString(4, vo.getInwon());
-		   ps.setDate(5, null);
 		   ps.executeUpdate();
 	   }catch(Exception ex)
 	   {
