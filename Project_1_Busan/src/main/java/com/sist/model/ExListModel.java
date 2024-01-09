@@ -21,6 +21,7 @@ public class ExListModel {
 	{
 		  // DB연동 
 		  //1. 요청값 받기
+		  String eno=request.getParameter("eno");
 		  String page=request.getParameter("page");
 		  if(page==null)
 			  page="1";
@@ -36,9 +37,9 @@ public class ExListModel {
 		   
 		   if(endPage>totalpage)
 			   endPage=totalpage;
-		  
-		  request.setAttribute("curpage", curpage);
-		  request.setAttribute("totalpage", totalpage);
+		   request.setAttribute("eno", eno);
+		   request.setAttribute("curpage", curpage);
+		   request.setAttribute("totalpage", totalpage);
 		   request.setAttribute("startPage", startPage);
 		   request.setAttribute("endPage", endPage);
 		  request.setAttribute("list", list);

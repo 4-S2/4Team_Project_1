@@ -52,7 +52,7 @@
                 });
 
                 var infowindow = new kakao.maps.InfoWindow({
-                    content: '<div style="width:150px;text-align:center;padding:6px 0;">${vo.ename}</div>'
+                    content: '<div style="width:150px;text-align:center;padding:6px 0;">${vo.loc}</div>'
                 });
                 infowindow.open(map, marker);
                 map.setCenter(coords);
@@ -67,7 +67,7 @@
                 var tabId = event.target.id + 'Cont';
                 showTab(tabId);
                 if (event.target.id === 'map' && !mapInitialized) {
-                    showMap('${vo.loc}');
+                    showMap('${vo.ename}');
                 }
             });
         }
@@ -101,8 +101,8 @@
 					}
 
 					// 예약 페이지로 이동하면서 선택한 값을 전달
-					location.href = '../busan/actex_reserve.do?eno='
-							+ eno + '&inwon=' + inwon + '&date=' + date;
+					location.href = '../reserve/ex_reserve.do?eno='
+						'&eno' + eno + '&inwon=' + inwon + '&date=' + date;
 				});
 	});
 </script>
@@ -142,7 +142,7 @@
 	                    	<span><img src="like.png"></a></span>
 	                    	<span>${vo.elike }</span>
 	                    	<button id="like-btn" style="margin:auto;">
-	                    	<a href="../busan/like_insert.do?eno=${vo.eno }">&nbsp;좋아요</a>
+	                    	<a href="../like/ex_like_insert.do?eno="${vo.eno }>&nbsp;좋아요</a>
 	                    	</button>
 	                    </div>
 	                    <div class="jjim">

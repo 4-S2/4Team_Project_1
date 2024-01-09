@@ -116,6 +116,8 @@ public class ReserveModel {
 		  String eno=request.getParameter("eno");
 		  String rday=request.getParameter("rday");
 		  String inwon=request.getParameter("inwon");
+		  
+		  
 		  // DAO연결 
 		  /*System.out.println("eno="+eno);
 		  System.out.println("rday="+rday);
@@ -131,19 +133,22 @@ public class ReserveModel {
 		  vo.setRday(rday);
 		  vo.setInwon(inwon);
 		  
+		  
+		  
 		  ReserveDAO dao=ReserveDAO.newInstance();
 		  dao.reserve_ok(vo);
 		  System.out.println(rday);
 		  System.out.println(id);
 		  System.out.println(inwon);
-		  return "redirect:../mypage/myReserv.do";
+		  
+		  return "redirect:../mypage/myReserv.do?page=1&tab=2";
 	  }
 	  @RequestMapping("reserve/reserve_info.do")
 	  public String reserve_info(HttpServletRequest request,
 			  HttpServletResponse response)
 	  {
 		  String no=request.getParameter("no"); // 예약정보
-		  String eno=request.getParameter("eno"); // 맛집 정보 읽기
+		  String eno=request.getParameter("eno"); //정보 읽기
 		  // DataBase 
 		  ReserveDAO dao=ReserveDAO.newInstance();
 		  ReserveInfoVO rvo=dao.reserveInfoData(Integer.parseInt(no));

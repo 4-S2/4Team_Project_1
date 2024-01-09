@@ -3,6 +3,13 @@ package com.sist.vo;
 public class HeartVO {
 	private int hno,no,cateno;
 	private MemberVO mvo = new MemberVO();
+	private ExVO evo=new ExVO();
+	public ExVO getEvo() {
+		return evo;
+	}
+	public void setEvo(ExVO evo) {
+		this.evo = evo;
+	}
 	public int getHno() {
 		return hno;
 	}

@@ -39,7 +39,7 @@
          </tr>
          <tr>
           <th width=20% class="text-center">가격대</th>
-          <td width=80%>${evo.price }</td>
+          <td width=80%>${rvo.evo.price }</td>
          </tr>
         
       
@@ -53,8 +53,6 @@
           <td width=30% class="text-center">${rvo.rday }</td>
         </tr>
         <tr>
-          <th width=20% class="text-center">예약시간</th>
-          <td width=30% class="text-center">${rvo.rtime }</td>
           <th width=20% class="text-center">인원</th>
           <td width=30% class="text-center">${rvo.inwon }</td>
         </tr>

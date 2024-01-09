@@ -15,6 +15,7 @@ $(function(){
 		let month=$(this).attr("data-month");
 		let day=$(this).text();
 		let rday=year+"년도 "+month+"월 "+day+"일";
+		
 		$('#ed').show();
 		$('#ex_day').text(rday)
 		$('#r_day').val(rday);
@@ -24,7 +25,7 @@ $(function(){
 			data:{"day":day},
 			success:function(result)
 			{
-				$('#ex_time').html(result)
+				$('#ex_inwon').html(result)
 			}
 		})
 	})

@@ -95,12 +95,15 @@ public class ReserveDAO {
 		   
 		   conn=dbconn.getConnection();
 		   String sql="INSERT INTO reserve_info VALUES("
-				     +"SEQ_NO_eres.nextval,?,?,?,?,SYSDATE,'0')";
+				     +"SEQ_NO_eres.nextval,?,?,?,?,SYSDATE,'0',?,?,?)";
 		   ps=conn.prepareStatement(sql);
 		   ps.setString(1, vo.getMvo().getId());
 		   ps.setInt(2, vo.getEno());
 		   ps.setString(3, vo.getRday());
 		   ps.setString(4, vo.getInwon());
+		   ps.setString(5, vo.getEvo().getEname());
+		   ps.setString(6, vo.getEvo().getLoc());
+           ps.setInt(7, vo.getEvo().getPrice());
 		   ps.executeUpdate();
 	   }catch(Exception ex)
 	   {
