@@ -11,17 +11,12 @@ public class HeartModel {
 	@RequestMapping("like/ex_like_insert.do")
 	public String ex_like_insert(HttpServletRequest request,HttpServletResponse response) {
 		String eno=request.getParameter("eno");
-		HttpSession session=request.getSession();
-		String id=(String)session.getAttribute("id");
+		String id=request.getParameter("id");
 		
 		HeartVO vo=new HeartVO();
 		
-	    vo.getMvo().setId(id);
-		vo.getEvo().setEno(0);
-		
-		System.out.println(id);
-		System.out.println(eno);
-		
+		vo.getMvo().setId(id);
+		vo.setHno(Integer.parseInt(eno));
 		
 		HeartDAO dao=HeartDAO.newInstance();
 		dao.HeartInsert(vo);

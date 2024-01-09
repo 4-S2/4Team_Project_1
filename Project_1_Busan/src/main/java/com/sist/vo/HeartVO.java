@@ -1,15 +1,10 @@
 package com.sist.vo;
-
+import com.sist.vo.*;
 public class HeartVO {
 	private int hno,no,cateno;
+	
 	private MemberVO mvo = new MemberVO();
 	private ExVO evo=new ExVO();
-	public ExVO getEvo() {
-		return evo;
-	}
-	public void setEvo(ExVO evo) {
-		this.evo = evo;
-	}
 	public int getHno() {
 		return hno;
 	}
@@ -34,9 +29,11 @@ public class HeartVO {
 	public void setMvo(MemberVO mvo) {
 		this.mvo = mvo;
 	}
-	public void setMvo(String id) {
-		// TODO Auto-generated method stub
-		
+	public ExVO getEvo() {
+		return evo;
+	}
+	public void setEvo(ExVO evo) {
+		this.evo = evo;
 	}
 	
 	

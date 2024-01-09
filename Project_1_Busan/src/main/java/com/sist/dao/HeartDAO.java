@@ -40,7 +40,7 @@ import com.sist.vo.HeartVO;
 				}
 			}
 		   
-		   public int HeartOk(int hno,String id) {
+		   public int heartOk(int hno,String id) {
 				int Heart_ok=0;
 				try {
 					conn=dbconn.getConnection();
@@ -60,27 +60,7 @@ import com.sist.vo.HeartVO;
 				}
 				return Heart_ok;
 			}
-		// Heart 여부 확인
-			public int heartOk(int eno,String id) {
-				int like_ok=0;
-				try {
-					conn=dbconn.getConnection();
-					String sql="SELECT COUNT(*) FROM heart "
-							+ "WHERE eno=? AND id=?";
-					ps=conn.prepareStatement(sql);
-					ps.setInt(1, eno);
-					ps.setString(2, id);
-					ResultSet rs=ps.executeQuery();
-					rs.next();
-					like_ok=rs.getInt(1);
-					rs.close();
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				} finally {
-					dbconn.disConnection(conn, ps);
-				}
-				return like_ok;
-			}  
+		
 		 
 		   
 		// Heart취소
