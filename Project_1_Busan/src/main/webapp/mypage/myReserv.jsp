@@ -87,6 +87,8 @@
 }
 </style>
 <script type="text/javascript">
+//toggleTab 함수 수정
+
 function toggleTab(tabIndex) {
     // 모든 테이블 숨기기
     document.getElementById('table1').classList.add('hidden');
@@ -106,7 +108,19 @@ function toggleTab(tabIndex) {
         document.getElementById('table2').classList.remove('hidden');
         buttons[tabIndex].classList.add('on');
     }
+
+    // 선택한 탭의 인덱스를 로컬 스토리지에 저장
+    localStorage.setItem('selectedTabIndex', tabIndex);
 }
+
+// 페이지 로드 시 저장된 탭 인덱스를 확인하여 해당 탭을 활성화
+document.addEventListener('DOMContentLoaded', function() {
+    var storedTabIndex = localStorage.getItem('selectedTabIndex');
+    if (storedTabIndex !== null) {
+        toggleTab(parseInt(storedTabIndex));
+    }
+});
+
 
 </script>
 </head>
@@ -178,42 +192,58 @@ function toggleTab(tabIndex) {
 			    <tr>
 			        <th class="dp_pc num2" scope="col">번호</th>
 			        <th class="title double ta_txt_center" scope="col" style="text-align: center;">전시회명</th>
-			        <th class="dp_pc reserve_date" scope="col">예약일시</th>
+			        <th class="dp_pc reserve_date" scope="col">예약일</th>
 			        <th class="dp_pc num2" scope="col">인원</th>
-			        <th class="dp_pc reserve_date" scope="col">결제상태</th>
+			        <!-- <th class="dp_pc reserve_date" scope="col">결제상태</th> -->
 			        <th class="write_date" scope="col">승인상태</th>
 			    </tr>
 			    </thead>
 			    <tbody>
-<%-- 					<c:choose>
-					    <c:when test="${empty list}"> --%>
+ 					<c:choose>
+					    <c:when test="${empty rlist}"> 
 					        <tr>
 					            <td colspan="4" class="empty">
 					                예약내역이 없습니다.
 					            </td>
 					        </tr>
-<%-- 					    </c:when>
-					    <c:otherwise>
-					        <c:forEach var="vo" items="${list}">
+ 					    </c:when>
+					    <c:otherwise> <!-- e.eno, e.ename, ri.day, ri.inwon, ri.rok, ri.id " -->
+					        <c:forEach var="vo" items="${rlist}" varStatus="r">
 					            <tr>
-					                <td class="dp_pc num2">${vo.qno}</td>
-					                <td class="title double ta_px20">
-					                    <a href="../board/qnaboard_detail.do?qno=${vo.qno}" class="ellipsis">${vo.subject}</a>
+					                <td class="dp_pc num2">${r.index +1}</td>
+					                <td class="title double ta_px20" style="text-align: center;">
+					                    <a href="../busan/ex_detail.do?eno=${vo.evo.eno}" class="ellipsis">${vo.evo.ename}</a>
 					                </td>
-					                <td class="dp_pc writer">${vo.regdate}</td>
-					                <c:if test="${vo.status == 0 }">
-					                	<td class="category px_20 ta_px10">답변대기</td>
+					                <td class="dp_pc writer">${vo.day}</td>
+					                 <td class="dp_pc num2">${vo.inwon}</td>
+					                <c:if test="${vo.rok == 0 }">
+					                	<td class="category px_20 ta_px10">승인대기</td>
 					                </c:if>
-					                <c:if test="${vo.status == 1 }">
-					                	<td class="category px_20 ta_px10"><strong>답변완료</strong></td>
+					                <c:if test="${vo.rok == 1 }">
+					                	<td class="category px_20 ta_px10"><strong>승인완료</strong></td>
 					                </c:if>				                
 					            </tr>
 					        </c:forEach>
 					    </c:otherwise> 
- 					</c:choose> --%>
+ 					</c:choose> 
 			    </tbody>
 			</table>
 			<!--//TABLE-->
+			 <div class="row">
+                <div class="text-center">
+                    <ul class="pagination">
+                        <c:if test="${startPage>1}">
+                            <li><a href="myReserv.do?page=${startPage-1}">&lt;</a></li>
+                        </c:if>
+                        <c:forEach var="i" begin="${startPage}" end="${endPage}">
+                            <li ${curpage==i?"class=active":""}><a href="myReserv.do?page=${i}">${i}</a></li>
+                        </c:forEach>
+                        <c:if test="${endPage<totalpage}">
+                            <li><a href="myReserv.do?page=${endPage+1}">&gt;</a></li>
+                        </c:if>
+                    </ul>
+                </div>
+            </div>
         </div>
 
 </body>

@@ -9,9 +9,11 @@ import com.sist.controller.RequestMapping;
 import java.io.PrintWriter;
 import java.util.*;
 import com.sist.dao.*;
+import com.sist.vo.BusanListVO;
 import com.sist.vo.JjimVO;
 import com.sist.vo.MemberVO;
 import com.sist.vo.QnaBoardVO;
+import com.sist.vo.ReserveInfoVO;
 
 
 public class MypageModel {
@@ -88,17 +90,34 @@ public class MypageModel {
 		}
 	}
 	
-	// 예약내역
+	// 예약내역 => 목록
 	@RequestMapping("mypage/myReserv.do")
 	public String mypage_myReserv(HttpServletRequest request, HttpServletResponse response)
 	{	
 		HttpSession session=request.getSession();
 		String id=(String)session.getAttribute("id");
-		
 		MypageDAO dao=MypageDAO.newInstance();
-		/* MemberVO vo=dao.myprofile(id); */
 		
-		/* request.setAttribute("vo", vo); */
+		String page=request.getParameter("page");
+		if(page==null)
+			page="1";
+		int curpage=Integer.parseInt(page);
+		
+		int totalpage=dao.reservationRowCount(id);
+		  
+		final int BLOCK=5;
+		int startPage=((curpage-1)/BLOCK*BLOCK)+1;
+		int endPage=((curpage-1)/BLOCK*BLOCK)+BLOCK;
+		if(endPage>totalpage)
+			endPage=totalpage;
+		
+		List<ReserveInfoVO> rlist = dao.myExReserveList(id,curpage);
+
+		request.setAttribute("curpage", curpage);
+		request.setAttribute("totalpage", totalpage);
+		request.setAttribute("startPage", startPage);
+		request.setAttribute("endPage", endPage);
+		request.setAttribute("rlist", rlist);
 		request.setAttribute("mypage_jsp", "myReserv.jsp");
 		request.setAttribute("main_jsp", "../mypage/mypage_main.jsp");
 		return "../main/main.jsp";
