@@ -127,7 +127,7 @@ public class FoodReserveModel {
 
 
 	@RequestMapping("reserve/food_reserve_ok.do")
-	public void food_reserve_ok(HttpServletRequest request,
+	public String food_reserve_ok(HttpServletRequest request,
 			HttpServletResponse response)
 	{
 		try {
@@ -151,6 +151,6 @@ public class FoodReserveModel {
 		FoodReserveDAO dao=FoodReserveDAO.newInstance();
 		dao.reserveInsertData(vo);
 		
-		
+		return "redirect:../mypage/myReserv.do";
 	}
 }
