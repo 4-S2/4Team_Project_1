@@ -229,7 +229,9 @@ color: #fff;
 						<li id="detail">상세 설명</li>
 						<li id="map">지도/주변 추천</li>
 						<li id="review">리뷰</li>
+						<c:if test="${cate=='맛집' && sessionScope.id != null}">
 						<li id="reserve">예약하기</li>
+						</c:if>
 					</ul>
 
 					<!-- <div class="shop-header-line">
@@ -387,6 +389,7 @@ color: #fff;
 						
 					</div>
 					<!-- <div id="reserveCont" class="tab-content"> -->
+					<c:if test="${cate=='맛집'}">
 					<div id="reserveCont" class="tab-content" style="display: none">
 						<!-- 예약하기 내용 -->
 						<jsp:include page="../reserve/foodreserve_main.jsp">
@@ -395,6 +398,7 @@ color: #fff;
 						  <jsp:param name="title" value="${URLEncoder.encode(vo.title, 'UTF-8')}"/>
 						</jsp:include>
 					</div>
+					</c:if>
 
 				</div>
 			</div>

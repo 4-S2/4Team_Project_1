@@ -15,13 +15,29 @@
 .rdays:hover {
 	cursor: pointer;
 }
+.dateCss{
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #000;
+    color: #fff;
+    line-height: 40px;
+}
+.dateCss3{
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    line-height: 40px;
+}
 </style>
 <script type="text/javascript">
 $(function(){
 	$('.rdays').click(function(){
 		let year=$(this).attr("data-year");
 		let month=$(this).attr("data-month");
-		let day=$(this).text();
+		let day=$(this).attr("data-day");
 		let rday=year+"년 "+month+"월 "+day+"일";
 		$('#food_day').text(rday);
 		$('#rday').val(rday);
@@ -62,11 +78,11 @@ $(function(){
 <body>
 	<table class="table">
 		<caption class="text-center">
-			<h3>${year }년도${month }월</h3>
+			<h3 style="font-size: 21px">${year }년&nbsp;&nbsp;${month }월</h3>
 		</caption>
 		<tr class="danger">
 			<c:forEach var="strWeek" items="${strWeek }">
-				<td class="text-center">${strWeek }</td>
+				<td class="text-center" style="background-color:#e5e9ff">${strWeek }</td>
 			</c:forEach>
 			<c:set var="week" value="${week }" />
 			<c:forEach var="i" begin="1" end="${lastday }">
@@ -76,11 +92,11 @@ $(function(){
 				</c:if>
 				<c:if test="${rday[i]==1}">
 					<td class="text-center rdays"
-						style="background-color: black; color: white" data-year="${year }"
-						data-month="${month }">${i }</td>
+						 data-year="${year }"
+						data-month="${month }" data-day="${i }"><span class="dateCss">${i }<span></td>
 				</c:if>
 				<c:if test="${rday[i]==0}">
-					<td class="text-center">${i }</td>
+					<td class="text-center" data-day="${i }"><span class="dateCss3">${i }<span></td>
 				</c:if>
 				<c:set var="week" value="${week+1 }" />
 				<c:if test="${week>6 }">

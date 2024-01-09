@@ -5,10 +5,29 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+.tinwon:active, .tinwon:hover,.tinwon:active {
+    color: #fff;
+    background-color: #0923a9;
+    border-color: #0923a9;
+}
+.tinwon{
+    color: #0923a9;
+    background-color: #fff;
+    border-color: #0923a9;
+}
+</style>
 <script type="text/javascript">
 $(function(){
     $('.tinwon').click(function(){
-       let tinwon = $(this).text();
+    	$('.tinwon').css({
+			"background-color": "#fff",
+			"color": "#0923a9",
+			"border-color": "#0923a9"
+		});
+       let tinwon = $(this).val();
+       $(this).css("background-color", "#0923a9");
+		$(this).css("color", "#fff");
        $('#food_inwon').text(tinwon);
        $('#rinwon').val(tinwon);
        $('#ok').show();
@@ -21,7 +40,7 @@ $(function(){
    <tr>
      <td>
       <c:forEach var="i" begin="1" end="10">
-        <span class="btn btn-xs btn-info tinwon">${i}</span>
+        <button class="btn btn-xs tinwon" value="${i}">${i}명</span>
       </c:forEach>
      </td>
    </tr>

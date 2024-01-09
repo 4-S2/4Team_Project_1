@@ -6,10 +6,30 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+.tspans:active, .tspans:hover,.tspans:active {
+    color: #fff;
+    background-color: #0923a9;
+    border-color: #0923a9;
+}
+.tspans{
+    color: #0923a9;
+    background-color: #fff;
+    border-color: #0923a9;
+    padding: 3px;
+}
+</style>
 <script type="text/javascript">
 $(function(){
 	$('.tspans').click(function(){
+		$('.tspans').css({
+			"background-color": "#fff",
+			"color": "#0923a9",
+			"border-color": "#0923a9"
+		});
 		let time=$(this).text();
+		$(this).css("background-color", "#0923a9");
+		$(this).css("color", "#fff");
 	   $('#food_time').text(time);
 	   $('#rtime').val(time);
 	   $.ajax({
@@ -28,7 +48,7 @@ $(function(){
    <tr>
      <td>
       <c:forEach var="time" items="${list }">
-        <span class="btn btn-xs btn-success tspans">${time }</span>
+        <span class="btn btn-xs tspans">${time }</span>
       </c:forEach>
      </td>
    </tr>
