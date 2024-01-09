@@ -3,8 +3,8 @@ import java.util.*;
 import java.text.*;
 
 import com.sist.dbcp.CreateDBCPConnection;
-import com.sist.vo.ExReserveVO;
 import com.sist.vo.ExVO;
+import com.sist.vo.*;
 
 import java.sql.*;
 public class ExDAO {

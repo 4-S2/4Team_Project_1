@@ -2,7 +2,9 @@ package com.sist.vo;
 
 public class ReserveInfoVO {
 	private int no,eno,rok;
-	private String ename,eename,poster,day,id,regdate,inwon;;
+	private String ename,eename,poster,day,regdate,inwon;
+	private MemberVO mvo = new MemberVO();
+	private ExVO evo = new ExVO();
 	public String getInwon() {
 		return inwon;
 	}
@@ -51,11 +53,17 @@ public class ReserveInfoVO {
 	public void setDay(String day) {
 		this.day = day;
 	}
-	public String getId() {
-		return id;
+	public MemberVO getMvo() {
+		return mvo;
 	}
-	public void setId(String id) {
-		this.id = id;
+	public void setMvo(MemberVO mvo) {
+		this.mvo = mvo;
+	}
+	public ExVO getEvo() {
+		return evo;
+	}
+	public void setEvo(ExVO evo) {
+		this.evo = evo;
 	}
 	public String getRegdate() {
 		return regdate;

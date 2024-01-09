@@ -111,13 +111,13 @@ public class ReserveDAO {
 	   }
    }
    // 예약현황 출력 
-   public List<ReserveVO> reserveInfoData(String id)
+   public List<ReserveInfoVO> resrveInfoData(String id)
    {
-	   List<ReserveVO> list=new ArrayList<ReserveVO>();
+	   List<ReserveInfoVO> list=new ArrayList<ReserveInfo VO>();
 	   try
 	   {
 		   conn=dbconn.getConnection();
-		   String sql="SELECT no,eno,rday,rtime,inwon,TO_CHAR(regdate,'yyyy-MM-dd hh24:mi:ss'),"
+		   String sql="SELECT no,eno,day,inwon,TO_CHAR(regdate,'yyyy-MM-dd hh24:mi:ss'),"
 				     +"exGetPoster(eno),exGetName(eno),exGetPhone(eno),ok,id "
 				     +"FROM reserve_info "
 				     +"WHERE id=? "
@@ -169,6 +169,8 @@ public class ReserveDAO {
 		   while(rs.next())
 		   {
 			   ReserveInfoVO vo=new ReserveInfoVO();
+			   MemberVO mvo = new MemberVO();
+			   
 			   vo.setNo(rs.getInt(1));
 			   vo.setEno(rs.getInt(2));
 			   vo.setEname(rs.getString(3));
@@ -177,7 +179,7 @@ public class ReserveDAO {
 			   vo.setDay(rs.getString(6));
 			   vo.setInwon(rs.getString(7));
 			   vo.setRok(rs.getInt(8));
-			   vo.setId(rs.getString(9));
+			   mvo.setId(rs.getString(9));
 			   vo.setRegdate(rs.getString(10));
 			   
 			   
