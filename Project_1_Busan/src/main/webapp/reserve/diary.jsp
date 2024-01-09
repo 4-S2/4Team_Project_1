@@ -20,7 +20,7 @@ $(function(){
 		$('#r_day').val(rday);
 		$.ajax({
 			type:'post',
-			url:'time.do',
+			url:'inwon.do',
 			data:{"day":day},
 			success:function(result)
 			{

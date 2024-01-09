@@ -257,36 +257,34 @@ public class MemberDAO {
 	public boolean sendPasswordToEmail(String id, String email, String password) {
 	    boolean sent = false;
 
-	    try {
-	        // Set the properties for Google's SMTP server.
-	        Properties props = new Properties();
-	        props.put("mail.smtp.host", "smtp.gmail.com"); 
-	        props.put("mail.smtp.port", 465); 
-	        props.put("mail.smtp.auth", "true"); 
-	        props.put("mail.smtp.ssl.enable", "true"); 
-	        props.put("mail.smtp.ssl.trust", "smtp.gmail.com");
-	        props.put("mail.smtp.ssl.protocols", "TLSv1.2");
-
-	        // Create a session with an authenticator for Google's SMTP.
-	        Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
-	            protected PasswordAuthentication getPasswordAuthentication() {
-	                return new PasswordAuthentication("ksssk9696", "urey yucx hjxk phzc"); // Enter Google ID and password
-	            }
-	        });
-
-	        // Prepare the email message.
-	        MimeMessage message = new MimeMessage(session);
-	        message.setFrom(new InternetAddress("ksssk9696@gmail.com")); // Set sender email address
-	        message.addRecipient(Message.RecipientType.TO, new InternetAddress(email)); // Set recipient email address
-	        message.setSubject("Your Password"); // Set email subject
-	        message.setText("Your password is " + password); // Set email body
-
-	        // Send the email.
-	        Transport.send(message);
-	        sent = true;
-	    } catch (Exception ex) {
-	        ex.printStackTrace();
-	    }
+	     String host = "smtp.naver.com"; // 네이버일 경우 네이버 계정, gmail경우 gmail 계정 
+	     String user = ""; // 패스워드 
+	     String pwd = "";      // SMTP 서버 정보를 설정한다. 
+	     Properties props = new Properties(); 
+	     props.put("mail.smtp.host", host); 
+	     props.put("mail.smtp.port", 587); 
+	     props.put("mail.smtp.auth", "true"); 
+	     Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator(){ 
+	    	 protected PasswordAuthentication getPasswordAuthentication() 
+	    	 { 
+	    		 return new PasswordAuthentication(user, password); 
+	    	 } 
+	     }); 
+	     try { 
+	        	  MimeMessage message = new MimeMessage(session); 
+	              message.setFrom(new InternetAddress(user)); 
+	              message.addRecipient(Message.RecipientType.TO, new InternetAddress("email")); // 메일 제목 
+	              message.setSubject(id+"님 예약 내역입니다!!"); // 메일 내용
+	              
+	              String html=pwd;
+	              		     
+	              message.setContent(html,"text/html;charset=UTF-8"); // send the message 
+	              Transport.send(message); 
+	              System.out.println("Success Message Send"); 
+	         } catch (MessagingException e) 
+	          {
+	        	 e.printStackTrace();
+	          }
 
 	    return sent;
 	}

@@ -40,17 +40,16 @@ public class GoodsDAO {
 			ResultSet rs=ps.executeQuery();
 			while(rs.next()) { // 출력 첫번째 위치부터 읽기 시작 
 				GoodsVO vo=new GoodsVO();
-	            vo.setGno(rs.getInt(1));
+				vo.setGno(rs.getInt(1));
 	            vo.setGname(rs.getString(2));
 	            vo.setPoster(rs.getString(3));
 	            vo.setPrice(rs.getString(4));
 	            list.add(vo);
-	         }
-	         rs.close();
-		}catch(Exception ex) {
+			}
+	        rs.close();
+		} catch(Exception ex) {
 			ex.printStackTrace();
-		}
-		finally{
+		} finally{
 			// 반환 => 재사용
 			dbconn.disConnection(conn, ps);
 		}
@@ -88,19 +87,18 @@ public class GoodsDAO {
 				list.add(vo);
 			}
 			rs.close();
-		}catch(Exception ex) {
+		} catch(Exception ex) {
 			ex.printStackTrace();
-		}
-		finally {
+		} finally {
 			dbconn.disConnection(conn, ps);
 		}
 		return list;
 	}
 	
-	
-	public int goodsListTotalPage(){
+	// 상품 리스트 총 페이지
+	public int goodsListTotalPage() {
 		int total=0;
-		try{
+		try {
 			conn=dbconn.getConnection();
 			String sql="SELECT CEIL(COUNT(*)/12.0) FROM goods";
 			ps=conn.prepareStatement(sql);
@@ -110,14 +108,79 @@ public class GoodsDAO {
 			total=rs.getInt(1);
 			
 			rs.close();
-		   }catch(Exception ex) {
-			   ex.printStackTrace();
-		   }
-		   finally {
-			   dbconn.disConnection(conn, ps);
-		   }
-		   return total;
-	   }	   
+		} catch(Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			dbconn.disConnection(conn, ps);
+		}
+		return total;
+	}	
+	
+	
+	// 상품 검색 리스트
+	public List<GoodsVO> goodsFindList(String keyword, int page, String sort) {
+		List<GoodsVO> list=new ArrayList<>();
+		String sort_way="ASC";
+		if(sort.equals("heart")||sort.contains("hit")) {
+			sort_way="DESC";
+		}
+			
+		try {
+			conn=dbconn.getConnection();
+			String sql="SELECT gno, gname, poster, price, num "
+					  +"FROM (SELECT gno, gname, poster, price, rownum as num "
+					  +"FROM (SELECT gno, gname, poster, price "
+					  +"FROM goods WHERE gname LIKE '%'||?||'%' "
+					  +"ORDER BY "+sort+" "+sort_way+")) "
+					  +"WHERE num BETWEEN ? AND ?";
+			ps=conn.prepareStatement(sql);
+			int rowSize=12;
+			int start=(rowSize*page)-(rowSize-1);
+			int end=rowSize*page;
+			   
+			ps.setString(1, keyword);
+			ps.setInt(2, start);
+			ps.setInt(3, end);
+			   
+			ResultSet rs=ps.executeQuery();
+			while(rs.next()) {
+				GoodsVO vo=new GoodsVO();
+				vo.setGno(rs.getInt(1));
+				vo.setGname(rs.getString(2));
+				vo.setPoster(rs.getString(3));
+				vo.setPrice(rs.getString(4));
+				list.add(vo);
+			}
+			rs.close();
+		} catch(Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			dbconn.disConnection(conn, ps);
+		}
+		return list;
+	}
+	   
+	// 상품 검색 리스트 총 페이지
+	public int goodsFindTotalPage(String keyword) {
+		int total=0;
+		try {
+			conn=dbconn.getConnection();
+			String sql="SELECT CEIL(COUNT(*)/12.0) "
+					  +"FROM goods "
+					  +"WHERE gname LIKE '%'||?||'%'";
+			ps=conn.prepareStatement(sql);
+			ps.setString(1, keyword);
+			ResultSet rs=ps.executeQuery();
+			rs.next();
+			total=rs.getInt(1);
+			rs.close();
+		} catch(Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			dbconn.disConnection(conn, ps);
+		}
+		return total;
+	}
 	   
 	
 	// 상품 상세보기
