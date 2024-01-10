@@ -193,9 +193,9 @@ public class MypageModel {
 		JjimDAO jdao = JjimDAO.newInstance();
 		
 		List<JjimVO> tlist = jdao.busanjjimListData(id, "tour",1);
-		List<JjimVO> fdlist = jdao.busanjjimListData(id, "food",2);
-		List<JjimVO> flist = jdao.busanjjimListData(id, "festival",3);
-		List<JjimVO> alist = jdao.busanjjimListData(id, "activity",4);
+		List<JjimVO> fdlist = jdao.busanjjimListData(id, "food",4);
+		List<JjimVO> flist = jdao.busanjjimListData(id, "festival",2);
+		List<JjimVO> alist = jdao.busanjjimListData(id, "activity",3);
 		List<JjimVO> elist = jdao.exjjimListData(id);
 		
 		int tSize = tlist.size();
