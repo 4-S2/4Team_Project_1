@@ -3,10 +3,17 @@ package com.sist.vo;
 public class FoodReserveVO {
 	private int rno,fno,inwon,ok;
 	private String day,time,id;
+	private String regdate;
 	private BusanListVO fvo=new BusanListVO();
 	private MemberVO mvo = new MemberVO();
 	
 	
+	public String getRegdate() {
+		return regdate;
+	}
+	public void setRegdate(String regdate) {
+		this.regdate = regdate;
+	}
 	public MemberVO getMvo() {
 		return mvo;
 	}

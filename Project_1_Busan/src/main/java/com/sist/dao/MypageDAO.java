@@ -165,7 +165,7 @@ public class MypageDAO {
 			List<ReserveInfoVO> list=new ArrayList<ReserveInfoVO>();
 			try {
 				conn=dbconn.getConnection();
-				String sql="SELECT e.eno, e.ename, ri.day, ri.inwon, ri.rok, ri.id "
+				String sql="SELECT e.eno, e.ename, ri.day, ri.inwon, ri.rok, ri.id,ri.no "
 						+ "FROM exhibition e "
 						+ "JOIN (SELECT ri.*, ROWNUM AS num "
 						+ "FROM reserve_info ri "
@@ -188,6 +188,7 @@ public class MypageDAO {
 					vo.setInwon(rs.getString(4));
 					vo.setRok(rs.getInt(5));
 					vo.getMvo().setId(rs.getString(6));
+					vo.setNo(rs.getInt(7));
 					list.add(vo);
 				}
 				rs.close();
@@ -219,18 +220,20 @@ public class MypageDAO {
 		}
 		
 		// 전시예약 상세 => 예약번호,전시번호,전시명,전시부제목,포스터,예약일,인원,승인상태,아이디,예약신청일
-		   public ReserveInfoVO myExReserveDetail()
+		   public ReserveInfoVO myExReserveDetail(String no)
 		   {	ReserveInfoVO vo=new ReserveInfoVO();
 			   try
 			   {
 				   conn=dbconn.getConnection();
 				   String sql="SELECT ri.no, e.eno, e.ename , e.eeName , e.poster, ri.day, ri.inwon , "
 				   		   +"ri.rok, ri.id, "
-				   		   +"TO_CHAR(ri.regdate, 'yyyy-MM-dd hh24:mi:ss') AS regdate "
-						   +"FROM exhibition e"
+				   		   +"TO_CHAR(ri.regdate, 'yyyy-MM-dd hh24:mi:ss') AS regdate, "
+				   		   + "e.loc, e.loc_detail "
+						   +"FROM exhibition e "
 						   +"JOIN reserve_info ri ON e.eno = ri.eno "
-						   +"ORDER BY ri.no DESC";
+						   +"WHERE no=?";
 				   ps=conn.prepareStatement(sql);
+				   ps.setString(1, no);
 				   ResultSet rs=ps.executeQuery();
 				   if(rs.next())
 				   {
@@ -244,6 +247,8 @@ public class MypageDAO {
 					   vo.setRok(rs.getInt(8));
 					   vo.getMvo().setId(rs.getString(9));
 					   vo.setRegdate(rs.getString(10));
+					   vo.getEvo().setLoc(rs.getString(11));
+					   vo.getEvo().setLoc_detail(rs.getString(12));
 				   }
 				   rs.close();
 			   }catch(Exception ex)
@@ -274,21 +279,6 @@ public class MypageDAO {
 			}
 		}
 		
-		// 일반 사용자 예약 상세보기
-		/*
-		 * public ReserveVO booking_detail(int rno) { ReserveVO vo=new ReserveVO(); try
-		 * { conn=db.getConnection(); String
-		 * sql="SELECT res_id,res_state,res_date,res_msg,res_img,user_id,com_id,pet_id,companyName(com_id) "
-		 * + "FROM reservation " + "WHERE res_id=?"; ps=conn.prepareStatement(sql);
-		 * ps.setInt(1, rno); rs=ps.executeQuery(); rs.next();
-		 * vo.setRes_id(rs.getInt(1)); vo.setRes_state(rs.getString(2));
-		 * vo.setRes_date(rs.getDate(3)); vo.setRes_msg(rs.getString(4));
-		 * vo.setRes_img(rs.getString(5)); vo.setUser_id(rs.getString(6));
-		 * vo.setCom_id(rs.getInt(7)); vo.setPet_id(rs.getInt(8));
-		 * vo.setCom_name(rs.getString(9)); rs.close(); }catch(Exception ex) {
-		 * ex.printStackTrace(); } finally { db.disConnection(conn, ps); } return vo; }
-		 */
-
 		/*
 		 * SELECT f.no, f.title, r.day, r.time, r.inwon, r.ok, r.id
 FROM food f
@@ -300,13 +290,14 @@ JOIN (
 WHERE r.num BETWEEN :2 AND :3
 ORDER BY r.frno DESC;
 
+
 		 */
 		// 맛집예약 목록 => 맛집번호,맛집명,예약일,예약시간,인원,승인상태,아이디
 		public List<FoodReserveVO> myFdReserveList(String id, int page){
 			List<FoodReserveVO> list=new ArrayList<>();
 			try {
 				conn=dbconn.getConnection();
-				String sql="SELECT f.no, f.title, r.day, r.time, r.inwon, r.ok, r.id "
+				String sql="SELECT f.no, f.title, r.day, r.time, r.inwon, r.ok, r.id,r.frno "
 						+ "FROM food f "
 						+ "JOIN (SELECT res.*, ROWNUM AS num "
 						+ "FROM reservation res "
@@ -330,6 +321,7 @@ ORDER BY r.frno DESC;
 					vo.setInwon(rs.getInt(5));
 					vo.setOk(rs.getInt(6));
 					vo.setId(rs.getString(7));
+					vo.setRno(rs.getInt(8));
 					list.add(vo);
 				}
 				rs.close();
@@ -340,6 +332,48 @@ ORDER BY r.frno DESC;
 			}
 			return list;
 		}
+		
+		// 맛집 예약 상세보기 => 예약번호 맛집번호 맛집명 예약일시 예약인원 예약신청일 승인상태 주소 전화번호 운영시간, 아이디
+		public FoodReserveVO myFdReserveDetail(String frno){
+			FoodReserveVO vo=new FoodReserveVO();
+			try {
+				conn=dbconn.getConnection();
+				String sql="SELECT f.no, f.title, r.day, r.time, r.inwon, r.ok, r.id, r.frno, "
+						+ "f.title, f.poster, f.addr, f.phone, "
+						+ "TO_CHAR(r.regdate, 'yyyy-MM-dd hh24:mi:ss') AS regdate "
+						+ "FROM food f "
+						+ "JOIN reservation r ON f.no = r.fno "
+						+ "WHERE frno = ?";
+				   ps=conn.prepareStatement(sql);
+				   ps.setString(1, frno);
+				   ResultSet rs=ps.executeQuery();
+				   if(rs.next())
+				   {
+						vo.setFno(rs.getInt(1));
+						vo.getFvo().setTitle(rs.getString(2));
+						vo.setDay(rs.getString(3));
+						vo.setTime(rs.getString(4));
+						vo.setInwon(rs.getInt(5));
+						vo.setOk(rs.getInt(6));
+						vo.setId(rs.getString(7));
+						vo.setRno(rs.getInt(8));
+						vo.getFvo().setTitle(rs.getString(9));
+						vo.getFvo().setPoster(rs.getString(10));
+						vo.getFvo().setAddr(rs.getString(11));
+						vo.getFvo().setPhone(rs.getString(12));
+						vo.setRegdate(rs.getString(13));
+				   }
+				   rs.close();
+			   }catch(Exception ex)
+			   {
+				   ex.printStackTrace();
+			   }
+			   finally
+			   {
+				   dbconn.disConnection(conn, ps);
+			   }
+			   return vo;
+		   }
 		// 맛집예약 총페이지
 		public int fdreservationRowCount(String id) {
 			int total=0;
@@ -385,7 +419,7 @@ ORDER BY r.frno DESC;
 		}
 		
 		// 회원 탈퇴하기
-		// 연결된 테이블: reservation, jjim, heart, review, review_reply, order 
+		// 연결된 테이블: reservation, jjim, heart, review, review_reply,order => cart, reserve_info
 		 public String memberDeleteOk(String id,String pwd)
 		   {
 			   String result="fail";
@@ -434,7 +468,7 @@ ORDER BY r.frno DESC;
 						   ps.setString(1, id);
 						   ps.executeUpdate();
 
-						   sql="DELETE FROM review "
+						   sql="DELETE FROM reserve_info "
 							  +"WHERE id=?";
 						   ps=conn.prepareStatement(sql);
 						   ps.setString(1, id);

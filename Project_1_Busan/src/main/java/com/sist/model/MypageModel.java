@@ -150,6 +150,31 @@ public class MypageModel {
 		return "../main/main.jsp";
 	}
 	
+	// 예약내역 => 맛집상세
+	@RequestMapping("mypage/myReserv_foodDetail.do")
+	public String mypage_myReserv_foodDetail(HttpServletRequest request, HttpServletResponse response)
+	{	
+		String rno=request.getParameter("rno");
+		
+		MypageDAO dao=MypageDAO.newInstance();
+		
+		FoodReserveVO vo=dao.myFdReserveDetail(rno);
+		request.setAttribute("vo", vo);
+		return "../mypage/myReserv_fdDetail.jsp";
+	}
+	
+	// 예약내역 => 전시상세
+	@RequestMapping("mypage/myReserv_exDetail.do")
+	public String mypage_myReserv_exDetail(HttpServletRequest request, HttpServletResponse response)
+	{	
+		String no=request.getParameter("no");
+		MypageDAO dao=MypageDAO.newInstance();
+		
+		ReserveInfoVO vo=dao.myExReserveDetail(no);
+		request.setAttribute("vo", vo);
+		return "../mypage/myReserv_exDetail.jsp";
+	}
+	
 	// 장바구니
 	@RequestMapping("mypage/myCart.do")
 	public String mypage_myCart(HttpServletRequest request, HttpServletResponse response)

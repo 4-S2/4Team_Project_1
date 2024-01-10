@@ -129,7 +129,39 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 </script>
+<script type="text/javascript">
+$(function(){
+	  $('#myTable').on('click', 'tr#food', function() {
+	    let x = (document.body.offsetWidth / 2) - (650 / 2);
+	    let y = (window.screen.height / 2) - (350 / 2) - 50;
+	    let rno = $(this).attr('data-rno');
+	        window.open("../mypage/myReserv_foodDetail.do?rno=" + rno,"",'width=650, height=430, left='+x+', top='+y);
+	});
+	});
+$(function(){
+	  $('#myTable2').on('click', 'tr#ex', function() {
+	    let x = (document.body.offsetWidth / 2) - (650 / 2);
+	    let y = (window.screen.height / 2) - (350 / 2) - 50;
+	    let no = $(this).attr('data-no');
+	    	window.open("../mypage/myReserv_exDetail.do?no=" + no,"",'width=750, height=570, left='+x+', top='+y);
+	});
+	});
+/*     $("#myTable tr #rno").click(function(){
+        let x = (document.body.offsetWidth / 2) - (650 / 2);
+        let y = (window.screen.height / 2) - (350 / 2) - 50;
 
+        let rno = $(this).attr('data-rno');
+        let no = $(this).attr('data-no');
+        // bottom은 뭐야? 깃허브 확인
+        if (rno !== undefined && rno !== null) {
+            window.open("../mypage/myReserv_foodDetail.do?rno=" + rno,"",'width=650, height=430, left='+x+', top='+y);
+        }  else if (no !== undefined && no !== null) {
+            window.open("../mypage/myReserv_exDetail.do?rno=" + no,"",'width=750, height=570, left='+x+', top='+y);
+        }  
+    });
+}); */
+
+</script>
 </head>
 <body>
   <div class="myReserv">
@@ -160,7 +192,7 @@ document.addEventListener('DOMContentLoaded', function() {
 			        <th class="dp_pc reserve_date" scope="col">예약취소</th> 
 			    </tr>
 			    </thead>
-			    <tbody>
+			    <tbody id=myTable>
  					<c:choose>
 					    <c:when test="${empty flist}"> 
 					        <tr>
@@ -171,7 +203,7 @@ document.addEventListener('DOMContentLoaded', function() {
  					    </c:when>
 					    <c:otherwise> 
 					        <c:forEach var="vo" items="${flist}" varStatus="r">
-					            <tr>
+					            <tr data-rno="${vo.rno } " id="food">
 					                <td class="dp_pc num2">${r.index +1}</td>
 					                <td class="title double ta_px20" style="text-align: center;">
 					                    <a href="../busan/food_detail.do?no=${vo.fno}" class="ellipsis">${vo.fvo.title}</a>
@@ -227,7 +259,7 @@ document.addEventListener('DOMContentLoaded', function() {
 			        <th class="dp_pc reserve_date" scope="col">예약취소</th> 
 			    </tr>
 			    </thead>
-			    <tbody>
+			    <tbody id=myTable2>
  					<c:choose>
 					    <c:when test="${empty rlist}"> 
 					        <tr>
@@ -238,7 +270,7 @@ document.addEventListener('DOMContentLoaded', function() {
  					    </c:when>
 					    <c:otherwise> <!-- e.eno, e.ename, ri.day, ri.inwon, ri.rok, ri.id " -->
 					        <c:forEach var="vo" items="${rlist}" varStatus="r">
-					            <tr>
+					            <tr data-no="${vo.no }" id="ex">
 					                <td class="dp_pc num2">${r.index +1}</td>
 					                <td class="title double ta_px20" style="text-align: center;">
 					                    <a href="../busan/ex_detail.do?eno=${vo.evo.eno}" class="ellipsis">${vo.evo.ename}</a>
