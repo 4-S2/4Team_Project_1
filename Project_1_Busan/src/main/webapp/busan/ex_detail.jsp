@@ -14,9 +14,13 @@
 {
   height: 1000px;
 }
+.jjim_img{
+  width: 20px;
+}
 
 </style>
 <!-- Include Kakao Maps API -->
+
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fce1f2ebd7aeec53bebf70c1f38c36c7&libraries=services"></script>
 
 <script type="text/javascript">
@@ -85,7 +89,6 @@
         }
     }
 </script>
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
 	$(function() {
 
@@ -105,7 +108,29 @@
 						'&eno' + eno + '&inwon=' + inwon + '&date=' + date;
 				});
 	});
+	$('.jjimBtn').click(function(){
+	    let eno = $(this).attr("data-eno");
+	    let cateno = $(this).attr("data-cateno");
+	    $.ajax({
+	        type: 'post',
+	        url: '../busan/ex_jjim.do',
+	        data: {'eno': eno, 'cateno': cateno},
+	        success: function(result){
+	            if(result === 'ok'){
+	                alert("찜하기가 완료되었습니다");
+	                $('.jjim_img').attr('src', '../busan/jjim.png');
+	            } else if(result === 'no'){
+	                alert("찜하기가 취소되었습니다");
+	                $('.jjim_img').attr('src', '../busan/jjim_none.png');
+	            }
+	        }
+	    });
+	});
+
+	
+	
 </script>
+
 </head>
 <body>
 	<div id="ex" class="detail">   
@@ -142,14 +167,14 @@
 	                    	<span><img src="like.png"></a></span>
 	                    	<span>${vo.elike }</span>
 	                    	<button id="like-btn" style="margin:auto;">
-	                    	<a href="../like/ex_like_insert.do?eno="${vo.eno }>&nbsp;좋아요</a>
+	                    	<a href="#" class="like-button">좋아요</a>
+	                    	
 	                    	</button>
 	                    </div>
-	                    <div class="jjim">
-	                    	<span><img src="jjim.png"></a></span>
-	                    	<span>${vo.jjim }</span>
-	                    	<button id="jjim-btn" style="margin:auto;">찜하기</button>
-	                    </div>
+	                    	<div class="jjim">
+							<span><img src="../busan/jjim_none.png" class="jjim_img"></span>
+							<button class="jjimBtn" data-cateno="${vo.cateno }" data-eno="${vo.eno }">찜하기</button>
+						</div>
 	                    	</form>
 		                     <div class="hit">
 	                    	<span>조회수</span>
