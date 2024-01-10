@@ -83,6 +83,11 @@ public class ExListModel {
 		  ExDAO dao=new ExDAO();
 		  ExVO vo=dao.exDetailData(Integer.parseInt(eno));
 		  List<ExVO> vo1=dao.exRecomendListData();
+		  
+		  HttpSession session=request.getSession();
+		  String id=(String)session.getAttribute("id");
+		  JjimDAO dao1=JjimDAO.newInstance();
+		  int count=dao1.jjimCount(id,5,Integer.parseInt(eno));
 			/*
 			 * // 쿠키 저장 Cookie[] cookies = request.getCookies(); if(cookies==null) { Cookie
 			 * cookie = new Cookie("exhibition_recent", String.valueOf(eno));
@@ -110,6 +115,7 @@ public class ExListModel {
 		  request.setAttribute("vo1", vo1);
 		  request.setAttribute("eno", eno);
 		  request.setAttribute("cateno", "5");
+		  request.setAttribute("count",count);
 		  //3. 결과값 모아서 request에 저장 
 		  request.setAttribute("main_jsp", "../busan/ex_detail.jsp");
 		  return "../main/main.jsp";
