@@ -441,14 +441,16 @@ color: #fff;
 							        
 									<tr>
 										
-										<td style="position: relative; max-width: 100%;">
+										<td style="position: relative; max-width: 100%; padding: 10px 0">
 										<h5>lee5678</h5>
-										<textarea rows="10" cols="60" name=content
+										<textarea rows="4" cols="60" name=content
 												required style="resize: none"></textarea><br>
+											<div class="reply-btn-wrapper">
 												<button class="btn-sm btn reInBtn" value="등록"
-												id="replyInsert" style="position: relative;left:323px">등록</button>
-											<button class="btn-sm btn reBack" value="취소"
-												id="replyCancel" onclick="javascript:history.back()" style="position: relative;left:323px">취소</button>
+												id="replyInsert">등록</button>
+												<button class="btn-sm btn reBack" value="취소"
+												id="replyCancel" onclick="javascript:history.back()">취소</button>
+											</div>
 												</td>		
 									</tr>
 									

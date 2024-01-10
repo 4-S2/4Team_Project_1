@@ -31,15 +31,16 @@
 
         #login-all-cont h2 {
             text-align: center;
-            color: #3498db;
+            color: #2546F4;
             margin-bottom: 20px;
         }
 
         #login-all-cont label {
             display: block;
             margin-bottom: 5px;
-            color: #3498db;
+            color: #444;
             width: 70px;
+            font-weight: normal;
         }
 
         #login-all-cont input[type="text"],
@@ -75,7 +76,7 @@
             display: inline-block;
             margin: 10px;
             text-decoration: none;
-            color: #3498db;
+            color: #666;
             border-radius: 1px;
         }
 
@@ -98,7 +99,7 @@
         }
         #login-all-cont #login-submit-btn
         {
-        	background-color: #3498db;
+        	background-color: #2546F4;
         	color: white;
         }
     </style>

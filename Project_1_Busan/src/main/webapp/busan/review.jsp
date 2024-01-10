@@ -61,7 +61,8 @@ $(document).ready(function(){
 </script>
 </head>
 <body>
-<div class="wrapper">
+<div class="wrapper section detail">
+<div id="reviewCont">
 	<button value="리뷰 작성" class="btn" id="reviewInsertBtn">리뷰 작성</button>
 	<c:forEach var="vo" items="${list}" begin="0" end="3">
         <div class="review-list">
@@ -115,6 +116,7 @@ $(document).ready(function(){
     	${curpage} page / ${totalpage} pages
     	<a href="#" class="btn btn-sm btn-primary">다음</a>
    	</div> --%>
+</div>
 </div>
 </body>
 </html>

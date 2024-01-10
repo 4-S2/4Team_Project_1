@@ -55,8 +55,8 @@ $(function(){
     }
 
     .container {
-      width: 400px;
-      padding: 20px;
+      width: 640px;
+      padding: 40px 20px;
       background-color: #ffffff; /* White container background */
       border: 1px solid #dee2e6; /* Light gray border */
       border-radius: 8px; /* Rounded corners */
@@ -67,12 +67,12 @@ $(function(){
     .title {
       font-size: 24px;
       text-align: center;
-      color: #007bff; /* Blue title color */
+      color: #2546F4; /* Blue title color */
       margin-bottom: 10px; /* Reduced margin */
     }
 
     .form-group {
-      margin-bottom: 10px; /* Reduced margin */
+      margin-bottom: 15px; /* Reduced margin */
     }
 
     .form-control {
@@ -81,22 +81,46 @@ $(function(){
       border: 1px solid #007bff; /* Blue border */
       border-radius: 5px;
     }
+	label{
+		display: inline-block;
+		margin-bottom: 5px;
+	}
 
     .required {
       color: red;
     }
+	
+	.input-wrapper{
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		gap: 5px;
+	}
 
-    .btn {
-      width: 100%;
-      height: 40px;
+    .btn-info {
+      /* width: 100%; */
+      height: 34px;
       border: none;
       border-radius: 5px;
       cursor: pointer;
       color: #fff; /* White text color */
       background-color: #007bff; /* Blue button background */
-      margin-top: 10px;
+      /* margin-top: 10px; */
+      white-space: nowrap;
     }
 
+	.btn-wrapper{
+		display: flex;
+		width: 100%;
+		justify-content: space-between;
+		align-items: center;
+		gap: 5px;
+	}
+	.btn-wrapper .btn{
+		width : 100%;
+		height: 42px;	
+	}
+	
     .btn-secondary {
       background-color: #6c757d; /* Secondary button background */
     }
@@ -179,11 +203,12 @@ sessionStorage.setItem("detailAddress", detailAddress);
         <div class="form-group">
         
      
-          <label for="id" style="display: inline">아이디 <span class="required">*</span></label>
-          <input type="button" value="중복체크" style="float: right"
-         class="btn-sm btn-info" id="checkBtn">
-          <input type="text" class="form-control" name="id" id="id" placeholder="아이디를 입력하세요" required readonly>
-           
+          <label for="id">아이디 <span class="required">*</span></label>
+          <span class="input-wrapper">
+	          <input type="text" class="form-control" name="id" id="id" placeholder="아이디를 입력하세요" required readonly>
+	          <input type="button" value="중복체크" style="float: right"
+	         class="btn-sm btn-info" id="checkBtn">
+          </span>
         </div>
         <div class="form-group">
           <label for="password">비밀번호 <span class="required">*</span></label>
@@ -208,9 +233,11 @@ sessionStorage.setItem("detailAddress", detailAddress);
           <input type="text" class="form-control" name="phone" id="phone" placeholder="휴대폰 번호를 입력하세요" required>
         </div>
         <div class="form-group">
-  <label for="postal_code" style="display: inline">우편번호 <span class="required">*</span></label>
-  <button type="button" id="searchZipCodeBtn" style="float:right" onclick="sample6_execDaumPostcode()">우편번호 찾기</button>
-  <input type="text" class="form-control" name="postal_code" id="sample6_postcode" placeholder="우편번호를 입력하세요" readonly required>
+  <label for="postal_code">우편번호 <span class="required">*</span></label>
+  <span class="input-wrapper">
+	  <input type="text" class="form-control" name="postal_code" id="sample6_postcode" placeholder="우편번호를 입력하세요" readonly required>
+	  <button type="button" id="searchZipCodeBtn" class="btn-sm btn-info" style="float:right" onclick="sample6_execDaumPostcode()">우편번호 찾기</button>
+  </span>
   
 </div>
 <div class="form-group">
@@ -225,12 +252,10 @@ sessionStorage.setItem("detailAddress", detailAddress);
   <label for="extra_address">참고항목</label>
   <input type="text" class="form-control" name="extra_address" id="sample6_extraAddress" readonly>
 </div>
-      <input type="submit" value="회원가입" class="btn"
-         id="joinBtn">
-        <input type=button value="취소" class="btn"
-         
-         onclick="javascript:history.back()"
-        >
+	<div class="btn-wrapper">
+      <input type="submit" value="회원가입" class="btn" id="joinBtn" style="background-color: #2546F4; color: #fff">
+        <input type=button value="취소" class="btn" onclick="javascript:history.back()" style="background-color: #ccc">
+    </div>
      
       </form>
     </div>

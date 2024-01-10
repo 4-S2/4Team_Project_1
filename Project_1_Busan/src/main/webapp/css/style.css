@@ -5612,7 +5612,9 @@ main #bottom .service p{
 /* reviewCont */
 .detail #reviewCont{
 	position: relative;
+	width: 100%;
 	padding-top: 50px;
+	margin: 0 auto;
 }
 .detail #reviewCont #reviewInsertBtn{
 	position: absolute;
@@ -5673,6 +5675,7 @@ main #bottom .service p{
 }
 .detail #reviewCont .review-img{
 	width: 30%;
+	max-height: 360px;
 	border-radius: 10px;
 	overflow: hidden;
 }
@@ -5708,6 +5711,9 @@ main #bottom .service p{
 }
 
 /* review comment */
+.review-comment{
+	margin-top: 20px;
+}
 .detail #reviewCont .review-comment h5{
 	margin-bottom: 0;
 	font-size: 16px;
@@ -5722,6 +5728,17 @@ main #bottom .service p{
 	padding-top: 10px;
 	border-top: 1px solid #eee;
 }
+
+.reply-insert textarea{
+	width: 100%;
+}
+.reply-insert .reply-btn-wrapper{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 10px;
+}
+
 
 /* ==========================================================================
       Media
