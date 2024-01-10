@@ -81,7 +81,7 @@
             <div class="swiper-wrapper">
             	<c:forEach var="vo" items="${gtoplist}" >
 	                <div class="swiper-slide">
-	                  <a href="../store/goods_detail.do?no=${vo.gno}">
+	                  <a href="../store/goods_detail.do?gno=${vo.gno}">
 	                    <img src="${vo.poster}" width="80px" height="80px">
 	                	<div class="text">
 	                		<span class="badge">HOT</span>

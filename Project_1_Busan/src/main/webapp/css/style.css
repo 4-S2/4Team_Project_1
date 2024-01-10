@@ -4921,7 +4921,7 @@ main #mainVisual .tourSlide .slide2{
   background-image: url("../images/visual2.png");
 }
 main #mainVisual .tourSlide .slide3{
-  background-image: url("../images/visual3.jpg");
+  background-image: url("../images/visual6.jpg");
 }
 
 main #mainVisual .tourSlide .swiper-slide{
@@ -5068,6 +5068,11 @@ main #shop .shopSlide .swiper-slide a{
     gap: 15px;
 	width: 100%;
 }
+
+main #shop .shopSlide .swiper-slide:hover a{
+	color: #111;
+}
+
 main #shop img{
 	width: 80px;
 	height: 80px;
@@ -5345,7 +5350,7 @@ main #bottom .service p{
 	transform: rotate(-90deg);
 }
 #contactBtn:hover{
-	background-color: #376092;
+	background-color: #222;
 	transition: all ease-in-out 0.3s;
 }
 #topBtn:hover{
@@ -5528,7 +5533,7 @@ main #bottom .service p{
 	color: #fff;
 }
 #goods.detail .product-info .btnWrap #listBtn:hover{
-	background-color: #666;
+	background-color: #888;
 	color: #fff;
 }
 
