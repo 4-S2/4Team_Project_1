@@ -155,6 +155,7 @@ public class BusanDetailModel {
 			request.setAttribute("vo", vo);
 			request.setAttribute("list", list);
 			request.setAttribute("tab","tour");
+			request.setAttribute("cateno","1");
 		  //3. 결과값 모아서 request에 저장 
 		  request.setAttribute("main_jsp", "../busan/busanList_detail.jsp");
 		  return "../main/main.jsp";
@@ -227,7 +228,7 @@ public class BusanDetailModel {
 		  request.setAttribute("vo", vo);
 		  request.setAttribute("list", list);
 		  request.setAttribute("tab","festival");
-		  
+		  request.setAttribute("cateno","2");
 		  //3. 결과값 모아서 request에 저장 
 		  request.setAttribute("main_jsp", "../busan/busanList_detail.jsp");
 		  return "../main/main.jsp";
@@ -299,7 +300,7 @@ public class BusanDetailModel {
 		  request.setAttribute("vo", vo);
 		  request.setAttribute("list", list);
 		  request.setAttribute("tab","activity");
-		  
+		  request.setAttribute("cateno","3");
 		  //3. 결과값 모아서 request에 저장 
 		  request.setAttribute("main_jsp", "../busan/busanList_detail.jsp");
 		  return "../main/main.jsp";
