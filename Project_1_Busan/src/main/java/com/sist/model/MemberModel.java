@@ -199,10 +199,10 @@ public class MemberModel {
         String email = request.getParameter("email");
 
         MemberDAO dao = MemberDAO.newInstance();
-        String password = dao.getOriginalPassword(id, email); // 원래 비밀번호 가져오기
+        String pwd = dao.getOriginalPassword(id, email); // 원래 비밀번호 가져오기
 
-        if(password != null) {
-            boolean emailSent = dao.sendPasswordToEmail(id, email, password); // 이메일 발송
+        if(pwd != null) {
+            boolean emailSent = dao.sendPasswordToEmail(id, email, pwd); // 이메일 발송
             if(emailSent) {
                 response.getWriter().print("YES");
             } else {
