@@ -4,7 +4,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
-<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+<!-- <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script> -->
 <script type="text/javascript">
 	<!-- 결제 API -->
 	var IMP = window.IMP; // 생략 가능
@@ -197,33 +197,33 @@ function showTab(tabName) {
                 <!-- 탭 메뉴 -->
                 <div class="product-detail">
                		<ul class="tab-menu">
-               			<li id="detailBtn">상세 설명</li>
-               			<!-- <li id="mapBtn">지도/주변 추천</li> -->
-               			<li id="reviewBtn">리뷰</li>
+               			<li id="detail">상세 설명</li>
+               			<li id="review">리뷰</li>
                			<!-- <li id="inquiryBtn">문의</li> -->
                		</ul>
                		<!-- <div class="shop-header-line">
 	                    <div class="shop-header-color"></div>
 	                </div> -->
-               		<div id="detailCont">
+               		<div id="detailCont" class="tab-content">
 	               		<div class="detail-info">              		
 	               			<!-- 상세 이미지 -->
 							<img class="deimage" src="${vo.dimage}" alt="상세 이미지"> 
 	                    	
 	                    	<!-- 상세 설명 -->
-	                    	<p class="cont"></p>
+	                    	<!-- <p class="cont"></p> -->
 		                </div>
                		</div>
 				    
-				    <div id="reviewCont" class="tab-content" style="">
+				    <div id="reviewCont" class="tab-content" style="display:none;">
+				        <a href="../busan/review.do">리뷰</a>
 				        <!-- 리뷰 내용 -->
-				        <jsp:include page="../busan/review.jsp">
+				        <%-- <jsp:include page="../busan/review.jsp">
 				        	<jsp:param name="rno" value="${vo.rno}"/>
 						  	<jsp:param name="score" value="${vo.score}"/>
 						  	<jsp:param name="id" value="${vo.id}"/>
 						  	<jsp:param name="cont" value="${vo.cont}"/>
 						  	<jsp:param name="img" value="${vo.img}"/>
-				        </jsp:include>
+				        </jsp:include> --%>
 				    </div>
 				    
 				    <!-- <div id="inquiryCont" class="tab-content" style="display: none;">

@@ -61,24 +61,26 @@ $(document).ready(function(){
 </script>
 </head>
 <body>
+<div class="wrapper">
 	<button value="리뷰 작성" class="btn" id="reviewInsertBtn">리뷰 작성</button>
-	<c:forEach var="rvo" items="${rlist}" begin="0" end="3">
+	<c:forEach var="vo" items="${list}" begin="0" end="3">
         <div class="review-list">
+        	<%-- <input type="hidden" id="goods_gno" value="${param.gno}"> --%>
         	<div class="review-profile">
         		<div class="profile">
         			<div class="profile-icon">
         				<img src="../images/icon_user.png" alt="프로필 이미지">
         			</div>
-	        		<h4>${rvo.mvo.id}<br>
-	        			<span class="regdate">${rvo.regdate}</span>
+	        		<h4>${vo.id}<br>
+	        			<span class="regdate">${vo.regdate}</span>
 	        		</h4>
         		</div>
-        		<span class="score">${rvo.score}</span>
+        		<span class="score">${vo.score}</span>
         	</div>
         	
         	<div class="review-item">
-        		<img src="${rvo.img}" class="review-img" alt="후기 이미지">
-        		<p class="cont">${rvo.cont}</p>
+        		<img src="${vo.img}" class="review-img" alt="후기 이미지">
+        		<p class="cont">${vo.cont}</p>
         	</div>
         	
         	<div class="btn-wrapper">
@@ -113,5 +115,6 @@ $(document).ready(function(){
     	${curpage} page / ${totalpage} pages
     	<a href="#" class="btn btn-sm btn-primary">다음</a>
    	</div> --%>
+</div>
 </body>
 </html>

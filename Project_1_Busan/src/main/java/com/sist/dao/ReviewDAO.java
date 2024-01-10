@@ -10,8 +10,8 @@ import com.sist.dbcp.CreateDBCPConnection;
 public class ReviewDAO {
 	private Connection conn;
     private PreparedStatement ps; 
-    private static ReviewDAO dao;
     private CreateDBCPConnection dbconn=new CreateDBCPConnection();
+    private static ReviewDAO dao;
    
     public static ReviewDAO newInstance() {
        if (dao==null) {
@@ -19,8 +19,6 @@ public class ReviewDAO {
        }
        return dao;
     }
-    
-    private final int rowSize=10;
     
     // 리뷰 목록 출력
     public List<ReviewVO> reviewListData(int page){
@@ -36,7 +34,8 @@ public class ReviewDAO {
                   +"WHERE num BETWEEN ? AND ?";
           // 3. 미리 전송 
           ps=conn.prepareStatement(sql);
-          // 4. 실행 요청전에 ?에 값을 채운다 
+          // 4. 실행 요청전에 ?에 값을 채운다
+          int rowSize=10;
           int start=(rowSize*page)-(rowSize-1); // 오라클 => 1번  
           int end=rowSize*page;
           
@@ -50,7 +49,7 @@ public class ReviewDAO {
              vo.setRno(rs.getInt(1));
              vo.setScore(rs.getInt(2));
              vo.setCateno(rs.getInt(3));
-             vo.getMvo().setId(rs.getString(4));
+             vo.setId(rs.getString(4));
              vo.setCont(rs.getString(5));
              vo.setPassword(rs.getString(6));
              vo.setImg(rs.getString(7));
@@ -91,6 +90,38 @@ public class ReviewDAO {
     }
     
     
+    // 상세보기 
+    public ReviewVO reviewDetailData(int rno) {
+    	ReviewVO vo=new ReviewVO();
+    	
+    	try {
+ 		   conn=dbconn.getConnection(); 		   
+ 		   String sql="SELECT rno, score, cateno, id, cont, password, img, TO_CHAR(regdate,'YYYY-MM-DD'), num "
+ 				     +"FROM (SELECT rno, score, cateno, id, cont, password, img, regdate, rownum as num "
+ 				     +"FROM (SELECT rno, score, cateno, id, cont, password, img, regdate "
+ 				     +"FROM review ORDER BY rno DESC)) "
+ 				     +"WHERE rno="+rno;
+ 		   ps=conn.prepareStatement(sql);
+ 		   ResultSet rs=ps.executeQuery();
+ 		   rs.next();
+ 		   vo.setRno(rs.getInt(1));
+           vo.setScore(rs.getInt(2));
+           vo.setCateno(rs.getInt(3));
+           vo.setId(rs.getString(4));
+           vo.setCont(rs.getString(5));
+           vo.setPassword(rs.getString(6));
+           vo.setImg(rs.getString(7));
+           vo.setRegdate(rs.getDate(8));
+ 		   rs.close();
+ 	   } catch(Exception ex) {
+ 		   ex.printStackTrace();
+ 	   } finally {
+ 		   dbconn.disConnection(conn, ps);
+ 	   }
+ 	   return vo;
+    }
+    
+    
     // 리뷰 작성
     public void reviewInsert(ReviewVO vo) {
     	try {
@@ -98,13 +129,12 @@ public class ReviewDAO {
     		String sql="INSERT INTO review(rno, score, cateno, id, cont, password, img) "
     				 + "VALUES(review_rno_seq.nextval,?,?,?,?,?,?)";
     		ps=conn.prepareStatement(sql);
-    		ps.setInt(1, vo.getRno());
-    		ps.setInt(2, vo.getScore());
-    		ps.setInt(3, vo.getCateno());
-			ps.setString(4, vo.getMvo().getId());
-    		ps.setString(5, vo.getCont());
-    		ps.setString(6, vo.getPassword());
-    		ps.setString(7, vo.getImg());
+    		ps.setInt(1, vo.getScore());
+    		ps.setInt(2, vo.getCateno());
+			ps.setString(3, vo.getId());
+    		ps.setString(4, vo.getCont());
+    		ps.setString(5, vo.getPassword());
+    		ps.setString(6, vo.getImg());
     		ps.executeUpdate();
     	}catch(Exception ex) {
     		ex.printStackTrace();
@@ -115,12 +145,12 @@ public class ReviewDAO {
     
     
     // 리뷰 삭제
-    public String reviewDeleteData(int rno, String pwd) {
+    public String reviewDelete(int rno, String password) {
     	String result="";
     	try {
       		conn=dbconn.getConnection();
       		String sql="SELECT password FROM review "
-      				 + "WHERE rno=?"; 
+      				 + "WHERE rno="+rno; 
       		ps=conn.prepareStatement(sql);
       		ResultSet rs=ps.executeQuery();
       		rs.next();
@@ -128,19 +158,19 @@ public class ReviewDAO {
       		rs.close();
       		ps.close();
       		
-      		if(db_pwd.equals(pwd)){
+      		if(db_pwd.equals(password)){
       			result="yes";
-      			sql="DELETE FROM review "
-      			   +"WHERE rno=?";
+      			sql="DELETE FROM review_reply "
+      			   +"WHERE rno="+rno;
       			ps=conn.prepareStatement(sql);
       			ps.executeUpdate();
       			ps.close();
       			
-//      			sql="DELETE FROM review "
-//      			   +"WHERE rno="+rno;
-//      			ps=conn.prepareStatement(sql);
-//      			ps.executeUpdate();
-//      			ps.close();
+      			sql="DELETE FROM review_reply "
+      			   +"WHERE rno="+rno;
+      			ps=conn.prepareStatement(sql);
+      			ps.executeUpdate();
+      			ps.close();
       		}else {
       			result="no";
       		}
@@ -155,12 +185,12 @@ public class ReviewDAO {
     
     
     // 리뷰 수정
-    public String reviewUpdateData(ReviewVO vo) {
-    	String res="no";
+    public String reviewUpdate(ReviewVO vo) {
+    	String result="no";
     	try {
       		conn=dbconn.getConnection();
       		String sql="SELECT password FROM review "
-      				  +"WHERE rno=?";
+      				  +"WHERE rno="+vo.getRno();
       		ps=conn.prepareStatement(sql);
       		ResultSet rs=ps.executeQuery();
       		rs.next();
@@ -169,7 +199,7 @@ public class ReviewDAO {
       		ps.close();
       		
       		if(db_pwd.equals(vo.getPassword())) {
-      			res="yes";
+      			result="yes";
       			sql="UPDATE review SET "
       			   +"score=?, cont=?, img=? "
       			   +"WHERE rno=?";
@@ -187,6 +217,6 @@ public class ReviewDAO {
       	finally {
       		dbconn.disConnection(conn, ps);
       	}
-    	return res;
+    	return result;
     }
 }

@@ -15,11 +15,11 @@
 
 </script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
 	<div class="review-insert">
-        <form method="post" action="../busan/review.do">
+        <form method="post" action="../busan/insert_ok.do">
 			<table class="table">
 				<tr>
 					<th width=10%>아이디</th>
@@ -46,7 +46,7 @@
 				<tr>
 					<th width=10%>비밀번호</th>
 					<td width=90%>
-						<input type="password" name="pwd" required>
+						<input type="password" name="password" required>
 					</td>
 				</tr>
 				<tr>

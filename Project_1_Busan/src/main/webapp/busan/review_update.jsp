@@ -42,9 +42,9 @@ $(document).ready(function(){
 		
 		let img=$('#img').val()
 		
-		let pwd=$('#pwd').val()
-		if(pwd.trim()===""){
-			$('#pwd').focus();
+		let password=$('#password').val()
+		if(password.trim()===""){
+			$('#password').focus();
 			return;
 		}
 		
@@ -52,9 +52,9 @@ $(document).ready(function(){
 		
 		$.ajax({
 			type:'post',
-			url:'../busan/review_update.do',
+			url:'../busan/review_update_ok.do',
 			data:{"rno":rno,"id":id,"score":score,
-				 "cont":cont,"pwd":pwd},
+				 "cont":cont,"password":password},
 			success:function(result){ //out.write
 			
 				if(result==="yes"){
@@ -62,8 +62,8 @@ $(document).ready(function(){
 				}
 				else{
 					alert("비밀번호가 틀립니다.")
-					$('#pwd').val("")
-					$('#pwd').focus()
+					$('#password').val("")
+					$('#password').focus()
 				}
 			},
 			error:function(err){
@@ -80,7 +80,7 @@ $(document).ready(function(){
 			<table class="table">
 				<tr>
 					<th width=10%>아이디</th>
-					<td width=90% id="id">아이디</td>
+					<td width=90% id="id">${sessionScope.id}</td>
 				</tr>
 				<tr>
 					<th width=10%>평점</th>
@@ -103,7 +103,7 @@ $(document).ready(function(){
 				<tr>
 					<th width=10%>비밀번호</th>
 					<td width=90%>
-						<input type="password" name="pwd" id="pwd" required>
+						<input type="password" name="password" id="password" required>
 					</td>
 				</tr>
 				<tr>
