@@ -41,7 +41,7 @@ public class HeartDAO {
 					+ "JOIN Heart h ON u.id = h.id "
 					+ "JOIN "+tab+" ON h.no = "+tab+".NO "
 					+ "WHERE u.id=? AND h.CATENO = "+cateno
-					+ " ORDER BY h.hno DESC";
+					+ " ORDER BY h.jno DESC";
 			ps=conn.prepareStatement(sql);
 			ps.setString(1, id);
 			ResultSet rs=ps.executeQuery();
@@ -67,11 +67,11 @@ public class HeartDAO {
 		List<HeartVO> list = new ArrayList<>();
 		try {
 			conn=dbconn.getConnection();
-			String sql="SELECT h.jno, e.poster, e.ename, h.eno "
+			String sql="SELECT h.hno, e.poster, e.ename, e.eno "
 					+ "FROM user_ u "
 					+ "JOIN Heart h ON u.id = h.id "
 					+ "JOIN EXHIBITION e ON h.no = e.eNO "
-					+ "WHERE u.id=? AND h.CATENO = 5 "
+					+ "WHERE u.id=? AND j.CATENO = 5 "
 					+ "ORDER BY h.hno DESC";
 			ps=conn.prepareStatement(sql);
 			ps.setString(1, id);
@@ -93,7 +93,38 @@ public class HeartDAO {
 		return list;
 	}
 	
-	public String HeartUpdate(String id,int cateno,int no)
+	public int heartCount(String id,int cateno,int no)
+	{
+		int count=0;
+		try {
+			conn=dbconn.getConnection();
+			String sql="SELECT count(*) FROM Heart "
+					+ "WHERE id=? AND cateno=? AND no=?";
+			ps=conn.prepareStatement(sql);
+			ps.setString(1, id);
+			ps.setInt(2, cateno);
+			ps.setInt(3, no);
+			ResultSet rs=ps.executeQuery();
+			rs.next();
+			count=rs.getInt(1);
+			rs.close();
+			ps.close();
+			if(count==0)
+			{
+				count=0;
+			}else {
+				count=1;
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			dbconn.disConnection(conn, ps);
+		}
+		return count;
+		
+	}
+	public String heartUpdate(String id,int cateno,int no)
 	{
 		String result="";
 		try {
@@ -113,7 +144,7 @@ public class HeartDAO {
 			if(count!=1)
 			{
 				sql="INSERT INTO Heart "
-						+ "VALUES((SELECT NVL(MAX(jno)+1,1) FROM Heart),"
+						+ "VALUES((SELECT NVL(MAX(hno)+1,1) FROM Heart),"
 						+ "?,?,?)";
 				ps=conn.prepareStatement(sql);
 				ps.setString(1, id);
@@ -140,50 +171,4 @@ public class HeartDAO {
 		return result;
 	}
 	
-	public String ex_HeartUpdate(String id,int cateno,int eno)
-	{
-		String result="";
-		try {
-			conn=dbconn.getConnection();
-			String sql="SELECT count(*) FROM Heart"
-					+ " WHERE id=? AND cateno=? AND eno=?";
-			ps=conn.prepareStatement(sql);
-			ps.setString(1, id);
-			ps.setInt(2, 5);
-			ps.setInt(3, eno);
-			ResultSet rs=ps.executeQuery();
-			rs.next();
-			int count=rs.getInt(1);
-			rs.close();
-			ps.close();
-			
-			if(count!=1)
-			{
-				sql="INSERT INTO Heart "
-						+ "VALUES((SELECT NVL(MAX(hno)+1,1) FROM Heart),"
-						+ "?,?,?)";
-				ps=conn.prepareStatement(sql);
-				ps.setString(1, id);
-				ps.setInt(2, 5);
-				ps.setInt(3, eno);
-				ps.executeUpdate();
-				result="ok";			
-			}
-			else {
-				sql="DELETE FROM Heart "
-						+ "WHERE id=? AND CATENO=? AND NO=?";
-				ps=conn.prepareStatement(sql);
-				ps.setString(1, id);
-				ps.setInt(2, 5);
-				ps.setInt(3, eno);
-				ps.executeUpdate();
-				result="no";
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			dbconn.disConnection(conn, ps);
-		}
-		return result;
-	}
 }

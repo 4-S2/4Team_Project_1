@@ -8,32 +8,32 @@
 <title>Insert title here</title>
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
+
 $(function(){
-	$('.rdays').css("cursor","pointer");
 	$('.rdays').click(function(){
 		let year=$(this).attr("data-year");
 		let month=$(this).attr("data-month");
-		let day=$(this).text();
-		let rday=year+"년도 "+month+"월 "+day+"일";
+		let day=$(this).attr("data-day");
+		let rday=year+"년 "+month+"월 "+day+"일";
+		$('#ex_day').text(rday);
+		$('#rday').val(rday);
 		
-		$('#ed').show();
-		$('#ex_day').text(rday)
-		$('#r_day').val(rday);
 		$.ajax({
 			type:'post',
-			url:'inwon.do',
-			data:{"day":day},
+			url:"../reserve/inwon.do",
+			data:{'day':day},
 			success:function(result)
 			{
-				$('#ex_inwon').html(result)
+				$('#times').html(result)
 			}
 		})
 	})
-})
+	
+});
 </script>
 </head>
 <body>
-     <h1>${year }년도 ${month }월</h1>
+     <h1>${year }년 ${month }월</h1>
      <table class="table">
       <tr>
         <td class="inline">

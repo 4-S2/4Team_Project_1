@@ -51,29 +51,26 @@ public class ReserveDAO {
 	   return list;
    }
    // 예약 => 맛집마다 가능한 날을 읽어 온다 
-   public String exReserveDay(int eno)
+   public String reserveDays(int eno)
    {
-	   String result="";
-	   try
-	   {
+	   String day="";
+	   try {
 		   conn=dbconn.getConnection();
-		   String sql="SELECT rday FROM exhibition "
-				     +"WHERE eno=?";
+		   String sql="SELECT rdate FROM exhibition WHERE eno=?";
 		   ps=conn.prepareStatement(sql);
 		   ps.setInt(1, eno);
 		   ResultSet rs=ps.executeQuery();
 		   rs.next();
-		   result=rs.getString(1);
+		   day=rs.getString(1);
 		   rs.close();
-	   }catch(Exception ex)
-	   {
-		   ex.printStackTrace();
+		   
+	   } catch (Exception e) {
+		   // TODO: handle exception
 	   }
-	   finally
-	   {
+	   finally {
 		   dbconn.disConnection(conn, ps);
 	   }
-	   return result;
+	   return day;
    }
    
    // 예약 등록 
@@ -281,6 +278,29 @@ public class ReserveDAO {
 		   dbconn.disConnection(conn, ps);
 	   }
 	   return vo;
+   }
+   public void exReserveInsertData(ReserveInfoVO vo)
+   { 
+	   try {
+		   conn=dbconn.getConnection();
+		   String sql="INSERT INTO Reserve_Info "
+		   		+ "VALUES((SELECT NVL(MAX(no)+1,1) FROM Reserve_Info),"
+		   		+ "?,?,?,?,0,SYSDATE)";
+		   ps=conn.prepareStatement(sql);
+		   ps.setString(1, vo.getMvo().getId());
+		   ps.setInt(2, vo.getEvo().getEno());
+		   ps.setString(3, vo.getDay());
+		   
+		   ps.setString(4, vo.getInwon());
+		   ps.setInt(5, vo.getRok());
+		   ps.executeUpdate();
+		   
+	   } catch (Exception e) {
+		   // TODO: handle exception
+	   }
+	   finally {
+		   dbconn.disConnection(conn, ps);
+	   }
    }
 } 
 

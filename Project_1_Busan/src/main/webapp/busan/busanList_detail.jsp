@@ -152,6 +152,27 @@
                 }
             });
         });
+        $('.heartBtn').click(function() {
+            let no = $(this).attr("data-no");            
+            let cateno = $(this).attr("data-cateno");
+
+            $.ajax({
+                type: 'post',
+                url: '../busan/heart.do',
+                data: {'no': no, 'cateno': cateno},
+                success: function(result) {
+                    if (result === 'ok') {
+                        alert("좋아요가 완료되었습니다");
+                        localStorage.setItem('jjimState', 'ok');  // 찜 상태를 Local Storage에 저장
+                        localStorage.setItem('no', no);
+                    } else if (result === 'no') {
+                        alert("좋아요가 취소되었습니다");
+                        localStorage.setItem('jjimState', 'no');  // 찜 상태를 Local Storage에 저장
+                        localStorage.setItem('no', no);
+                    }
+                }
+            });
+        });
 
     });
     /* let bCheck=false;
@@ -264,9 +285,9 @@ color: #fff;
 					<div class="product-info">
 						<h1 style="margin-bottom: 140px">${vo.title}</h1>
 						<div class="joa">
-						<div class="heart">
-							<span>좋아요 수</span>
-							<button>좋아요</button>
+					    <div class="heart" data-count="${count }">
+							<span><img src="../busan/like.png" class="heart_img"></span>
+							<button class="heartBtn" data-cateno="${cateno}" data-no="${vo.no }">좋아요</button>
 						</div>
 						<div class="jjim" data-count="${count }">
 							<span><img src="../busan/jjim_none.png" class="jjim_img"></span>

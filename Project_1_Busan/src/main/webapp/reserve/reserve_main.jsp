@@ -13,15 +13,29 @@
 </style>
 <script type="text/javascript">
 $(function(){
+	let eno=$('#ex_eno').val();
+	$('#eno').val(no);
+	
 	$.ajax({
 		type:'post',
-		url:'../reserve/ex_list.do',
-		
+		url:'../reserve/diary.do',
+		data:{"eno":eno},
 		success:function(result)
 		{
-			$('#ex_list').html(result);
+			$('#ex_date').html(result)
 		}
 	})
+	$.ajax({
+		type:'post',
+		url:"../reserve/ename.do",
+		data:{"eno":eno},
+		success:function(result)
+		{
+			var ename=decodeURIComponent(result);
+			$('#ex_ename').text(ename);
+		}
+	})
+	
 })
 </script>
 </head>
@@ -30,39 +44,27 @@ $(function(){
    <main class="container clear">
    <h2 class="sectiontitle" >전시회 예약</h2>
    <div class="row">
-    <table class="table" height=700>
+    <table class="table" height=600px>
       <tr>
         <td width=20% height="580" class="">
           <table class="table">
-           <caption><h3>전시회 정보</h3></caption>
-           
-             <td>
-              <span class="btn btn-xs exs" style="display:none;">전시회</span>
-              
-             </td>
-           
            <tr>
-             <td>
-              <div id="ex_list" style="height: 450px;overflow-y:scroll"></div>
-             </td>
-           </tr>
+           <td>
+            <img src="${param.poster }" style="width: 300px" id="ex_image">
+           </td>
+          </tr>
+          <tr>
+            <td class="td">전시회명&nbsp;:&nbsp;<span id="ex_ename"></span></td>
+          </tr>
+          <tr>
+            <td class="td">예약일&nbsp;:&nbsp;<span id="ex_day"></span></td>
+          </tr>  
+          <tr>
+            <td class="td1">인원&nbsp;:&nbsp;<span id="ex_inwon"></span></td>
+          </tr>
           </table>
         </td>
-        <td width=45% height="580" >
-         <table class="table">
-           <caption><h3>예약일 정보</h3></caption>
-           <tr>
-            <td id="reserve_day"></td>
-           </tr>
-           <tr>
-        <td width=40% height="120" >
-          <table class="table">
-           <caption><h3>인원 정보</h3></caption>
-           <tr>
-             <td id="ex_inwon"></td>
-           </tr>
-          </table>
-        </td>
+        
       </tr>
           </table>
           
@@ -107,19 +109,26 @@ $(function(){
             --%>
            <tr id="ok" style="display:none">
              <td colspan="2" class="text-center">
-              <form method="post" action="../reserve/reserve_ok.do">
-                <input type=hidden name="eno" id="r_eno"/>
-                <input type=hidden name="rday" id="r_day"/>
-                 <input type=hidden name="ename" id="r_ename"/>
-                <input type=hidden name="inwon" id="r_inwon"/>
-                <input type=hidden name="price" id="r_price"/>
-                <input type=hidden name="loc" id="r_loc"/>
-                <input type=submit value="예약"
-                class="btn btn-lg">
-                
-              </form>
+              <form method="post" action="../reserve/reserve_ok.do"> 
+       <input type="hidden" name="eno" id="eno">
+       <input type="hidden" name="rday" id="rday">
+       <input type="hidden" name="rinwon" id="rinwon">
+       <button class="btn btn-sm btn-res" style="font-size: 14px;width: 100%;height: 40px">예약하기</button>
+       </form>
              </td>
            </tr>
+            <tr>
+      <td width="35%" height="150">
+          <table class="table">
+           <h3>인원선택</h3>
+           <tr>
+           <td>
+             <div id="inwons"></div>
+           </td>
+           </tr>
+          </table>
+        </td>
+      </tr>
           </table>
         </td>
       </tr>

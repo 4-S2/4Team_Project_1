@@ -156,7 +156,24 @@
                 }
             });
         });
-        
+        $('.heartBtn').click(function(){
+            let eno= $(this).attr("data-eno");
+            let cateno= $(this).attr("data-cateno");
+            $.ajax({
+                type: 'post',
+                url: '../busan/ex_heart.do',
+                data: {'eno':eno, 'cateno':cateno},
+                success: function(result){
+                    if(result === 'ok'){
+                        alert("좋아요가 완료되었습니다");
+                        localStorage.setItem('no', eno);
+                    } else if(result === 'no'){
+                        alert("좋아요가 취소되었습니다");
+                        localStorage.setItem('no', eno);
+                    }
+                }
+            });
+        });
 
 	
     });
@@ -207,18 +224,17 @@
 	                    	<a href="../reserve/reserve_main.do">
         					<input type="submit" value="예약하기" class="w-commerce-commerceaddtocartbutton button add-to-cart-button" id="reservationButton" />
     						</a>
+    						<p>
     						
     						
+    							<div class="heart" data-count="${count }">
+									<span><img src="../busan/like.png" class="heart_img"></span>
+							
+									<button class="heartBtn" data-cateno="${cateno }" data-eno="${vo.eno }">좋아요</button>
+								</div>
 	                    	
 	                    	
-	                            <div class="heart">
-	                    	<span><img src="like.png"></a></span>
-	                    	<span>${vo.elike }</span>
-	                    	<button id="like-btn" style="margin:auto;">
-	                    	<a href="#" class="like-button">좋아요</a>
-	                    	
-	                    	</button>
-	                    </div>
+	                   
 	                    	<div class="jjim" data-count="${count }">
 							<span><img src="../busan/jjim_none.png" class="jjim_img"></span>
 							
@@ -368,10 +384,14 @@
 					    	</table>
 					    </form> -->
 				    </div>
-				 <div id="reserveCont" class="tab-content" style="display: none;">
-    				<!-- 예약하기 내용 -->
-			  
-			     </div>
+				 <div id="reserveCont" class="tab-content" style="display: none">
+						<!-- 예약하기 내용 -->
+						<jsp:include page="../reserve/reserve_main.jsp">
+						  <jsp:param name="eno" value="${vo.eno }"/>
+						  <jsp:param name="poster" value="${vo.poster }"/>
+						  <jsp:param name="ename" value="${URLEncoder.encode(vo.ename, 'UTF-8')}"/>
+						</jsp:include>
+					</div>
 		            
 	              <div class="section">
         <div class="wrapper">
