@@ -16,6 +16,7 @@ public class ReviewVO {
 	private int rno, score, cateno;
 	private String id, cont, password, img;
 	private Date regdate;
+	
 	private MemberVO mvo;
 	
     public ReviewVO() {

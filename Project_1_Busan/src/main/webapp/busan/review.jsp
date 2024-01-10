@@ -108,10 +108,10 @@ $(document).ready(function(){
 	        </div>
         </div>
 	</c:forEach>
-   	<div class="text-center">
+   	<%-- <div class="text-center">
     	<a href="#" class="btn btn-sm btn-primary">이전</a>
     	${curpage} page / ${totalpage} pages
     	<a href="#" class="btn btn-sm btn-primary">다음</a>
-   	</div>
+   	</div> --%>
 </body>
 </html>

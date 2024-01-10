@@ -2654,7 +2654,7 @@ li{list-style: none;}
    }
    
    .button:hover {
-     box-shadow: 0 8px 8px -4px rgba(165, 201, 38, 0.5);
+     box-shadow: 0 8px 8px -4px rgba(37, 70, 244, 0.5);
      -webkit-transform: scale(1.05);
      -ms-transform: scale(1.05);
      transform: scale(1.05);
@@ -5360,6 +5360,9 @@ main #bottom .service p{
 
 
 /***** list page *****/
+.search .button{
+	border: 0;
+}
 /*.list .product-card-image-wrapper{
 	height: 308px;
 }*/

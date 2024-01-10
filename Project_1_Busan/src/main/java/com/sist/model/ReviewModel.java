@@ -24,7 +24,7 @@ public class ReviewModel {
         
         // 2. 데이터베이스 연결
         ReviewDAO dao=ReviewDAO.newInstance();
-		List<ReviewVO> rlist=dao.reviewListData(curpage);
+		List<ReviewVO> list=dao.reviewListData(curpage);
 		int count=dao.ReviewRowCount();
 		int totalpage=(int)(Math.ceil(count/10.0));
 		count=count-((curpage*10)-10);
@@ -42,7 +42,7 @@ public class ReviewModel {
         request.setAttribute("totalpage", totalpage);
         request.setAttribute("startPage", startPage);
         request.setAttribute("endPage", endPage);
-        request.setAttribute("rlist", rlist);
+        request.setAttribute("list", list);
         request.setAttribute("today", new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
         
 		request.setAttribute("main_jsp", "../busan/review.jsp");

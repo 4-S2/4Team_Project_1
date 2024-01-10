@@ -217,7 +217,13 @@ function showTab(tabName) {
 				    
 				    <div id="reviewCont" class="tab-content" style="">
 				        <!-- 리뷰 내용 -->
-				        <jsp:include page="../busan/review.jsp"></jsp:include>
+				        <jsp:include page="../busan/review.jsp">
+				        	<jsp:param name="rno" value="${vo.rno}"/>
+						  	<jsp:param name="score" value="${vo.score}"/>
+						  	<jsp:param name="id" value="${vo.id}"/>
+						  	<jsp:param name="cont" value="${vo.cont}"/>
+						  	<jsp:param name="img" value="${vo.img}"/>
+				        </jsp:include>
 				    </div>
 				    
 				    <!-- <div id="inquiryCont" class="tab-content" style="display: none;">
