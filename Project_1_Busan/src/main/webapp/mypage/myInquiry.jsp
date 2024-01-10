@@ -77,6 +77,22 @@
 			}
 		</script>
 		</div>
+		<!--PAGING-->
+			 <div class="row">
+                <div class="text-center">
+                    <ul class="pagination">
+                        <c:if test="${startPage>1}">
+                            <li><a href="../mypage/myInquiry.do?page=${startPage-1}">&lt;</a></li>
+                        </c:if>
+                        <c:forEach var="i" begin="${startPage}" end="${endPage}">
+                            <li ${curpage==i?"class=active":""}><a href="../mypage/myInquiry.do?page=${i}">${i}</a></li>
+                        </c:forEach>
+                        <c:if test="${endPage<totalpage}">
+                            <li><a href="../mypage/myInquiry.do?page=${endPage+1}">&gt;</a></li>
+                        </c:if>
+                    </ul>
+                </div>
+            </div>	
 		<!--//PAGING-->
 		</div>   	  
   </div>

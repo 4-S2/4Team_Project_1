@@ -274,6 +274,11 @@ public class MypageModel {
 	@RequestMapping("mypage/myInquiry.do")
 	public String mypage_myqInquiry(HttpServletRequest request, HttpServletResponse response)
 	{	
+		String page=request.getParameter("page");
+		if(page==null)
+			page="1";
+		int curpage=Integer.parseInt(page);
+		
 		HttpSession session=request.getSession();
 		String id=(String)session.getAttribute("id");
 		
@@ -281,6 +286,19 @@ public class MypageModel {
 		List<QnaBoardVO> list = dao.getAllQnas(id);
 		int inqSize = list.size();
 		
+		int totalpage=dao.QnasTotalPage(id);
+		
+		final int BLOCK=10;
+		int startpage=((curpage-1)/BLOCK)*BLOCK+1;
+		int endpage=((curpage-1)/BLOCK)*BLOCK+BLOCK;
+		if(totalpage<endpage) {
+			endpage=totalpage;
+		}
+		
+		request.setAttribute("curpage", curpage);
+		request.setAttribute("totalpage", totalpage);
+		request.setAttribute("startPage", startpage);
+		request.setAttribute("endPage", endpage);
 		request.setAttribute("inqSize", inqSize); 
 		request.setAttribute("list", list); 
 		request.setAttribute("mypage_jsp", "myInquiry.jsp");

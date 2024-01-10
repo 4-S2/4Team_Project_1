@@ -69,9 +69,9 @@ document.addEventListener("DOMContentLoaded", function() {
                         <a href="../admin/admin_goods.do" class="menu_depth3 single ">특산물관리</a>
                     </li>
                     <li class="divider"></li>                      
-                    <li class="filter_box">
+<!--                     <li class="filter_box">
                         <a href="../admin/admin_notice.do" class="menu_depth3 single ">공지사항</a>
-                    </li>  
+                    </li>  --> 
                     <li class="filter_box">
                         <a href="../admin/admin_qna.do" class="menu_depth3 single ">문의내역관리</a>
                     </li>

@@ -551,7 +551,26 @@ ORDER BY r.frno DESC;
 					dbconn.disConnection(conn, ps);
 				}
 				return list;
-		        
 		    }
 			
+			// 문의내역 총페이지
+			public int QnasTotalPage(String id) {
+				int total=0;
+				try {
+					conn=dbconn.getConnection();
+					String sql="SELECT CEIL(COUNT(*)/5.0) FROM QnaBoard "
+							+ "WHERE id=?";
+					ps=conn.prepareStatement(sql);
+					ps.setString(1, id);
+					ResultSet rs=ps.executeQuery();
+					rs.next();
+					total=rs.getInt(1);
+					rs.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}finally {
+					dbconn.disConnection(conn, ps);
+				}
+				return total;
+			}
 }
