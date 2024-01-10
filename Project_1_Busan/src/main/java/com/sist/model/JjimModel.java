@@ -29,23 +29,23 @@ public class JjimModel {
 	   }catch(Exception e) {e.printStackTrace();}
 	}
    
-   @RequestMapping("busan/ex_jjim.do")
- 	public void ex_busan_jjim(HttpServletRequest request, HttpServletResponse response)
- 	{
- 	   try {
- 		   request.setCharacterEncoding("UTF-8");
- 	   }catch(Exception e) {e.printStackTrace();}
- 	   String eno=request.getParameter("eno");
- 	  String cateno=request.getParameter("cateno");
- 	   HttpSession session=request.getSession();
- 	   String id=(String)session.getAttribute("id");
- 	   JjimDAO dao=JjimDAO.newInstance();
- 	   String res=dao.ex_jjimUpdate(id, Integer.parseInt(cateno), Integer.parseInt(eno));
- 	   
- 	   try {
- 		   PrintWriter out=response.getWriter();
- 		   out.write(res);
- 	   }catch(Exception e) {e.printStackTrace();}
- 	}
+   @RequestMapping("busan/jjim.do")
+	public void ex_busan_jjim(HttpServletRequest request, HttpServletResponse response)
+	{
+	   try {
+		   request.setCharacterEncoding("UTF-8");
+	   }catch(Exception e) {e.printStackTrace();}
+	   String eno=request.getParameter("eno");
+	   String cateno=request.getParameter("cateno");
+	   HttpSession session=request.getSession();
+	   String id=(String)session.getAttribute("id");
+	   JjimDAO dao=JjimDAO.newInstance();
+	   String res=dao.ex_jjimUpdate(id, Integer.parseInt(cateno), Integer.parseInt(eno));
+	   
+	   try {
+		   PrintWriter out=response.getWriter();
+		   out.write(res);
+	   }catch(Exception e) {e.printStackTrace();}
+	}
     
 }
