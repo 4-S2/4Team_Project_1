@@ -80,6 +80,7 @@ public class BusanDetailModel {
 		 
 		  request.setAttribute("vo", vo);
 		  request.setAttribute("cate","맛집");
+		  request.setAttribute("cateno","4");
 		  request.setAttribute("tab","food");
 		  request.setAttribute("vo", vo);
 		  request.setAttribute("list", list);

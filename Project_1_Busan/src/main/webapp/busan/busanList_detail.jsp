@@ -110,18 +110,25 @@
             }
         });
         
-        /* $('#reserve').click(function(){
-        	let no=$('#reserveCont').attr("data-no");
-        	$.ajax({
-        		type:'post',
-        		url:'../reserve/foodreserve_main.do',
-        		data{'no',no},
-        		success:function(result){
-        			$('#reserveCont').html(result);
-        		}
-        		
-        	})
-        }) */
+        $('.jjimBtn').click(function(){
+            let no = $(this).attr("data-no");
+            let cateno = $(this).attr("data-cateno");
+            $.ajax({
+                type: 'post',
+                url: '../busan/jjim.do',
+                data: {'no': no, 'cateno': cateno},
+                success: function(result){
+                    if(result === 'ok'){
+                        alert("찜하기가 완료되었습니다");
+                        $('.jjim_img').attr('src', '../busan/jjim.png');
+                    } else if(result === 'no'){
+                        alert("찜하기가 취소되었습니다");
+                        $('.jjim_img').attr('src', '../busan/jjim_none.png');
+                    }
+                }
+            });
+        });
+
     });
     /* let bCheck=false;
     $(function(){
@@ -143,6 +150,10 @@
 </script>
 
 <style>
+.jjim_img{
+  width: 20px;
+}
+
 #mapCont {
 	display: none;
 	width: 100%;
@@ -217,8 +228,8 @@ color: #fff;
 							<button>좋아요</button>
 						</div>
 						<div class="jjim">
-							<span>찜하기 수</span>
-							<button>찜하기</button>
+							<span><img src="../busan/jjim_none.png" class="jjim_img"></span>
+							<button class="jjimBtn" data-cateno="${cateno}" data-no="${vo.no }">찜하기</button>
 						</div>
 					</div>
 				</div>
