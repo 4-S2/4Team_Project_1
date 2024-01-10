@@ -29,11 +29,13 @@ public class JjimModel {
 	   }catch(Exception e) {e.printStackTrace();}
 	}
    
+
    @RequestMapping("busan/ex_jjim.do")
  	public void ex_busan_jjim(HttpServletRequest request, HttpServletResponse response)
  	{
  	   try {
  		   request.setCharacterEncoding("UTF-8");
+ 		   
  	   }catch(Exception e) {e.printStackTrace();}
  	   String eno=request.getParameter("eno");
  	   String cateno=request.getParameter("cateno");
@@ -48,5 +50,7 @@ public class JjimModel {
  		   out.write(res);
  	   }catch(Exception e) {e.printStackTrace();}
  	}
+
+   
     
 }

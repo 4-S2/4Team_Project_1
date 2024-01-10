@@ -109,6 +109,7 @@ public class ExListModel {
 		  request.setAttribute("vo", vo);
 		  request.setAttribute("vo1", vo1);
 		  request.setAttribute("eno", eno);
+		  request.setAttribute("cateno", "5");
 		  //3. 결과값 모아서 request에 저장 
 		  request.setAttribute("main_jsp", "../busan/ex_detail.jsp");
 		  return "../main/main.jsp";

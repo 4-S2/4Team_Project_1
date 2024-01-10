@@ -21,7 +21,8 @@
 </style>
 <!-- Include Kakao Maps API -->
 
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fce1f2ebd7aeec53bebf70c1f38c36c7&libraries=services"></script>
+<script type="text/javascript"
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fce1f2ebd7aeec53bebf70c1f38c36c7&libraries=services"></script>
 
 <script type="text/javascript">
     var mapInitialized = false;
@@ -56,7 +57,7 @@
                 });
 
                 var infowindow = new kakao.maps.InfoWindow({
-                    content: '<div style="width:150px;text-align:center;padding:6px 0;">${vo.loc}</div>'
+                    content: '<div style="width:150px;text-align:center;padding:6px 0;">${vo.ename}</div>'
                 });
                 infowindow.open(map, marker);
                 map.setCenter(coords);
@@ -71,7 +72,7 @@
                 var tabId = event.target.id + 'Cont';
                 showTab(tabId);
                 if (event.target.id === 'map' && !mapInitialized) {
-                    showMap('${vo.ename}');
+                    showMap('${vo.loc}');
                 }
             });
         }
@@ -88,48 +89,82 @@
             selectedTab.style.display = 'block';
         }
     }
-</script>
-<script type="text/javascript">
-	$(function() {
 
-		$('#realbuy').click(
-				function() {
-					var inwon = $('#inwon').val();
-					var date = $('#datepicker').val();
-					var eno = $('#eno').val(); // 선택한 방 ID 가져오기 (버튼에 data-속성으로 저장하는 방법도 있음)
+/*     $(function(){
+        $('.reUp').click(function(){
+        	$(this).text('취소'); 
+        	$('.update').show();
+        });
+    }); */
+    
+    $(function(){
+        $('.reUp').click(function(){
+            var buttonText = $(this).text();
+            
+            if(buttonText === '취소') {
+                // '취소'일 때의 동작
+                $(this).text('수정');
+                $('.update').hide();
+            } else {
+                // '취소'가 아닐 때의 동작
+                $(this).text('취소');
+                $('.update').show();
+            }
+        });
+    });
+    $(function(){
+        $('.replyBtn').click(function(){
+            var buttonText = $(this).text();
+            
+            if(buttonText === '취소') {
+                // '취소'일 때의 동작
+                $(this).text('답글쓰기');
+                $('.reply').hide();
+            } else {
+                // '취소'가 아닐 때의 동작
+                $(this).text('취소');
+                $('.reply').show();
+            }
+        });
+        $('.jjimBtn').click(function(){
+            let eno= $(this).attr("data-eno");
+            let cateno= $(this).attr("data-cateno");
+            $.ajax({
+                type: 'post',
+                url: '../busan/ex_jjim.do',
+                data: {'eno':eno, 'cateno':cateno},
+                success: function(result){
+                    if(result === 'ok'){
+                        alert("찜하기가 완료되었습니다");
+                        $('.jjim_img').attr('src', '../busan/jjim.png');
+                    } else if(result === 'no'){
+                        alert("찜하기가 취소되었습니다");
+                        $('.jjim_img').attr('src', '../busan/jjim_none.png');
+                    }
+                }
+            });
+        });
+        
 
-					if (date === '') {
-						alert('날짜를 선택해주세요.'); // 입력 요청 알림
-						return; // 화면을 유지하기 위해 return 문 사용
-					}
-
-					// 예약 페이지로 이동하면서 선택한 값을 전달
-					location.href = '../reserve/ex_reserve.do?eno='
-						'&eno' + eno + '&inwon=' + inwon + '&date=' + date;
-				});
-		$('.jjimBtn').click(function(){
-		    let eno = $(this).attr("data-eno");
-		    let cateno = $(this).attr("data-cateno");
-		     $.ajax({
-		        type: 'post',
-		        url: '../busan/ex_jjim.do',
-		        data: {'eno': eno, 'cateno': cateno},
-		        success: function(result){
-		            if(result === 'ok'){
-		                alert("찜하기가 완료되었습니다");
-		                $('.jjim_img').attr('src', '../busan/jjim.png');
-		            } else if(result === 'no'){
-		                alert("찜하기가 취소되었습니다");
-		                $('.jjim_img').attr('src', '../busan/jjim_none.png');
-		            }
-		        }
-		    }); 
-		});
-	});
 	
-
-	
-	
+    });
+    /* let bCheck=false;
+    $(function(){
+    	$('.reUp').click(function(){
+    		if(bCheck===false)
+    		{
+    			bCheck=true;
+    			$('.update').show();
+    			$(this).text('취소');
+    			
+    		}
+    		else{
+    			bCheck=false;
+    			$('.update').show();
+    			$(this).text('수정'); 
+    			
+    		}
+    	}); */
 </script>
 
 </head>
@@ -175,7 +210,7 @@
 	                    	<div class="jjim">
 							<span><img src="../busan/jjim_none.png" class="jjim_img"></span>
 							
-							<button class="jjimBtn" data-cateno="${vo.cateno }" data-eno="${vo.eno }">찜하기</button>
+							<button class="jjimBtn" data-cateno="${cateno }" data-eno="${vo.eno }">찜하기</button>
 						</div>
 	                    	
 		                     <div class="hit">
