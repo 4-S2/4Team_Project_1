@@ -342,9 +342,9 @@ public class GoodsDAO {
 		try {
 	        conn=dbconn.getConnection();
 	        String sql="SELECT cart_no, gno, amount, regdate, issale, ischeck, price, "
-	        		  +"(SELECT poster FROM goods WHERE no=cart.gno) as poster, "
-	                  +"(SELECT gname FROM goods WHERE no=cart.gno) as gname, "
-	                  +"(SELECT price FROM goods WHERE no=cart.gno) as price "
+	        		  +"(SELECT poster FROM goods WHERE gno=cart.gno) as poster, "
+	                  +"(SELECT gname FROM goods WHERE gno=cart.gno) as gname, "
+	                  +"(SELECT price FROM goods WHERE gno=cart.gno) as price "
 	                  +"FROM cart "
 	                  +"WHERE id=? AND issale!=1 "
 	                  +"ORDER BY cart_no DESC";
@@ -386,9 +386,9 @@ public class GoodsDAO {
 		try {
 	        conn=dbconn.getConnection();
 	        String sql="SELECT cart_no, gno, amount, regdate, issale, ischeck, price, "
-	        		  +"(SELECT poster FROM goods WHERE no=cart.gno) as poster, "
-	                  +"(SELECT gname FROM goods WHERE no=cart.gno) as gname, "
-	                  +"(SELECT price FROM goods WHERE no=cart.gno) as price "
+	        		  +"(SELECT poster FROM goods WHERE gno=cart.gno) as poster, "
+	                  +"(SELECT gname FROM goods WHERE gno=cart.gno) as gname, "
+	                  +"(SELECT price FROM goods WHERE gno=cart.gno) as price "
 	                  +"FROM cart "
 	                  +"WHERE id=? AND issale!=1 "
 	                  +"ORDER BY cart_no DESC";

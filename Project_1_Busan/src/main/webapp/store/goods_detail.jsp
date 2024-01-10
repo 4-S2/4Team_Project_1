@@ -26,8 +26,8 @@
 		    // 출력할 내용을 Session에 등록하기
 		    pay_method : 'card', // 'card' : 신용카드 | 'trans' : 실시간계좌이체 | 'vbank' : 가상계좌 | 'phone' : 휴대폰소액결제
 		    merchant_uid : 'merchant_' + new Date().getTime(),
-		    name : $('#title').text(), /* $('#title').text(), */
-		    amount : $('#price').attr("data-price"), /* $('#price').attr('data-price'), */
+		    name : $('#gname').text(), /* $('#title').text(), */
+		    amount : $('#total').text(), /* $('#price').attr('data-price'), */
 		    buyer_email : 'iamport@siot.do',
 		    buyer_name : '구매자이름',
 		    buyer_tel : '010-1234-5678',
@@ -42,13 +42,12 @@
 		        msg += '결제 금액 : ' + rsp.paid_amount;
 		        msg += '카드 승인번호 : ' + rsp.apply_num;s
 		    } else {
-		        var msg = '결제에 실패하였습니다.';
+		        var msg = '결제에 완료되었습니다.';
 		        msg += '에러내용 : ' + rsp.error_msg;
 		        
 		        let price=$('#price').attr("data-price")
 				let count=$('#sel').val()
-				let no=$('#cart').attr("data-no")
-				let type=$('#cart').attr("data-type")
+				let gno=$('#buyBtn').attr("data-gno")
 				
 				$.ajax({
 					type:'post',
@@ -57,6 +56,7 @@
 					success:function(result){
 						// 마이페이지 이동
 						if(result=='yes'){
+							alert("구매에 성공했습니다.")
 							location.href="../mypage/myPurchase.do"	
 						} else {
 							alert("구매에 실패했습니다.")
@@ -156,7 +156,7 @@ function showTab(tabName) {
 	                </div>
 	            
 	                <div class="product-info">
-	                    <h1>${vo.gname}</h1>
+	                    <h1 id="gname">${vo.gname}</h1>
 	                    <p class="origin"><span>원산지 </span><span class="emph"> ${vo.origin}</span></p>
 	                    <p class="manufacturer"><span>제조사 </span><span class="emph"> ${vo.manufacturer}</span></p>
 	                    <p class="delivery-info"><span>배송</span><span class="emph"> 무료 배송</span></p>
@@ -185,9 +185,9 @@ function showTab(tabName) {
                     		<span class="emph"><span id="total">${vo.price}</span>원</span>
                     	</p>
                     	<div class="btnWrap">
-                    		<button value="장바구니" id="cartBtn" class="btn" data-gno="${vo.gno}">장바구니</button>
                     		<c:if test="${sessionScope!=null}">
-                    			<button value="구매하기" id="buyBtn" class="btn">구매하기</button>
+                    			<button value="장바구니" id="cartBtn" class="btn" data-gno="${vo.gno}">장바구니</button>
+                    			<button value="구매하기" id="buyBtn" class="btn" data-gno="${vo.gno}">구매하기</button>
                     		</c:if>
                     		<button value="목록" id="listBtn" class="btn" onclick="javascript:history.back()">목록</button>
                     	</div>
