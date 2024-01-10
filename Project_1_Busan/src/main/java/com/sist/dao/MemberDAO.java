@@ -254,12 +254,12 @@ public class MemberDAO {
 		}
 		return result;
 	}
-	public boolean sendPasswordToEmail(String id, String email, String password) {
+	public boolean sendPasswordToEmail(String id, String email, String pwd) {
 	    boolean sent = false;
 
 	     String host = "smtp.naver.com"; // 네이버일 경우 네이버 계정, gmail경우 gmail 계정 
 	     String user = ""; // 패스워드 
-	     String pwd = "";      // SMTP 서버 정보를 설정한다. 
+	     String password = "";      // SMTP 서버 정보를 설정한다. 
 	     Properties props = new Properties(); 
 	     props.put("mail.smtp.host", host); 
 	     props.put("mail.smtp.port", 587); 
@@ -273,10 +273,14 @@ public class MemberDAO {
 	     try { 
 	        	  MimeMessage message = new MimeMessage(session); 
 	              message.setFrom(new InternetAddress(user)); 
-	              message.addRecipient(Message.RecipientType.TO, new InternetAddress("email")); // 메일 제목 
-	              message.setSubject(id+"님 예약 내역입니다!!"); // 메일 내용
+	              message.addRecipient(Message.RecipientType.TO, new InternetAddress("ksssk96@gmail.com"));
+	              // 메일 제목 
+	              message.setSubject("Busan Tour 비밀번호 확인"); // 메일 내용
 	              
-	              String html=pwd;
+	              String html="<html><head>"+
+	                     "<body>"
+	            		  +id+"님의 비밀번호는 '"+pwd+"'입니다."
+	            		  +"</body></html>";
 	              		     
 	              message.setContent(html,"text/html;charset=UTF-8"); // send the message 
 	              Transport.send(message); 
