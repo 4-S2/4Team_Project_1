@@ -222,6 +222,22 @@ color: #fff;
     float: right;
     margin-top: 7px;
 }
+.joa{
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    /* margin-top: 120px; */
+    width: 100%;
+    justify-content: flex-start;
+    margin-bottom: 5px;
+
+}
+.detail .product-top{
+    align-items: end;
+}
+.detail .product-info .heart{
+    margin: 0px;
+}
 </style>
 
 <div id="busan" class="detail">
@@ -246,7 +262,8 @@ color: #fff;
 							sizes="(max-width: 479px) 83vw, (max-width: 767px) 75vw, (max-width: 991px) 76vw, 32vw" />
 					</div>
 					<div class="product-info">
-						<h1>${vo.title}</h1>
+						<h1 style="margin-bottom: 140px">${vo.title}</h1>
+						<div class="joa">
 						<div class="heart">
 							<span>좋아요 수</span>
 							<button>좋아요</button>
@@ -254,6 +271,7 @@ color: #fff;
 						<div class="jjim" data-count="${count }">
 							<span><img src="../busan/jjim_none.png" class="jjim_img"></span>
 							<button class="jjimBtn" data-cateno="${cateno}" data-no="${vo.no }">찜하기</button>
+						</div>
 						</div>
 					</div>
 				</div>
