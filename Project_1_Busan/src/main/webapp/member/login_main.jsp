@@ -102,6 +102,37 @@
         	color: white;
         }
     </style>
+  <script type="text/javascript">
+    $(document).ready(function() {
+        // 로그인 폼 제출 이벤트 처리
+        $("#login-form-all").submit(function(event) {
+            // 기본 동작 방지
+            event.preventDefault();
+
+            // AJAX를 사용하여 로그인 요청 전송
+            $.ajax({
+                type: "POST",
+                url: $(this).attr('action'),
+                data: $(this).serialize(),
+                success: function(response) {
+                    // 서버로부터의 응답 처리
+                    if (response === "Login Failed") {
+                        // 로그인 실패 시 알림 표시
+                        alert("로그인 정보가 일치하지 않습니다.");
+                    } else {
+                        // 로그인 성공 시 처리
+                    	window.location.href = "../main/main.do";
+                    }
+                },
+                error: function() {
+                    // 네트워크 오류 등 기타 오류 처리
+                }
+            });
+        });
+    });
+</script>
+  
+    
     
 </head>
 <body>
