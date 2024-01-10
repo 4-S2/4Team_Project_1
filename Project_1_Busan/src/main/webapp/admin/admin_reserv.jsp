@@ -131,14 +131,27 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 <script type="text/javascript">
 $(function(){
-	  $("#myTable tr").click(function(){
-			let x=(document.body.offsetWidth/2)-(750/2)
-			let y=(window.screen.height/2)-(500/2)-50
-			let frno=$(this).attr('data-frno')
-			window.open("../admin/member_detail.do?id="+id,"",'width=650, height=350, left='+x+', top='+y)
-	  })
-	  
-	});
+	$(document).ready(function(){
+		  $('.ok').on("change",function(){
+			  let rstate=$(this).val()
+			  let rno=$(this).attr("data-rno")
+			  location.href="../admin/admin_fReserve_ok.do?rstate="+rstate+"&rno="+rno
+		  })
+
+})
+});
+$(function(){
+		$(document).ready(function(){
+			  $('.rok').on("change",function(){
+				  let rs=$(this).val()
+				  let no=$(this).attr("data-no")
+				  location.href="../admin/admin_exReserve_ok.do?rs="+rs+"&no="+no
+			  })		  
+			})
+
+});
+	
+
 </script>
 </head>
 <body>
@@ -151,8 +164,8 @@ $(function(){
    	  </div>
 		<div class="pc_mt30 ta_mt40 ta_mx40 tab_area tab2 sub4 mypage">
 		    <div class="tab_box">
-		        <button onclick="toggleTab(0)" class="h40 on"><a href="myReserv.do?page=1&tab=1"><span>맛집</span></a></button>
-		        <button onclick="toggleTab(1)" class="h40"><a href="myReserv.do?page=1&tab=2"><span>전시회</span></a></button>
+		        <button onclick="toggleTab(0)" class="h40 on"><a href="admin_reserv.do?page=1&tab=1"><span>맛집</span></a></button>
+		        <button onclick="toggleTab(1)" class="h40"><a href="admin_reserv.do?page=1&tab=2"><span>전시회</span></a></button>
 		    </div>
 		</div>
 
@@ -182,21 +195,22 @@ $(function(){
  					    </c:when>
 					    <c:otherwise> 
 					        <c:forEach var="vo" items="${flist}" varStatus="r">
-					            <tr data-id="${vo.rno}" id=food>
+					            <tr>
 					                <td class="dp_pc num2">${r.index +1}</td>
 					                <td class="title double ta_px20" style="text-align: center;">
-					                    <a href="../busan/food_detail.do?no=${vo.fno}" class="ellipsis">${vo.fvo.title}</a>
+					                    <a href="../busan/food_detail.do?no=${vo.fno}">${vo.fvo.title}</a>
 					                </td>
 					                <td class="dp_pc writer">${vo.mvo.name}</td>
-					                <td class="dp_pc writer">${vo.id}</td>
+					                <td class="dp_pc writer" data-id="${vo.id}">${vo.id}</td>
 					                <td class="dp_pc writer">${vo.day}<br>${vo.time}</td>
 					                 <td class="dp_pc num2">${vo.inwon}명</td>
-					                <c:if test="${vo.ok == 0 }">
-					                	<td class="category px_20 ta_px10">승인대기</td>
-					                </c:if>
-					                <c:if test="${vo.ok == 1 }">
-					                	<td class="category px_20 ta_px10"><strong>승인완료</strong></td>
-					                </c:if>	                
+							        <td>
+										<select class="ok" data-rno=${vo.rno }>
+											<option ${vo.ok=='0'?"selected":"" } value=0>승인대기</option>
+											<option ${vo.ok=='1'?"selected":"" } value=1>승인완료</option>
+											<option ${vo.ok=='2'?"selected":"" } value=2>예약취소</option>
+										</select>
+									</td>                 
 					            </tr>
 					        </c:forEach>
 					    </c:otherwise> 
@@ -249,7 +263,7 @@ $(function(){
  					    </c:when>
 					    <c:otherwise> <!-- e.eno, e.ename, ri.day, ri.inwon, ri.rok, ri.id " -->
 					        <c:forEach var="vo" items="${rlist}" varStatus="r">
-					            <tr data-id="${vo.no}" id=ex>
+					            <tr id=ex>
 					                <td class="dp_pc num2">${r.index +1}</td>
 					                <td class="title double ta_px20" style="text-align: center;">
 					                    <a href="../busan/ex_detail.do?eno=${vo.evo.eno}" class="ellipsis">${vo.evo.ename}</a>
@@ -258,12 +272,13 @@ $(function(){
 					                 <td class="dp_pc writer">${vo.mvo.id}</td>
 					                <td class="dp_pc writer">${vo.day}</td>
 					                 <td class="dp_pc num2">${vo.inwon}</td>
-					                <c:if test="${vo.rok == 0 }">
-					                	<td class="category px_20 ta_px10">승인대기</td>
-					                </c:if>
-					                <c:if test="${vo.rok == 1 }">
-					                	<td class="category px_20 ta_px10"><strong>승인완료</strong></td>
-					                </c:if>	                
+							        <td>
+										<select class="rok" data-no=${vo.no }>
+											<option ${vo.rok=='0'?"selected":"" } value=0>승인대기</option>
+											<option ${vo.rok=='1'?"selected":"" } value=1>승인완료</option>
+											<option ${vo.rok=='2'?"selected":"" } value=2>예약취소</option>
+										</select>
+									</td>              
 					            </tr>
 					        </c:forEach>
 					    </c:otherwise> 

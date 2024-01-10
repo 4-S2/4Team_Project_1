@@ -175,6 +175,28 @@ public class AdminPageModel {
 			return "../main/main.jsp";
 	}
 	
+	// 맛집 예약 승인
+	@RequestMapping("admin/admin_fReserve_ok.do")
+	public String stateChange3(HttpServletRequest request, HttpServletResponse response) {
+		String rno=request.getParameter("rno");
+		String rstate=request.getParameter("rstate");
+		
+		dao.admin_fdReserve_ok(Integer.parseInt(rno),Integer.parseInt(rstate));
+		
+		return "redirect:../admin/admin_reserv.do";
+	}
+	
+	// 전시회 예약 승인
+	@RequestMapping("admin/admin_exReserve_ok.do")
+	public String stateChange2(HttpServletRequest request, HttpServletResponse response) {
+		String no=request.getParameter("no");
+		String rs=request.getParameter("rs");
+		
+		dao.admin_exReserve_ok(Integer.parseInt(no),Integer.parseInt(rs));
+		
+		return "redirect:../admin/admin_reserv.do?tab=2";
+	}
+	
 	// 특산물 리스트
 	@RequestMapping("admin/admin_goods.do")
 	public String admin_goods(HttpServletRequest request,HttpServletResponse response) {

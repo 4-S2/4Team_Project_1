@@ -33,7 +33,7 @@ public class AdminDAO {
 							+"FROM (SELECT id, name, email, phone, addr, rownum AS num "
 							+"FROM (SELECT id, name, email, phone, addr "
 							+"FROM user_ WHERE admin ='n' ORDER BY id ASC)) " 
-							+"WHERE rownum BETWEEN ? AND ?";
+							+"WHERE num BETWEEN ? AND ?";
 				ps=conn.prepareStatement(sql);
 				   int rowSize=5;
 				   int start=(rowSize*page)-(rowSize-1); // 오라클 => 1번 
@@ -449,8 +449,8 @@ public class AdminDAO {
 			return total;
 		}
 		
-		// 관리자 예약 상태 변경
-		public void admin_booking_confirm(int frno, int ok)
+		// 관리자 맛집예약 상태 변경
+		public void admin_fdReserve_ok(int frno, int ok)
 		{
 			try
 			{
@@ -459,6 +459,26 @@ public class AdminDAO {
 				ps=conn.prepareStatement(sql);
 				ps.setInt(1, ok);
 				ps.setInt(2, frno);
+				ps.executeUpdate();
+			}catch(Exception ex)
+			{
+				ex.printStackTrace();
+			}
+			finally
+			{
+				dbconn.disConnection(conn, ps);
+			}
+		}
+		// 관리자 전시회예약 상태 변경		
+		public void admin_exReserve_ok(int no, int rok)
+		{
+			try
+			{
+				conn=dbconn.getConnection();
+				String sql="UPDATE reserve_info SET rok=? WHERE no=?";
+				ps=conn.prepareStatement(sql);
+				ps.setInt(1, rok);
+				ps.setInt(2, no);
 				ps.executeUpdate();
 			}catch(Exception ex)
 			{
