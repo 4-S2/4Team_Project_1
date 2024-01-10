@@ -4,8 +4,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.sist.controller.RequestMapping;
 
+import java.io.File;
 import java.io.PrintWriter;
 import java.util.*;
 import com.sist.dao.*;
@@ -197,6 +200,97 @@ public class AdminPageModel {
 		return "redirect:../admin/admin_reserv.do?tab=2";
 	}
 	
+//-------------------------------- End of 예약
+	
+//-------------------------------- 문의내역 관리
+	// 문의내역 목록
+	@RequestMapping("admin/admin_qna.do")
+	public String admin_qna(HttpServletRequest request, HttpServletResponse response)
+	{	
+		String page=request.getParameter("page");
+		if(page==null)
+			page="1";
+		int curpage=Integer.parseInt(page);
+		AdminDAO dao=AdminDAO.newInstance();
+		
+		
+		List<QnaBoardVO> list = dao.adGetAllQnas(curpage);
+		int totalpage=dao.adQnasTotalPage();
+		
+		int inqSize = dao.adQnasTotal();
+		
+		final int BLOCK=10;
+		int startpage=((curpage-1)/BLOCK)*BLOCK+1;
+		int endpage=((curpage-1)/BLOCK)*BLOCK+BLOCK;
+		if(totalpage<endpage) {
+			endpage=totalpage;
+		}
+		
+		request.setAttribute("curpage", curpage);
+		request.setAttribute("totalpage", totalpage);
+		request.setAttribute("startPage", startpage);
+		request.setAttribute("endPage", endpage);
+		request.setAttribute("inqSize", inqSize); 
+		request.setAttribute("list", list); 
+		request.setAttribute("admin_jsp", "../admin/admin_qna.jsp");
+		request.setAttribute("main_jsp", "../admin/admin_main.jsp");
+		return "../main/main.jsp";
+	}
+	
+	// 문의 불러오기
+	@RequestMapping("admin/admin_qna_detail.do")
+	public String admin_qna_detail(HttpServletRequest request, HttpServletResponse response) {
+		String qno=request.getParameter("qno");
+		QnaBoardVO vo=dao.adQnaDetailData(Integer.parseInt(qno));
+		request.setAttribute("vo", vo);
+		return "../admin/admin_qna_insert.jsp";
+	}
+	
+	// 문의 답변하기
+	@RequestMapping("admin/admin_qna_insert.do")
+	public String admin_qna_insert(HttpServletRequest request, HttpServletResponse response) {
+		try {
+        	
+        	request.setCharacterEncoding("UTF-8");
+           String path = "C:\\download";
+           File downloadDirectory = new File(path);
+           if (!downloadDirectory.exists()) {
+               downloadDirectory.mkdirs();
+           }
+ 		   String enctype="UTF-8";
+ 		   int max_size=1024*1024*500;
+ 		   MultipartRequest mr=
+ 				   new MultipartRequest(request,path,max_size,enctype,
+ 						   new DefaultFileRenamePolicy());
+ 		   
+		    String filename=mr.getFilesystemName("upload");
+	        
+	        HttpSession session=request.getSession();
+	        String id=(String) session.getAttribute("id");
+            
+	        QnaBoardVO vo=new QnaBoardVO();
+	        vo.setName(mr.getParameter("name"));
+			   vo.setCont(mr.getParameter("cont"));
+			   vo.setSubject(mr.getParameter("subject"));
+			   vo.setPwd(mr.getParameter("pwd"));
+			   vo.setGroup_id(Integer.parseInt(mr.getParameter("gid")));
+			   vo.setId(id);
+			   if(filename==null)
+			   {
+				   vo.setFilename("");
+				   vo.setFilesize(0);
+			   }
+			   else
+			   {
+				   File file=new File(path+"\\"+filename);
+				   vo.setFilename(filename);
+				   vo.setFilesize((int)file.length());
+			   }
+	        dao.adQnaInsertData(vo);
+        }catch(Exception e) {}
+        
+        return "redirect:../admin/admin_qna.do";
+	}
 	
 	// 특산물 리스트
 	@RequestMapping("admin/admin_goods.do")

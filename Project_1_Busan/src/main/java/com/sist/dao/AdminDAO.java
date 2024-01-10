@@ -572,4 +572,180 @@ public class AdminDAO {
 			}
 			return total;
 		}
+		
+//--------------------- End of 전시회 예약 
+		
+//--------------------- 문의내역 관리
+		/*
+		 * private int qno; private String subject; private Date regdate;
+		 * user id,name,
+		 * + "WHERE ri.num BETWEEN ? AND ? "
+						+ "ORDER BY ri.no DESC";
+				ps=conn.prepareStatement(sql);
+				int rowSize=5;
+				int start=(rowSize*page)-(rowSize-1);
+				int end=rowSize*page;
+				ps.setInt(1, start);
+				ps.setInt(2, end);
+				
+				ps
+		 */
+	    // 문의내역 목록
+	    public List<QnaBoardVO> adGetAllQnas(int page) {
+	        List<QnaBoardVO> list = new ArrayList<>();
+			try
+			{
+				conn=dbconn.getConnection();
+				String sql="SELECT qno,subject,regdate,status,name, id, num "
+						+ "FROM (SELECT qno,subject,regdate,status,name, id,rownum as num "
+						+ "FROM (SELECT qno,subject,regdate,status,name, id "
+						+ "FROM QnaBoard "
+						+ "WHERE group_step=0 "
+						+ "ORDER BY qno DESC)) "
+						+ "WHERE num BETWEEN ? AND ?";
+				ps=conn.prepareStatement(sql);
+				int rowSize=5;
+				int start=(rowSize*page)-(rowSize-1);
+				int end=rowSize*page;
+				ps.setInt(1, start);
+				ps.setInt(2, end);
+				ResultSet rs=ps.executeQuery();
+		         while(rs.next())
+		         {
+		        	QnaBoardVO vo=new QnaBoardVO();
+		            vo.setQno(rs.getInt(1));
+		            vo.setSubject(rs.getString(2));
+		            vo.setRegdate(rs.getDate(3));
+		            vo.setStatus(rs.getInt(4));
+		            vo.setName(rs.getString(5));
+		            vo.setId(rs.getString(6));
+		            vo.setNum(rs.getInt(7));
+		            list.add(vo);
+		         }
+		         rs.close();
+			}catch(Exception ex)
+			{
+				ex.printStackTrace();
+			}
+			finally
+			{
+				dbconn.disConnection(conn, ps);
+			}
+			return list;
+	    }
+		
+		// 문의내역 총페이지
+		public int adQnasTotalPage() {
+			int total=0;
+			try {
+				conn=dbconn.getConnection();
+				String sql="SELECT CEIL(COUNT(*)/5.0) FROM QnaBoard "
+						+ "WHERE group_step=0";
+				ps=conn.prepareStatement(sql);
+				ResultSet rs=ps.executeQuery();
+				rs.next();
+				total=rs.getInt(1);
+				rs.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}finally {
+				dbconn.disConnection(conn, ps);
+			}
+			return total;
+		}
+		
+		// 문의 내역 총 갯수
+		public int adQnasTotal() {
+			int total=0;
+			try {
+				conn=dbconn.getConnection();
+				String sql="SELECT COUNT(*) AS total FROM QnaBoard "
+						+ "WHERE group_step=0";
+				ps=conn.prepareStatement(sql);
+				ResultSet rs=ps.executeQuery();
+				rs.next();
+				total=rs.getInt(1);
+				rs.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}finally {
+				dbconn.disConnection(conn, ps);
+			}
+			return total;
+		}
+		
+		//문의내역 답변 불러오기
+		   public QnaBoardVO adQnaDetailData(int qno)
+		   {
+			     QnaBoardVO vo=new QnaBoardVO();
+		         try
+		         {
+		        	conn=dbconn.getConnection();
+		            String sql="SELECT qno,name,subject,cont,id,group_id "
+		                    +"FROM qnaBoard "
+		                    +"WHERE qno="+qno;
+		            ps=conn.prepareStatement(sql);
+		            ResultSet rs=ps.executeQuery();
+		            if (rs.next()) {
+		                vo.setQno(rs.getInt(1));
+		                vo.setName(rs.getString(2));
+		                vo.setSubject(rs.getString(3));
+		                vo.setCont(rs.getString(4));
+		                vo.setId(rs.getString(5));
+		                vo.setGroup_id(rs.getInt(6));
+		            }
+		            rs.close();
+		         }catch(Exception ex)
+		         {
+		           // 에러 출력 
+		            ex.printStackTrace();
+		         }
+		         finally
+		         {
+		            // 반환 => 재사용 
+		            dbconn.disConnection(conn, ps);
+		         }
+		         return vo;
+		  }
+		   
+		//문의내역 답변하기
+		   public void adQnaInsertData(QnaBoardVO vo)
+		   {		
+			   try {
+				   conn=dbconn.getConnection();
+					/*
+					 * String sql =
+					 * "SELECT MAX(group_step) FROM qnaBoard WHERE group_id="+vo.getGroup_id();
+					 * ps=conn.prepareStatement(sql); ResultSet rs=ps.executeQuery(); rs.next(); int
+					 * maxGId = rs.getInt(1);
+					 */
+				    
+		           String sql="INSERT INTO qnaBoard(qno,name,subject,cont,pwd,filename,filesize,id,group_id,"
+		            		+ "group_step) "
+		            		+ "VALUES(qb_no_seq.nextval,?,?,?,?,?,?,?,?,?)";
+		            ps=conn.prepareStatement(sql);
+		            ps.setString(1, vo.getName());
+		            ps.setString(2, vo.getSubject());
+		            ps.setString(3, vo.getCont());
+		            ps.setString(4, vo.getPwd());
+		            ps.setString(5, vo.getFilename());
+		            ps.setInt(6, vo.getFilesize());
+		            ps.setString(7, vo.getId());
+		            ps.setInt(8, vo.getGroup_id());
+		            ps.setInt(9, 1);
+		            ps.executeUpdate();
+		            ps.close();
+		            
+		            sql = "UPDATE qnaBoard "
+		            		+ "SET status = 1 "
+		            		+ "WHERE group_id = "+vo.getGroup_id();
+		            ps=conn.prepareStatement(sql);
+		            ps.executeUpdate();
+		            ps.close();
+			   }catch (Exception e) {
+					e.printStackTrace();
+				}finally {
+					dbconn.disConnection(conn, ps);
+				}
+		   }
 }

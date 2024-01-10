@@ -101,7 +101,7 @@ function toggleTab(tabIndex) {
     document.getElementById('table2').classList.add('hidden');
 
     // 모든 탭의 활성화 클래스 제거
-    var buttons = document.querySelectorAll('.tab_box button');
+    let buttons = document.querySelectorAll('.tab_box button');
     buttons.forEach(function(button) {
         button.classList.remove('on');
     });
@@ -121,7 +121,7 @@ function toggleTab(tabIndex) {
 
 // 페이지 로드 시 저장된 탭 인덱스를 확인하여 해당 탭을 활성화
 document.addEventListener('DOMContentLoaded', function() {
-    var storedTabIndex = localStorage.getItem('selectedTabIndex');
+    let storedTabIndex = localStorage.getItem('selectedTabIndex');
     if (storedTabIndex !== null) {
         toggleTab(parseInt(storedTabIndex));
     }
@@ -150,13 +150,13 @@ $(function(){
 	location.href="../admin/admin_Reserve_cancel.do?rrno="+rrno
 } */
 function cancelReservation(rrno) {
-    var confirmation = confirm("예약을 취소하시겠습니까?");
+    let confirmation = confirm("예약을 취소하시겠습니까?");
     if (confirmation) {
         location.href = "../admin/admin_Reserve_cancel.do?rrno=" + rrno;
     }
 }
 function excancelReservation(nno) {
-    var confirmation = confirm("예약을 취소하시겠습니까?");
+    let confirmation = confirm("예약을 취소하시겠습니까?");
     if (confirmation) {
         location.href = "../mypage/ex_Reserve_cancel.do?nno=" + nno;
     }

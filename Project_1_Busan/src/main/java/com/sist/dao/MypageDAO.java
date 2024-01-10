@@ -115,44 +115,7 @@ public class MypageDAO {
 		}
 
 
-		/*
-		 * private int qno; private String subject; private Date regdate;
-		 */
-	    // 나의 문의내역
-	    public List<QnaBoardVO> getAllQnas(String id) {
-	        List<QnaBoardVO> list = new ArrayList<>();
-			try
-			{
-				conn=dbconn.getConnection();
-				String sql="SELECT qno,subject,regdate,status "
-						+ "FROM QnaBoard "
-						+ "WHERE id=? "
-						+ "ORDER BY qno DESC";
-				ps=conn.prepareStatement(sql);
-				ps.setString(1, id);
-				ResultSet rs=ps.executeQuery();
-		         while(rs.next())
-		         {
-		        	 QnaBoardVO vo=new QnaBoardVO();
-		            vo.setQno(rs.getInt(1));
-		            vo.setSubject(rs.getString(2));
-		            vo.setRegdate(rs.getDate(3));
-		            vo.setStatus(rs.getInt(4));
-		            list.add(vo);
-		         }
-		         rs.close();
-			}catch(Exception ex)
-			{
-				ex.printStackTrace();
-			}
-			finally
-			{
-				dbconn.disConnection(conn, ps);
-			}
-			return list;
-	        
-	    }
-		
+
 //----------------------- 나의 예약내역
 	    /*
 	     * SELECT e.eno, e.ename , ri.day, ri.rok, ri.id, 
@@ -275,6 +238,26 @@ public class MypageDAO {
 				e.printStackTrace();
 			}
 			finally {
+				dbconn.disConnection(conn, ps);
+			}
+		}
+		
+		// 전시회예약 취소		
+		public void exReserve_cc(int no)
+		{
+			try
+			{
+				conn=dbconn.getConnection();
+				String sql="UPDATE reserve_info SET rok=2 WHERE no=?";
+				ps=conn.prepareStatement(sql);
+				ps.setInt(1, no);
+				ps.executeUpdate();
+			}catch(Exception ex)
+			{
+				ex.printStackTrace();
+			}
+			finally
+			{
 				dbconn.disConnection(conn, ps);
 			}
 		}
@@ -418,6 +401,27 @@ ORDER BY r.frno DESC;
 			return total;
 		}
 		
+		// 맛집예약 취소
+		public void fdReserve_cc(int frno)
+		{
+			try
+			{
+				conn=dbconn.getConnection();
+				String sql="UPDATE reservation SET ok=2 WHERE frno=?";
+				ps=conn.prepareStatement(sql);
+				ps.setInt(1, frno);
+				ps.executeUpdate();
+			}catch(Exception ex)
+			{
+				ex.printStackTrace();
+			}
+			finally
+			{
+				dbconn.disConnection(conn, ps);
+			}
+		}
+
+		
 		// 회원 탈퇴하기
 		// 연결된 테이블: reservation, jjim, heart, review, review_reply,order => cart, reserve_info
 		 public String memberDeleteOk(String id,String pwd)
@@ -512,42 +516,42 @@ ORDER BY r.frno DESC;
 			   return result;
 		   }
 
-		// 맛집예약 취소
-		public void fdReserve_cc(int frno)
-		{
-			try
-			{
-				conn=dbconn.getConnection();
-				String sql="UPDATE reservation SET ok=2 WHERE frno=?";
-				ps=conn.prepareStatement(sql);
-				ps.setInt(1, frno);
-				ps.executeUpdate();
-			}catch(Exception ex)
-			{
-				ex.printStackTrace();
-			}
-			finally
-			{
-				dbconn.disConnection(conn, ps);
-			}
-		}
-		// 전시회예약 취소		
-		public void exReserve_cc(int no)
-		{
-			try
-			{
-				conn=dbconn.getConnection();
-				String sql="UPDATE reserve_info SET rok=2 WHERE no=?";
-				ps=conn.prepareStatement(sql);
-				ps.setInt(1, no);
-				ps.executeUpdate();
-			}catch(Exception ex)
-			{
-				ex.printStackTrace();
-			}
-			finally
-			{
-				dbconn.disConnection(conn, ps);
-			}
-		}
+			/*
+			 * private int qno; private String subject; private Date regdate;
+			 */
+		    // 나의 문의내역
+		    public List<QnaBoardVO> getAllQnas(String id) {
+		        List<QnaBoardVO> list = new ArrayList<>();
+				try
+				{
+					conn=dbconn.getConnection();
+					String sql="SELECT qno,subject,regdate,status "
+							+ "FROM QnaBoard "
+							+ "WHERE id=? "
+							+ "ORDER BY qno DESC";
+					ps=conn.prepareStatement(sql);
+					ps.setString(1, id);
+					ResultSet rs=ps.executeQuery();
+			         while(rs.next())
+			         {
+			        	 QnaBoardVO vo=new QnaBoardVO();
+			            vo.setQno(rs.getInt(1));
+			            vo.setSubject(rs.getString(2));
+			            vo.setRegdate(rs.getDate(3));
+			            vo.setStatus(rs.getInt(4));
+			            list.add(vo);
+			         }
+			         rs.close();
+				}catch(Exception ex)
+				{
+					ex.printStackTrace();
+				}
+				finally
+				{
+					dbconn.disConnection(conn, ps);
+				}
+				return list;
+		        
+		    }
+			
 }

@@ -87,9 +87,7 @@
 }
 
 .cancel-button {
-        padding: 3px 5px; /* 버튼 내부의 여백 조절 */
-        /* 또는 */
-        /* margin: 5px; */ /* 버튼 주변의 여백 조절 */
+        padding: 3px 5px; 
     }
 </style>
 <script type="text/javascript">
@@ -157,7 +155,7 @@ $(function(){
 <body>
   <div class="myReserv">
       <div class="max1200 dp_pc contents_titbox">
-                <h4 class="titbox">나의<strong>예약내역</strong></h4>
+                <h4 class="titbox">회원<strong>예약내역</strong></h4>
    	  </div>
    	 <div class="tab_contents_area">
    	  	<p class="titbox">&nbsp;&nbsp;<span class="total_num_txt offline ta_px0">총 <strong>${rSize }</strong>개의 미승인된 예약내역이 있습니다.</span></p>

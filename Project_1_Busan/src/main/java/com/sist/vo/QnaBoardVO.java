@@ -28,8 +28,15 @@ public class QnaBoardVO {
 	   private String filename,filesize2;
 	   private int filesize;
 	   private int status;
+	   private int num;
 	
 	   
+	public int getNum() {
+		return num;
+	}
+	public void setNum(int num) {
+		this.num = num;
+	}
 	public int getStatus() {
 		return status;
 	}

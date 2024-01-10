@@ -18,7 +18,7 @@ $(function(){
 			let x=(document.body.offsetWidth/2)-(750/2)
 			let y=(window.screen.height/2)-(500/2)-50
 			let id=$(this).attr('data-id')
-			window.open("../admin/member_detail.do?id="+id,"",'width=650, height=350, left='+x+', top='+y)
+			window.open("../admin/member_detail.do?id="+id,"",'width=550, height=330, left='+x+', top='+y)
 	  })
 	});
 </script>
