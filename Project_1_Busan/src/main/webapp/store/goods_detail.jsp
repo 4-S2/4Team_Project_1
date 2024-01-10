@@ -52,12 +52,12 @@
 				
 				$.ajax({
 					type:'post',
-					url:'../goods/cart_buy.do',
-					data:{"no":no, "count":count, "price":price}, 
+					url:'../store/goods_buy.do',
+					data:{"gno":gno, "count":count, "price":price}, 
 					success:function(result){
 						// 마이페이지 이동
 						if(result=='yes'){
-							location.href="../mypage/mypage_buy.do"	
+							location.href="../mypage/myPurchase.do"	
 						} else {
 							alert("구매에 실패했습니다.")
 						}
@@ -79,20 +79,20 @@
 		$('#cartBtn').click(function(){
 			let price=$('#price').attr("data-price")
 			let count=$('#sel').val()
-			let no=$(this).attr("data-no")
+			let gno=$(this).attr("data-gno")
 			/* let msg="가격:"+price+"\n"
 					+"수량:"+count+"\n"
-					+"상품번호:"+no+"\n"
+					+"상품번호:"+gno+"\n"
 			alert(msg) */
 			
 			$.ajax({
 				type:'post',
-				url:'../goods/cart_insert.do',
-				data:{"no":no, "count":count, "price":price}, 
+				url:'../store/goods_cart.do',
+				data:{"gno":gno, "count":count, "price":price}, 
 				success:function(result){
 					// 마이페이지 이동
 					if(result=='yes'){
-						location.href="../mypage/mypage_cart.do"	
+						location.href="../mypage/myCart.do"	
 					} else {
 						alert("장바구니에 추가가 불가합니다.")
 					}
@@ -160,39 +160,37 @@ function showTab(tabName) {
 	                    <p class="origin"><span>원산지 </span><span class="emph"> ${vo.origin}</span></p>
 	                    <p class="manufacturer"><span>제조사 </span><span class="emph"> ${vo.manufacturer}</span></p>
 	                    <p class="delivery-info"><span>배송</span><span class="emph"> 무료 배송</span></p>
-	                    <form>
-	                    	<p class="price"><span>가격 </span><span class="emph" id="price" data-price="${vo.price}"> ${vo.price}원</span></p>
-	                    	<!-- 수량 -->
-	                    	<div class="number">
-	                    		<span>수량 </span>
-	                    		<span class="emph">
-									<select id="sel">
-										<option value="1">1개</option>
-										<option value="2">2개</option>
-									 	<option value="3">3개</option>
-									 	<option value="4">4개</option>
-									 	<option value="5">5개</option>
-									 	<option value="6">6개</option>
-									 	<option value="7">7개</option>
-										<option value="8">8개</option>
-									 	<option value="9">9개</option>
-									 	<option value="10">10개</option>
-									</select>
-								</span>
-	                    	</div>
-	                    	<!-- 총 금액 -->
-	                    	<div class="totalPrice">
-	                    		<span>총 금액</span>
-	                    		<span id="total" class="emph">${vo.price}</span>원
-	                    	</div>
-	                    	<div class="btnWrap">
-	                    		<button value="장바구니" id="cartBtn" class="btn" data-no="${vo.gno}">장바구니</button>
-	                    		<c:if test="${sessionScope!=null}">
-	                    			<button value="구매하기" id="buyBtn" class="btn">구매하기</button>
-	                    		</c:if>
-	                    		<button value="목록" id="listBtn" class="btn" onclick="javascript:history.back()">목록</button>
-	                    	</div>
-	                    </form>
+                    	<p class="price"><span>가격 </span><span class="emph" id="price" data-price="${vo.price}"> ${vo.price}원</span></p>
+                    	<!-- 수량 -->
+                    	<p class="number">
+                    		<span>수량 </span>
+                    		<span class="emph">
+								<select id="sel">
+									<option value="1">1개</option>
+									<option value="2">2개</option>
+								 	<option value="3">3개</option>
+								 	<option value="4">4개</option>
+								 	<option value="5">5개</option>
+								 	<option value="6">6개</option>
+								 	<option value="7">7개</option>
+									<option value="8">8개</option>
+								 	<option value="9">9개</option>
+								 	<option value="10">10개</option>
+								</select>
+							</span>
+                    	</p>
+                    	<!-- 총 금액 -->
+                    	<p class="totalPrice">
+                    		<span>총 금액</span>
+                    		<span class="emph"><span id="total">${vo.price}</span>원</span>
+                    	</p>
+                    	<div class="btnWrap">
+                    		<button value="장바구니" id="cartBtn" class="btn" data-gno="${vo.gno}">장바구니</button>
+                    		<c:if test="${sessionScope!=null}">
+                    			<button value="구매하기" id="buyBtn" class="btn">구매하기</button>
+                    		</c:if>
+                    		<button value="목록" id="listBtn" class="btn" onclick="javascript:history.back()">목록</button>
+                    	</div>
 	                </div>
             	</div>
 
@@ -214,64 +212,13 @@ function showTab(tabName) {
 	                    	
 	                    	<!-- 상세 설명 -->
 	                    	<p class="cont"></p>
-	                    	
-	                    	<!-- 테이블 -->
-		                    <%-- <div class="detail-table">
-		                    	<div class="product-table">
-			                        <div class="product-table-cell">
-			                            <div>주소</div>
-			                            <div class="product-table-info">
-			                                <div data-wf-sku-bindings="%5B%7B%22from%22%3A%22f_width_%22%2C%22to%22%3A%22innerHTML%22%7D%5D">${vo.addr}</div>
-			                                <!-- <div>in</div> -->
-			                            </div>
-			                        </div>
-			                        <div class="product-table-cell">
-			                            <div>전화번호</div>
-			                            <div class="product-table-info">
-			                                <div data-wf-sku-bindings="%5B%7B%22from%22%3A%22f_height_%22%2C%22to%22%3A%22innerHTML%22%7D%5D">${vo.phone}</div>
-			                                <!-- <div>in</div> -->
-			                            </div>
-			                        </div>
-			                        <div class="product-table-cell">
-			                            <div>운영시간</div>
-			                            <div class="product-table-info">
-			                                <div data-wf-sku-bindings="%5B%7B%22from%22%3A%22f_length_%22%2C%22to%22%3A%22innerHTML%22%7D%5D">${vo.bhour}</div>
-			                                <!-- <div>in</div> -->
-			                            </div>
-			                        </div>
-			                        <div class="product-table-cell no-border-bottom">
-			                            <div>요금</div>
-			                            <div class="product-table-info">
-			                                <div data-wf-sku-bindings="%5B%7B%22from%22%3A%22f_weight_%22%2C%22to%22%3A%22innerHTML%22%7D%5D">${vo.rate}</div>
-			                                <!-- <div>oz</div> -->
-			                            </div>
-			                        </div>
-			                    </div>
-		                    </div> --%>
-	
-		                    <!-- 해시 태그 -->
-		                    <%-- <div class="tag-list">
-		                    	<h5>연관 태그</h5>
-			                    <c:forEach var="tag" items="${vo.tag}">
-			                    	<a href="#"><span>${tag}</span></a>
-			                    </c:forEach>
-		                    </div> --%>
 		                </div>
                		</div>
-                	
-                	<!-- <div id="mapCont" class="tab-content" style="display: none;">
-				        지도/주변 추천 내용
-				        지도/주변 추천 내용을 입력하세요.
-				    </div> -->
 				    
-				    <div id="reviewCont" class="tab-content" style="display:none">
+				    <div id="reviewCont" class="tab-content" style="">
 				        <!-- 리뷰 내용 -->
 				        <jsp:include page="../busan/review.jsp"></jsp:include>
 				    </div>
-				    <!-- <div id="reserveCont" class="tab-content" style="display: none;">
-				        예약하기 내용
-				        예약하기 내용을 입력하세요.
-				    </div> -->
 				    
 				    <!-- <div id="inquiryCont" class="tab-content" style="display: none;">
 				        문의 내용

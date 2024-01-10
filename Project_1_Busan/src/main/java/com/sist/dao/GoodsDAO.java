@@ -62,21 +62,22 @@ public class GoodsDAO {
 		List<GoodsVO> list=new ArrayList<>();
 		try {
 			conn=dbconn.getConnection();
+			
+			int rowSize=12;
+			int start=(rowSize*page)-(rowSize-1); // 오라클 => 1번 
+			int end=rowSize*page;
+			
 			String sql="SELECT gno, gname, poster, price, num "
 					  +"FROM (SELECT gno, gname, poster, price, rownum as num "
 					  +"FROM (SELECT gno, gname, poster, price "
 					  +"FROM goods ORDER BY gno ASC)) "
-					  +"WHERE num BETWEEN ? AND ?";
-			ps=conn.prepareStatement(sql);
+					  +"WHERE num BETWEEN ? AND ?";			
 			
 			// ?에 값 채움
-			int rowSize=12;
-			int start=(rowSize*page)-(rowSize-1); // 오라클 => 1번 
-			int end=rowSize*page;
-			   
+			ps=conn.prepareStatement(sql);
 			ps.setInt(1, start);
 			ps.setInt(2, end);
-			   
+
 			ResultSet rs=ps.executeQuery();
 			while(rs.next()) { // 출력 1번째 위치부터 읽기 시작 
 				GoodsVO vo=new GoodsVO();
@@ -104,9 +105,7 @@ public class GoodsDAO {
 			ps=conn.prepareStatement(sql);
 			ResultSet rs=ps.executeQuery();
 			rs.next();
-			
 			total=rs.getInt(1);
-			
 			rs.close();
 		} catch(Exception ex) {
 			ex.printStackTrace();
@@ -127,6 +126,11 @@ public class GoodsDAO {
 			
 		try {
 			conn=dbconn.getConnection();
+			
+			int rowSize=12;
+			int start=(rowSize*page)-(rowSize-1);
+			int end=rowSize*page;
+			
 			String sql="SELECT gno, gname, poster, price, num "
 					  +"FROM (SELECT gno, gname, poster, price, rownum as num "
 					  +"FROM (SELECT gno, gname, poster, price "
@@ -134,10 +138,6 @@ public class GoodsDAO {
 					  +"ORDER BY "+sort+" "+sort_way+")) "
 					  +"WHERE num BETWEEN ? AND ?";
 			ps=conn.prepareStatement(sql);
-			int rowSize=12;
-			int start=(rowSize*page)-(rowSize-1);
-			int end=rowSize*page;
-			   
 			ps.setString(1, keyword);
 			ps.setInt(2, start);
 			ps.setInt(3, end);
@@ -193,6 +193,8 @@ public class GoodsDAO {
 	                  +"WHERE gno="+gno;
 	         
 			ps=conn.prepareStatement(sql);
+			
+			
 			ResultSet rs=ps.executeQuery();
 			if(rs.next()) {
 				vo.setGno(rs.getInt(1));
@@ -250,30 +252,18 @@ public class GoodsDAO {
 	
 	
 	// 존재하는 상품 확인
-	public int goodsCartCount(CartVO vo) {
-		int count=0;
-		try {
-			conn=dbconn.getConnection();
-			
-			String sql="SELECT COUNT(*) "
-				      +"FROM cart "
-				      +"WHERE gno=? AND issale!=1 AND id=?";
-			ps=conn.prepareStatement(sql);
-			ps.setInt(1, vo.getGno());
-	        ps.setString(2, vo.getId());
-	        
-	        ResultSet rs=ps.executeQuery();
-			if(rs.next()) {
-				count=rs.getInt(1);
-			}
-			rs.close();
-		} catch(Exception ex) {
-			ex.printStackTrace();
-		} finally {
-			dbconn.disConnection(conn, ps);
-		}
-		return count;
-	}
+	/*
+	 * public int cartGoodsCount(CartVO vo) { int count=0; try {
+	 * conn=dbconn.getConnection();
+	 * 
+	 * String sql="SELECT COUNT(*) " +"FROM cart "
+	 * +"WHERE gno=? AND issale!=1 AND id=?"; ps=conn.prepareStatement(sql);
+	 * ps.setInt(1, vo.getGno()); ps.setString(2, vo.getId());
+	 * 
+	 * ResultSet rs=ps.executeQuery(); if(rs.next()) { count=rs.getInt(1); }
+	 * rs.close(); } catch(Exception ex) { ex.printStackTrace(); } finally {
+	 * dbconn.disConnection(conn, ps); } return count; }
+	 */
 	
 	
 	public void cartGoodsUpdate(CartVO vo) {
@@ -295,42 +285,44 @@ public class GoodsDAO {
 	}
 	
 
-	public void cartGoodsInsert(CartVO vo) {
+	public String cartGoodsInsert(CartVO vo) {
+	    String result="";
 	    try {
 	        conn=dbconn.getConnection();
-	        String sql ="SELECT COUNT(*) "
-	        		   +"FROM cart "
-	        		   +"WHERE gno=? AND id=? AND issale!=1";
+	        String sql="SELECT COUNT(*) " +
+	                     "FROM cart " +
+	                     "WHERE gno=? AND id=? AND issale!=1";
 	        ps=conn.prepareStatement(sql);
 	        ps.setInt(1, vo.getGno());
 	        ps.setString(2, vo.getId());
+
 	        ResultSet rs=ps.executeQuery();
-	        rs=ps.executeQuery();
 	        if (rs.next()) {
 	            int count=rs.getInt(1);
 
 	            // 구매가 안된 상품이 있는지 확인 
 	            if (count!=0) {
 	                // 존재한다면 => 수량만 증가 
-	                sql="UPDATE cart SET "
-	                   +"amount=amount+? "
-	                   +"WHERE gno=? AND id=?";
+	                sql="UPDATE cart SET " +
+	                      "amount=amount+? " +
+	                      "WHERE gno=? AND id=?";
 	                ps=conn.prepareStatement(sql);
 	                ps.setInt(1, vo.getAmount());
 	                ps.setInt(2, vo.getGno());
 	                ps.setString(3, vo.getId());
 	                ps.executeUpdate();
+	                result="yes";
 	            } else {
 	                // 없다면 => 추가 
-	                sql="INSERT INTO cart VALUES("
-	                   +"(SELECT NVL(MAX(cart_no) + 1, 1) "
-	                   +"FROM cart), ?, ?, ?, ?, 0, 0, SYSDATE)";
-	                ps = conn.prepareStatement(sql);
+	                sql="INSERT INTO cart VALUES(" +
+	                      "(SELECT NVL(MAX(cart_no) + 1, 1) FROM cart), ?, ?, ?, ?, 0, 0, SYSDATE)";
+	                ps=conn.prepareStatement(sql);
 	                ps.setInt(1, vo.getGno());
 	                ps.setInt(2, vo.getAmount());
 	                ps.setInt(3, vo.getPrice());
 	                ps.setString(4, vo.getId());
 	                ps.executeUpdate();
+	                result="yes";
 	            }
 	        }
 	    } catch (Exception ex) {
@@ -338,12 +330,14 @@ public class GoodsDAO {
 	    } finally {
 	        dbconn.disConnection(conn, ps);
 	    }
+	    return result;
 	}
+
 	
 	
 	// mypageList(cart)
-	public CartVO myCartGoodsData(String id) {
-		CartVO vo=new CartVO();
+	public List<CartVO> myCartGoodsData(String id) {
+		List<CartVO> list=new ArrayList<>();
 		
 		try {
 	        conn=dbconn.getConnection();
@@ -355,19 +349,80 @@ public class GoodsDAO {
 	                  +"WHERE id=? AND issale!=1 "
 	                  +"ORDER BY cart_no DESC";
 	        ps=conn.prepareStatement(sql);
-	        ps.setString(1, vo.getId());
+	        ps.setString(1, id);
 
 	        ResultSet rs=ps.executeQuery();
-	        rs=ps.executeQuery();
+	        while (rs.next()) {
+                CartVO vo=new CartVO();
+                vo.setCart_no(rs.getInt(1));
+                vo.setGno(rs.getInt(2));
+                vo.setAmount(rs.getInt(3));
+                vo.setRegdate(rs.getDate(4));
+                vo.setIssale(rs.getInt(5));
+                vo.setIscheck(rs.getInt(6));
+                vo.setPrice(rs.getInt(7));
+                
+                GoodsVO gvo=new GoodsVO();
+                gvo.setPoster(rs.getString(8));
+                gvo.setGname(rs.getString(9));
+                gvo.setPrice(rs.getString(10));
+                vo.setGvo(gvo);
+                
+                list.add(vo);
+            }
 	    } catch (Exception ex) {
 	        ex.printStackTrace();
 	    } finally {
 	        dbconn.disConnection(conn, ps);
 	    }
 		
-		return vo;
+		return list;
 	}
+
 	
+	public List<CartVO> myCartGoodsBuyData(String id) {
+		List<CartVO> list=new ArrayList<>();
+		
+		try {
+	        conn=dbconn.getConnection();
+	        String sql="SELECT cart_no, gno, amount, regdate, issale, ischeck, price, "
+	        		  +"(SELECT poster FROM goods WHERE no=cart.gno) as poster, "
+	                  +"(SELECT gname FROM goods WHERE no=cart.gno) as gname, "
+	                  +"(SELECT price FROM goods WHERE no=cart.gno) as price "
+	                  +"FROM cart "
+	                  +"WHERE id=? AND issale!=1 "
+	                  +"ORDER BY cart_no DESC";
+	        ps=conn.prepareStatement(sql);
+	        ps.setString(1, id);
+	        ResultSet rs=ps.executeQuery();
+	        while(rs.next()) {
+	        	CartVO vo=new CartVO();
+	            vo.setCart_no(rs.getInt(1));
+	            vo.setGno(rs.getInt(2));
+	            vo.setAmount(rs.getInt(3));
+	            vo.setRegdate(rs.getDate(4));
+	            vo.setIssale(rs.getInt(5));
+	            vo.setIscheck(rs.getInt(6));
+	            vo.setPrice(rs.getInt(7));
+	            
+	            GoodsVO gvo=new GoodsVO();
+                gvo.setPoster(rs.getString(8));
+                gvo.setGname(rs.getString(9));
+                gvo.setPrice(rs.getString(10));
+                vo.setGvo(gvo);
+                
+	            list.add(vo);
+	        }
+	        rs.close();
+	    } catch (Exception ex) {
+	        ex.printStackTrace();
+	    } finally {
+	        dbconn.disConnection(conn, ps);
+	    }
+		
+		return list;
+	}
+
 	
 	public void cartGoodsBuyInsert(CartVO vo) {
 		try {
@@ -380,13 +435,44 @@ public class GoodsDAO {
 	        ps.setInt(2, vo.getAmount());
 	        ps.setInt(3, vo.getPrice());
 	        ps.setString(4, vo.getId());
-			ResultSet rs=ps.executeQuery();
-	        rs=ps.executeQuery();
+			ps.executeQuery();
 		} catch (Exception ex) {
 	        ex.printStackTrace();
 	    } finally {
 	        dbconn.disConnection(conn, ps);
 	    }
 	}
-   
+	
+	
+	public void cartGoodsDelete(int cart_no) {
+		try {
+			conn=dbconn.getConnection();
+	        String sql="DELETE FROM cart "
+	        		  +"WHERE cart_no=?";
+	        ps=conn.prepareStatement(sql);
+	        ps.setInt(1, cart_no);
+	        ps.executeUpdate();
+		} catch(Exception ex) {
+			ex.printStackTrace();
+		} finally {
+	        dbconn.disConnection(conn, ps);
+	    }
+	}
+	
+	
+	public void cartGoodsBuyUpdate(int cart_no) {
+		try {
+			conn=dbconn.getConnection();
+	        String sql="UPDATE cart SET "
+	        		  +"issale=1 "
+	        		  +"WHERE cart_no=?";
+	        ps=conn.prepareStatement(sql);
+	        ps.setInt(1, cart_no);
+	        ps.executeUpdate();
+		} catch(Exception ex) {
+			ex.printStackTrace();
+		} finally {
+	        dbconn.disConnection(conn, ps);
+	    }
+	}
 }
