@@ -43,7 +43,7 @@ public class JjimModel {
  	   HttpSession session=request.getSession();
  	   String id=(String)session.getAttribute("id");
  	   JjimDAO dao=JjimDAO.newInstance();
- 	   String res=dao.ex_jjimUpdate(id, Integer.parseInt(cateno), Integer.parseInt(eno));
+ 	   String res=dao.jjimUpdate(id, Integer.parseInt(cateno), Integer.parseInt(eno));
  	   
  	   try {
  		   PrintWriter out=response.getWriter();

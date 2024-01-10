@@ -93,6 +93,37 @@ public class JjimDAO {
 		return list;
 	}
 	
+	public int jjimCount(String id,int cateno,int no)
+	{
+		int count=0;
+		try {
+			conn=dbconn.getConnection();
+			String sql="SELECT count(*) FROM jjim "
+					+ "WHERE id=? AND cateno=? AND no=?";
+			ps=conn.prepareStatement(sql);
+			ps.setString(1, id);
+			ps.setInt(2, cateno);
+			ps.setInt(3, no);
+			ResultSet rs=ps.executeQuery();
+			rs.next();
+			count=rs.getInt(1);
+			rs.close();
+			ps.close();
+			if(count==0)
+			{
+				count=0;
+			}else {
+				count=1;
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			dbconn.disConnection(conn, ps);
+		}
+		return count;
+		
+	}
 	public String jjimUpdate(String id,int cateno,int no)
 	{
 		String result="";
@@ -139,47 +170,5 @@ public class JjimDAO {
 		}
 		return result;
 	}
-	public String ex_jjimUpdate(String id,int cateno,int eno)
-	{
-		String result="";
-		try {
-			conn=dbconn.getConnection();
-			String sql="SELECT count(*) FROM jjim"
-					+ " WHERE id=? AND cateno=5 AND no=?";
-			ps=conn.prepareStatement(sql);
-			ps.setString(1, id);
-			ps.setInt(2, eno);
-			ResultSet rs=ps.executeQuery();
-			rs.next();
-			int count=rs.getInt(1);
-			rs.close();
-			ps.close();
-			
-			if(count!=1)
-			{
-				sql="INSERT INTO jjim "
-						+ "VALUES((SELECT NVL(MAX(jno)+1,1) FROM jjim),"
-						+ "?,5,?)";
-				ps=conn.prepareStatement(sql);
-				ps.setString(1, id);
-				ps.setInt(2, eno);
-				ps.executeUpdate();
-				result="ok";			
-			}
-			else {
-				sql="DELETE FROM jjim "
-						+ "WHERE id=? AND CATENO=5 AND NO=?";
-				ps=conn.prepareStatement(sql);
-				ps.setString(1, id);
-				ps.setInt(2, eno);
-				ps.executeUpdate();
-				result="no";
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			dbconn.disConnection(conn, ps);
-		}
-		return result;
-	}
+	
 }
