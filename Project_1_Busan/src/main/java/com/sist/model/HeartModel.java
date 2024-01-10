@@ -1,38 +1,54 @@
 package com.sist.model;
 
+import java.io.PrintWriter;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.sist.controller.RequestMapping;
-import com.sist.dao.*;
-import com.sist.vo.*;
+import com.sist.dao.HeartDAO;
+
 public class HeartModel {
-	@RequestMapping("like/ex_like_insert.do")
-	public String ex_like_insert(HttpServletRequest request,HttpServletResponse response) {
-		String eno=request.getParameter("eno");
-		String id=request.getParameter("id");
-		
-		HeartVO vo=new HeartVO();
-		
-		vo.getMvo().setId(id);
-		vo.setHno(Integer.parseInt(eno));
-		
-		HeartDAO dao=HeartDAO.newInstance();
-		dao.HeartInsert(vo);
-		
-		return "redirect:../busan/ex_detail.do?eno="+eno;
+   @RequestMapping("busan/Heart.do")
+	public void busan_Heart(HttpServletRequest request, HttpServletResponse response)
+	{
+	   try {
+		   request.setCharacterEncoding("UTF-8");
+	   }catch(Exception e) {e.printStackTrace();}
+	   String no=request.getParameter("no");
+	   String cateno=request.getParameter("cateno");
+	   HttpSession session=request.getSession();
+	   String id=(String)session.getAttribute("id");
+	   HeartDAO dao=HeartDAO.newInstance();
+	   String res=dao.ex_HeartUpdate(id, Integer.parseInt("5"), Integer.parseInt(no));
+	   
+	   try {
+		   PrintWriter out=response.getWriter();
+		   out.write(res);
+	   }catch(Exception e) {e.printStackTrace();}
 	}
-	
-	@RequestMapping("like/like_cancle.do")
-	public String ex_like_cancle(HttpServletRequest request,HttpServletResponse response) {
-		String eno=request.getParameter("eno");
-		HttpSession session=request.getSession();
-		String id=(String)session.getAttribute("id");
-		
-		HeartDAO dao=HeartDAO.newInstance();
-		dao.HeartCancle(id, Integer.parseInt(eno));
-		
-		return "redirect:../busan/ex_detail.do?eno="+eno;
+   
+   @RequestMapping("busan/ex_Heart.do")
+	public String ex_Heart(HttpServletRequest request, HttpServletResponse response)
+	{
+	   try {
+		   request.setCharacterEncoding("UTF-8");
+	   }catch(Exception e) {e.printStackTrace();}
+	   String eno=request.getParameter("eno");
+	   String cateno=request.getParameter("cateno");
+	   HttpSession session=request.getSession();
+	   String id=(String)session.getAttribute("id");
+	   HeartDAO dao=HeartDAO.newInstance();
+	   String res=dao.HeartUpdate(id, Integer.parseInt("5"), Integer.parseInt(eno));
+	   
+	   try {
+		   PrintWriter out=response.getWriter();
+		   out.write(res);
+	   }catch(Exception e) {e.printStackTrace();}
+	   return "redirect:../busan/ex_detail.do?eno="+eno;
 	}
+   
+   
+   
 }

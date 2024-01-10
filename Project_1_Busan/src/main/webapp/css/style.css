@@ -2654,7 +2654,7 @@ li{list-style: none;}
    }
    
    .button:hover {
-     box-shadow: 0 8px 8px -4px rgba(165, 201, 38, 0.5);
+     box-shadow: 0 8px 8px -4px rgba(37, 70, 244, 0.5);
      -webkit-transform: scale(1.05);
      -ms-transform: scale(1.05);
      transform: scale(1.05);
@@ -4921,7 +4921,7 @@ main #mainVisual .tourSlide .slide2{
   background-image: url("../images/visual2.png");
 }
 main #mainVisual .tourSlide .slide3{
-  background-image: url("../images/visual3.jpg");
+  background-image: url("../images/visual6.jpg");
 }
 
 main #mainVisual .tourSlide .swiper-slide{
@@ -5068,6 +5068,11 @@ main #shop .shopSlide .swiper-slide a{
     gap: 15px;
 	width: 100%;
 }
+
+main #shop .shopSlide .swiper-slide:hover a{
+	color: #111;
+}
+
 main #shop img{
 	width: 80px;
 	height: 80px;
@@ -5345,7 +5350,7 @@ main #bottom .service p{
 	transform: rotate(-90deg);
 }
 #contactBtn:hover{
-	background-color: #376092;
+	background-color: #222;
 	transition: all ease-in-out 0.3s;
 }
 #topBtn:hover{
@@ -5355,6 +5360,9 @@ main #bottom .service p{
 
 
 /***** list page *****/
+.search .button{
+	border: 0;
+}
 /*.list .product-card-image-wrapper{
 	height: 308px;
 }*/
@@ -5398,7 +5406,7 @@ main #bottom .service p{
 }
 .detail .product-top{
 	display: flex;
-	justify-content: center;
+	justify-content: space-between;
 	align-items: flex-start;
 	gap: 40px;
 }
@@ -5431,13 +5439,17 @@ main #bottom .service p{
 }
 .detail .product-info p{
 	display: flex;
-	justify-content: flex-start;
+	justify-content: space-between;
 	align-items: center;
 	gap: 20px;
+	width: 100%;
 	margin-bottom: 25px;
 	color: #888;
 	font-size: 15px;
 	font-weight: normal;
+}
+.detail .product-info .delivery-info{
+	padding-right: 0;
 }
 .detail .product-info span{
 	min-width: 40px;
@@ -5446,6 +5458,21 @@ main #bottom .service p{
 	color: #333;
 	font-size: 16px;
 	font-weight: 600;
+	text-align: right;
+}
+.detail .product-info #sel{
+	min-width: 100px;
+	border: 1px solid #ddd;
+	border-radius: 5px;
+}
+.detail .product-info .totalPrice{
+	padding-top: 25px;
+	border-top: 1px solid #eee;
+}
+.detail .product-info .totalPrice .emph{
+	color: #2546F4;
+	font-size: 20px;
+	font-weight: bold;
 }
 .detail .product-info .heart{
 	margin: 30px 0 15px 0;
@@ -5509,7 +5536,7 @@ main #bottom .service p{
 	color: #fff;
 }
 #goods.detail .product-info .btnWrap #listBtn:hover{
-	background-color: #666;
+	background-color: #888;
 	color: #fff;
 }
 

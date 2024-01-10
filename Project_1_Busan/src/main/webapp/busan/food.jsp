@@ -177,7 +177,10 @@
                                         <img src="${vo.poster}" alt="" sizes="(max-width: 479px) 73vw, (max-width: 767px) 34vw, (max-width: 991px) 33vw, 12vw"/>
                                     </div>
                                     <h6 class="product-card-heading">${vo.title}</h6>
-                                    <div data-wf-sku-bindings="%5B%7B%22from%22%3A%22f_price_%22%2C%22to%22%3A%22innerHTML%22%7D%5D" class="product-card-price">$ 30.00 USD</div>
+                                    <div class="product-card-info">
+	                                   	<span><img src="../images/icon_heart.png" class="icon icon-heart"> 좋아요 ${vo.heart}</span>
+	                                   	<span><img src="../images/icon_jjim.png" class="icon icon-jjim"> 찜 ${vo.jjim}</span>
+	                                </div>
                                 </a>
                             </div>
                             </c:forEach>

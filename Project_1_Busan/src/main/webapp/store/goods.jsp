@@ -140,10 +140,10 @@
                     <div class="w-dyn-list">
                         <div role="list" class="shop-categories w-dyn-items">
                             <div role="listitem" class="w-dyn-item">
-                                <a href="../store/goods.do?word=${word}&sort=hit" class="shop-category-link">조회순</a>
+                                <a href="../store/goods.do?word=${word}&sort=hit" class="shop-category-link">고가순</a>
                             </div>
                             <div role="listitem" class="w-dyn-item">
-                                <a href="../store/goods.do?word=${word}&sort=heart" class="shop-category-link">좋아요순</a>
+                                <a href="../store/goods.do?word=${word}&sort=heart" class="shop-category-link">저가순</a>
                             </div>
                         </div>
                     </div>

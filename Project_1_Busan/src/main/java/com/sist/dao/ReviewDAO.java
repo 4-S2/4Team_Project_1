@@ -24,7 +24,7 @@ public class ReviewDAO {
     
     // 리뷰 목록 출력
     public List<ReviewVO> reviewListData(int page){
-       List<ReviewVO> rlist=new ArrayList<ReviewVO>();
+       List<ReviewVO> list=new ArrayList<ReviewVO>();
        try{
           // 1. 연결
           conn=dbconn.getConnection();
@@ -55,7 +55,7 @@ public class ReviewDAO {
              vo.setPassword(rs.getString(6));
              vo.setImg(rs.getString(7));
              vo.setRegdate(rs.getDate(8));
-             rlist.add(vo);
+             list.add(vo);
           }
           rs.close();
        }catch(Exception ex){
@@ -66,7 +66,7 @@ public class ReviewDAO {
           // 반환 => 재사용 
           dbconn.disConnection(conn, ps);
        }
-       return rlist;
+       return list;
     }
     
     

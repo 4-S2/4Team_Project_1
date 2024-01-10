@@ -109,33 +109,44 @@ public class MemberModel {
     }
     
     @RequestMapping("member/login_ok.do")
-    public String member_login_ok(HttpServletRequest request, HttpServletResponse response) {
-
+    public void member_login_ok(HttpServletRequest request, HttpServletResponse response) {
+        // 문자 인코딩 설정
         response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=UTF-8");
 
+        // 요청으로부터 ID와 비밀번호 가져오기
         String id = request.getParameter("id");
         String pwd = request.getParameter("password");
 
+        // DAO 인스턴스 생성 및 로그인 메소드 호출
         MemberDAO dao = MemberDAO.newInstance();
         MemberVO vo = dao.memberLogin(id, pwd);
-        if (vo.getMsg().equals("OK")) {
-            // 세션에 저장 
-            HttpSession session = request.getSession();
-            session.setAttribute("id", vo.getId());
-            session.setAttribute("name", vo.getName());
-            session.setAttribute("admin", vo.getAdmin());
-            session.setAttribute("address", vo.getAddr());
-            session.setAttribute("detail_address", vo.getDetail_addr());
-            session.setAttribute("postal_code", vo.getPostcode());
 
-            // 로그인 성공 시 메인 페이지로 리디렉션
-            return "redirect:../main/main.do";
-        } else {
-            // 로그인 실패 시 다시 로그인 페이지로
-            return "../member/login_main.do";
+        try {
+            PrintWriter out = response.getWriter();
+
+            if (vo.getMsg().equals("OK")) {
+                // 세션에 사용자 정보 저장
+                HttpSession session = request.getSession();
+                session.setAttribute("id", vo.getId());
+                session.setAttribute("name", vo.getName());
+                session.setAttribute("admin", vo.getAdmin());
+                session.setAttribute("address", vo.getAddr());
+                session.setAttribute("detail_address", vo.getDetail_addr());
+                session.setAttribute("postal_code", vo.getPostcode());
+                // ... 기타 세션 정보 설정 ...
+
+                // 로그인 성공 시, 성공 메시지 전송
+                out.print("Login Success");
+            } else {
+                // 로그인 실패 시, 실패 메시지 전송
+                out.print("Login Failed");
+            }
+        } catch(IOException e) {
+            e.printStackTrace();
         }
     }
+
     
 
     @RequestMapping("member/logout.do")
@@ -188,10 +199,10 @@ public class MemberModel {
         String email = request.getParameter("email");
 
         MemberDAO dao = MemberDAO.newInstance();
-        String password = dao.getOriginalPassword(id, email); // 원래 비밀번호 가져오기
+        String pwd = dao.getOriginalPassword(id, email); // 원래 비밀번호 가져오기
 
-        if(password != null) {
-            boolean emailSent = dao.sendPasswordToEmail(id, email, password); // 이메일 발송
+        if(pwd != null) {
+            boolean emailSent = dao.sendPasswordToEmail(id, email, pwd); // 이메일 발송
             if(emailSent) {
                 response.getWriter().print("YES");
             } else {

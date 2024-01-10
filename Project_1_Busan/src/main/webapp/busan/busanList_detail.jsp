@@ -79,9 +79,29 @@
         	$('.update').show();
         });
     }); */
+    /* let storedJjimState = localStorage.getItem('jjimState');
+    let storedJjimNo = localStorage.getItem('no');
+    let jjimno = $('.jjimBtn').attr("data-no");
+    if (storedJjimState === 'ok'&&storedJjimNo===jjimno) {
+        $('.jjim_img').attr('src', '../busan/jjim.png');
+    } else if (storedJjimState === 'no') {
+        $('.jjim_img').attr('src', '../busan/jjim_none.png');
+    } */
+    $(document).ready(function() {
+        let count = parseInt($('.jjim').attr('data-count'), 10); // 문자열을 숫자로 변환
+
+        if (count === 1) {
+            $('.jjim_img').attr('src', '../busan/jjim.png');
+        } else if (count === 0) {
+            $('.jjim_img').attr('src', '../busan/jjim_none.png');
+        }
+    });
+
+    
     
     $(function(){
-        $('.reUp').click(function(){
+    	
+    	$('.reUp').click(function(){
             var buttonText = $(this).text();
             
             if(buttonText === '취소') {
@@ -94,8 +114,7 @@
                 $('.update').show();
             }
         });
-    });
-    $(function(){
+        
         $('.replyBtn').click(function(){
             var buttonText = $(this).text();
             
@@ -110,18 +129,30 @@
             }
         });
         
-        /* $('#reserve').click(function(){
-        	let no=$('#reserveCont').attr("data-no");
-        	$.ajax({
-        		type:'post',
-        		url:'../reserve/foodreserve_main.do',
-        		data{'no',no},
-        		success:function(result){
-        			$('#reserveCont').html(result);
-        		}
-        		
-        	})
-        }) */
+        $('.jjimBtn').click(function() {
+            let no = $(this).attr("data-no");            
+            let cateno = $(this).attr("data-cateno");
+
+            $.ajax({
+                type: 'post',
+                url: '../busan/jjim.do',
+                data: {'no': no, 'cateno': cateno},
+                success: function(result) {
+                    if (result === 'ok') {
+                        alert("찜하기가 완료되었습니다");
+                        $('.jjim_img').attr('src', '../busan/jjim.png');
+                        localStorage.setItem('jjimState', 'ok');  // 찜 상태를 Local Storage에 저장
+                        localStorage.setItem('no', no);
+                    } else if (result === 'no') {
+                        alert("찜하기가 취소되었습니다");
+                        $('.jjim_img').attr('src', '../busan/jjim_none.png');
+                        localStorage.setItem('jjimState', 'no');  // 찜 상태를 Local Storage에 저장
+                        localStorage.setItem('no', no);
+                    }
+                }
+            });
+        });
+
     });
     /* let bCheck=false;
     $(function(){
@@ -143,6 +174,10 @@
 </script>
 
 <style>
+.jjim_img{
+  width: 20px;
+}
+
 #mapCont {
 	display: none;
 	width: 100%;
@@ -187,6 +222,22 @@ color: #fff;
     float: right;
     margin-top: 7px;
 }
+.joa{
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    /* margin-top: 120px; */
+    width: 100%;
+    justify-content: flex-start;
+    margin-bottom: 5px;
+
+}
+.detail .product-top{
+    align-items: end;
+}
+.detail .product-info .heart{
+    margin: 0px;
+}
 </style>
 
 <div id="busan" class="detail">
@@ -211,14 +262,16 @@ color: #fff;
 							sizes="(max-width: 479px) 83vw, (max-width: 767px) 75vw, (max-width: 991px) 76vw, 32vw" />
 					</div>
 					<div class="product-info">
-						<h1>${vo.title}</h1>
+						<h1 style="margin-bottom: 140px">${vo.title}</h1>
+						<div class="joa">
 						<div class="heart">
 							<span>좋아요 수</span>
 							<button>좋아요</button>
 						</div>
-						<div class="jjim">
-							<span>찜하기 수</span>
-							<button>찜하기</button>
+						<div class="jjim" data-count="${count }">
+							<span><img src="../busan/jjim_none.png" class="jjim_img"></span>
+							<button class="jjimBtn" data-cateno="${cateno}" data-no="${vo.no }">찜하기</button>
+						</div>
 						</div>
 					</div>
 				</div>

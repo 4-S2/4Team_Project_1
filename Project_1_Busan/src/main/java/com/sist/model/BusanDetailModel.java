@@ -7,9 +7,11 @@ import java.util.StringTokenizer;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.sist.controller.RequestMapping;
 import com.sist.dao.BusanDAO;
+import com.sist.dao.JjimDAO;
 import com.sist.vo.BusanListVO;
 import com.sist.vo.GoodsVO;
 
@@ -27,6 +29,10 @@ public class BusanDetailModel {
 		  BusanDAO dao=new BusanDAO();
 		  BusanListVO vo=dao.busanDetailData(Integer.parseInt(no), "food");
 		  List<BusanListVO> list=dao.busanRandomList("food");
+		  HttpSession session=request.getSession();
+		  String id=(String)session.getAttribute("id");
+		  JjimDAO dao1=JjimDAO.newInstance();
+		  int count=dao1.jjimCount(id,4,Integer.parseInt(no));
 		  // 쿠키 저장
 		  Cookie[] cookies = request.getCookies();
 			if(cookies==null) {
@@ -77,9 +83,11 @@ public class BusanDetailModel {
 					response.addCookie(cookie);
 				}
 			}
-		 
+		  
 		  request.setAttribute("vo", vo);
 		  request.setAttribute("cate","맛집");
+		  request.setAttribute("count",count);
+		  request.setAttribute("cateno","4");
 		  request.setAttribute("tab","food");
 		  request.setAttribute("vo", vo);
 		  request.setAttribute("list", list);
@@ -98,7 +106,10 @@ public class BusanDetailModel {
 		  BusanDAO dao = new BusanDAO();
 		  BusanListVO vo = dao.busanDetailData(Integer.parseInt(no),"tour");
 		  List<BusanListVO> list=dao.busanRandomList("tour");
-		  
+		  HttpSession session=request.getSession();
+		  String id=(String)session.getAttribute("id");
+		  JjimDAO dao1=JjimDAO.newInstance();
+		  int count=dao1.jjimCount(id,1,Integer.parseInt(no));
 		  // 쿠키 저장
 		  Cookie[] cookies = request.getCookies();
 			if(cookies==null) {
@@ -154,6 +165,8 @@ public class BusanDetailModel {
 			request.setAttribute("vo", vo);
 			request.setAttribute("list", list);
 			request.setAttribute("tab","tour");
+			request.setAttribute("count",count);
+			request.setAttribute("cateno","1");
 		  //3. 결과값 모아서 request에 저장 
 		  request.setAttribute("main_jsp", "../busan/busanList_detail.jsp");
 		  return "../main/main.jsp";
@@ -170,7 +183,10 @@ public class BusanDetailModel {
 		  BusanDAO dao = new BusanDAO();
 		  BusanListVO vo = dao.busanDetailData(Integer.parseInt(no),"festival");
 		  List<BusanListVO> list=dao.busanRandomList("festival");
-		  
+		  HttpSession session=request.getSession();
+		  String id=(String)session.getAttribute("id");
+		  JjimDAO dao1=JjimDAO.newInstance();
+		  int count=dao1.jjimCount(id,2,Integer.parseInt(no));
 		  // 쿠키 저장
 		  Cookie[] cookies = request.getCookies();
 			if(cookies==null) {
@@ -225,8 +241,9 @@ public class BusanDetailModel {
 		  request.setAttribute("cate","축제");
 		  request.setAttribute("vo", vo);
 		  request.setAttribute("list", list);
+		  request.setAttribute("count",count);
 		  request.setAttribute("tab","festival");
-		  
+		  request.setAttribute("cateno","2");
 		  //3. 결과값 모아서 request에 저장 
 		  request.setAttribute("main_jsp", "../busan/busanList_detail.jsp");
 		  return "../main/main.jsp";
@@ -243,6 +260,10 @@ public class BusanDetailModel {
 		  BusanDAO dao = new BusanDAO();
 		  BusanListVO vo = dao.busanDetailData(Integer.parseInt(no),"activity");
 		  List<BusanListVO> list=dao.busanRandomList("activity");
+		  HttpSession session=request.getSession();
+		  String id=(String)session.getAttribute("id");
+		  JjimDAO dao1=JjimDAO.newInstance();
+		  int count=dao1.jjimCount(id,3,Integer.parseInt(no));
 		  // 쿠키 저장
 		  Cookie[] cookies = request.getCookies();
 			if(cookies==null) {
@@ -297,8 +318,9 @@ public class BusanDetailModel {
 		  request.setAttribute("cate","체험");
 		  request.setAttribute("vo", vo);
 		  request.setAttribute("list", list);
+		  request.setAttribute("count",count);
 		  request.setAttribute("tab","activity");
-		  
+		  request.setAttribute("cateno","3");
 		  //3. 결과값 모아서 request에 저장 
 		  request.setAttribute("main_jsp", "../busan/busanList_detail.jsp");
 		  return "../main/main.jsp";

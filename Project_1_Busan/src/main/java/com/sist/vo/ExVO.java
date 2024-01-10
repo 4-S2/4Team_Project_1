@@ -1,7 +1,13 @@
 package com.sist.vo;
 
 public class ExVO {
-	private int eno,elike,hit,jjim,price,cocate;
+	private int eno,elike,hit,jjim,price,cocate,cateno;
+	public int getCateno() {
+		return cateno;
+	}
+	public void setCateno(int cateno) {
+		this.cateno = cateno;
+	}
 	public int getJjim() {
 		return jjim;
 	}

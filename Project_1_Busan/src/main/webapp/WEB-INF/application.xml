@@ -15,4 +15,5 @@
   <bean id="admin" class="com.sist.model.AdminPageModel"/>
   <bean id="review" class="com.sist.model.ReviewModel"/>
   <bean id="foodreserve" class="com.sist.model.FoodReserveModel"/>
+  <bean id="jjim" class="com.sist.model.JjimModel"/>
 </beans>
