@@ -107,25 +107,26 @@
 					location.href = '../reserve/ex_reserve.do?eno='
 						'&eno' + eno + '&inwon=' + inwon + '&date=' + date;
 				});
+		$('.jjimBtn').click(function(){
+		    let eno = $(this).attr("data-eno");
+		    let cateno = $(this).attr("data-cateno");
+		     $.ajax({
+		        type: 'post',
+		        url: '../busan/ex_jjim.do',
+		        data: {'eno': eno, 'cateno': cateno},
+		        success: function(result){
+		            if(result === 'ok'){
+		                alert("찜하기가 완료되었습니다");
+		                $('.jjim_img').attr('src', '../busan/jjim.png');
+		            } else if(result === 'no'){
+		                alert("찜하기가 취소되었습니다");
+		                $('.jjim_img').attr('src', '../busan/jjim_none.png');
+		            }
+		        }
+		    }); 
+		});
 	});
-	$('.jjimBtn').click(function(){
-	    let eno = $(this).attr("data-eno");
-	    let cateno = $(this).attr("data-cateno");
-	    $.ajax({
-	        type: 'post',
-	        url: '../busan/ex_jjim.do',
-	        data: {'eno': eno, 'cateno': cateno},
-	        success: function(result){
-	            if(result === 'ok'){
-	                alert("찜하기가 완료되었습니다");
-	                $('.jjim_img').attr('src', '../busan/jjim.png');
-	            } else if(result === 'no'){
-	                alert("찜하기가 취소되었습니다");
-	                $('.jjim_img').attr('src', '../busan/jjim_none.png');
-	            }
-	        }
-	    });
-	});
+	
 
 	
 	
@@ -161,7 +162,7 @@
     						</a>
     						
     						
-	                    	<form>
+	                    	
 	                    	
 	                            <div class="heart">
 	                    	<span><img src="like.png"></a></span>
@@ -173,9 +174,10 @@
 	                    </div>
 	                    	<div class="jjim">
 							<span><img src="../busan/jjim_none.png" class="jjim_img"></span>
+							
 							<button class="jjimBtn" data-cateno="${vo.cateno }" data-eno="${vo.eno }">찜하기</button>
 						</div>
-	                    	</form>
+	                    	
 		                     <div class="hit">
 	                    	<span>조회수</span>
 	                    	<span>${vo.hit } 회</span>

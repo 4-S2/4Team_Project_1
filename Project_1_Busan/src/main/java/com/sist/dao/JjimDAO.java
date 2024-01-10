@@ -145,7 +145,7 @@ public class JjimDAO {
 		try {
 			conn=dbconn.getConnection();
 			String sql="SELECT count(*) FROM jjim"
-					+ " WHERE id=? AND cateno=5 AND eno=?";
+					+ " WHERE id=? AND cateno=5 AND no=?";
 			ps=conn.prepareStatement(sql);
 			ps.setString(1, id);
 			ps.setInt(2, eno);

@@ -36,7 +36,8 @@ public class JjimModel {
  		   request.setCharacterEncoding("UTF-8");
  	   }catch(Exception e) {e.printStackTrace();}
  	   String eno=request.getParameter("eno");
- 	  String cateno=request.getParameter("cateno");
+ 	   String cateno=request.getParameter("cateno");
+ 	   System.out.println(eno+" "+"cateno");
  	   HttpSession session=request.getSession();
  	   String id=(String)session.getAttribute("id");
  	   JjimDAO dao=JjimDAO.newInstance();
