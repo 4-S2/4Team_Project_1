@@ -511,4 +511,43 @@ ORDER BY r.frno DESC;
 			   }
 			   return result;
 		   }
+
+		// 맛집예약 취소
+		public void fdReserve_cc(int frno)
+		{
+			try
+			{
+				conn=dbconn.getConnection();
+				String sql="UPDATE reservation SET ok=2 WHERE frno=?";
+				ps=conn.prepareStatement(sql);
+				ps.setInt(1, frno);
+				ps.executeUpdate();
+			}catch(Exception ex)
+			{
+				ex.printStackTrace();
+			}
+			finally
+			{
+				dbconn.disConnection(conn, ps);
+			}
+		}
+		// 전시회예약 취소		
+		public void exReserve_cc(int no)
+		{
+			try
+			{
+				conn=dbconn.getConnection();
+				String sql="UPDATE reserve_info SET rok=2 WHERE no=?";
+				ps=conn.prepareStatement(sql);
+				ps.setInt(1, no);
+				ps.executeUpdate();
+			}catch(Exception ex)
+			{
+				ex.printStackTrace();
+			}
+			finally
+			{
+				dbconn.disConnection(conn, ps);
+			}
+		}
 }

@@ -175,6 +175,29 @@ public class MypageModel {
 		return "../mypage/myReserv_exDetail.jsp";
 	}
 	
+	// 맛집예약 취소
+	@RequestMapping("admin/admin_Reserve_cancel.do")
+	public String stateChange2(HttpServletRequest request, HttpServletResponse response) {
+		String rno=request.getParameter("rrno");
+		
+		MypageDAO dao=MypageDAO.newInstance();
+		dao.fdReserve_cc(Integer.parseInt(rno));
+		
+		return "redirect:../mypage/myReserv.do";
+	}
+	
+	// 전시회예약 취소
+	@RequestMapping("mypage/ex_Reserve_cancel.do")
+	public String ex_Reserve_cancel(HttpServletRequest request, HttpServletResponse response) {
+		String nno=request.getParameter("nno");
+		
+		MypageDAO dao=MypageDAO.newInstance();
+		dao.exReserve_cc(Integer.parseInt(nno));
+		
+		return "redirect:../mypage/myReserv.do?tab=2";
+	}
+	
+	
 	// 장바구니
 	@RequestMapping("mypage/myCart.do")
 	public String mypage_myCart(HttpServletRequest request, HttpServletResponse response)

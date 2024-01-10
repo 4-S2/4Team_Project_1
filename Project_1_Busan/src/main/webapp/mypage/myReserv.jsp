@@ -146,21 +146,21 @@ $(function(){
 	    	window.open("../mypage/myReserv_exDetail.do?no=" + no,"",'width=750, height=570, left='+x+', top='+y);
 	});
 	});
-/*     $("#myTable tr #rno").click(function(){
-        let x = (document.body.offsetWidth / 2) - (650 / 2);
-        let y = (window.screen.height / 2) - (350 / 2) - 50;
-
-        let rno = $(this).attr('data-rno');
-        let no = $(this).attr('data-no');
-        // bottom은 뭐야? 깃허브 확인
-        if (rno !== undefined && rno !== null) {
-            window.open("../mypage/myReserv_foodDetail.do?rno=" + rno,"",'width=650, height=430, left='+x+', top='+y);
-        }  else if (no !== undefined && no !== null) {
-            window.open("../mypage/myReserv_exDetail.do?rno=" + no,"",'width=750, height=570, left='+x+', top='+y);
-        }  
-    });
-}); */
-
+/* function cancelReservation(rrno){
+	location.href="../admin/admin_Reserve_cancel.do?rrno="+rrno
+} */
+function cancelReservation(rrno) {
+    var confirmation = confirm("예약을 취소하시겠습니까?");
+    if (confirmation) {
+        location.href = "../admin/admin_Reserve_cancel.do?rrno=" + rrno;
+    }
+}
+function excancelReservation(nno) {
+    var confirmation = confirm("예약을 취소하시겠습니까?");
+    if (confirmation) {
+        location.href = "../mypage/ex_Reserve_cancel.do?nno=" + nno;
+    }
+}
 </script>
 </head>
 <body>
@@ -216,9 +216,19 @@ $(function(){
 					                <c:if test="${vo.ok == 1 }">
 					                	<td class="category px_20 ta_px10"><strong>승인완료</strong></td>
 					                </c:if>
-					                 <td class="dp_pc writer">
-										<input type="button" value="예약취소" onclick="cancelReservation()" class="cancel-button">
-									 </td>		                
+					                <c:if test="${vo.ok == 2 }">
+					                	<td class="category px_20 ta_px10" style="color: #e75757;"><strong>예약취소</strong></td>
+					                </c:if>
+					                <c:if test="${vo.ok == 0 || vo.ok == 1}">
+					                  <td class="dp_pc writer">
+										<input type="button" value="예약취소" onclick="cancelReservation(${vo.rno })" class="cancel-button">
+									 </td>	
+					                </c:if>					                					                
+									<c:if test="${vo.ok == 2}">
+					                  <td class="dp_pc writer">
+										-
+									 </td>	
+					                </c:if>					   	                
 					            </tr>
 					        </c:forEach>
 					    </c:otherwise> 
@@ -283,9 +293,19 @@ $(function(){
 					                <c:if test="${vo.rok == 1 }">
 					                	<td class="category px_20 ta_px10"><strong>승인완료</strong></td>
 					                </c:if>
-					                 <td class="dp_pc writer">
-										<input type="button" value="예약취소" onclick="cancelReservation()" class="cancel-button">
-									 </td>		                
+					                <c:if test="${vo.rok == 2 }">
+					                	<td class="category px_20 ta_px10" style="color: #e75757;"><strong>예약취소</strong></td>
+					                </c:if>
+					                <c:if test="${vo.rok == 0 || vo.rok == 1}">
+					                  <td class="dp_pc writer">
+										<input type="button" value="예약취소" onclick="excancelReservation(${vo.no })" class="cancel-button">
+									 </td>	
+					                </c:if>					                					                
+									<c:if test="${vo.rok == 2}">
+					                  <td class="dp_pc writer">
+										-
+									 </td>	
+					                </c:if>							                
 					            </tr>
 					        </c:forEach>
 					    </c:otherwise> 

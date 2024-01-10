@@ -141,7 +141,13 @@ color: #fff;
 												data-wf-sku-bindings="%5B%7B%22from%22%3A%22f_width_%22%2C%22to%22%3A%22innerHTML%22%7D%5D">
 											승인완료
 											</div>
-					                </c:if>				          										
+					                </c:if>	
+					                <c:if test="${vo.ok == 2 }">
+											<div
+												data-wf-sku-bindings="%5B%7B%22from%22%3A%22f_width_%22%2C%22to%22%3A%22innerHTML%22%7D%5D">
+											예약취소
+											</div>
+					                </c:if>						                			          										
 										</div>
 									</div>																									
 									<div class="product-table-cell">

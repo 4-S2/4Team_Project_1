@@ -197,6 +197,7 @@ public class AdminPageModel {
 		return "redirect:../admin/admin_reserv.do?tab=2";
 	}
 	
+	
 	// 특산물 리스트
 	@RequestMapping("admin/admin_goods.do")
 	public String admin_goods(HttpServletRequest request,HttpServletResponse response) {
