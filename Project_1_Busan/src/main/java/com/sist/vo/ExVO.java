@@ -1,7 +1,27 @@
 package com.sist.vo;
 
 public class ExVO {
-	private int eno,elike,hit,jjim,price,cocate,cateno;
+	private int eno;
+	private int elike;
+	private int hit;
+	private int jjim;
+	private int price;
+	private int cocate;
+	private int cateno;
+	private double score;
+	private String ename;
+	private String eename;
+	private String efield;
+	private String eitem;
+	private String cate;
+	private String homepage;
+	private String s_date;
+	private String e_date;
+	private String loc;
+	private String loc_detail;
+	private String host;
+	private String poster;
+	private String rday;
 	public int getCateno() {
 		return cateno;
 	}
@@ -27,8 +47,6 @@ public class ExVO {
 	public void setCocate(int cocate) {
 		this.cocate = cocate;
 	}
-
-	private String ename,eename,efield,eitem,cate,homepage,s_date,e_date,loc,loc_detail,host,poster,rday;
 	public String getRday() {
 		return rday;
 	}
@@ -36,7 +54,7 @@ public class ExVO {
 		this.rday = rday;
 	}
 
-	private double score;
+	
 	public int getEno() {
 		return eno;
 	}

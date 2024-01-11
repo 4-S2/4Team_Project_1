@@ -8,7 +8,8 @@ package com.sist.vo;
 		);
  */
 public class ReserveDayVO {
-    private int rno,rday;
+    private int rno;
+    private int rday;
     private String time;
 	public int getRno() {
 		return rno;

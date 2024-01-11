@@ -1,7 +1,9 @@
 package com.sist.vo;
 
 public class JjimVO {
-	private int jno,no,cateno;
+	private int jno;
+	private int no;
+	private int cateno;
 	private MemberVO mvo = new MemberVO();
 	private BusanListVO bvo = new BusanListVO();
 	private ExVO evo = new ExVO();

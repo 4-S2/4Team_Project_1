@@ -1,8 +1,17 @@
 package com.sist.vo;
 
 public class ReserveInfoVO {
-	private int no,eno,rok;
-	private String ename,eename,poster,day,regdate,inwon,rday,time;
+	private int no;
+	private int eno;
+	private int rok;
+	private String ename;
+	private String eename;
+	private String poster;
+	private String day;
+	private String regdate;
+	private String inwon;
+	private String rday;
+	private String time;
 	public String getTime() {
 		return time;
 	}

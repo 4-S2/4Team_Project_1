@@ -346,44 +346,80 @@
                		지도 표시
                  <div id="kkomap" style="width:100%;height:350px;"></div>
                     </div>
-				    <div id="reviewCont" class="tab-content" style="display: none;">
-				        <!-- 리뷰 내용 -->
-				        리뷰 내용을 입력하세요.
-				        <!-- <form method="post" action="insert_ok.do">
-							<table class="table">
-								<tr>
-									<th width=10% class="text-center">이름</th>
-									<td width=90%>
-										<input type=text name=name size=20 required class="input-sm">
-									</td>
-								</tr>
-								<tr>
-									<th width=10% class="text-center">제목</th>
-									<td width=90%>
-										<input type=text name=subject size=55 required class="input-sm">
-									</td>
-								</tr>
-								<tr>
-									<th width=10% class="text-center">내용</th>
-									<td width=90%>
-										<textarea rows="10" cols="60" name=content required></textarea>
-									</td>
-								</tr>
-								<tr>
-									<th width=10% class="text-center">비밀번호</th>
-									<td width=90%>
-										<input type="password" name=pwd size=10 required class="input-sm">
-									</td>
-								</tr>
-								<tr>
-									<td colspan="2" class="text-center">
-										<button class="btn-sm btn-success">글쓰기</button>
-					           			<input type=button class="btn-sm btn-info" value="취소" onclick="javascript:history.back()">
-					         		</td>
-					       		</tr>
-					    	</table>
-					    </form> -->
-				    </div>
+				    <div id="reviewCont" class="tab-content" style="">
+						<!-- 리뷰 내용 -->
+						<button value="리뷰 작성" class="btn" id="reviewInsertBtn">리뷰
+							작성</button>
+						<div class="review-list">
+							<div class="review-profile">
+								<div class="profile">
+									<div class="profile-icon">
+										<img src="../images/icon_user.png" alt="프로필 이미지">
+									</div>
+									<h4>
+										kim1234<br> <span class="regdate">2024.01.05</span>
+									</h4>
+								</div>
+								<span class="score">★★★★★</span>
+							</div>
+
+							<div class="review-item">
+								<img src="../images/visual3.jpg" class="review-img" alt="후기 이미지">
+								<p class="cont">9월에 별바다부산 나이트페스타에 가봤어요! 다대포의 해변공원에서 나이트뮤직캠크닉
+									공연이 있었어요 ㅎㅎ 저는 미리 예약하고 티켓이랑 매트, 맥주, 간식도 받았어요~ 사람들이 매트를 가지고 와서
+									가족과 친구들과 소풍을 하면서 공연을 봤어요~너무 좋았어요! 분위기 좋았고 노래를 들면서 저녁을 먹고 좋은 시간을
+									보냈어요~ 나이트뮤직캠크닉이 다음 달도 있을거니까 안 가봤으면 추천합니다!</p>
+							</div>
+
+							<button value="댓글" class="btn" id="reviewCommentBtn">댓글</button>
+
+							
+							  <div class="review-comment">
+							       <h5>lee5678<span class="regdate">&nbsp;(2024.01.05)</span></h5>
+							       <div class="review-comment-list" style="border-top: 1px solid #eee">
+							         <p class="comment" style="border-top: 0px">답글 내용 답글 내용 답글 내용 답글 내용 답글 내용 답글 내용</p>
+							         <div class="btnTo">
+							         <button class="btn btn-sm reUp">수정</button>
+							         <a href="" class="btn btn-sm reDel">삭제</a>
+							         <button class="btn btn-sm replyBtn">답글달기</button>
+							         </div>
+							       </div>
+							       <div class="update" style="display: none">
+							         <input type=text class="upBox">
+							         <a href="" class="btn btn-sm reUpBtn">수정</a>
+							       </div>
+							       <div class="reply" style="display: none">
+							         <h5>아이디</h5>
+							         <input type=text class="replyBox">
+							         <a href="" class="btn btn-sm replyInsertBtn">등록</a>
+							       </div>
+							  </div>
+							  
+							  <div class="reply-insert">
+						<form method="post" action="">
+								<table class="table">
+							        
+									<tr>
+										
+										<td style="position: relative; max-width: 100%; padding: 10px 0">
+										<h5>lee5678</h5>
+										<textarea rows="4" cols="60" name=content
+												required style="resize: none"></textarea><br>
+											<div class="reply-btn-wrapper">
+												<button class="btn-sm btn reInBtn" value="등록"
+												id="replyInsert">등록</button>
+												<button class="btn-sm btn reBack" value="취소"
+												id="replyCancel" onclick="javascript:history.back()">취소</button>
+											</div>
+												</td>		
+									</tr>
+									
+								</table>
+							</form>
+						</div>
+							  
+							</div>
+						</div>
 				<div id="reserveCont" class="tab-content" style="display: none">
 						<!-- 예약하기 내용 -->
 						<jsp:include page="../reserve/reserve_main.jsp">

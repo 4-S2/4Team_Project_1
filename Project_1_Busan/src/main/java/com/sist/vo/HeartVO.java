@@ -1,7 +1,9 @@
 package com.sist.vo;
 
 public class HeartVO {
-	private int hno,no,cateno;
+	private int hno;
+	private int no;
+	private int cateno;
 	private MemberVO mvo = new MemberVO();
 	private BusanListVO bvo = new BusanListVO();
 	private ExVO evo = new ExVO();
