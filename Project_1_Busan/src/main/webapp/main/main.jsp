@@ -25,6 +25,10 @@
                 display: inline-block;
                 color: #9d9d9d;
             }
+.divider {
+    margin: 10px 0;
+    border-top: 1px solid #e6e8eb;
+}
         </style>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>

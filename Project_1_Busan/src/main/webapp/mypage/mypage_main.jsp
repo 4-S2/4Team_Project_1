@@ -76,7 +76,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     <li class="filter_box">
                         <a href="../mypage/myInquiry.do" class="menu_depth3 single ">문의내역</a>
                     </li>
-                    <li class="divider"></li>
+                    <!-- <li class="divider"></li> -->
                     <li class="filter_box">
                         <a href="../mypage/myacc_delete.do" class="menu_depth3 single ">회원탈퇴</a>
                     </li>

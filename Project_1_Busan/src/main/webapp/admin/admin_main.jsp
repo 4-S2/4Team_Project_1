@@ -21,10 +21,6 @@ padding:0;
 /* width: auto;
 max-width: 1280px; */
 }
-.list_fliter_board .board_filter_area .board_filter_box .board_filter_in .divider {
-    margin: 10px 0;
-    border-top: 1px solid #e6e8eb;
-}
 </style>
 <script>
 document.addEventListener("DOMContentLoaded", function() {
@@ -39,6 +35,7 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     });
 });
+
 </script>
 
 </head>
@@ -68,11 +65,11 @@ document.addEventListener("DOMContentLoaded", function() {
                     <li class="filter_box">
                         <a href="../admin/admin_reserv.do" class="menu_depth3 single">예약현황</a>
                     </li>
-                    <li class="divider"></li>
+                    <!-- <li class="divider"></li> -->
                     <li class="filter_box">
                         <a href="../admin/admin_goods.do" class="menu_depth3 single ">특산물관리</a>
                     </li>
-                    <li class="divider"></li>                      
+                   <!--  <li class="divider"></li>   -->                    
 <!--                     <li class="filter_box">
                         <a href="../admin/admin_notice.do" class="menu_depth3 single ">공지사항</a>
                     </li>  --> 
