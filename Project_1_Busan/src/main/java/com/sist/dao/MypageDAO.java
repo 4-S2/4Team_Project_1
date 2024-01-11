@@ -867,6 +867,45 @@ ORDER BY r.frno DESC;
 				}
 			}
 			
+			// 장바구니 상품 삭제
+			public void mygoods_cancel(int cno) {
+				try {
+					conn = dbconn.getConnection();
+					String sql = "DELETE FROM cart where cart_no=?";
+					ps = conn.prepareStatement(sql);
+					ps.setInt(1, cno);
+					ps.executeUpdate();
+				}
+				catch (Exception e) {
+					e.printStackTrace();
+				}
+				finally {
+					dbconn.disConnection(conn, ps);
+				}
+			}
+			
+			// 장바구니 상품 구매
+			public void mycart_buy(int cno)
+			{
+				try
+				{
+					conn=dbconn.getConnection();
+					String sql="UPDATE cart SET issale=1, "
+							+ "cart_no=(SELECT NVL(MAX(cart_no) + 1, 1) FROM cart) "
+							+ "WHERE cart_no=?";
+					ps=conn.prepareStatement(sql);
+					ps.setInt(1, cno);
+					ps.executeUpdate();
+				}catch(Exception ex)
+				{
+					ex.printStackTrace();
+				}
+				finally
+				{
+					dbconn.disConnection(conn, ps);
+				}
+			}
+			
 			//특산물 상세 
 			public GoodsVO adGoodsDetailData(int gno) {
 				GoodsVO vo=new GoodsVO();

@@ -62,8 +62,12 @@ tr, td {
     padding: 8px;
     line-height: 1.42857143;
     vertical-align: top;
-    border-top: 1px solid #ddd; 
-}   
+    border-top: 0px solid #ddd; 
+} 
+    .cancel-button {
+        padding: 3px 8px; /* 원하는 패딩 값으로 조절 */
+       /*  font-size: 16px; /*  */원하는 글자 크기로 조절 */
+    }  
 </style>
 <script type="text/javascript">
 function cancelGoods(cno) {
@@ -72,7 +76,14 @@ function cancelGoods(cno) {
         location.href = "../mypage/mypage_goods_cancel.do?cno=" + cno;
     }
 }
-
+/*$(function(){
+	$('#sel').change(function(){
+		let price=$('#buyBtn').attr("data-price")
+		let count=$(this).val()
+		let total=Number(price)*count;
+		$('#total').text(total)
+	})
+})*/
 $(function(){
 	$(document).ready(function(){
 		  $('.amount').on("change",function(){
@@ -83,31 +94,85 @@ $(function(){
 
 	})
 });
-</script>
-<script type="text/javascript">
-$('.jjimBtn').click(function() {
-    let no = $(this).attr("data-no");            
-    let cateno = $(this).attr("data-cateno");
+/*$(function(){
+	$(document).ready(function(){
+		  $('.amount').on("change",function(){
+			  let amount=$(this).val()
+			  let cno=$(this).attr("data-cno")
+			  location.href="../mypage/mypage_mycart_chg.do?amount="+amount+"&cno="+cno
+		  })
 
-    $.ajax({
-        type: 'post',
-        url: '../busan/jjim.do',
-        data: {'no': no, 'cateno': cateno},
-        success: function(result) {
-            if (result === 'ok') {
-                alert("찜하기가 완료되었습니다");
-                $('.jjim_img').attr('src', '../busan/jjim.png');
-                localStorage.setItem('jjimState', 'ok');  // 찜 상태를 Local Storage에 저장
-                localStorage.setItem('no', no);
-            } else if (result === 'no') {
-                alert("찜하기가 취소되었습니다");
-                $('.jjim_img').attr('src', '../busan/jjim_none.png');
-                localStorage.setItem('jjimState', 'no');  // 찜 상태를 Local Storage에 저장
-                localStorage.setItem('no', no);
-            }
-        }
-    });
-});
+	})
+});*/
+</script>
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
+<script type="text/javascript">
+<!-- 결제 API -->
+var IMP = window.IMP; // 생략 가능
+IMP.init("imp80485780"); // 예: imp00000000 
+function requestPay() {
+	console.log('clicked');
+  // IMP.request_pay(param, callback) 결제창 호출
+	IMP.request_pay({
+	    pg : 'html5_inicis', // version 1.1.0부터 지원.
+	    
+	        /*
+	            'kakaopay':카카오페이,
+	            'inicis':이니시스, 'html5_inicis':이니시스(웹표준결제),
+	            'nice':나이스,
+	            'jtnet':jtnet,
+	            'uplus':LG유플러스
+	        */
+	        
+	    // 출력할 내용을 Session에 등록하기
+	    pay_method : 'card', // 'card' : 신용카드 | 'trans' : 실시간계좌이체 | 'vbank' : 가상계좌 | 'phone' : 휴대폰소액결제
+	    merchant_uid : 'merchant_' + new Date().getTime(),
+	    name : $('#gname').text(), /* $('#title').text(), */
+	    amount : $('#buyBtn').attr('total'), /* $('#price').attr('data-price'), */
+	    buyer_email : 'iamport@siot.do',
+	    buyer_name : '구매자이름',
+	    buyer_tel : '010-1234-5678',
+	    buyer_addr : '서울특별시 강남구 삼성동',
+	    buyer_postcode : '123-456',
+	    app_scheme : 'iamporttest' // in app browser결제에서만 사용 
+	}, function(rsp) {
+	    if ( rsp.success ) {
+	        var msg = '결제가 완료되었습니다.';
+	        msg += '고유ID : ' + rsp.imp_uid;
+	        msg += '상점 거래ID : ' + rsp.merchant_uid;
+	        msg += '결제 금액 : ' + rsp.paid_amount;
+	        msg += '카드 승인번호 : ' + rsp.apply_num;s
+	    } else {
+	        var msg = '결제에 완료되었습니다.';
+	        msg += '에러내용 : ' + rsp.error_msg;
+	        
+	        /*let price=$('#buyBtn').attr("data-price")
+			let count=$('.amount').val()*/
+			let cno=$('#buyBtn').attr("data-no")
+			
+			$.ajax({
+				type:'post',
+				url:'../mypage/mygoods_buy.do',
+				data:{"cno":cno}, 
+				success:function(result){
+					// 마이페이지 이동
+					if(result=='yes'){
+						alert("구매에 성공했습니다.")
+						location.href="../mypage/myPurchase.do"	
+					} else {
+						alert("구매에 실패했습니다.")
+					}
+				}
+			})
+	    }
+	})
+}
+
+$(function(){
+	$('#buyBtn').click(function(){
+		requestPay()
+	})
+})
 </script>
 </head>
 <body>
@@ -128,7 +193,7 @@ $('.jjimBtn').click(function() {
 								<td rowspan="2" width="15%"><img src="${vo.gvo.poster }"
 									class="reserveImg"></td>
 								<td width="65%" style="font-size: 17px; font-weight: bold;"
-									id="title">${vo.gvo.gname }</td>
+									id="gname">${vo.gvo.gname }</td>
 								<!-- <td width="15%"><a href="../mypage/mypage_reserve_delete.do?jrno=" class="btn btn-outline-danger rcanBtn">예약소취</a></td> -->
 									<td>
 										<select class="amount" data-cno=${vo.cart_no } >
@@ -143,21 +208,26 @@ $('.jjimBtn').click(function() {
 											<option ${vo.amount=='9'?"selected":"" } value=9>9</option>
 											<option ${vo.amount=='10'?"selected":"" } value=10>10</option>
 										</select>
-										<input type="button" value="삭제" onclick="cancelGoods()" class="cancel-button" >
+										<input type="button" value="삭제" onclick="cancelGoods(${vo.cart_no})" class="cancel-button" >
+										
 									</td> 
 							</tr>
 							<tr>
-								<td width="100%" style="color: gray;">
-									<p
-										style="text-align: right; margin-right: 30px; font-weight: bold; font-size: 18pt">
+								<td width="100%" style="color: #0923a9;">
+									<p id="total" 
+										style="text-align: right; margin-right: 30px; font-weight: bold; font-size: 18pt" >
 										<fmt:formatNumber value="${vo.amount * vo.gvo.price}" pattern="#,###" />
 										원
 									</p></td>
-<!-- 								<td width="20%">
-									<span class="btn btn-outline-secondary reviewBtn"
-												data-jrno="특산물번호" data-acino=""
-												data-rno="카트번호" data-cid="멤버번호">리뷰작성</span>
-								</td> -->
+								<td width="">
+									<span>
+										<input type="button" class="btn btn-sm btn-info" value="구매" id="buyBtn"
+											data-gno="${vo.gno}"
+											data-price="${vo.gvo.price}"
+											data-no="${vo.cart_no}"
+											total="${vo.amount * vo.gvo.price}">
+									</span>
+								</td> 
 							</tr>
 						</table>
 					</div>

@@ -265,6 +265,40 @@ public class MypageModel {
 		return "redirect:../mypage/myCart.do";
 	}
 	
+	// 장바구니 상품 삭제
+	@RequestMapping("mypage/mypage_goods_cancel.do")
+	public String mypage_goods_cancel(HttpServletRequest request, HttpServletResponse response) {
+		String cno=request.getParameter("cno");
+		
+		MypageDAO dao=MypageDAO.newInstance();
+		dao.mygoods_cancel(Integer.parseInt(cno));
+			
+		return "redirect:../mypage/myCart.do";
+	}
+	
+	// 장바구니 상품 구매
+	@RequestMapping("mypage/mygoods_buy.do")
+	  public static void mygoods_buy(HttpServletRequest request, HttpServletResponse response){
+		  String result="";
+			 
+		  try {
+			  String cno=request.getParameter("cno");
+			  
+			  MypageDAO dao=MypageDAO.newInstance();
+			  dao.mycart_buy(Integer.parseInt(cno));
+          
+			  result="yes";
+		  } catch(Exception ex) {
+			  result="no";
+			  ex.printStackTrace();
+		  }
+		  
+		  try{
+			  PrintWriter out=response.getWriter();
+			  out.write(result);
+		  } catch(Exception ex) {}
+	  }
+	
 	// 찜목록
 	@RequestMapping("mypage/myJjim.do")
 	public String mypage_myJjim(HttpServletRequest request, HttpServletResponse response)
