@@ -198,26 +198,6 @@ public class MypageModel {
 		return "redirect:../mypage/myReserv.do?tab=2";
 	}
 	
-	// 찜 취소
-	 @RequestMapping("mypage/myjjim_cancel.do")
-		public void myjjim_cancel(HttpServletRequest request, HttpServletResponse response)
-		{
-		   try {
-			   request.setCharacterEncoding("UTF-8");
-		   }catch(Exception e) {e.printStackTrace();}
-		   HttpSession session=request.getSession();
-		   String id=(String)session.getAttribute("id");
-		   
-		   String jno=request.getParameter("jno");
-		   
-		   MypageDAO dao=MypageDAO.newInstance();
-		   String res=dao.jjimCancel(id, Integer.parseInt(jno));
-		   
-		   try {
-			   PrintWriter out=response.getWriter();
-			   out.write(res);
-		   }catch(Exception e) {e.printStackTrace();}
-		}
 	 
 	// 장바구니
 	@RequestMapping("mypage/myCart.do")
@@ -273,6 +253,18 @@ public class MypageModel {
 		return "../main/main.jsp";
 	}
 	
+	// 장바구니 개수 변경
+	@RequestMapping("mypage/mypage_mycart_chg.do")
+	public String mypage_mycart_chg(HttpServletRequest request, HttpServletResponse response) {
+		String cno=request.getParameter("cno");
+		String amount=request.getParameter("amount");
+		
+		MypageDAO dao=MypageDAO.newInstance();
+		dao.mycart_chg(Integer.parseInt(cno),Integer.parseInt(amount));
+			
+		return "redirect:../mypage/myCart.do";
+	}
+	
 	// 찜목록
 	@RequestMapping("mypage/myJjim.do")
 	public String mypage_myJjim(HttpServletRequest request, HttpServletResponse response)
@@ -305,6 +297,27 @@ public class MypageModel {
 		request.setAttribute("main_jsp", "../mypage/mypage_main.jsp");
 		return "../main/main.jsp";
 	}
+	
+	// 찜 취소
+	 @RequestMapping("mypage/myjjim_cancel.do")
+		public void myjjim_cancel(HttpServletRequest request, HttpServletResponse response)
+		{
+		   try {
+			   request.setCharacterEncoding("UTF-8");
+		   }catch(Exception e) {e.printStackTrace();}
+		   HttpSession session=request.getSession();
+		   String id=(String)session.getAttribute("id");
+		   
+		   String jno=request.getParameter("jno");
+		   
+		   MypageDAO dao=MypageDAO.newInstance();
+		   String res=dao.jjimCancel(id, Integer.parseInt(jno));
+		   
+		   try {
+			   PrintWriter out=response.getWriter();
+			   out.write(res);
+		   }catch(Exception e) {e.printStackTrace();}
+		}
 	
 	// 문의내역
 	@RequestMapping("mypage/myInquiry.do")

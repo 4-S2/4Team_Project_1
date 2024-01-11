@@ -844,7 +844,28 @@ ORDER BY r.frno DESC;
 					dbconn.disConnection(conn, ps);
 				}
 				return total;
-			}			
+			}		
+			
+			// 장바구니 개수 변경
+			public void mycart_chg(int cno, int amount)
+			{
+				try
+				{
+					conn=dbconn.getConnection();
+					String sql="UPDATE cart SET amount=? WHERE cart_no=?";
+					ps=conn.prepareStatement(sql);
+					ps.setInt(1, amount);
+					ps.setInt(2, cno);
+					ps.executeUpdate();
+				}catch(Exception ex)
+				{
+					ex.printStackTrace();
+				}
+				finally
+				{
+					dbconn.disConnection(conn, ps);
+				}
+			}
 			
 			//특산물 상세 
 			public GoodsVO adGoodsDetailData(int gno) {

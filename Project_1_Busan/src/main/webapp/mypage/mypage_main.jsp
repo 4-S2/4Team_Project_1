@@ -65,11 +65,11 @@ document.addEventListener("DOMContentLoaded", function() {
                         <a href="../mypage/myReserv.do" class="menu_depth3 single">예약내역</a>
                     </li>
                     <li class="filter_box">
-                        <a href="../mypage/myPurchase.do" class="menu_depth3 single ">구매내역</a>
-                    </li>                      
-                    <li class="filter_box">
                         <a href="../mypage/myCart.do" class="menu_depth3 single ">장바구니</a>
                     </li>  
+                    <li class="filter_box">
+                        <a href="../mypage/myPurchase.do" class="menu_depth3 single ">구매내역</a>
+                    </li>
                     <li class="filter_box">
                         <a href="../mypage/myJjim.do" class="menu_depth3 single ">찜목록</a>
                     </li>

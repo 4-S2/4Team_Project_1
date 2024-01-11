@@ -65,7 +65,7 @@
 								        ${vo.gvo.gname}
 								    </a>
 								</td>
-				                <td class="dp_pc writer">${vo.gvo.price}</td>
+				                <td class="dp_pc writer"><fmt:formatNumber value="${vo.gvo.price}" pattern="#,###" />원</td>
 				                <td class="dp_pc num2">${vo.amount}</td>
 				                <td class="category px_20 ta_px10"><fmt:formatNumber value="${vo.amount * vo.gvo.price}" pattern="#,###" />원</td>
 				                <td class="category px_20 ta_px10">${vo.regdate }</td>

@@ -69,18 +69,44 @@ tr, td {
 function cancelGoods(cno) {
     let confirmation = confirm("상품을 삭제 하시겠습니까?");
     if (confirmation) {
-        location.href = "../admin/mypage_goods_cancel.do?cno=" + cno;
+        location.href = "../mypage/mypage_goods_cancel.do?cno=" + cno;
     }
 }
 
 $(function(){
 	$(document).ready(function(){
 		  $('.amount').on("change",function(){
-			  let rno=$(this).attr("data-rno")
-			  location.href="../admin/admin_fReserve_ok.do?rstate="+rstate+"&rno="+rno
+			  let amount=$(this).val()
+			  let cno=$(this).attr("data-cno")
+			  location.href="../mypage/mypage_mycart_chg.do?amount="+amount+"&cno="+cno
 		  })
 
-})
+	})
+});
+</script>
+<script type="text/javascript">
+$('.jjimBtn').click(function() {
+    let no = $(this).attr("data-no");            
+    let cateno = $(this).attr("data-cateno");
+
+    $.ajax({
+        type: 'post',
+        url: '../busan/jjim.do',
+        data: {'no': no, 'cateno': cateno},
+        success: function(result) {
+            if (result === 'ok') {
+                alert("찜하기가 완료되었습니다");
+                $('.jjim_img').attr('src', '../busan/jjim.png');
+                localStorage.setItem('jjimState', 'ok');  // 찜 상태를 Local Storage에 저장
+                localStorage.setItem('no', no);
+            } else if (result === 'no') {
+                alert("찜하기가 취소되었습니다");
+                $('.jjim_img').attr('src', '../busan/jjim_none.png');
+                localStorage.setItem('jjimState', 'no');  // 찜 상태를 Local Storage에 저장
+                localStorage.setItem('no', no);
+            }
+        }
+    });
 });
 </script>
 </head>
@@ -105,7 +131,7 @@ $(function(){
 									id="title">${vo.gvo.gname }</td>
 								<!-- <td width="15%"><a href="../mypage/mypage_reserve_delete.do?jrno=" class="btn btn-outline-danger rcanBtn">예약소취</a></td> -->
 									<td>
-										<select class="amount" <%-- data-cno=${vo.cno } --%>>
+										<select class="amount" data-cno=${vo.cart_no } >
 											<option ${vo.amount=='1'?"selected":"" } value=1>1</option>
 											<option ${vo.amount=='2'?"selected":"" } value=2>2</option>
 											<option ${vo.amount=='3'?"selected":"" } value=3>3</option>
@@ -140,7 +166,10 @@ $(function(){
 		</tr>
 	</table>
 	</div>
-	<div class="right">
+	
+<%-- 	
+         <link rel="stylesheet" type="text/css" href="../css/cart1.css" />
+<div class="right">
 <div class="order">
   <div class="box__order-info">
     <strong class="text__title">결제정보</strong>
@@ -214,7 +243,7 @@ $(function(){
     </div>
   </div>
 </div>
-	</div>
+	</div> --%>
 	</div>
 	
 	
