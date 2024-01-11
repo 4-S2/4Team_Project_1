@@ -40,7 +40,7 @@
 		        <th class="dp_pc reserve_date" scope="col">단가</th>
 		        <th class="dp_pc num2" scope="col">수량</th>
 		        <th class="write_date" scope="col">결제금액</th>
-		        <th class="dp_pc reserve_date" scope="col">결제일시</th>
+		        <th class="dp_pc reserve_date" scope="col">결제일</th>
 		        <th class="dp_pc reserve_date" scope="col">리뷰</th>
 		    </tr>
 		    </thead>

@@ -207,9 +207,11 @@ public class MypageModel {
 		String id=(String)session.getAttribute("id");
 		
 		MypageDAO dao=MypageDAO.newInstance();
-		/* MemberVO vo=dao.myprofile(id); */
+		List<CartVO> list = dao.myCartData(id);
+		int total = dao.myCartTotal(id);
 		
-		/* request.setAttribute("vo", vo); */
+		request.setAttribute("list", list);
+		request.setAttribute("total", total);
 		request.setAttribute("mypage_jsp", "myCart.jsp");
 		request.setAttribute("main_jsp", "../mypage/mypage_main.jsp");
 		return "../main/main.jsp";

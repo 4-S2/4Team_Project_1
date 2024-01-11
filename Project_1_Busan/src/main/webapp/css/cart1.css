@@ -56,11 +56,6 @@ hr {
     display: none
 }
 
-/* font rule */
-body,table,input,textarea,select,button,th,td,input,select,textarea,th,td,p,dl,dt,dd,li,pre {
-    font-family: -apple-system, BlinkMacSystemFont, Apple SD Gothic Neo, Roboto, Noto Sans CJK KR, Tahoma, 'Noto Sans KR', 'Gmarket Sans', sans-serif;
-}
-
 /* Global Common */
 .for-a11y {
     position: absolute;
@@ -1274,8 +1269,6 @@ h2.sf_title img {
     font-weight: bold;
     letter-spacing: -1.34px;
     padding-left: 14px;
-    background: url(//pics.gmarket.co.kr/pc/ko/pay/cart/bg_title_cart.png) right -18px no-repeat ;
-    font-family: 'Gmarket Sans',sans-serif;
     font-weight: normal;
 }
 
@@ -1611,7 +1604,6 @@ h2.sf_title img {
     color: #1e1e1e;
     letter-spacing: -0.4px;
     line-height: 24px;
-    font-family: 'Gmarket Sans',sans-serif;
     font-weight: normal;
 }
 
@@ -1815,7 +1807,6 @@ h2.sf_title img {
 
 .cart--basket .cart--basket_footer .cart--basket--total .text__value {
     display: inline-block;
-    font-family: 'Gmarket Sans',sans-serif;
     font-size: 18px;
     line-height: 17px;
     color: #616161
@@ -1828,7 +1819,6 @@ h2.sf_title img {
 .cart--basket .cart--basket_footer .cart--basket--total .price.free {
     color: #067dfd;
     font-weight: normal;
-    font-family: 'Gmarket Sans',sans-serif;
     font-size: 15px;
     letter-spacing: -0.5px;
     vertical-align: top
@@ -2336,7 +2326,6 @@ h2.sf_title img {
     height: 28px;
     background: #00c400;
     border-radius: 6px;
-    font-family: 'Gmarket Sans',serif;
     font-size: 12px;
     color: #fff;
     text-align: center
@@ -2377,7 +2366,6 @@ h2.sf_title img {
 
 .unit--item .unit--item_desc .section.item_price .text__value {
     color: #424242;
-    font-family: 'Gmarket Sans',serif;
     font-size: 18px;
     line-height: 27px;
     font-weight: bold;
@@ -2895,7 +2883,6 @@ h2.sf_title img {
     margin-bottom: 0;
     font-size: 14px;
     font-weight: 500;
-    font-family: 'Gmarket Sans',serif;
     color: #f9560e;
     line-height: 20px;
     vertical-align: baseline
@@ -2904,7 +2891,6 @@ h2.sf_title img {
 .order .order_info .receipt_list_box .format-price.discount .box__discount--amount .text__percent {
     font-size: 14px;
     font-weight: 500;
-    font-family: 'Gmarket Sans',serif;
     line-height: 20px
 }
 
@@ -2927,7 +2913,6 @@ h2.sf_title img {
     color: #000;
     font-weight: normal;
     font-size: 16px;
-    font-family: 'Gmarket Sans',serif
 }
 
 .order .order_info .receipt_list_box .text__unit {
@@ -3023,7 +3008,6 @@ h2.sf_title img {
     display: inline-block;
     margin-bottom: 0;
     font-size: 16px;
-    font-family: 'Gmarket Sans',serif;
     color: #01a900;
     line-height: 20px;
     vertical-align: baseline
@@ -3032,7 +3016,6 @@ h2.sf_title img {
 .order .order_info .discount .text__sign {
     display: inline-block;
     font-size: 16px;
-    font-family: 'Gmarket Sans',serif;
     color: #01a900;
     line-height: 20px
 }
@@ -3053,7 +3036,6 @@ h2.sf_title img {
 
 .order .order_summary .label {
     font-size: 18px;
-    font-family: 'Gmarket Sans',sans-serif;
     line-height: 24px;
     color: #222;
     letter-spacing: -0.18px;
@@ -3064,7 +3046,6 @@ h2.sf_title img {
 
 .order .order_summary .box__format-amount .text__value {
     font-size: 30px;
-    font-family: 'Gmarket Sans',sans-serif;
     color: #424242;
     letter-spacing: -0.3px;
     font-weight: bold;
@@ -3073,7 +3054,6 @@ h2.sf_title img {
 
 .order .order_summary .box__format-amount .text__unit {
     font-size: 29px;
-    font-family: 'Gmarket Sans',sans-serif;
     font-weight: normal;
     letter-spacing: -0.29px;
     line-height: 30px;
@@ -3176,7 +3156,6 @@ h2.sf_title img {
 .order .order_action .btn_submit .text {
     color: #fff;
     font-size: 22px;
-    font-family: 'Gmarket Sans',sans-serif;
     vertical-align: middle;
     letter-spacing: -0.22px;
 }
@@ -5119,7 +5098,6 @@ h2.sf_title img {
 }
 
 .box__layer-authenticate .text__message {
-    font-family: 'Gmarket Sans';
     font-size: 20px;
     line-height: 28px;
     color: #000
@@ -5135,7 +5113,6 @@ h2.sf_title img {
     height: 56px;
     border-radius: 8px;
     background: #00c400;
-    font-family: 'Gmarket Sans';
     font-size: 18px;
     line-height: 56px;
     color: #fff
@@ -5147,7 +5124,6 @@ h2.sf_title img {
     height: 56px;
     border-radius: 8px;
     background: #fff;
-    font-family: 'Gmarket Sans';
     font-size: 18px;
     line-height: 58px;
     color: #222;
@@ -5252,7 +5228,6 @@ h2.sf_title img {
     border-radius: 8px;
     background: #a78353;
     color: #fff;
-    font-family: 'Gmarket Sans';
     font-weight: 400
 }
 
@@ -5617,7 +5592,6 @@ h2.sf_title img {
 }
 
 .box__layer-culture-tax .text__info {
-    font-family: 'Gmarket Sans',serif;
     font-weight: 500;
     font-size: 18px;
     line-height: 24px;
@@ -5636,7 +5610,6 @@ h2.sf_title img {
 }
 
 .box__layer-culture-tax .box__button .button {
-    font-family: 'Gmarket Sans',serif;
     font-weight: 500;
     display: block;
     width: 100%;
@@ -5703,7 +5676,6 @@ h2.sf_title img {
 }
 
 .box__layer-oversea-delivery .text__info {
-    font-family: 'Gmarket Sans',serif;
     font-weight: 500;
     font-size: 20px;
     line-height: 28px;
@@ -5729,7 +5701,6 @@ h2.sf_title img {
 }
 
 .box__layer-oversea-delivery .box__button .button {
-    font-family: 'Gmarket Sans',serif;
     font-weight: 500;
     display: block;
     width: 100%;
@@ -5824,7 +5795,6 @@ h2.sf_title img {
 
 .box__layer-booking-install .section__booking-install .text__message {
     font-size: 20px;
-    font-family: 'Gmarket Sans',serif;
     line-height: 20px;
     color: #222;
     font-weight: 500;
@@ -5915,7 +5885,6 @@ h2.sf_title img {
     height: 57px;
     border-radius: 8px;
     font-size: 18px;
-    font-family: 'Gmarket Sans',serif;
     font-weight: 500
 }
 
@@ -5970,7 +5939,6 @@ h2.sf_title img {
 .box__layer--alert .button__confirm {
     width: 100%;
     height: 44px;
-    font-family: 'Gmarket Sans',serif;
     font-size: 16px;
     font-weight: 400;
     color: #fff;
@@ -5986,7 +5954,6 @@ h2.sf_title img {
 }
 
 .unit--item .unit--item_desc .section.item_del .box__tooltip .text__guide {
-    font-family: 'Gmarket Sans',serif;
     position: relative;
     display: inline-block;
     vertical-align: top;
@@ -6005,7 +5972,6 @@ h2.sf_title img {
 }
 
 .unit--item .unit--item_desc .section.item_del .box__tooltip .text__guide .text__emphasis {
-    font-family: 'Gmarket Sans',serif;
     font-weight: bold;
 }
 
@@ -6037,15 +6003,11 @@ h2.sf_title img {
 }
 
 .unit--item .unit--item_desc .section.item_del .box__tooltip.oversea-delivery .text__guide {
-    font-family: -apple-system, BlinkMacSystemFont, Apple SD Gothic Neo, Roboto, Noto Sans CJK KR, Tahoma, 'Noto Sans KR', 'Gmarket Sans', sans-serif;
     font-size: 12px;
     padding: 0 12px;
     line-height: 22px;
 }
 
-.unit--item .unit--item_desc .section.item_del .box__tooltip.oversea-delivery .text__guide .text__emphasis {
-    font-family: -apple-system, BlinkMacSystemFont, Apple SD Gothic Neo, Roboto, Noto Sans CJK KR, Tahoma, 'Noto Sans KR', 'Gmarket Sans', sans-serif;
-}
 
 /* 복수구매 할인 */
 .box__mutiple-purchases {
@@ -6307,7 +6269,6 @@ h2.sf_title img {
     line-height: 24px;
     font-size: 20px;
     color: #000;
-    font-family: 'Gmarket Sans',serif;
     font-weight: normal;
 }
 
@@ -6376,7 +6337,6 @@ h2.sf_title img {
     background-color: #00c400;
     font-size: 18px;
     color: #fff;
-    font-family: 'Gmarket Sans',serif;
     line-height: 22px;
     font-weight: normal;
     border-radius: 8px;
@@ -6436,7 +6396,6 @@ h2.sf_title img {
     border-radius: 17px;
     box-shadow: 0 2px 5px 0 rgb(0 0 0 / 30%);
     white-space: nowrap;
-    font-family: 'Gmarket Sans',serif;
     box-sizing: border-box;
 }
 
@@ -6500,7 +6459,6 @@ h2.sf_title img {
     color: #fff;
     border-radius: 8px;
     background-color: rgba(0, 0, 0, 0.8);
-    font-family: 'Gmarket Sans',serif;
 }
 
 .box__toast-popup .text__emphasis {
@@ -6532,7 +6490,6 @@ h2.sf_title img {
 .box__order-info .box__address-info .button__address, .box__order-info .box__address-info .link__address {
     margin-left: 8px;
     padding: 7px 8px;
-    font-family: 'Gmarket Sans',serif;
     color: #222;
     font-size: 12px;
     line-height: 16px;
@@ -6544,7 +6501,6 @@ h2.sf_title img {
 .box__order-info .text__name {
     font-size: 16px;
     line-height: 22px;
-    font-family: 'Gmarket Sans',serif;
     color: #2c2c2c;
 }
 
@@ -6564,7 +6520,6 @@ h2.sf_title img {
     padding-left: 20px;
     font-size: 16px;
     line-height: 22px;
-    font-family: 'Gmarket Sans',serif;
     color: #2c2c2c;
 }
 
@@ -6667,7 +6622,6 @@ h2.sf_title img {
     line-height: 32px;
     font-size: 18px;
     color: #000;
-    font-family: 'Gmarket Sans',serif;
     font-weight: normal;
 }
 
@@ -6702,7 +6656,6 @@ h2.sf_title img {
     line-height: 18px;
     color: #222;
     letter-spacing: -0.5px;
-    font-family: 'Gmarket Sans',serif;
     font-weight: normal;
 }
 
@@ -6761,7 +6714,6 @@ h2.sf_title img {
     font-size: 16px;
     line-height: 20px;
     color: #000;
-    font-family: 'Gmarket Sans',serif;
 }
 
 .box__layer-order-oversea .box__button-wrap {
@@ -6781,7 +6733,6 @@ h2.sf_title img {
     color: #2c2c2c;
     border: 1px solid #bdbdbd;
     border-radius: 8px;
-    font-family: 'Gmarket Sans',serif;
 }
 
 .box__layer-order-oversea .box__button-wrap .button__comfirm {
@@ -6806,7 +6757,6 @@ h2.sf_title img {
 
 .box__layer-order-oversea .box__destination .text__destination {
     display: block;
-    font-family: 'Gmarket Sans',serif;
     font-size: 14px;
     line-height: 22px;
     color: #00c400;
@@ -6816,7 +6766,6 @@ h2.sf_title img {
 .box__layer-order-oversea .box__destination .button__change {
     margin-top: 6px;
     padding: 10px 11px;
-    font-family: 'Gmarket Sans',serif;
     font-size: 12px;
     color: #222;
     border: 1px solid #bdbdbd;
@@ -6942,7 +6891,6 @@ h2.sf_title img {
     font-size: 13px;
     line-height: 20px;
     color: #2c2c2c;
-    font-family: 'Gmarket Sans',serif;
 }
 
 .box__smilefresh-wrap .text__address::before {
@@ -7007,7 +6955,6 @@ h2.sf_title img {
     line-height: 16px;
     color: #864300;
     background-color: rgba(134, 67, 0, 0.08);
-    font-family: 'Gmarket Sans',serif;
     border-radius: 8px;
     white-space: nowrap;
 }
@@ -7046,7 +6993,6 @@ h2.sf_title img {
     line-height: 20px;
     color: #864300;
     font-weight: bold;
-    font-family: 'Gmarket Sans',serif;
 }
 
 .box__smilefresh-wrap .box__smiledelivery .link__free-membershop::after {
@@ -7065,7 +7011,6 @@ h2.sf_title img {
 }
 
 .box__smilefresh-toggle .text__delivery-info {
-    font-family: 'Gmarket Sans',serif;
     font-weight: 500;
     display: inline-block;
     vertical-align: top;
@@ -7272,7 +7217,6 @@ h2.sf_title img {
     height: 32px;
     border: 1px solid #bdbdbd;
     border-radius: 6px;
-    font-family: 'Gmarket Sans',serif;
     font-size: 12px;
     color: #222
 }
@@ -7305,7 +7249,6 @@ h2.sf_title img {
 }
 
 .cart--basket .cart--basket_body .box__smilefresh--guide .text__smilefresh--guide {
-    font-family: 'Gmarket Sans',serif;
     font-weight: 500;
     font-size: 16px;
     line-height: 22px;
@@ -7370,7 +7313,6 @@ h2.sf_title img {
     padding: 0 16px;
     border: 1px solid #bdbdbd;
     border-radius: 8px;
-    font-family: 'Gmarket Sans',serif;
     font-size: 16px;
     color: #000;
     line-height: 42px;
@@ -7528,7 +7470,6 @@ h2.sf_title img {
 }
 
 .box__layer__smilefresh .section__smilefresh-order .text__smilefresh-order {
-    font-family: 'Gmarket Sans',serif;
     font-weight: 500;
     font-size: 18px;
     line-height: 23px;
@@ -7567,7 +7508,6 @@ h2.sf_title img {
 }
 
 .box__layer__smilefresh .box__button .button {
-    font-family: 'Gmarket Sans',serif;
     font-weight: 500;
     display: block;
     width: 100%;
@@ -7608,7 +7548,6 @@ h2.sf_title img {
 }
 
 .box__toast-auto-init.box__toast-popup .text__message {
-    font-family: 'Gmarket Sans';
     font-size: 16px;
     font-weight: 500;
     line-height: 1.5;

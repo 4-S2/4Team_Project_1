@@ -619,7 +619,7 @@ ORDER BY r.frno DESC;
 				return list;
 			}
 			
-			// 나의 구매내역
+			// 구매내역
 			public List<CartVO> myBuyData(String id, int page) {
 				List<CartVO> list=new ArrayList<>();
 				
@@ -663,7 +663,7 @@ ORDER BY r.frno DESC;
 				return list;
 			}
 			
-			// 총 구매내역 숫자
+			// 구매내역 총 개수
 			public int myBuyTotal(String id) {
 				int total=0;
 				try {
@@ -703,6 +703,64 @@ ORDER BY r.frno DESC;
 				}
 				return totalpage;
 			}
+			
+			// 장바구니
+			public List<CartVO> myCartData(String id) {
+				List<CartVO> list=new ArrayList<>();
+				
+				try {
+			        conn=dbconn.getConnection();
+			        String sql="SELECT cart_no,GNO, amount, price, id, regdate, GNAME, poster,issale,ischeck, num "
+			        		+ "FROM (SELECT cart_no,GNO, amount, price, id, regdate, GNAME, poster,issale,ischeck, rownum AS num "
+			        		+ "FROM (SELECT cart_no,c.GNO, amount, c.price, c.id, regdate, g.GNAME, g.poster,issale,ischeck "
+			        		+ "FROM cart c,goods g "
+			        		+ "WHERE c.gno=g.gno AND id=? AND issale=0 ORDER BY cart_no DESC)) ";
+			        ps=conn.prepareStatement(sql);
+			        ps.setString(1, id);
+					ResultSet rs=ps.executeQuery();
+			        while(rs.next()) {
+			        	CartVO vo=new CartVO();
+			            vo.setCart_no(rs.getInt(1));
+			            vo.setGno(rs.getInt(2));
+			            vo.setAmount(rs.getInt(3));
+			            vo.getGvo().setPrice(rs.getString(4));
+			            vo.setId(rs.getString(5));
+			            vo.setRegdate(rs.getDate(6));
+			            vo.getGvo().setGname(rs.getString(7));
+			            vo.getGvo().setPoster(rs.getString(8));
+			            vo.setIssale(rs.getInt(9));
+			            vo.setIscheck(rs.getInt(10));
+			            vo.setNum(rs.getInt(11));
+			            list.add(vo);
+			        }
+			        rs.close();
+			    } catch (Exception ex) {
+			        ex.printStackTrace();
+			    } finally {
+			        dbconn.disConnection(conn, ps);
+			    }
+				return list;
+			}
+			
+			// 장바구니 총 갯수
+			public int myCartTotal(String id) {
+				int total=0;
+				try {
+					conn=dbconn.getConnection();
+					String sql="SELECT COUNT(*) FROM cart WHERE id=? AND issale=0";
+					ps=conn.prepareStatement(sql);
+					ps.setString(1, id);
+					ResultSet rs=ps.executeQuery();
+					rs.next();
+					total=rs.getInt(1);
+					rs.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				} finally {
+					dbconn.disConnection(conn, ps);
+				}
+				return total;
+			}			
 			
 			//특산물 상세 
 			public GoodsVO adGoodsDetailData(int gno) {

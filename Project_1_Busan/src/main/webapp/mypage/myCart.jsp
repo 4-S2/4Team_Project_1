@@ -31,7 +31,7 @@ textarea {
 }
 .reserveImg {
 	width: 120px;
-	height: 120px;
+	height: 99px;
 	border-radius: 8px;
 }
 
@@ -54,109 +54,89 @@ tr, td {
     .right {
       /* 오른쪽 컨텐츠에 필요한 스타일을 추가하세요. */
     }
-    
+ .total_num_txt {
+    color: #999;
+    font-size: 20px;
+}
+.table>tbody>tr>td{
+    padding: 8px;
+    line-height: 1.42857143;
+    vertical-align: top;
+    border-top: 1px solid #ddd; 
+}   
 </style>
 <script type="text/javascript">
+function cancelGoods(cno) {
+    let confirmation = confirm("상품을 삭제 하시겠습니까?");
+    if (confirmation) {
+        location.href = "../admin/mypage_goods_cancel.do?cno=" + cno;
+    }
+}
+
 $(function(){
-	let i=0;
-	$(document).on('click', '.reviewBtn', function() {
-		// 클릭한 reviewBtn에 해당하는 가장 가까운 부모 table-reserve 요소 찾기
-		var tableReserve = $(this).closest('.table-reserve');
-		
-		// 해당 table-reserve 안에서 중첩된 table-review 요소 찾기
-		var tableReview = tableReserve.find('.table-review');
-		
-		// table-review 요소의 가시성 토글하기
-		tableReview.toggle();
-		
-		// reviewBtn 텍스트 토글하기
-		$(this).text(function(i, text) {
-		  return text === "리뷰작성" ? "작성취소" : "리뷰작성";
-		});
-    });
-	
-	$('.rcanBtn').click(function(){
-		alert("예약이 취소되었습니다.")
-	});
-	
+	$(document).ready(function(){
+		  $('.amount').on("change",function(){
+			  let rno=$(this).attr("data-rno")
+			  location.href="../admin/admin_fReserve_ok.do?rstate="+rstate+"&rno="+rno
+		  })
+
 })
-		
+});
 </script>
 </head>
 <body>
-	      <div class="max1200 dp_pc contents_titbox">
-                <h4 class="titbox"> 나의<strong>장바구니</strong></h4>
+      <div class="max1200 dp_pc contents_titbox">
+                <h4 class="titbox">&nbsp;&nbsp;&nbsp;나의<strong>장바구니</strong></h4>
+   	  </div>
+   	  <div class="tab_contents_area">
+   	  	<p class="titbox">&nbsp;&nbsp;<span class="total_num_txt offline ta_px0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;총 <strong>${total}</strong>개의 상품이 있습니다.</span></p>
    	  </div>
 	<div class="container">
   		<div class="left">
 	<table class="table table-borderless">
 		<tr>
-			<td><%-- <c:forEach var="vo" items="${list }"> --%>
+			<td><c:forEach var="vo" items="${list }"> 
 					<div style="border: solid 1px; border-color: gainsboro; border-radius: 20px; width: 750px; padding: 20px 20px 0px 20px;">
 						<table class="table table-reserve">
-<%-- 							<tr>
-								<td style="font-size: 15pt; font-weight: bold;">결제완료</td>
-								<td>${vo.realDate }</td>
-								<c:if test="${ vo.rok=='y' }">
-									<td><button class="btn btn-success" disabled>예약완료</button></td>
-								</c:if>
-								<c:if test="${ vo.rok=='n' }">
-									<td><button class="btn btn-outline-success" disabled>예약대기</button></td>
-								</c:if>
-							</tr> --%>
 							<tr>
-								<td rowspan="2" width="15%"><img src=""
+								<td rowspan="2" width="15%"><img src="${vo.gvo.poster }"
 									class="reserveImg"></td>
 								<td width="65%" style="font-size: 17px; font-weight: bold;"
-									id="title">제목</td>
-								<td width="15%"><a href="../mypage/mypage_reserve_delete.do?jrno=" class="btn btn-outline-danger rcanBtn">예약취소</a></td>
+									id="title">${vo.gvo.gname }</td>
+								<!-- <td width="15%"><a href="../mypage/mypage_reserve_delete.do?jrno=" class="btn btn-outline-danger rcanBtn">예약소취</a></td> -->
+									<td>
+										<select class="amount" data-cno=${vo.cno }>
+											<option ${vo.amount=='1'?"selected":"" } value=1>1</option>
+											<option ${vo.amount=='2'?"selected":"" } value=2>2</option>
+											<option ${vo.amount=='3'?"selected":"" } value=3>3</option>
+											<option ${vo.amount=='4'?"selected":"" } value=4>4</option>
+											<option ${vo.amount=='5'?"selected":"" } value=5>5</option>
+											<option ${vo.amount=='6'?"selected":"" } value=6>6</option>
+											<option ${vo.amount=='7'?"selected":"" } value=7>7</option>
+											<option ${vo.amount=='8'?"selected":"" } value=8>8</option>
+											<option ${vo.amount=='9'?"selected":"" } value=9>9</option>
+											<option ${vo.amount=='10'?"selected":"" } value=10>10</option>
+										</select>
+										<input type="button" value="삭제" onclick="cancelGoods()" class="cancel-button" >
+									</td> 
 							</tr>
 							<tr>
-								<td width="65%" style="color: gray;"><p>결제일시</p>
+								<td width="100%" style="color: gray;">
 									<p
 										style="text-align: right; margin-right: 30px; font-weight: bold; font-size: 18pt">
-										<fmt:formatNumber value="1111" pattern="#,###" />
+										<fmt:formatNumber value="${vo.amount * vo.gvo.price}" pattern="#,###" />
 										원
 									</p></td>
-								<td width="20%">
+<!-- 								<td width="20%">
 									<span class="btn btn-outline-secondary reviewBtn"
 												data-jrno="특산물번호" data-acino=""
 												data-rno="카트번호" data-cid="멤버번호">리뷰작성</span>
-								</td>
-							</tr>
-							<tr>
-								<td colspan="3">
-									<form method="post" action="../mypage/mypage_review_ok.do">
-									<table class="table table-review">
-										<tr>
-											<td width="75%" rowspan="2"><textarea name="content"></textarea></td>
-											<td width="25%" style="padding-top:25px;"><span style="display:inline">평점 : </span> 
-												<select class="form-select" name="score">
-												  <option>1</option>
-												  <option>1.5</option>
-												  <option>2</option>
-												  <option>2.5</option>
-												  <option>3</option>
-												  <option>3.5</option>
-												  <option>4</option>
-												  <option>4.5</option>
-												  <option selected="selected">5</option>
-												</select> 
-											</td>
-										</tr>
-										<tr>
-											<td width="25%">
-											<input type="hidden" name="jrno" value="특산물번호">
-											<input type="submit" class="btn btn-outline-danger inputBtn" style="width:100%" value="작성"></td>
-										</tr>
-									</table>
-									</form>
-								</td>
+								</td> -->
 							</tr>
 						</table>
 					</div>
 					<div style="height: 15px;"></div>
-				<%-- </c:forEach> --%></td>
+				</c:forEach> </td>
 		</tr>
 	</table>
 	</div>
@@ -171,7 +151,7 @@ $(function(){
       <li class="list">
         <span class="label">상품수</span>
         <span class="format-amount">
-          <strong class="text">5</strong>
+          <strong class="text">${total}</strong>
           <span class="unit">개</span>
         </span>
       </li>

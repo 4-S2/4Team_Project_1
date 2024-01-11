@@ -135,7 +135,7 @@ $(function(){
 	    let x = (document.body.offsetWidth / 2) - (650 / 2);
 	    let y = (window.screen.height / 2) - (350 / 2) - 50;
 	    let rno = $(this).attr('data-rno');
-	        window.open("../mypage/myReserv_foodDetail.do?rno=" + rno,"",'width=650, height=430, left='+x+', top='+y);
+	        window.open("../mypage/myReserv_foodDetail.do?rno=" + rno,"",'width=1000, height=650, left='+x+', top='+y);
 	});
 	});
 $(function(){
@@ -143,7 +143,7 @@ $(function(){
 	    let x = (document.body.offsetWidth / 2) - (650 / 2);
 	    let y = (window.screen.height / 2) - (350 / 2) - 50;
 	    let no = $(this).attr('data-no');
-	    	window.open("../mypage/myReserv_exDetail.do?no=" + no,"",'width=750, height=570, left='+x+', top='+y);
+	    	window.open("../mypage/myReserv_exDetail.do?no=" + no,"",'width=1000, height=650, left='+x+', top='+y);
 	});
 	});
 /* function cancelReservation(rrno){
