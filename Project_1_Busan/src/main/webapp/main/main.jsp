@@ -9,13 +9,14 @@
         <meta charset="utf-8"/>
         <meta content="width=device-width, initial-scale=1" name="viewport"/>
         <title>Busan Tour</title>
+         <link rel="stylesheet" type="text/css" href="../css/cart1.css" />
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
         <link href="../css/style.css" rel="stylesheet" type="text/css"/>
         <!-- <link rel="stylesheet" type="text/css" href="../css/reset.css" /> -->
         <link rel="stylesheet" type="text/css" href="../css/pc.css" />
         <!-- <link href="../css/mainlist.css" rel="stylesheet" type="text/css"/> -->
-         <link rel="stylesheet" type="text/css" href="../css/cart1.css" />
+        
         <style type="text/stylesheet">
             .nav-bar .navbar-user{
                 float: right;

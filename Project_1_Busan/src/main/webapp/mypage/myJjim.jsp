@@ -85,6 +85,15 @@
     left: 0;
     content: '';
 }
+    
+.jjimTitle {
+        font-size: 1.2em; /* 원하는 크기로 조절 */
+        font-weight: bold;
+}
+    .jjimBtn {
+        width: 25px; /* 원하는 너비로 조절 */
+        height: 25px; /* 원하는 높이로 조절 */
+    }
 </style>
 <script type="text/javascript">
 function toggleTab(tabIndex) {
@@ -120,6 +129,24 @@ function toggleTab(tabIndex) {
     }
 }
 
+</script>
+<script type="text/javascript">
+$(function(){
+	$('.jjimBtn').click(function() {
+        let jno = $(this).attr("data-jno");            
+
+        $.ajax({
+            type: 'post',
+            url: '../mypage/myjjim_cancel.do',
+            data: {'jno': jno},
+            success: function(result) {
+                if (result === 'ok') {
+                    alert("찜 취소가 완료되었습니다");
+                } 
+            }
+        });
+    });
+})
 </script>
 </head>
 <body>
@@ -165,12 +192,10 @@ function toggleTab(tabIndex) {
 									<a class="image fix" href="../busan/tour_detail.do?no=${vo.no}"><img
 										src="${vo.bvo.poster }" width="100%" height="220px" /></a>
 									<div class="metammm" style="position: relative">
-										<div style="display: inline-block">
-											<h2>
-												<a style="text-decoration: none"
-													href="#">${vo.jno}</a>
-											</h2>
-											<a class="title" href="../busan/tour_detail.do?no=${vo.no}">${vo.bvo.title}</a>
+										<div style="display: inline-block" class="jjimTitle">
+											<a href="../busan/tour_detail.do?no=${vo.no}"></a>
+											<img src="../busan/jjim.png" class="jjimBtn" data-jno="${vo.jno }">
+											${vo.bvo.title}
 										</div>
 										<div style="display: inline-block; float: right; margin-top: 22px; cursor: pointer;" onclick="">
 											<img src="" style="width: 30px;">
@@ -211,12 +236,10 @@ function toggleTab(tabIndex) {
 									<a class="image fix" href="../busan/food_detail.do?no=${vo.no}"><img
 										src="${vo.bvo.poster }" width="100%" height="220px" /></a>
 									<div class="metammm" style="position: relative">
-										<div style="display: inline-block">
-											<h2>
-												<a style="text-decoration: none"
-													href="#">${vo.jno}</a>
-											</h2>
-											<a class="title" href="../busan/food_detail.do?no=${vo.no}">${vo.bvo.title}</a>
+										<div style="display: inline-block" class="jjimTitle">
+											<a href="../busan/food_detail.do?no=${vo.no}"></a>
+											<img src="../busan/jjim.png" class="jjimBtn" data-jno="${vo.jno }">
+											${vo.bvo.title}
 										</div>
 										<div style="display: inline-block; float: right; margin-top: 22px; cursor: pointer;" onclick="">
 											<img src="" style="width: 30px;">
@@ -257,12 +280,10 @@ function toggleTab(tabIndex) {
 									<a class="image fix" href="../busan/festival_detail.do?no=${vo.no}"><img
 										src="${vo.bvo.poster }" width="100%" height="220px" /></a>
 									<div class="metammm" style="position: relative">
-										<div style="display: inline-block">
-											<h2>
-												<a style="text-decoration: none"
-													href="#">${vo.jno}</a>
-											</h2>
-											<a class="title" href="../busan/festival_detail.do?no=${vo.no}">${vo.bvo.title}</a>
+										<div style="display: inline-block" class="jjimTitle">
+											<a  href="../busan/festival_detail.do?no=${vo.no}"></a>
+											<img src="../busan/jjim.png" class="jjimBtn" data-jno="${vo.jno }">
+											${vo.bvo.title}
 										</div>
 										<div style="display: inline-block; float: right; margin-top: 22px; cursor: pointer;" onclick="">
 											<img src="" style="width: 30px;">
@@ -303,12 +324,11 @@ function toggleTab(tabIndex) {
 									<a class="image fix" href="../busan/activity_detail.do?no=${vo.no}"><img
 										src="${vo.bvo.poster }" width="100%" height="220px" /></a>
 									<div class="metammm" style="position: relative">
-										<div style="display: inline-block">
-											<h2>
-												<a style="text-decoration: none"
-													href="#">${vo.jno}</a>
-											</h2>
-											<a class="title" href="../busan/activity_detail.do?no=${vo.no}">${vo.bvo.title}</a>
+										<div style="display: inline-block" class="jjimTitle">
+											<a href="../busan/activity_detail.do?no=${vo.no}"></a>
+											<img src="../busan/jjim.png" class="jjimBtn" data-jno="${vo.jno }">
+											${vo.bvo.title}
+											
 										</div>
 										<div style="display: inline-block; float: right; margin-top: 22px; cursor: pointer;" onclick="">
 											<img src="" style="width: 30px;">
@@ -346,15 +366,13 @@ function toggleTab(tabIndex) {
 						<div class="col-md-4">
 							<div class="single-blog">
 								<div class="content fix">
-									<a class="image fix" href="../busan/ex_detail.do?eno=${vo.no}"><img
+									<a class="image fix" href="../busan/ex_detail.do?eno=${vo.evo.eno}"><img
 										src="${vo.evo.poster }" width="100%" height="220px" /></a>
 									<div class="metammm" style="position: relative">
-										<div style="display: inline-block">
-											<h2>
-												<a style="text-decoration: none"
-													href="#">${vo.jno}</a>
-											</h2>
-											<a class="title" href="../busan/ex_detail.do?eno=${vo.no}">${vo.evo.ename}</a>
+										<div style="display: inline-block" class="jjimTitle">
+											<a href="../busan/ex_detail.do?eno=${vo.evo.eno}"></a>
+											<img src="../busan/jjim.png" class="jjimBtn" data-jno="${vo.jno }">
+											${vo.evo.ename}
 										</div>
 										<div style="display: inline-block; float: right; margin-top: 22px; cursor: pointer;" onclick="">
 											<img src="" style="width: 30px;">

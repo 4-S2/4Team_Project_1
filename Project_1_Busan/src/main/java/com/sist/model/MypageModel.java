@@ -198,7 +198,27 @@ public class MypageModel {
 		return "redirect:../mypage/myReserv.do?tab=2";
 	}
 	
-	
+	// 찜 취소
+	 @RequestMapping("mypage/myjjim_cancel.do")
+		public void myjjim_cancel(HttpServletRequest request, HttpServletResponse response)
+		{
+		   try {
+			   request.setCharacterEncoding("UTF-8");
+		   }catch(Exception e) {e.printStackTrace();}
+		   HttpSession session=request.getSession();
+		   String id=(String)session.getAttribute("id");
+		   
+		   String jno=request.getParameter("jno");
+		   
+		   MypageDAO dao=MypageDAO.newInstance();
+		   String res=dao.jjimCancel(id, Integer.parseInt(jno));
+		   
+		   try {
+			   PrintWriter out=response.getWriter();
+			   out.write(res);
+		   }catch(Exception e) {e.printStackTrace();}
+		}
+	 
 	// 장바구니
 	@RequestMapping("mypage/myCart.do")
 	public String mypage_myCart(HttpServletRequest request, HttpServletResponse response)
@@ -261,13 +281,12 @@ public class MypageModel {
 		String id=(String)session.getAttribute("id");
 		
 		MypageDAO dao=MypageDAO.newInstance();
-		JjimDAO jdao = JjimDAO.newInstance();
 		
-		List<JjimVO> tlist = jdao.busanjjimListData(id, "tour",1);
-		List<JjimVO> fdlist = jdao.busanjjimListData(id, "food",4);
-		List<JjimVO> flist = jdao.busanjjimListData(id, "festival",2);
-		List<JjimVO> alist = jdao.busanjjimListData(id, "activity",3);
-		List<JjimVO> elist = jdao.exjjimListData(id);
+		List<JjimVO> tlist = dao.busanjjimListData(id, "tour",1);
+		List<JjimVO> fdlist = dao.busanjjimListData(id, "food",4);
+		List<JjimVO> flist = dao.busanjjimListData(id, "festival",2);
+		List<JjimVO> alist = dao.busanjjimListData(id, "activity",3);
+		List<JjimVO> elist = dao.exjjimListData(id);
 		
 		int tSize = tlist.size();
 		int fdSize = fdlist.size();
@@ -276,12 +295,6 @@ public class MypageModel {
 		int eSize = elist.size();
 		int totalJjim = tSize+fdSize+fSize+aSize+eSize;
 		  
-			/*
-			 * request.setAttribute("tSize",tSize); request.setAttribute("fdSize",fdSize);
-			 * request.setAttribute("fSize",fSize); request.setAttribute("aSize",aSize);
-			 * request.setAttribute("eSize",eSize);
-			 */
-		 
 		request.setAttribute("tlist",tlist); 
 		request.setAttribute("fdlist",fdlist);
 		request.setAttribute("flist",flist); 
