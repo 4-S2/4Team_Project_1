@@ -5,7 +5,7 @@
 
 <!-- Include Kakao Maps API -->
 
-
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fce1f2ebd7aeec53bebf70c1f38c36c7&libraries=services"></script>
 <script type="text/javascript">
    /*global-kakao*/
     var mapInitialized = false;

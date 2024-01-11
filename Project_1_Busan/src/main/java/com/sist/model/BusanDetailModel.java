@@ -40,7 +40,13 @@ public class BusanDetailModel {
 		  String addr=vo.getAddr().substring(vo.getAddr().indexOf(" "));
 		  System.out.println(addr);
 		  String addr1=addr.trim().substring(0,addr.trim().indexOf(" "));
-		  String addr2=addr1.substring(3);
+		  String addr2=addr1.substring(1);
+		  if(addr1.length()>2)
+		  {
+			  addr2=addr1.substring(3);
+		  }else {
+			  
+		  }
 		  System.out.println(addr1);
 		  List<BusanListVO> recolist1=dao.BusanRecoListData("food", addr2);	 
 		  List<BusanListVO> recolist2=dao.BusanRecoListData("tour", addr2);
@@ -141,8 +147,13 @@ public class BusanDetailModel {
 		  String addr=vo.getAddr().substring(vo.getAddr().indexOf(" "));
 		  System.out.println(addr);
 		  String addr1=addr.trim().substring(0,addr.trim().indexOf(" "));
-		  String addr2=addr1.substring(3);
-		  System.out.println(addr1);
+		  String addr2=addr1.substring(1);
+		  if(addr1.length()>2)
+		  {
+			  addr2=addr1.substring(3);
+		  }else {
+			  
+		  }
 		  List<BusanListVO> recolist1=dao.BusanRecoListData("food", addr2);	 
 		  List<BusanListVO> recolist2=dao.BusanRecoListData("tour", addr2);
 		  List<BusanListVO> recolist3=dao.BusanRecoListData("activity", addr2);
@@ -234,8 +245,13 @@ public class BusanDetailModel {
 		  String addr=vo.getAddr().substring(vo.getAddr().indexOf(" "));
 		  System.out.println(addr);
 		  String addr1=addr.trim().substring(0,addr.trim().indexOf(" "));
-		  String addr2=addr1.substring(3);
-		  System.out.println(addr1);
+		  String addr2=addr1.substring(1);
+		  if(addr1.length()>2)
+		  {
+			  addr2=addr1.substring(3);
+		  }else {
+			  
+		  }
 		  List<BusanListVO> recolist1=dao.BusanRecoListData("food", addr2);	 
 		  List<BusanListVO> recolist2=dao.BusanRecoListData("tour", addr2);
 		  List<BusanListVO> recolist3=dao.BusanRecoListData("activity", addr2);
@@ -328,8 +344,13 @@ public class BusanDetailModel {
 		  String addr=vo.getAddr().substring(vo.getAddr().indexOf(" "));
 		  System.out.println(addr);
 		  String addr1=addr.trim().substring(0,addr.trim().indexOf(" "));
-		  String addr2=addr1.substring(3);
-		  System.out.println(addr1);
+		  String addr2=addr1.substring(1);
+		  if(addr1.length()>2)
+		  {
+			  addr2=addr1.substring(3);
+		  }else {
+			  
+		  }
 		  List<BusanListVO> recolist1=dao.BusanRecoListData("food", addr2);	 
 		  List<BusanListVO> recolist2=dao.BusanRecoListData("tour", addr2);
 		  List<BusanListVO> recolist3=dao.BusanRecoListData("activity", addr2);
