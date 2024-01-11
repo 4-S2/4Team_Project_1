@@ -10,12 +10,12 @@
 <link rel="stylesheet" href="../shadow/css/shadowbox.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
-<script type="text/javascript" src="../shadow/js/shadowbox.js"></script>
+<!-- <script type="text/javascript" src="../shadow/js/shadowbox.js"></script> -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
-	$('#reviewUpdateBtn').click(function(){
+	/* $('#reviewUpdateBtn').click(function(){
 		Shadowbox.open({
 			content:'../busan/review_update.do',
 			player:'iframe',
@@ -23,7 +23,7 @@ $(document).ready(function(){
 			width: 640,
 			height: 480
 		})
-	})
+	}) */
 	
 	$('#reviewUpdateBtn').click(function(){
 		let id=$('#id').val()
@@ -54,7 +54,7 @@ $(document).ready(function(){
 		
 		let rno=$('#rno').val()
 		
-		$.ajax({
+		/* $.ajax({
 			type:'post',
 			url:'../busan/review_update_ok.do',
 			data:{"rno":rno,"id":id,"score":score,
@@ -74,40 +74,55 @@ $(document).ready(function(){
 				alert(err)
 			}
 			
-		})
+		}) */
 	})
 </script>
 </head>
 <body>
 	<div class="review-insert review-update">
-        <form method="post" action="../busan/review_insert_ok.do">
+        <form method="post" action="../busan/review_update_ok.do">
 			<table class="table">
 				<tr>
-					<th width=10%>아이디</th>
-					<td width=90% id="id">${sessionScope.id}</td>
+					<th width=15%>아이디</th>
+					<td width=85% id="id" value="${rvo.id}">${sessionScope.id}</td>
 				</tr>
+				
 				<tr>
-					<th width=10%>평점</th>
-					<td width=90%>
-						<input type="text" name="score" id="score" required>
+					<th width="15%">카테고리</th>
+					<td width="85%" value="${rvo.cateno}">
+						<select class="cate">
+		        			<option value="1">명소</option>
+		        			<option value="2">맛집</option>
+		        			<option value="3">축제</option>
+		        			<option value="4">체험</option>
+		        			<option value="5">전시</option>
+		        			<option value="6">특산물</option>
+		        		</select>
+					</td>
+				</tr>
+				
+				<tr>
+					<th width=15%>평점</th>
+					<td width=85%>
+						<input type="text" name="score" id="score" value="${rvo.score}" required>
 					</td>
 				</tr>
 				<tr>
-					<th width=10%>이미지</th>
-					<td width=90%>
-						<input type="file" name="img" id="img" required>
+					<th width=15%>이미지</th>
+					<td width=85%>
+						<input type="file" name="img" id="img" value="${rvo.img}" required>
 					</td>
 				</tr>
 				<tr>
-					<th width=10%>내용</th>
-					<td width=90%>
-						<textarea rows="10" cols="60" name="cont" id="cont" required style="resize: none"></textarea>
+					<th width=15%>내용</th>
+					<td width=85%>
+						<textarea rows="10" cols="60" name="cont" id="cont" value="${rvo.cont}" required style="resize: none"></textarea>
 					</td>
 				</tr>
 				<tr>
-					<th width=10%>비밀번호</th>
-					<td width=90%>
-						<input type="password" name="password" id="password" required>
+					<th width=15%>비밀번호</th>
+					<td width=85%>
+						<input type="password" name="password" id="password" value="${rvo.password}" required>
 					</td>
 				</tr>
 				<tr>

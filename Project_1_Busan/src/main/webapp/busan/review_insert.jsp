@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="../shadow/css/shadowbox.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
-<script type="text/javascript" src="../shadow/js/shadowbox.js"></script>
+<!-- <script type="text/javascript" src="../shadow/js/shadowbox.js"></script> -->
 <script type="text/javascript">
 
 </script>
@@ -22,31 +22,44 @@
         <form method="post" action="../busan/insert_ok.do">
 			<table class="table">
 				<tr>
-					<th width=10%>아이디</th>
-					<td width=90%>${sessionScope.id}</td>
+					<th width=15%>아이디</th>
+					<td width=85% value="${rvo.id}">${sessionScope.id}</td>
 				</tr>
 				<tr>
-					<th width=10%>평점</th>
-					<td width=90%>
-						<input type="text" name="score" required>
+					<th width="15%">카테고리</th>
+					<td width="85%" value="${rvo.cateno}">
+						<select class="cate">
+		        			<option value="1">명소</option>
+		        			<option value="2">맛집</option>
+		        			<option value="3">축제</option>
+		        			<option value="4">체험</option>
+		        			<option value="5">전시</option>
+		        			<option value="6">특산물</option>
+		        		</select>
 					</td>
 				</tr>
 				<tr>
-					<th width=10%>이미지</th>
-					<td width=90%>
-						<input type="file" name="img" required>
+					<th width=15%>평점</th>
+					<td width=85%>
+						<input type="text" name="score" value="${rvo.score}" required>
 					</td>
 				</tr>
 				<tr>
-					<th width=10%>내용</th>
-					<td width=90%>
-						<textarea rows="10" cols="60" name="cont" required style="resize: none"></textarea>
+					<th width=15%>이미지</th>
+					<td width=85%>
+						<input type="file" name="img" value="${rvo.img}" required>
 					</td>
 				</tr>
 				<tr>
-					<th width=10%>비밀번호</th>
-					<td width=90%>
-						<input type="password" name="password" required>
+					<th width=15%>내용</th>
+					<td width=85%>
+						<textarea rows="10" cols="60" name="cont" value="${rvo.cont}" required style="resize: none"></textarea>
+					</td>
+				</tr>
+				<tr>
+					<th width=15%>비밀번호</th>
+					<td width=85%>
+						<input type="password" name="password" value="${rvo.password}" required>
 					</td>
 				</tr>
 				<tr>

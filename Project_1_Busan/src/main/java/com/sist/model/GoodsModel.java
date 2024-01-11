@@ -90,6 +90,19 @@ public class GoodsModel {
 	}
 	
 	
+//	public String goods_list_sort(HttpServletRequest request, HttpServletResponse response) {
+//		String order=request.getParameter("order"); // "asc" 또는 "desc" 값을 받아옴
+//		GoodsDAO dao=GoodsDAO.newInstance();
+//		List<GoodsVO> list= dao.goodsListSort(order);
+//
+//        // 상품 목록을 request 속성에 저장
+//		request.setAttribute("order", order);
+//        request.setAttribute("list", list);
+//
+//        return "../main/main.jsp"; // 적절한 경로로 변경
+//    }
+//	
+	
 	@RequestMapping("store/goods_detail.do")
 	public String goods_detail(HttpServletRequest request, HttpServletResponse response) {
 		String gno=request.getParameter("gno");
@@ -109,10 +122,7 @@ public class GoodsModel {
 		return "../main/main.jsp";
 	}
 	
-	
-	
-	
-	
+
 	// 장바구니
 	@RequestMapping("store/goods_cart.do")
 	public void cart_insert(HttpServletRequest request, HttpServletResponse response) {

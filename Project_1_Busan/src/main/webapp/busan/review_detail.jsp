@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="../shadow/css/shadowbox.css">
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
-<script type="text/javascript" src="../shadow/js/shadowbox.js"></script>
+<!-- <script type="text/javascript" src="../shadow/js/shadowbox.js"></script> -->
 <script type="text/javascript">
 $(document).ready(function(){
 	
@@ -19,6 +19,7 @@ $(document).ready(function(){
 			$('#password').focus();
 			return;
 		}
+		
 		$.ajax({
 			type:'post',
 			url:'../busan/review_delete_ok.do',
@@ -47,25 +48,25 @@ $(document).ready(function(){
 		<tr>
 			<th width=10%>평점</th>
 			<td width=90%>
-				<input type="text" name="score" id="score" value="${vo.score}" required>
+				<input type="text" name="score" id="score" value="${rvo.score}" required>
 			</td>
 		</tr>
 		<tr>
 			<th width=10%>이미지</th>
 			<td width=90%>
-				<input type="file" name="img" id="img" value="${vo.img}" required>
+				<input type="file" name="img" id="img" value="${rvo.img}" required>
 			</td>
 		</tr>
 		<tr>
 			<th width=10%>내용</th>
 			<td width=90%>
-				<textarea rows="10" cols="60" name="cont" id="cont" value="${vo.cont}" required style="resize: none"></textarea>
+				<textarea rows="10" cols="60" name="cont" id="cont" value="${rvo.cont}" required style="resize: none"></textarea>
 			</td>
 		</tr>
 		<tr>
 			<th width=10%>비밀번호</th>
 			<td width=90%>
-				<input type="password" name="password" id="password" required>
+				<input type="password" name="password" id="password"value="${rvo.password}" required>
 			</td>
 		</tr>
 		<tr>

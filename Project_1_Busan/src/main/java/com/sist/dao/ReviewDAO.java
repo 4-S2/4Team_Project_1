@@ -22,7 +22,7 @@ public class ReviewDAO {
     
     // 리뷰 목록 출력
     public List<ReviewVO> reviewListData(int page){
-       List<ReviewVO> list=new ArrayList<ReviewVO>();
+       List<ReviewVO> rlist=new ArrayList<ReviewVO>();
        try{
           // 1. 연결
           conn=dbconn.getConnection();
@@ -45,16 +45,16 @@ public class ReviewDAO {
           // 5. 실행후에 결과값을 받는다 
           ResultSet rs=ps.executeQuery();
           while(rs.next()) { // 출력 1번째 위치부터 읽기 시작 
-        	 ReviewVO vo=new ReviewVO();
-             vo.setRno(rs.getInt(1));
-             vo.setScore(rs.getInt(2));
-             vo.setCateno(rs.getInt(3));
-             vo.setId(rs.getString(4));
-             vo.setCont(rs.getString(5));
-             vo.setPassword(rs.getString(6));
-             vo.setImg(rs.getString(7));
-             vo.setRegdate(rs.getDate(8));
-             list.add(vo);
+        	 ReviewVO rvo=new ReviewVO();
+             rvo.setRno(rs.getInt(1));
+             rvo.setScore(rs.getInt(2));
+             rvo.setCateno(rs.getInt(3));
+             rvo.setId(rs.getString(4));
+             rvo.setCont(rs.getString(5));
+             rvo.setPassword(rs.getString(6));
+             rvo.setImg(rs.getString(7));
+             rvo.setRegdate(rs.getDate(8));
+             rlist.add(rvo);
           }
           rs.close();
        }catch(Exception ex){
@@ -65,7 +65,7 @@ public class ReviewDAO {
           // 반환 => 재사용 
           dbconn.disConnection(conn, ps);
        }
-       return list;
+       return rlist;
     }
     
     
@@ -92,7 +92,7 @@ public class ReviewDAO {
     
     // 상세보기 
     public ReviewVO reviewDetailData(int rno) {
-    	ReviewVO vo=new ReviewVO();
+    	ReviewVO rvo=new ReviewVO();
     	
     	try {
  		   conn=dbconn.getConnection(); 		   
@@ -104,37 +104,37 @@ public class ReviewDAO {
  		   ps=conn.prepareStatement(sql);
  		   ResultSet rs=ps.executeQuery();
  		   rs.next();
- 		   vo.setRno(rs.getInt(1));
-           vo.setScore(rs.getInt(2));
-           vo.setCateno(rs.getInt(3));
-           vo.setId(rs.getString(4));
-           vo.setCont(rs.getString(5));
-           vo.setPassword(rs.getString(6));
-           vo.setImg(rs.getString(7));
-           vo.setRegdate(rs.getDate(8));
+ 		   rvo.setRno(rs.getInt(1));
+           rvo.setScore(rs.getInt(2));
+           rvo.setCateno(rs.getInt(3));
+           rvo.setId(rs.getString(4));
+           rvo.setCont(rs.getString(5));
+           rvo.setPassword(rs.getString(6));
+           rvo.setImg(rs.getString(7));
+           rvo.setRegdate(rs.getDate(8));
  		   rs.close();
  	   } catch(Exception ex) {
  		   ex.printStackTrace();
  	   } finally {
  		   dbconn.disConnection(conn, ps);
  	   }
- 	   return vo;
+ 	   return rvo;
     }
     
     
     // 리뷰 작성
-    public void reviewInsert(ReviewVO vo) {
+    public void reviewInsert(ReviewVO rvo) {
     	try {
     		conn=dbconn.getConnection();
     		String sql="INSERT INTO review(rno, score, cateno, id, cont, password, img) "
     				 + "VALUES(review_rno_seq.nextval,?,?,?,?,?,?)";
     		ps=conn.prepareStatement(sql);
-    		ps.setInt(1, vo.getScore());
-    		ps.setInt(2, vo.getCateno());
-			ps.setString(3, vo.getId());
-    		ps.setString(4, vo.getCont());
-    		ps.setString(5, vo.getPassword());
-    		ps.setString(6, vo.getImg());
+    		ps.setInt(1, rvo.getScore());
+    		ps.setInt(2, rvo.getCateno());
+			ps.setString(3, rvo.getId());
+    		ps.setString(4, rvo.getCont());
+    		ps.setString(5, rvo.getPassword());
+    		ps.setString(6, rvo.getImg());
     		ps.executeUpdate();
     	}catch(Exception ex) {
     		ex.printStackTrace();
@@ -185,12 +185,12 @@ public class ReviewDAO {
     
     
     // 리뷰 수정
-    public String reviewUpdate(ReviewVO vo) {
+    public String reviewUpdate(ReviewVO rvo) {
     	String result="no";
     	try {
       		conn=dbconn.getConnection();
       		String sql="SELECT password FROM review "
-      				  +"WHERE rno="+vo.getRno();
+      				  +"WHERE rno="+rvo.getRno();
       		ps=conn.prepareStatement(sql);
       		ResultSet rs=ps.executeQuery();
       		rs.next();
@@ -198,17 +198,17 @@ public class ReviewDAO {
       		rs.close();
       		ps.close();
       		
-      		if(db_pwd.equals(vo.getPassword())) {
+      		if(db_pwd.equals(rvo.getPassword())) {
       			result="yes";
       			sql="UPDATE review SET "
       			   +"score=?, cont=?, img=? "
       			   +"WHERE rno=?";
       		}
       		ps=conn.prepareStatement(sql);
-      		ps.setInt(1, vo.getScore());
-      		ps.setString(2, vo.getCont());
-      		ps.setString(3, vo.getImg());
-      		ps.setInt(4, vo.getRno());
+      		ps.setInt(1, rvo.getScore());
+      		ps.setString(2, rvo.getCont());
+      		ps.setString(3, rvo.getImg());
+      		ps.setInt(4, rvo.getRno());
       		ps.executeUpdate();
       		ps.close();
       	}catch(Exception ex) {

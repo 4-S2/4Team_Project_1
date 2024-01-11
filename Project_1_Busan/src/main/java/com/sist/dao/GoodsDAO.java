@@ -183,6 +183,62 @@ public class GoodsDAO {
 	}
 	   
 	
+	
+	// 저가순 정렬
+	public List<GoodsVO> goodsListSortLow(String order) {
+	    List<GoodsVO> list=new ArrayList<>();
+	    try {
+	        conn=dbconn.getConnection();
+	        String sql="SELECT gno, gname, poster, price "
+	                  +"FROM goods "
+	                  +"ORDER BY price ASC";
+	        ps=conn.prepareStatement(sql);
+	        ResultSet rs=ps.executeQuery();
+	        while (rs.next()) {
+	            GoodsVO vo = new GoodsVO();
+	            vo.setGno(rs.getInt(1));
+	            vo.setGname(rs.getString(2));
+	            vo.setPoster(rs.getString(3));
+	            vo.setPrice(rs.getString(4));
+	            list.add(vo);
+	        }
+	        rs.close();
+	    } catch (Exception ex) {
+	        ex.printStackTrace();
+	    } finally {
+	        dbconn.disConnection(conn, ps);
+	    }
+	    return list;
+	}
+	
+	// 고가순 정렬
+	public List<GoodsVO> goodsListSortHigh(String order) {
+	    List<GoodsVO> list=new ArrayList<>();
+	    try {
+	        conn=dbconn.getConnection();
+	        String sql="SELECT gno, gname, poster, price "
+	                  +"FROM goods "
+	                  +"ORDER BY price DESC";
+	        ps=conn.prepareStatement(sql);
+	        ResultSet rs=ps.executeQuery();
+	        while (rs.next()) {
+	            GoodsVO vo = new GoodsVO();
+	            vo.setGno(rs.getInt(1));
+	            vo.setGname(rs.getString(2));
+	            vo.setPoster(rs.getString(3));
+	            vo.setPrice(rs.getString(4));
+	            list.add(vo);
+	        }
+	        rs.close();
+	    } catch (Exception ex) {
+	        ex.printStackTrace();
+	    } finally {
+	        dbconn.disConnection(conn, ps);
+	    }
+	    return list;
+	}
+	
+	
 	// 상품 상세보기
 	public GoodsVO goodsDetailData(int gno) {
 		GoodsVO vo=new GoodsVO();

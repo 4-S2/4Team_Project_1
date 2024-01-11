@@ -4,7 +4,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
-<!-- <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script> -->
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script> -->
 <script type="text/javascript">
 	<!-- 결제 API -->
 	var IMP = window.IMP; // 생략 가능
@@ -103,6 +103,22 @@
 		$('#buyBtn').click(function(){
 			requestPay()
 		})
+		
+		
+		$('#review').click(function(){
+			let gno=$('#cartBtn').attr("data-gno")
+			
+			$.ajax({
+				type:'post',
+				url:'../busan/review.do',
+				data:{"gno":gno},
+				success:function(result)
+				{
+					$('#reviewCont').html(result)
+				}
+			})
+		})
+		
 	})
 </script>
 
@@ -214,16 +230,8 @@ function showTab(tabName) {
 		                </div>
                		</div>
 				    
-				    <div id="reviewCont" class="tab-content" style="display:none;">
-				        <a href="../busan/review.do">리뷰</a>
-				        <!-- 리뷰 내용 -->
-				        <%-- <jsp:include page="../busan/review.jsp">
-				        	<jsp:param name="rno" value="${vo.rno}"/>
-						  	<jsp:param name="score" value="${vo.score}"/>
-						  	<jsp:param name="id" value="${vo.id}"/>
-						  	<jsp:param name="cont" value="${vo.cont}"/>
-						  	<jsp:param name="img" value="${vo.img}"/>
-				        </jsp:include> --%>
+				    <div id="reviewCont" class="tab-content">
+				        
 				    </div>
 				    
 				    <!-- <div id="inquiryCont" class="tab-content" style="display: none;">

@@ -83,7 +83,7 @@
 	</c:if>	
 </div>
 
-<a href="#" id="contactBtn" class="fixed-btn">
+<a href="../board/qnaboard.do" id="contactBtn" class="fixed-btn">
 	<img class="icon icon-contact" src="../images/icon_contact.png">
 </a>
 
