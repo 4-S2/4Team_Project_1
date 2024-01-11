@@ -329,6 +329,17 @@ public class MypageModel {
 		return "../main/main.jsp";
 	}
 	
+	@RequestMapping("mypage/myInquiry_answer.do")
+	public String mypage_myqInquiry_answer(HttpServletRequest request, HttpServletResponse response)
+	{	
+		String gid=request.getParameter("gid");
+		String qno=request.getParameter("qno");
+		
+		request.setAttribute("mypage_jsp", "myacc_delete.jsp");
+		request.setAttribute("main_jsp", "../mypage/mypage_main.jsp");
+		return "../main/main.jsp";
+	}
+	
 	// 회원탈퇴
 	@RequestMapping("mypage/myacc_delete.do")
 	public String mypage_myacc_delete(HttpServletRequest request, HttpServletResponse response)

@@ -105,7 +105,7 @@ $(function(){
 									id="title">${vo.gvo.gname }</td>
 								<!-- <td width="15%"><a href="../mypage/mypage_reserve_delete.do?jrno=" class="btn btn-outline-danger rcanBtn">예약소취</a></td> -->
 									<td>
-										<select class="amount" data-cno=${vo.cno }>
+										<select class="amount" <%-- data-cno=${vo.cno } --%>>
 											<option ${vo.amount=='1'?"selected":"" } value=1>1</option>
 											<option ${vo.amount=='2'?"selected":"" } value=2>2</option>
 											<option ${vo.amount=='3'?"selected":"" } value=3>3</option>

@@ -527,7 +527,7 @@ ORDER BY r.frno DESC;
 				try
 				{
 					conn=dbconn.getConnection();
-					String sql="SELECT qno,subject,regdate,status "
+					String sql="SELECT qno,subject,regdate,status,group_id "
 							+ "FROM QnaBoard "
 							+ "WHERE id=? "
 							+ "ORDER BY qno DESC";
@@ -541,6 +541,7 @@ ORDER BY r.frno DESC;
 			            vo.setSubject(rs.getString(2));
 			            vo.setRegdate(rs.getDate(3));
 			            vo.setStatus(rs.getInt(4));
+			            vo.setGroup_id(rs.getInt(5));
 			            list.add(vo);
 			         }
 			         rs.close();

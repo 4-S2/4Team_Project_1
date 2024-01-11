@@ -12,6 +12,13 @@
 }
 
 </style>
+<script>
+    function answer(gid,qno) {
+    	"mypage/myInquiry_answer.do?gid="+gid+"&qno="+qno;
+        location.href()
+    }
+</script>
+
 </head>
 <body>
   <div class="myInquiry">
@@ -53,7 +60,7 @@
 				                	<td class="category px_20 ta_px10">답변대기</td>
 				                </c:if>
 				                <c:if test="${vo.status == 1 }">
-				                	<td class="category px_20 ta_px10"><strong>답변완료</strong></td>
+				                	<td class="category px_20 ta_px10"  onclick="answer(${vo.group_id},(${vo.qno})"> <strong>답변완료</strong></td>
 				                </c:if>				                
 				            </tr>
 				        </c:forEach>
