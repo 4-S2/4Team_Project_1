@@ -70,6 +70,7 @@ public class GoodsModel {
 		GoodsDAO dao=GoodsDAO.newInstance();
 		List<GoodsVO> list=dao.goodsFindList(word, curpage, sort);
 		int totalpage=dao.goodsFindTotalPage(word);
+		
 		final int BLOCK=10;
 		int startPage=((curpage-1)/BLOCK*BLOCK)+1;
 		int endPage=((curpage-1)/BLOCK*BLOCK)+BLOCK;
@@ -88,20 +89,7 @@ public class GoodsModel {
 		request.setAttribute("main_jsp", "../store/goods.jsp");
 		return "../main/main.jsp";
 	}
-	
-	
-//	public String goods_list_sort(HttpServletRequest request, HttpServletResponse response) {
-//		String order=request.getParameter("order"); // "asc" 또는 "desc" 값을 받아옴
-//		GoodsDAO dao=GoodsDAO.newInstance();
-//		List<GoodsVO> list= dao.goodsListSort(order);
-//
-//        // 상품 목록을 request 속성에 저장
-//		request.setAttribute("order", order);
-//        request.setAttribute("list", list);
-//
-//        return "../main/main.jsp"; // 적절한 경로로 변경
-//    }
-//	
+
 	
 	@RequestMapping("store/goods_detail.do")
 	public String goods_detail(HttpServletRequest request, HttpServletResponse response) {

@@ -69,6 +69,14 @@
 
 
 	$(function(){
+		
+		$('.tab-menu li').click(function(){
+    	    // 모든 li 요소의 하단 테두리 색상 초기화
+    	    $('.tab-menu li').css("border-bottom-color", "#fff");
+    	    // 현재 클릭한 li에 대한 하단 테두리 색상 변경
+    	    $(this).css("border-bottom-color", "#2546f3");
+    	});
+		
 		$('#sel').change(function(){
 			let price=$('#price').attr("data-price")
 			let count=$(this).val()
@@ -119,6 +127,33 @@
 			})
 		})
 		
+		$('.reUp').click(function(){
+            var buttonText = $(this).text();
+            
+            if(buttonText === '취소') {
+                // '취소'일 때의 동작
+                $(this).text('수정');
+                $('.update').hide();
+            } else {
+                // '취소'가 아닐 때의 동작
+                $(this).text('취소');
+                $('.update').show();
+            }
+        });
+		
+		$('.replyBtn').click(function(){
+            var buttonText = $(this).text();
+            
+            if(buttonText === '취소') {
+                // '취소'일 때의 동작
+                $(this).text('답글쓰기');
+                $('.reply').hide();
+            } else {
+                // '취소'가 아닐 때의 동작
+                $(this).text('취소');
+                $('.reply').show();
+            }
+        });
 	})
 </script>
 
@@ -213,7 +248,7 @@ function showTab(tabName) {
                 <!-- 탭 메뉴 -->
                 <div class="product-detail">
                		<ul class="tab-menu">
-               			<li id="detail">상세 설명</li>
+               			<li id="detail" class="selected">상세 설명</li>
                			<li id="review">리뷰</li>
                			<!-- <li id="inquiryBtn">문의</li> -->
                		</ul>

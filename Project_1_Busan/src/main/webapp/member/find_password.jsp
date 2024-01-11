@@ -31,14 +31,14 @@
 
         #findpwd-all-cont h2 {
             text-align: center;
-            color: #3498db;
+            color: #2546F4;
             margin-bottom: 20px;
         }
 
         #findpwd-all-cont label {
             display: block;
             margin-bottom: 5px;
-            color: #3498db;
+            color: #444;
             width: 70px;
         }
 
@@ -64,14 +64,14 @@
 
         #findpwd-all-cont input[type="submit"]:hover {
             background-color: transparent;
-            color: #2980b9;
+            color: #2546F4;
         }
 
         #findpwd-all-cont a {
             display: inline-block;
             margin: 10px;
             text-decoration: none;
-            color: #3498db;
+            color: #666;
             border-radius: 1px;
         }
 
@@ -94,7 +94,7 @@
         }
         #findpwd-all-cont #pwd-find-submit-btn
         {
-        	background-color: #3498db;
+        	background-color: #2546F4;
         	color: white;
         }
     </style>

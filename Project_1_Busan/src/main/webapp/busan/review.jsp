@@ -54,7 +54,7 @@ $(document).ready(function(){
 		})
 	}) */
 	
-	$('.review-comment-btn').click(function(){
+	$('#reviewCommentBtn').click(function(){
 		$(this).closest('.review-list').find('.review-comment').toggle();
 	})
 	
@@ -146,11 +146,11 @@ function reviewInsert(gno) {
         	</div>
         	
         	<div class="btn-wrapper">
-	        	<button class="btn-sm btn-info" value="수정" id="reviewUpdateBtn">수정</button>
-		        <button class="btn-sm btn-danger" value="삭제" id="reviewDeleteBtn">삭제</button>
+	        	<button class="btn-sm btn-primary" value="수정" id="reviewUpdateBtn">수정</button>
+		        <button class="btn-sm btn-info" value="삭제" id="reviewDeleteBtn">삭제</button>
         	</div>
         	
-        	<button value="댓글" class="btn review-comment-btn">댓글</button>
+        	<button value="댓글" class="btn" id="reviewCommentBtn">댓글</button>
 	        
 	        <div class="review-comment" style="display:none">
 	        	<ul class="review-comment-list">

@@ -123,8 +123,8 @@
 <body>
 	<div style="margin-top:100px">
         <div class="search">
-               <form name="Search-Form" method="get" class="subscribe-form" action="../store/goods.do">
-                   <input type="text" class="input subscribe-input w-input" name="Search" placeholder="검색어를 입력하세요" 
+               <form name="Search-Form" method="post" class="subscribe-form" action="../store/goods.do">
+                   <input type="text" class="input subscribe-input w-input" name="word" placeholder="검색어를 입력하세요" 
                    id="" required style="width:500px" value="${word }"/>
                    <input type="submit" value="Search" class="button w-button"/>
                </form>
@@ -140,10 +140,10 @@
                     <div class="w-dyn-list">
                         <div role="list" class="shop-categories w-dyn-items">
                             <div role="listitem" class="w-dyn-item">
-                                <a href="../store/goods.do?word=${word}&sort=hit" class="shop-category-link">고가순</a>
+                                <a href="../store/goods.do?word=${word}&sort=asc" class="shop-category-link">고가순</a>
                             </div>
                             <div role="listitem" class="w-dyn-item">
-                                <a href="../store/goods.do?word=${word}&sort=heart" class="shop-category-link">저가순</a>
+                                <a href="../store/goods.do?word=${word}&sort=desc" class="shop-category-link">저가순</a>
                             </div>
                         </div>
                     </div>

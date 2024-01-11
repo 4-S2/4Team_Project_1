@@ -58,10 +58,10 @@ $(function(){
       width: 640px;
       padding: 40px 20px;
       background-color: #ffffff; /* White container background */
-      border: 1px solid #dee2e6; /* Light gray border */
+      border: 1px solid #eee; /* Light gray border */
       border-radius: 8px; /* Rounded corners */
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Box shadow for depth */
-      z-index: 2; /* Ensure it's above other elements, including the header */
+      /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Box shadow for depth */
+      z-index: 2; /* Ensure it's above other elements, including the header */ */
     }
 
     .title {

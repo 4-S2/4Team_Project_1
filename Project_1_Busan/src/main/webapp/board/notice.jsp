@@ -52,7 +52,7 @@
     height: 30px;
     width: 50px;
     border-radius: 50px;
-    background-color: #0923a9;
+    background-color: #2546F4;
 	color: white;
 }
 
@@ -70,14 +70,14 @@
 #insert button{
     height: 30px;
     width: 90px;
-    background-color: #0923a9;
+    background-color: #2546F4;
 	color: white;
 	border-radius: 50px;
 }
 a.btn{
     height: 30px;
     width: 60px;
-    background-color: #0923a9;
+    background-color: #2546F4;
     color: white;
     border-radius: 50px;
     text-align: center;

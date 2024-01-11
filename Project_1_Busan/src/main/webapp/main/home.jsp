@@ -212,7 +212,7 @@
             <ul>
             	<c:forEach var="vo" items="${nlist}">
                 	<li>
-                		<a href="#" >${vo.ntitle}</a>
+                		<a href="../board/notice_detail.do?nno=${vo.nno}" >${vo.ntitle}</a>
                 	</li>
                 </c:forEach>
             </ul>
@@ -228,7 +228,7 @@
             <ul>
             	<c:forEach var="vo" items="${qlist}">
                 	<li>
-                		<a href="#" >${vo.subject}</a>
+                		<a href="../board/notice_detail.do?qno=${vo.qno}" >${vo.subject}</a>
                 	</li>
                 </c:forEach>
             </ul>

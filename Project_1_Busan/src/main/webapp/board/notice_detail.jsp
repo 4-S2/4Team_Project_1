@@ -9,13 +9,13 @@
 <title>Insert title here</title>
 <style>
 .table_content a {
-	border: 1px solid #0923A9;
+	border: 1px solid #2546F4;
 	display: inline-block;
 	border-radius: 25px;
 	padding: 5px 18px;
 	margin: 0px auto;
 	margin-bottom: 10px;
-	color: #0923A9;
+	color: #2546F4;
 	width: 80px;
 	text-align: center;
 }
@@ -23,13 +23,13 @@
     border-bottom-style: none;
 }
 .table_content a:hover {
-	background-color: #0923A9;
+	background-color: #2546F4;
     color: white;
 	text-decoration: none;
 }
 
 .table_content a:focus {
-	background-color: #0923A9;
+	background-color: #2546F4;
     color: white;
 	text-decoration: none;
 }
@@ -119,7 +119,7 @@ div.container {
 }
 
 .table_content th {
-	background-color: #0923A9;
+	background-color: #2546F4;
 	color: #fff;
 	border-bottom-width: 1px;
 	border-bottom-color: #333;

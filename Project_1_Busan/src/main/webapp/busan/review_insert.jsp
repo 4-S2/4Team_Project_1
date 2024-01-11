@@ -64,7 +64,7 @@
 				</tr>
 				<tr>
 					<td colspan="2" class="text-center">
-						<button class="btn-sm btn-success" value="작성" id="reviewIsertBtn">작성</button>
+						<button class="btn-sm btn-primary" value="작성" id="reviewIsertBtn">작성</button>
 	           			<button class="btn-sm btn-info" value="취소" id="reviewCancelBtn" onclick="javascript:history.back()">취소</button>
 	         		</td>
 	       		</tr>

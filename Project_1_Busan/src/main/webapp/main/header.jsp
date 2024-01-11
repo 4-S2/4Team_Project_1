@@ -67,7 +67,7 @@
     </c:if>
 
     <!-- Shopping Cart Icon, always displayed -->
-    <li style="display: inline-block;"><a href="#"><img class="icon-cart" src="../images/icon_cart.png"></a></li>
+    <li style="display: inline-block;"><a href="../mypage/myCart.do"><img class="icon-cart" src="../images/icon_cart.png"></a></li>
 </ul>
     </div>
 </nav>

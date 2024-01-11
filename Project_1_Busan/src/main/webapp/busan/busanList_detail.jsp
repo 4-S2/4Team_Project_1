@@ -99,7 +99,19 @@
 
     
     
-    $(function(){
+    $(function(){   	
+    	$('.tab-menu li').click(function(){
+    	    // 모든 li 요소의 하단 테두리 색상 초기화
+    	    $('.tab-menu li').css("border-bottom-color", "#fff");
+    	    // 현재 클릭한 li에 대한 하단 테두리 색상 변경
+    	    $(this).css("border-bottom-color", "#2546f3");
+    	});
+    	
+    	
+    	$('#reviewCommentBtn').click(function(){
+    		$(this).closest('.review-list').find('.review-comment').toggle();
+    	})
+    	
     	
     	$('.reUp').click(function(){
             var buttonText = $(this).text();
@@ -332,7 +344,7 @@ color: #fff;
 				<!-- 탭 메뉴 -->
 				<div class="product-detail">
 					<ul class="tab-menu">
-						<li id="detail">상세 설명</li>
+						<li id="detail" class="selected">상세 설명</li>
 						<li id="map">지도/주변 추천</li>
 						<li id="review">리뷰</li>
 						<c:if test="${cate=='맛집' && sessionScope.id != null}">
@@ -440,7 +452,7 @@ color: #fff;
 						</div>
 						
 					</div>
-					<div id="reviewCont" class="tab-content" style="">
+					<div id="reviewCont" class="tab-content" style="display:none">
 						<!-- 리뷰 내용 -->
 						<button value="리뷰 작성" class="btn" id="reviewInsertBtn">리뷰
 							작성</button>
@@ -555,10 +567,7 @@ color: #fff;
 									<img alt="" src="${vo.poster}"
 										size="(max-width: 479px) 73vw, (max-width: 767px) 34vw, (max-width: 991px) 33vw, 12vw" />
 								</div>
-								<div
-									data-wf-sku-bindings="%5B%7B%22from%22%3A%22f_price_%22%2C%22to%22%3A%22innerHTML%22%7D%5D"
-									class="product-card-price"
-									style="margin-top: 25px; font-size: 15px">${vo.title}</div>
+								<div class="product-card-heading">${vo.title}</div>
 							</a>
 						</div>
 					</c:forEach>
