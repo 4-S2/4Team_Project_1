@@ -2,21 +2,24 @@ package com.sist.model;
 
 import java.util.*;
 import java.io.PrintWriter;
+import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.sist.controller.RequestMapping;
-import com.sist.dao.ReserveDAO;
 import com.sist.dao.ExDAO;
+import com.sist.dao. ReserveDAO;
 import com.sist.vo.ExVO;
 import com.sist.vo.ReserveInfoVO;
+import com.sist.*;
 
 
-public class ReserveModel {
+public class  ReserveModel {
 	@RequestMapping("reserve/reserve_main.do")
 	public String reserve_main(HttpServletRequest request,
 			HttpServletResponse response)
@@ -25,7 +28,7 @@ public class ReserveModel {
 		System.out.println(eno);
 		return "../reserve/reserve_main.jsp";
 	}
-	@RequestMapping("reserve/diary.do")
+	@RequestMapping("reserve/ex_date.do")
 	public String diary(HttpServletRequest request,
 			HttpServletResponse response)
 	{
@@ -61,7 +64,7 @@ public class ReserveModel {
 		request.setAttribute("strWeek", strWeek);
 
 		//예약 가능한 날짜
-		ReserveDAO dao=ReserveDAO.newInstance();
+		ReserveDAO dao= ReserveDAO.newInstance();
 		String rdays=dao.reserveDays(Integer.parseInt(eno));
 		int rday[]=new int[32];
 		st=new StringTokenizer(rdays,",");
@@ -74,10 +77,10 @@ public class ReserveModel {
 			}
 		}
 		request.setAttribute("rday", rday);
-		return "../reserve/diary.jsp";
+		return "../reserve/ex_date.jsp";
 	}
-	@RequestMapping("reserve/ename.do")
-	public void food_title(HttpServletRequest request,
+	@RequestMapping("reserve/ex_ename.do")
+	public void  ex_ename (HttpServletRequest request,
 			HttpServletResponse response)
 	{
 		// DB연동 
@@ -86,30 +89,53 @@ public class ReserveModel {
 
 		ExDAO dao=new ExDAO();
 		ExVO vo=dao.exDetailData(Integer.parseInt(eno));
-		String title=vo.getEname();
+		String ename=vo.getEname();
 
 		try {
 			PrintWriter pw=response.getWriter();
-			pw.write(URLEncoder.encode(title,"UTF-8"));
+			pw.write(URLEncoder.encode(ename,"UTF-8"));
 		}catch(Exception e) {e.printStackTrace();}
 	}
-	
-	@RequestMapping("reserve/inwon.do")
-	public String food_inwon(HttpServletRequest request,
+	@RequestMapping("reserve/ex_time.do")
+	public String time(HttpServletRequest request,
 			HttpServletResponse response)
 	{
-		return "../reserve/inwon.jsp";
+		String day=request.getParameter("day");
+		System.out.println(day);
+		 ReserveDAO dao= ReserveDAO.newInstance();
+		String rtime=dao.reserveDateTime(Integer.parseInt(day));
+		System.out.println(rtime);
+		StringTokenizer st=new StringTokenizer(rtime,",");
+		List<String> list=new ArrayList<String>();
+		while(st.hasMoreTokens())
+		{
+			int ftno=Integer.parseInt(st.nextToken());
+			System.out.println(ftno);
+			String time=dao.reserveTime(ftno);
+			System.out.println(time);
+			list.add(time);
+
+		}
+		request.setAttribute("list", list);
+		return "../reserve/ex_time.jsp";
+	}
+
+	@RequestMapping("reserve/ex_inwon.do")
+	public String inwon(HttpServletRequest request,
+			HttpServletResponse response)
+	{
+		return "../reserve/ex_inwon.jsp";
 	}
 
 
 	@RequestMapping("reserve/reserve_ok.do")
-	public String food_reserve_ok(HttpServletRequest request,
+	public String reserve_ok(HttpServletRequest request,
 			HttpServletResponse response)
 	{
 		try {
 			request.setCharacterEncoding("UTF-8");
 		}catch(Exception e) {}
-		String no=request.getParameter("fno");
+		String no=request.getParameter("no");
 		String rday=request.getParameter("rday");
 		String rtime=request.getParameter("rtime");
 		String rinwon=request.getParameter("rinwon");
@@ -118,14 +144,17 @@ public class ReserveModel {
 		HttpSession session=request.getSession();
 		String id=(String)session.getAttribute("id");
 		
-		ReserveInfoVO vo=new ReserveInfoVO();
+		 ReserveInfoVO vo=new  ReserveInfoVO();
 		vo.setNo(Integer.parseInt(no));
 		vo.setDay(rday);
 		vo.getMvo().setId(id);
-		vo.setInwon(rinwon);
-		ReserveDAO dao=ReserveDAO.newInstance();
-		dao.exReserveInsertData(vo);
+		vo.setInwon((rinwon));
+		vo.setTime(rtime);
+		 ReserveDAO dao= ReserveDAO.newInstance();
+		dao.reserveInsertData(vo);
 		
 		return "redirect:../mypage/myReserv.do";
 	}
 }
+
+

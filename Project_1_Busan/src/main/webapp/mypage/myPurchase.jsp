@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,7 +11,15 @@
 .titbox .total_num_txt {
     color: grey; 
 }
-
+.thumbnail7 {
+        width: 43px;
+        height: 40px;
+    }
+.r-button {
+        padding: 3px 5px; 
+        /* 또는 */
+        /* margin: 5px; 
+    }
 </style>
 </head>
 <body>
@@ -18,7 +28,7 @@
                 <h4 class="titbox">나의<strong>구매내역</strong></h4>
    	  </div>
    	  <div class="tab_contents_area">
-   	  	<p class="titbox">&nbsp;&nbsp;<span class="total_num_txt offline ta_px0">총 <strong>0</strong>개의 구매내역이 있습니다.</span></p>
+   	  	<p class="titbox">&nbsp;&nbsp;<span class="total_num_txt offline ta_px0">총 <strong>${total }</strong>개의 구매내역이 있습니다.</span></p>
    	  </div>
 		<div id="divBoardList2" >
 		<!--TABLE-->
@@ -31,6 +41,7 @@
 		        <th class="dp_pc num2" scope="col">수량</th>
 		        <th class="write_date" scope="col">결제금액</th>
 		        <th class="dp_pc reserve_date" scope="col">결제일시</th>
+		        <th class="dp_pc reserve_date" scope="col">리뷰</th>
 		    </tr>
 		    </thead>
 		    <tbody>
@@ -43,21 +54,26 @@
 				        </tr>
 				    </c:when>
 				    <c:otherwise>
-<%-- 				        <c:forEach var="vo" items="${list}">
+ 				        <c:forEach var="vo" items="${list}">
 				            <tr>
-				                <td class="dp_pc num2">${vo.qno}</td>
-				                <td class="title double ta_px20">
-				                    <a href="../board/qnaboard_detail.do?qno=${vo.qno}" class="ellipsis">${vo.subject}</a>
-				                </td>
-				                <td class="dp_pc writer">${vo.regdate}</td>
-				                <c:if test="${vo.status == 0 }">
-				                	<td class="category px_20 ta_px10">답변대기</td>
-				                </c:if>
-				                <c:if test="${vo.status == 1 }">
-				                	<td class="category px_20 ta_px10"><strong>답변완료</strong></td>
-				                </c:if>				                
+				                <td class="dp_pc num2">${vo.num}</td>
+								<td class="title double ta_px20">
+								    <a href="../store/goods_detail.do?gno=${vo.gno}" class="ellipsis">
+								        <div style="float: left; margin-right: 10px;">
+								            <img src="${vo.gvo.poster }" class="thumbnail7" style="border-radius: 10px;">
+								        </div>
+								        ${vo.gvo.gname}
+								    </a>
+								</td>
+				                <td class="dp_pc writer">${vo.gvo.price}</td>
+				                <td class="dp_pc num2">${vo.amount}</td>
+				                <td class="category px_20 ta_px10"><fmt:formatNumber value="${vo.amount * vo.gvo.price}" pattern="#,###" />원</td>
+				                <td class="category px_20 ta_px10">${vo.regdate }</td>
+				                	<td class="dp_pc writer">
+										<input type="button" value="리뷰작성" onclick="" class="r-button">
+									 </td>	
 				            </tr>
-				        </c:forEach> --%>
+				        </c:forEach> 
 				    </c:otherwise>
 				</c:choose>
 		    </tbody>
@@ -65,9 +81,21 @@
 		<!--//TABLE-->
 		
 		<!--PAGING-->
-		<div class="pc_mt30 pc_pb80 paging_area">
-
-		</div>
+			 <div class="row">
+                <div class="text-center">
+                    <ul class="pagination">
+                        <c:if test="${startPage>1}">
+                            <li><a href="../mypage/myPurchase.do?page=${startPage-1}">&lt;</a></li>
+                        </c:if>
+                        <c:forEach var="i" begin="${startPage}" end="${endPage}">
+                            <li ${curpage==i?"class=active":""}><a href="../mypage/myPurchase.do?page=${i}">${i}</a></li>
+                        </c:forEach>
+                        <c:if test="${endPage<totalpage}">
+                            <li><a href="../mypage/myPurchase.do?page=${endPage+1}">&gt;</a></li>
+                        </c:if>
+                    </ul>
+                </div>
+            </div>	
 		<!--//PAGING-->
 		</div>  
 	</div>

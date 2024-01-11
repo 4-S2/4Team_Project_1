@@ -15,6 +15,7 @@
         <!-- <link rel="stylesheet" type="text/css" href="../css/reset.css" /> -->
         <link rel="stylesheet" type="text/css" href="../css/pc.css" />
         <!-- <link href="../css/mainlist.css" rel="stylesheet" type="text/css"/> -->
+         <link rel="stylesheet" type="text/css" href="../css/cart1.css" />
         <style type="text/stylesheet">
             .nav-bar .navbar-user{
                 float: right;

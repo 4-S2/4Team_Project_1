@@ -1,0 +1,7617 @@
+@charset "UTF-8";
+
+/* PC RESET */
+* {
+    margin: 0;
+    padding: 0
+}
+
+ul,ol {
+    list-style: none
+}
+
+button {
+    -webkit-border-radius: 0;
+    border-radius: 0;
+    background-color: transparent;
+    cursor: pointer
+}
+
+a,a:hover,a:active,a:focus {
+    text-decoration: none
+}
+
+button {
+    border: 0 none;
+    background-color: transparent;
+    cursor: pointer
+}
+
+em,address {
+    font-style: normal
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0
+}
+
+iframe,fieldset,img {
+    border: 0 none
+}
+
+textarea {
+    resize: none
+}
+
+article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section {
+    display: block
+}
+
+img {
+    vertical-align: top
+}
+
+hr {
+    display: none
+}
+
+/* font rule */
+body,table,input,textarea,select,button,th,td,input,select,textarea,th,td,p,dl,dt,dd,li,pre {
+    font-family: -apple-system, BlinkMacSystemFont, Apple SD Gothic Neo, Roboto, Noto Sans CJK KR, Tahoma, 'Noto Sans KR', 'Gmarket Sans', sans-serif;
+}
+
+/* Global Common */
+.for-a11y {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    border: 0;
+    clip: rect(0 0 0 0);
+    overflow: hidden;
+    text-indent: -5000em;
+}
+
+/*global skip navigation*/
+#skip-navigation {
+}
+
+#skip-navigation a {
+    position: absolute;
+    left: 0;
+    top: -100px;
+    z-index: 1020;
+    display: block;
+    padding: 9px 0;
+    width: 100%;
+    background: #1179ea;
+    font-size: 0;
+    line-height: 0;
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+}
+
+#skip-navigation a:active, #skip-navigation a:focus {
+    top: 0;
+    font-size: 13px;
+    font-weight: bold;
+    line-height: 1.5;
+    opacity: .7;
+}
+
+/*old header 원래 font로 */
+#header * {
+    font-family: dotum,"돋움";
+}
+
+/* layout */
+#wrapper {
+    width: 100%
+}
+
+#header {
+    width: 100%
+}
+
+#container {
+    width: 100%
+}
+
+#footer {
+    width: 100%
+}
+
+/* IE9 이하 브라우저 브라우저 업데이트 안내 레이어 */
+.section__layer {
+    position: fixed;
+    z-index: 100010;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.section__layer .section__browser-update-notification-layer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 578px;
+    height: 395px;
+    margin-top: -217px;
+    margin-left: -290px;
+    background-color: #fff;
+    border: solid 1px #666;
+    z-index: 100010;
+}
+
+.section__layer .section__browser-update-notification-layer .box__layer-content .text__layer-title {
+    font-size: 34px;
+    font-weight: bold;
+    line-height: 50px;
+    text-align: center;
+    color: #333;
+    margin-top: 56px;
+    margin-bottom: 9px;
+}
+
+.section__layer .section__browser-update-notification-layer .box__layer-content .text__layer-text {
+    margin-bottom: 8px;
+    text-align: center;
+    font-size: 15px;
+    line-height: 1.74;
+    letter-spacing: 0.2px;
+    color: #333
+}
+
+.section__layer .section__browser-update-notification-layer .box__layer-content .text__layer-text .text__emphasis {
+    color: #067dfd;
+    font-weight: bold;
+}
+
+.section__layer .section__browser-update-notification-layer .box__layer-content .link__browser-update {
+    display: block;
+    width: 234px;
+    height: 68px;
+    color: #fff;
+    text-align: center;
+    line-height: 68px;
+    background: url('//pics.gmarket.co.kr/pc/single/kr/common/browser-update-notification-layer/btn.png') no-repeat 0 0;
+    font-size: 20px;
+    font-weight: bold;
+    text-decoration: none;
+    margin: 24px auto 0;
+}
+
+.section__layer .section__browser-update-notification-layer .box__layer_footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 50px;
+    border-top: 1px solid #ebebeb;
+    *zoom:1;}
+
+.section__layer .section__browser-update-notification-layer .box__layer_footer:after {
+    content: '';
+    display: block;
+    clear: both;
+}
+
+.section__layer .section__browser-update-notification-layer .box__layer_footer .button__set-notification-state {
+    width: auto;
+    height: 50px;
+    border: none;
+    background: transparent;
+    text-align: left;
+    float: left;
+    min-width: 180px;
+    padding-top: 3px;
+}
+
+.section__layer .section__browser-update-notification-layer .box__layer_footer .button__set-notification-state .box__set-notification-state {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    margin-top: -4px;
+    margin-left: 18px;
+    background: #fff url('//pics.gmarket.co.kr/pc/single/kr/common/browser-update-notification-layer/d-ico-check-24-off.png') no-repeat 0 0;
+}
+
+.section__layer .section__browser-update-notification-layer .box__layer_footer .button__set-notification-state .box__set-notification-state .ir {
+    display: block;
+    overflow: hidden;
+    position: absolute;
+    top: -999em;
+    left: 0;
+    font-size: 0;
+    line-height: 0;
+    text-indent: -999em
+}
+
+.section__layer .section__browser-update-notification-layer .box__layer_footer .button__set-notification-state.button__set-notification-state--active .box__set-notification-state .sprite__icon-checkbox {
+    display: block;
+    width: 24px;
+    height: 24px;
+    background: #fff url('//pics.gmarket.co.kr/pc/single/kr/common/browser-update-notification-layer/d-ico-check-24-on.png') no-repeat 0 0;
+}
+
+.section__layer .section__browser-update-notification-layer .box__layer_footer .button__set-notification-state .text__notification-state {
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 1;
+    color: #666;
+    display: inline-block;
+    margin-top: 0px;
+    margin-left: 10px;
+    vertical-align: top;
+}
+
+.section__layer .section__browser-update-notification-layer .box__layer_footer .button__set-notification-state:focus .box__set-notification-state, .section__layer .section__browser-update-notification-layer .box__layer_footer .button__set-notification-state:focus .text__notification-state {
+    position: relative;
+}
+
+.section__layer .section__browser-update-notification-layer .box__layer_footer .button__close-layer {
+    float: right;
+    width: auto;
+    height: 50px;
+    border: none;
+    background: transparent;
+    padding-right: 16px;
+    min-width: 84px;
+    text-align: right;
+}
+
+.section__layer .section__browser-update-notification-layer .box__layer_footer .button__close-layer .sprite__close-layer-icon {
+    width: 26px;
+    height: 26px;
+    display: inline-block;
+    margin-left: 14px;
+    background: #fff url('//pics.gmarket.co.kr/pc/single/kr/common/browser-update-notification-layer/ic-close-48.png') no-repeat 0 0;
+    margin-top: -1px;
+}
+
+.section__layer .section__browser-update-notification-layer .box__layer_footer .button__close-layer .text__close-layer {
+    display: inline-block;
+    margin-left: 5px;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 20px;
+    color: #333;
+    vertical-align: top;
+}
+
+.section__layer .section__browser-update-notification-layer .box__layer_footer .button__close-layer:focus .sprite__close-layer-icon, .section__layer .section__browser-update-notification-layer .box__layer_footer .button__close-layer:focus .text__close-layer {
+    position: relative;
+}
+
+.section__layer .dimmed {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    left: 0;
+    top: 0;
+    z-index: 9998;
+    opacity: 0.2;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=20)";
+    /* IE8을 위한 투명도 설정 */
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=20);
+}
+
+/* Big Smile Day*/
+.box__bigs-tag {
+    display: block;
+    position: absolute
+}
+
+.box__bigs-tag .image {
+    width: 100%
+}
+
+.unit--item_coupon {
+    display: none;
+}
+
+/*모바일쿠폰함 */
+#footer {
+    margin-top: 0;
+    background: none;
+    padding-bottom: 0;
+}
+
+.order .order_action .summary {
+    display: none
+}
+
+.cart--basket_body .order_smile_cart {
+    display: none
+}
+
+#layer_couponbox {
+    display: none;
+    z-index: 5040;
+    outline: none
+}
+
+/*sprite*/
+.sprite__cart, .sprite__cart--before:before, .sprite__cart--after:after {
+    overflow: hidden;
+    display: inline-block;
+    background: url(//pics.gmarket.co.kr/pc/sprite/kr/cart/sprite__cart.png?v=20220427) no-repeat;
+    background-size: 500px auto;
+    font-size: 0;
+    vertical-align: top
+}
+
+.sprite__cart--before:before, .sprite__cart--after:after {
+    content: ''
+}
+
+/**************************************/
+/* CART Old version modify
+/**************************************/
+/*해외국가선택*/
+/* layer style */
+.l_icon {
+    background: url(//pics.gmarket.co.kr/pc//ko/pay/fr_img/sprite_layer_icon.gif) no-repeat
+}
+
+/* ********** layer - title position ******* */
+/* cart_pay_layer title */
+.ly_wrap .title strong {
+    height: 19px;
+    font-family: "돋움";
+    font-size: 18px;
+    font-weight: bold
+}
+
+.ly_wrap .title strong.type2_title17 {
+    padding-left: 105px
+}
+
+h2.sf_title {
+    clear: both;
+    line-height: 18px
+}
+
+h2.sf_title img {
+    float: left;
+    margin: -9px 8px 0 0
+}
+
+/**************** layer **************/
+/* 신규 고고 layer.css */
+.ly_wrap .pop_cont .btn_basic {
+    display: inline-block;
+    height: 20px;
+    padding: 0 8px;
+    background: #fff;
+    border: 1px solid #cccccc;
+    border-bottom: 1px solid #a3a3a3;
+    color: #444;
+    font-size: 11px;
+    line-height: 22px;
+    *zoom:1}
+
+.ly_wrap .pop_cont .btn_basic:hover {
+    text-decoration: none;
+    color: #444
+}
+
+.ly_wrap .pop_cont .btn_blue {
+    height: 20px;
+    padding: 0 8px;
+    background: #027fe9;
+    color: #fff;
+    font-size: 11px;
+    line-height: 22px
+}
+
+.ly_wrap .pop_cont .btn_blue:hover {
+    color: #fff;
+    text-decoration: none
+}
+
+.ly_wrap .pop_cont .btn_sky {
+    display: inline-block;
+    height: 20px;
+    padding: 0 8px;
+    background: #70aff2;
+    border: 1px solid #4194ee;
+    border-bottom: 1px solid #3476be;
+    color: #fff;
+    font-size: 11px;
+    line-height: 22px;
+    *zoom:1}
+
+.ly_wrap .pop_cont .btn_sky:hover {
+    color: #fff;
+    text-decoration: none
+}
+
+.ly_wrap .pop_cont table .btn_blue {
+    display: inline-block;
+    position: relative;
+    *top: -2px
+}
+
+.ly_wrap .pop_cont table {
+    line-height: 140%
+}
+
+/* 타이틀 스타일 */
+.ly_wrap .title {
+    padding-top: 13px;
+    background: url(//pics.gmarket.co.kr/pc/ko/pay/fr_img/sprite_layer_icon.gif) repeat-x 0 -9999em
+}
+
+.ly_wrap .title strong {
+    display: inline-block;
+    height: 19px;
+    padding-top: 0;
+    padding-left: 19px
+}
+
+/* img title 제거 block 속성 뺌 2015-01-26 */
+.ly_wrap .layer_type1 .title {
+    height: 35px;
+    background-position: 0 0
+}
+
+.ly_wrap .layer_type1 .title strong {
+    color: #fff;
+    letter-spacing: -1px
+}
+
+/* 시스템폰트로 2014-07-23 */
+.ly_wrap .layer_type2>.title, .ly_wrap .layer_type4>.title {
+    height: 30px;
+    background-position: 0 -227px
+}
+
+.ly_wrap .layer_type3 .title {
+    background: url(//pics.gmarket.co.kr/pc/ko/pay/fr_img/sprite_layer_icon.gif) no-repeat 0 -121px;
+    border-bottom: 1px solid #444;
+    margin-top: 0;
+    padding: 0px 0 5px 15px;
+    color: #222;
+    font-weight: bold
+}
+
+.ly_wrap .layer_type3 .title strong {
+    padding: 0;
+    color: #222;
+    font-size: 12px
+}
+
+/* 닫기버튼 */
+.ly_wrap .ly_close {
+    display: block;
+    position: absolute;
+    top: 1px;
+    right: 0;
+    background-position: 0 -75px;
+    text-indent: -9999em
+}
+
+/********************************  layer_type 1 ~ layer_type3 ***********************************/
+.scroll_fixed {
+    overflow-y: scroll !important;
+    overflow-x: hidden !important;
+    padding-top: 0px !important;
+    padding-right: 10px !important;
+    margin: 0 10px 10px 0 !important
+}
+
+.scroll_fixed1 {
+    overflow-y: scroll !important;
+    overflow-x: hidden !important;
+    padding: 10px !important;
+    margin: 10px !important
+}
+
+.scroll_fixed2 {
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    padding: 20px !important;
+    margin: 0 !important
+}
+
+/* layer_type1 - 파란배경 타이틀*/
+.ly_wrap .layer_type1 {
+    position: absolute;
+    left: 50%;
+    z-index: 222;
+    background: #fff
+}
+
+.ly_wrap .layer_type1 .pop_cont {
+    overflow: auto;
+    overflow-x: hidden;
+    *position: relative;
+    max-height: 520px;
+    margin-bottom: 20px;
+    padding: 20px 20px 0px 20px
+}
+
+.ly_wrap .layer_type1 .pop_cont p {
+    line-height: 1.3
+}
+
+.ly_wrap .layer_type1 .ly_close {
+    top: 1px;
+    right: 0;
+    width: 40px;
+    height: 44px;
+    background-position: 0 -75px
+}
+
+/* layer_type2 - 파란 라인(3px)*/
+.ly_wrap .layer_type2 {
+    position: absolute;
+    left: 50%;
+    z-index: 222;
+    background: #fff;
+    border: 3px solid #1179ea;
+    width: 444px;
+    margin-left: -222px;
+    margin-top: -132px;
+}
+
+.ly_wrap .layer_type2 .title strong {
+    color: #1179ea
+}
+
+.ly_wrap .layer_type2 .pop_cont {
+    /*position:relative;*/
+    overflow: auto;
+    overflow-x: hidden;
+    /* max-height:412px;*/
+    margin-bottom: 20px;
+    padding: 20px 20px 0px 20px
+}
+
+.ly_wrap .layer_type2 .pop_cont p {
+    line-height: 1.3
+}
+
+.ly_wrap .layer_type2 .ly_close {
+    top: 0;
+    right: 0;
+    width: 20px;
+    height: 20px;
+    padding: 11px 12px 10px;
+    background-position: 13px -388px
+}
+
+.ly_wrap .layer_type2 .pop_cont.scroll_fixed.first {
+    margin-top: 20px !important
+}
+
+.ly_wrap .layer_type2 .tit_bl {
+    background-position: 0 -123px
+}
+
+/* layer_type2 - 파란 라인없음*/
+.ly_wrap .layer_type2_v2 {
+    border: 0
+}
+
+.ly_wrap .pop_cont .scroll_fixed {
+    margin: 0 !important
+}
+
+/* 배송 가능한 국가보기 */
+.ly_wrap .pop_cont .index_country {
+    width: 390px;
+    margin: -3px 0 0 -3px
+}
+
+.ly_wrap .pop_cont .index_country:after {
+    display: block;
+    clear: both;
+    content: ""
+}
+
+.ly_wrap .pop_cont .index_country a {
+    display: block;
+    float: left;
+    width: 25px;
+    height: 25px;
+    margin: 3px 0 0 3px;
+    background: #fff;
+    border: 1px solid #ccc;
+    color: #000;
+    font-size: 12px;
+    line-height: 25px;
+    text-align: center
+}
+
+.ly_wrap .pop_cont .index_country a.active {
+    background: #000;
+    color: #fff
+}
+
+.ly_wrap .pop_cont .main {
+    padding: 10px;
+    background: #f7f7f7;
+    border-top: 1px solid #444444;
+    border-bottom: 1px solid #e6e6e6;
+    line-height: 20px;
+    text-align: center
+}
+
+.ly_wrap .pop_cont .main strong {
+    display: block;
+    color: #444;
+    font-size: 16px
+}
+
+.ly_wrap .pop_cont .main strong span {
+    margin-left: 5px;
+    color: #777;
+    font-size: 11px;
+    font-weight: normal
+}
+
+.ly_wrap .pop_cont .main a.tx_btn {
+    letter-spacing: -1px;
+    display: inline-block;
+    height: 22px;
+    padding: 0 6px;
+    background-color: #FFF;
+    border: 1px solid #ccc;
+    line-height: 23px;
+    vertical-align: middle;
+    *zoom: 1;font-size: 11px;
+}
+
+.ly_wrap .pop_cont .main_cont {
+    height: 180px;
+    margin-top: 10px;
+    padding-left: 5px;
+    border-bottom: 1px solid #e6e6e6
+}
+
+.ly_wrap .pop_cont .main_cont li {
+    line-height: 20px
+}
+
+.ly_wrap .pop_cont .main_cont li a:hover span {
+    text-decoration: underline
+}
+
+.ly_wrap .pop_cont .main_cont li span.unavail {
+    color: #bebebe;
+    text-decoration: none
+}
+
+/*popup --react css edit */
+.couponbox.layer_type2 {
+    margin-top: -277px
+}
+
+#container.case_openpopup {
+    position: relative;
+    z-index: 3100
+}
+
+/*react구조로 레이어가 돔안에 들어가서 ie7에서의 z-index때문에 넣음 */
+#cartApp #container .ly_wrap {
+    position: relative;
+    left: auto;
+    top: auto;
+    display: block;
+    text-align: initial;
+    vertical-align: initial;
+}
+
+/*#cartApp .nv-layer .nv-layer-cont{display:block;position:absolute;top:50%;left: 50%;0%0width:100%height:auto;}*/
+#cartApp .ly_wrap .layer_type2 {
+    left: 0;
+}
+
+/**************************************/
+/* CART SATURN
+/**************************************/
+/* typography
+@font-face{
+    font-family:'Noto Sans Korean';font-style:normal;font-weight:400;
+    src:url(//script.gmarket.com/fonts/NotoSansKR-DemiLight-Hestia.eot),
+    url(//script.gmarket.com/fonts/NotoSansKR-DemiLight-Hestia.eot?#iefix) format('embedded-opentype');
+    src:local('Noto Sans DemiLight'),local('NotoSans-DemiLight'),
+    url(//script.gmarket.com/fonts/NotoSansKR-DemiLight-Hestia.woff) format('woff'),
+    url(//script.gmarket.com/fonts/NotoSansKR-DemiLight-Hestia.otf) format('opentype');
+}
+@font-face{
+    font-family:'Noto Sans Korean';font-style:normal;font-weight:bold;
+    src:url(//script.gmarket.com/fonts/NotoSansKR-Medium-Hestia.eot),
+    url(//script.gmarket.com/fonts/NotoSansKR-Medium-Hestia.eot?#iefix) format('embedded-opentype');
+    src:local('Noto Sans Medium'),local('NotoSans-Medium'),
+    url(//script.gmarket.com/fonts/NotoSansKR-Medium-Hestia.woff) format('woff'),
+    url(//script.gmarket.com/fonts/NotoSansKR-Medium-Hestia.otf) format('opentype');
+}
+*/
+/*개편된부분에만 폰트재정의 ....... ;;;;  */
+/*#cart_header *, #cart_body *, #cart_null *{
+    font-family: Tahoma,'Noto Sans Korean', 'Malgun Gothic', '맑은 고딕', AppleSDGothicNeo, Helvetica, dotum, 돋움, sans-serif;
+}
+*/
+/* dimmed layer  */
+.nv-layer {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 99999;
+    _position: absolute
+}
+
+.nv-layer .nv-layer-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    opacity: .5;
+    filter: alpha(opacity=50)
+}
+
+.nv-layer .nv-layer-cont {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: auto
+}
+
+.body_dimmed {
+    width: 100%;
+    overflow: hidden
+}
+
+.body_dimmed .dimmed {
+    position: fixed;
+}
+
+.body_fix {
+    position: fixed;
+    *position: relative;
+    overflow: hidden;
+    width: 100%;
+    -webkit-overflow-scrolling: touch
+}
+
+/* cart common  */
+.service__cart a:hover {
+    text-decoration: none
+}
+
+.service__cart button {
+    background: none;
+    padding: 0 ;
+    margin: 0 ;
+    box-shadow: none;
+}
+
+.service__cart button .icon {
+    position: relative;
+}
+
+.service__cart input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+}
+
+.service__cart input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+.service__cart input[type=number] {
+    -moz-appearance: textfield;
+}
+
+/*Hide Spinner in Input Number - Firefox */
+.service__cart .for_a11y {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    border: 0;
+    overflow: hidden;
+    text-indent: -5000em;
+}
+
+.service__cart .emphasis {
+    color: #2e8de5;
+    font-size: inherit;
+    letter-spacing: -0.4px;
+}
+
+.service__cart .inner_cont {
+    width: 1200px;
+    margin: 0 auto;
+}
+
+.service__cart #container .wrap {
+    width: 100%;
+    background: #f3f3f3;
+}
+
+/*Amount Formmating */
+.service__cart .box__format-amount--exchange:before {
+    content: '(';
+}
+
+.service__cart .box__format-amount--exchange:after {
+    content: ')';
+}
+
+/*cart skip navigation*/
+#skip-navigation__content .link__skip-navigation {
+    position: absolute;
+    left: 0;
+    top: -200px;
+    z-index: 1020;
+    display: block;
+    padding: 9px 0;
+    width: 100%;
+    background: #e63740;
+    font-size: 0;
+    line-height: 0;
+    color: #fff;
+    text-align: center;
+    text-decoration: none
+}
+
+#skip-navigation__content .link__skip-navigation:active, #skip-navigation__content .link__skip-navigation:focus {
+    top: 0;
+    font-size: 13px;
+    font-weight: bold;
+    line-height: 1.5;
+    opacity: .7
+}
+
+/*cart layout*/
+#cart_header {
+    height: 216px;
+    background: #fff;
+    overflow: visible;
+    min-width: 1200px;
+    background: #f3f3f3;
+}
+
+#cart_header .cart_header_wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    min-width: 100%;
+    background: #fff
+}
+
+#cart_header .cart_header_wrapper.fixed {
+    position: fixed;
+    top: -24px;
+    width: 100%;
+    z-index: 300;
+    background: #fff;
+}
+
+#cart_body {
+    position: relative;
+    width: 100%;
+    padding-bottom: 100px;
+    min-width: 1200px;
+    background: #f3f3f3;
+    overflow: auto;
+}
+
+#cart_order {
+    display: inline-block;
+    margin-left: 0;
+}
+
+#cart_order.fixed {
+    position: fixed;
+    top: 192px;
+}
+
+#cart_order.fixed.bottom {
+    position: absolute;
+    bottom: 116px;
+    top: auto;
+    float: none;
+}
+
+#cart_list {
+    position: static;
+    display: inline-block;
+    float: left;
+    width: 826px;
+    padding-right: 0;
+    margin-right: 14px;
+}
+
+#cart_list .fake_cursorpoint {
+    background: transparent;
+    width: 100%;
+    height: 16px;
+    margin-top: -16px
+}
+
+#cart_null {
+    width: 100%;
+    min-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+    padding-top: 150px;
+    padding-bottom: 380px;
+    background: #f3f3f3;
+}
+
+#floating {
+    display: none;
+    position: fixed;
+    bottom: -999px;
+    right: -999px;
+    z-index: 100;
+}
+
+#floating .btn_gotop {
+    display: block;
+    width: 42px;
+    height: 42px;
+    background: url(//pics.gmarket.co.kr/pc/ko/pay/cart/btn_gotop.png) no-repeat ;
+}
+
+/*************************/
+/* CART ICON / IMAGE
+/**********************/
+/*cart custom input  */
+.service__cart .input_custom {
+    position: relative;
+    display: block;
+    *width: 20px;
+    *overflow: visible;
+}
+
+.service__cart .input_custom input {
+    border: 0;
+    background: none;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.service__cart .input_custom input[type="checkbox"] {
+    position: absolute;
+    top: 0;
+    left: 0%;
+    z-index: 1;
+    width: 20px;
+    height: 20px;
+    margin-top: 0 !important;
+}
+
+.service__cart .input_custom input[type="checkbox"]+ label {
+    position: relative;
+    display: inline-block;
+    height: 20px;
+    width: 20px;
+    margin: 0;
+    background: url(//pics.gmarket.co.kr/pc/ko/pay/cart/sp_inputcustom.png) no-repeat;
+    background-position: 0px 0;
+    *background: none;
+    background: none\0/IE8
+}
+
+.service__cart .input_custom input[type="checkbox"]:checked+label {
+    background-position: 0px -24px
+}
+
+.service__cart .input_custom input[type="checkbox"]:focus+label {
+    background-color: transparent
+}
+
+.os__ie .service__cart .cart_option_box .input_custom input[type="checkbox"] {
+    height: 18px
+}
+
+.service__cart .input_custom input {
+    border: 0;
+    background: none;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.service__cart .input_custom input[type="radio"] {
+    position: absolute;
+    top: 0;
+    left: 0%;
+    z-index: 1;
+    width: 20px;
+    height: 20px;
+    margin-top: 0 !important;
+}
+
+.service__cart .input_custom input[type="radio"]+ label {
+    position: relative;
+    display: inline-block;
+    z-index: 5;
+    height: 20px;
+    width: 20px;
+    margin: 0;
+    background: url(//pics.gmarket.co.kr/pc/ko/pay/cart/sp_inputcustom.png) no-repeat;
+    background-position: 0px -50px;
+    *background: none;
+    background: none\0/IE8
+}
+
+.service__cart .input_custom input[type="radio"]:checked+label {
+    background-position: 0px -70px
+}
+
+.service__cart .input_custom input[type="radio"]:focus+label {
+    background-color: transparent
+}
+
+.service__cart .box__all .cart--basket_header.box__smiledelivery .input_custom input[type="checkbox"]+ label, .service__cart .cart--basket_header.box__smilefresh .input_custom input[type="checkbox"]+ label {
+    background-position: 0 -90px;
+}
+
+.service__cart .box__all .cart--basket_header.box__smiledelivery .input_custom input[type="checkbox"]:checked+label, .service__cart .cart--basket_header.box__smilefresh .input_custom input[type="checkbox"]:checked+label {
+    background-position: 0px -114px;
+}
+
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+    .service__cart .input_custom input[type="checkbox"]+ label {
+        background-color: #fff
+    }
+}
+
+/*sprite icon*/
+.service__cart .icon, .service__cart .sp_cart, .service__cart .sp_cart:after {
+    background: url(//pics.gmarket.co.kr/pc/ko/pay/cart/sp_cart.png) no-repeat;
+    font-size: 0;
+    display: inline-block;
+    vertical-align: middle
+}
+
+.service__cart .icon.btn_qty_minus {
+    width: 21px;
+    height: 21px;
+    background-position: 0 0
+}
+
+.service__cart .icon.btn_qty_plus {
+    width: 21px;
+    height: 21px;
+    background-position: -26px 0
+}
+
+.service__cart .icon.input_check {
+    width: 20px;
+    height: 20px;
+    background-position: -50px 0
+}
+
+.service__cart .icon.input_check.active {
+    width: 20px;
+    height: 20px;
+    background-position: -72px 0
+}
+
+.service__cart .icon.input_radio {
+    width: 16px;
+    height: 16px;
+    background-position: -100px 0
+}
+
+.service__cart .icon.input_radio.active {
+    width: 16px;
+    height: 16px;
+    background-position: -120px 0
+}
+
+.service__cart .icon.img_coupon {
+    width: 70px;
+    height: 27px;
+    background-position: 0px -25px
+}
+
+.service__cart .icon.img_coupon.active {
+    width: 70px;
+    height: 27px;
+    background-position: -80px -25px
+}
+
+.service__cart .icon.img_minus {
+    width: 21px;
+    height: 21px;
+    background-position: 0 -60px
+}
+
+.service__cart .icon.img_plus {
+    width: 21px;
+    height: 21px;
+    background-position: -24px -60px
+}
+
+.service__cart .icon.img_result {
+    width: 21px;
+    height: 21px;
+    background-position: -48px -60px
+}
+
+.service__cart .icon.img_arrow_right {
+    width: 5px;
+    height: 9px;
+    background-position: -80px -60px
+}
+
+.service__cart .icon.img_arrow_down {
+    width: 10px;
+    height: 8px;
+    background-position: -90px -60px;
+}
+
+.service__cart .icon.img_arrow_down.active, .service__cart .icon.img_arrow_up {
+    width: 10px;
+    height: 8px;
+    background-position: -90px -70px;
+}
+
+.service__cart .icon.btn_cart_item_del {
+    width: 14px;
+    height: 14px;
+    background-position: -102px -60px;
+}
+
+.service__cart .icon.img_smileclub {
+    width: 55px;
+    height: 13px;
+    background-position: -20px -89px
+}
+
+.service__cart .icon.img_question {
+    width: 12px;
+    height: 12px;
+    background-position: 0px -90px
+}
+
+.service__cart .icon.btn_introduce_smiledelivery {
+    width: 109px;
+    height: 27px;
+    background-position: 0px -110px;
+    margin-left: 4px
+}
+
+/*************************/
+/* CART loading
+/**********************/
+.box__cart-loading {
+    position: fixed;
+    width: 100%;
+    background: rgba(255,255,255,0.6);
+    left: 0;
+    top: 0;
+    height: 100%;
+    z-index: 500;
+}
+
+.box__cart-loading .image__loading {
+    width: 28px;
+    height: 28px;
+    background: url(//pics.gmarket.co.kr/pc/ko/pay/cart/loader_ec.gif) left center no-repeat;
+    background-size: 28px 28px;
+    margin: 0 33px;
+    top: 50%;
+    left: 50%;
+    margin-top: -22px;
+    margin-left: -22px;
+    position: relative;
+}
+
+/*************************/
+/* CART EMPTY
+/**********************/
+/*cart null*/
+.none_item {
+    width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.none_item .msg {
+    background: url(//pics.gmarket.co.kr/pc/ko/pay/cart/img_cart.png) center top no-repeat;
+    display: block;
+    padding-top: 70px;
+    font-size: 15px;
+    text-align: center;
+    color: #7B7F87;
+    line-height: 22px;
+    font-weight: normal;
+}
+
+.none_item .btn_action {
+    width: 200px;
+    text-align: center;
+    background: #fff;
+    border: 1px solid #ddd;
+    padding: 13px 0 12px;
+    display: block;
+    margin: 27px auto;
+}
+
+.none_item .btn_action .btn_text {
+    font-size: 14px;
+    line-height: 19px;
+    letter-spacing: -0.5px;
+    color: #000;
+}
+
+/*************************/
+/* CART HEADER
+/**********************/
+/* cart_header*/
+.cart_header {
+    padding: 18px 0 20px;
+    border-bottom: 1px solid #eee;
+}
+
+.cart_header .title {
+    font-size: 38px;
+    line-height: 56px;
+    color: #363636;
+    font-weight: bold;
+    letter-spacing: -1.34px;
+    padding-left: 14px;
+    background: url(//pics.gmarket.co.kr/pc/ko/pay/cart/bg_title_cart.png) right -18px no-repeat ;
+    font-family: 'Gmarket Sans',sans-serif;
+    font-weight: normal;
+}
+
+/* cart_tab*/
+.cart_tab {
+    width: 100%;
+    overflow: hidden;
+    border-bottom: 1px solid #d7d7d7;
+}
+
+.cart_tab .cart_type_group {
+    width: 100%;
+}
+
+.cart_tab .cart_type_group .tab:first-child {
+    padding-left: 14px;
+}
+
+.cart_tab .cart_type_group .tab:first-child:before {
+    display: none;
+}
+
+.cart_tab .cart_type_group .tab {
+    float: left;
+    margin-right: 24px;
+    position: relative;
+    padding-left: 24px;
+    color: #363636;
+}
+
+.cart_tab .cart_type_group .tab:before {
+    content: "";
+    position: absolute;
+    top: 22px;
+    left: 0;
+    width: 1px;
+    background: #e1e1e1;
+    z-index: 10;
+    height: 14px;
+}
+
+.cart_tab .cart_type_group .tab.active {
+    font-weight: bold;
+    color: #067dfd;
+}
+
+.cart_tab .cart_type_group .tab a {
+    display: block;
+    padding: 15px 0;
+    height: 30px;
+    color: inherit;
+    line-height: 30px;
+    vertical-align: middle;
+}
+
+.cart_tab .cart_type_group .tab a:focus {
+    outline-offset: -1px
+}
+
+.cart_tab .cart_type_group .tab .tab_title {
+    color: inherit;
+    font-size: 20px;
+    letter-spacing: -0.7px;
+    font-weight: inherit;
+    float: left;
+    line-height: 29px;
+}
+
+.cart_tab .cart_type_group .tab .count {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    background: #E6F1FD;
+    line-height: 20px;
+    float: left;
+    border-radius: 50%;
+    text-align: center;
+    margin-left: 6px;
+    line-height: 1;
+    margin-top: 4px;
+    *margin-top: 8px
+}
+
+.cart_tab .cart_type_group .tab .count .num {
+    font-size: 12px;
+    letter-spacing: -0.5px;
+    text-align: center;
+    display: block;
+    line-height: 20px;
+    font-weight: inherit;
+}
+
+/* cart_list_option*/
+.cart_option {
+    display: block;
+    width: 100%;
+    overflow: hidden;
+    height: auto;
+    background: #f3f3f3;
+}
+
+.cart_option_area {
+    display: block;
+    width: 824px;
+    height: 60px;
+}
+
+.cart_option_area .cart_option_box {
+    width: auto;
+    overflow: auto;
+    height: auto;
+    padding: 20px 0 20px 8px;
+}
+
+.cart_option_area .cart_option_box li {
+    float: left;
+    line-height: 20px;
+    margin-right: 14px;
+    position: relative;
+    margin-left: 14px;
+    vertical-align: top;
+    *background : url(//pics.gmarket.co.kr/pc/ko/pay/cart/bg_item_option_addbuy_contour.png) right center no-repeat;
+    *padding-right: 14px;
+    *margin-right: 0
+}
+
+.cart_option_area .cart_option_box li:before {
+    content: "";
+    position: absolute;
+    background: #d8d8d8;
+    width: 1px;
+    height: 10px;
+    top: 5px;
+    left: -13px;
+}
+
+.cart_option_area .cart_option_box .select_all {
+    height: 20px;
+    line-height: 20px;
+    *display: inline-block;
+    *margin-top: 0px ;
+    margin-top: -1px
+}
+
+.cart_option_area .cart_option_box .select_all .input_custom {
+    margin-top: 1px;
+}
+
+.cart_option_area .cart_option_box .select_all .input_custom input[type='checkbox'] {
+    *margin-top: 2px !important ;
+}
+
+.cart_option_area .cart_option_box .select_all .input_custom label {
+    white-space: nowrap;
+    overflow: visible;
+    padding-left: 25px;
+    background-color: #f3f3f3;
+    width: auto;
+    *background: none;
+    background: none\0/IE8
+}
+
+.cart_option_area .cart_option_box .select_all:before {
+    display: none
+}
+
+.cart_option_area .cart_option_box span {
+    display: inline-block;
+    color: #7F8590;
+    font-size: 14px;
+    letter-spacing: -0.5px;
+    font-weight: normal;
+    line-height: 20px;
+    height: 20px;
+}
+
+.cart_option_area .cart_option_box input[type="checkbox"] {
+    margin-right: 8px
+}
+
+.cart_option_area .cart_option_box button {
+    vertical-align: top;
+    margin-top: 1px;
+    display: inline-block;
+    line-height: 20px;
+    height: 20px;
+    overflow: hidden;
+}
+
+.cart_option_area .cart_option_box button span {
+    position: relative;
+    top: -1px;
+    left: -1px;
+}
+
+.cart_option_area .cart_option_box .icon.input_check {
+    margin-right: 8px;
+    vertical-align: top;
+    float: left;
+}
+
+.cart_option_area .cart_option_box a {
+    display: inline-block;
+    vertical-align: middle
+}
+
+.basket_list_group {
+    overflow: auto;
+    height: auto;
+}
+
+/*************************/
+/* 당일배송
+/**********************/
+/* 당일배송 지역 영역 */
+.user_location {
+    position: relative;
+    width: 315px;
+    margin-bottom: 10px;
+    padding: 14px 10px 14px 35px;
+    background: #fff;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.18);
+    border-radius: 2px;
+}
+
+.user_location span {
+    font-size: 14px;
+    line-height: 18px;
+    color: #444
+}
+
+.user_location .sp_cart {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    width: 13px;
+    height: 18px;
+    background-position: -140px 0
+}
+
+.user_location .user_name {
+    padding-right: 5px;
+    white-space: nowrap
+}
+
+.user_location .user_addr {
+    padding-left: 5px
+}
+
+.user_location .bar {
+    display: inline-block;
+    position: relative;
+    top: 1px;
+    width: 1px;
+    height: 13px;
+    background-color: #e0e0e0
+}
+
+/*당배 배송시간표 */
+#popup_expressshop_bridge {
+}
+
+#popup_expressshop_bridge .ly_wrap {
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    width: 750px;
+    height: 690px;
+    margin: -345px 0 0 -375px;
+    z-index: 9999;
+}
+
+#popup_expressshop_bridge .ly_wrap .ly_wrap_close {
+    position: absolute;
+    top: -49px;
+    right: -16px;
+    width: 56px;
+    height: 53px;
+}
+
+#popup_expressshop_bridge .ly_wrap .ly_wrap_close .icon.sp_cart {
+    display: inline-block;
+    width: 22px;
+    height: 21px;
+    margin: 17px 0 0 17px;
+    font-size: 0;
+    line-height: 0;
+    background: url(//pics.gmarket.co.kr/pc/ko/common/common.png) no-repeat -834px -486px;
+}
+
+/*************************/
+/* CART UI MODULE : SHOP > SHIPPING > ITEM > CART-UNIT
+/**********************/
+/*cart--basket
+*** type_minishop : 미니샵
+*** type_smiledelivery : 스마일배송
+*** type_todaydelivery : 당일배송용
+*/
+/* SHOP GROUP */
+.cart--basket {
+    width: 824px;
+    margin-bottom: 16px;
+    background: #fff;
+    overflow: hidden;
+    height: auto;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0
+}
+
+.cart--basket .cart--basket_header {
+    position: relative;
+    height: 24px;
+    line-height: 24px;
+    margin: 0 22px;
+    width: auto;
+    padding: 17px 0 19px;
+    vertical-align: middle;
+    border-bottom: 1px solid #333333;
+}
+
+.cart--basket .cart--basket_header .input_custom {
+    float: left;
+    line-height: 1;
+    margin-right: 12px;
+    height: 20px;
+    margin-top: 2px;
+}
+
+.cart--basket .cart--basket_header .shop_name {
+    float: left;
+    margin-top: 1px;
+    font-size: 18px;
+    color: #1e1e1e;
+    letter-spacing: -0.4px;
+    line-height: 24px;
+    font-family: 'Gmarket Sans',sans-serif;
+    font-weight: normal;
+}
+
+.cart--basket .cart--basket_header .tit_logo {
+    position: relative;
+    margin-right: -2px;
+    text-indent: -9999px
+}
+
+.cart--basket .cart--basket_header .tit_logo_homeplus {
+    width: 66px;
+    height: 13px;
+    top: 2px;
+    background-position: -80px -138px
+}
+
+.cart--basket .cart--basket_header .tit_logo_lottesuper {
+    width: 90px;
+    height: 13px;
+    top: 2px;
+    background-position: -80px -168px
+}
+
+.cart--basket .cart--basket_header .tit_logo_gsfresh {
+    width: 93px;
+    height: 13px;
+    top: 2px;
+    background-position: -80px -153px
+}
+
+.cart--basket .cart--basket_header .tit_logo_lottemart {
+    width: 73px;
+    height: 13px;
+    background-position: -80px -185px
+}
+
+.cart--basket .cart--basket_header .tit_logo_smilefresh {
+    width: 120px;
+    height: 22px;
+    margin: 1px 0 0;
+    background: url(//pics.gmarket.co.kr/pc/single/kr/cart/image__smilefresh.svg) 0 0 no-repeat;
+    background-size: auto 100%
+}
+
+.cart--basket .cart--basket_header .tit_logo + .market {
+    margin-left: 6px
+}
+
+.service__cart .cart--basket .cart--basket_header .tit_logo_smiledelivery {
+    width: 104px;
+    height: 22px;
+    background-position: -60px -51px;
+}
+
+.cart--basket .cart--basket_header .emphasis {
+    display: inline-block;
+    margin-left: 7px;
+    font-size: 13px;
+    line-height: 24px;
+    vertical-align: top;
+}
+
+.cart--basket .cart--basket_header .link_area {
+    display: inline-block;
+}
+
+.cart--basket .cart--basket_header .btn_table_delivery {
+    position: absolute;
+    top: 19px;
+    right: 0;
+    font-size: 13px;
+    color: #666
+}
+
+.cart--basket .cart--basket_header .btn_table_delivery:hover {
+    color: #1179ea
+}
+
+.box__all .cart--basket .cart--basket_header.box__smiledelivery {
+    margin: 0;
+    padding: 17px 22px 19px;
+    background-color: #292668;
+}
+
+.box__all .cart--basket .cart--basket_header.box__smiledelivery .tit_logo_smiledelivery {
+    width: 104px;
+    height: 22px;
+    margin: 1px 0 0;
+    background: url(//pics.gmarket.co.kr/pc/single/kr/cart/image__smiledelivery.svg) 0 0 no-repeat;
+    background-size: auto 100%
+}
+
+.cart--basket .cart--basket_header.box__smiledelivery .tit_logo_smiledelivery {
+    width: 104px;
+    height: 22px;
+    margin: 1px 0 0;
+    background: url(//pics.gmarket.co.kr/pc/single/kr/cart/image__smiledelivery-white.svg) 0 0 no-repeat;
+    background-size: auto 100%
+}
+
+.cart--basket .cart--basket_body {
+    width: auto;
+    overflow: visible;
+    height: auto;
+    margin-bottom: -1px;
+    position: relative;
+}
+
+.cart--basket .cart--basket_body .shipping--group {
+    display: block;
+    overflow: hidden;
+}
+
+.cart--basket .cart--basket_body .shipping--no--group {
+    display: block;
+    overflow: hidden;
+}
+
+.cart--basket .cart--basket_body .order--list {
+    display: block;
+    padding: 0 22px;
+}
+
+.cart--basket .cart--basket_body .order--idx {
+    border-top: 1px solid #dedede;
+    height: auto;
+    overflow: visible;
+    padding-top: 20px;
+    vertical-align: top;
+}
+
+.cart--basket .cart--basket_body .order--idx:first-child {
+    border-top: 0;
+}
+
+.cart--basket .cart--basket_footer {
+    height: 78px;
+    background: #f8f9fa;
+    border-top: 1px solid #ddd;
+    padding: 0 54px;
+    overflow: hidden;
+    margin-top: -1px;
+}
+
+.cart--basket .cart--basket_footer .cart--basket--total {
+    width: 100%;
+    padding: 15px 0 22px;
+    height: 40px;
+    display: block;
+}
+
+.cart--basket .cart--basket_footer .cart--basket--total .sub_sec.delivery {
+    text-align: center;
+}
+
+.cart--basket .cart--basket_footer .cart--basket--total .sub_sec.discount {
+    text-align: center;
+}
+
+.cart--basket .cart--basket_footer .cart--basket--total .sub_sec.discount .box__format-amount .text__sign {
+    display: none
+}
+
+.cart--basket .cart--basket_footer .cart--basket--total .sub_sec.discount .box__format-amount .text__unit, .cart--basket .cart--basket_footer .cart--basket--total .sub_sec.discount .box__format-amount .text__value {
+    color: #01a900
+}
+
+.cart--basket .cart--basket_footer .cart--basket--total .sub_sec.discount .box__format-amount .text__value .text__math--sign {
+    display: none
+}
+
+.cart--basket .cart--basket_footer .cart--basket--total .sub_sec {
+    float: left;
+    width: 160px;
+    display: block;
+}
+
+.cart--basket .cart--basket_footer .cart--basket--total .math {
+    float: left;
+    width: 22px;
+    text-align: center;
+    height: 40px;
+    line-height: 40px;
+    display: block;
+}
+
+.cart--basket .cart--basket_footer .cart--basket--total .sub_total {
+    float: left;
+    width: 170px;
+    text-align: right;
+}
+
+.cart--basket .cart--basket_footer .cart--basket--total .label {
+    display: block;
+    font-size: 12px;
+    color: #A4A9B0;
+    line-height: 17px;
+    margin-bottom: 6px;
+    font-weight: normal;
+}
+
+.cart--basket .cart--basket_footer .cart--basket--total .text__value {
+    display: inline-block;
+    font-family: 'Gmarket Sans',sans-serif;
+    font-size: 18px;
+    line-height: 17px;
+    color: #616161
+}
+
+.cart--basket .cart--basket_footer .cart--basket--total .sub_total .text__value, .cart--basket .cart--basket_footer .cart--basket--total .sub_total .text__unit {
+    color: #424242
+}
+
+.cart--basket .cart--basket_footer .cart--basket--total .price.free {
+    color: #067dfd;
+    font-weight: normal;
+    font-family: 'Gmarket Sans',sans-serif;
+    font-size: 15px;
+    letter-spacing: -0.5px;
+    vertical-align: top
+}
+
+.cart--basket .cart--basket_footer .cart--basket--total .text__value.free {
+    color: #067dfd;
+    font-size: 15px;
+    letter-spacing: -0.5px;
+}
+
+.cart--basket .cart--basket_footer .cart--basket--total .text__value.green {
+    color: #23C72E;
+}
+
+.cart--basket .cart--basket_footer .cart--basket--total .text__unit {
+    font-size: 15px;
+    line-height: 1;
+    color: inherit;
+    font-weight: normal;
+    display: inline-block;
+    vertical-align: top;
+    margin-top: 1px;
+    *line-height: 1.5;
+    *margin-top: -4px
+}
+
+.cart--basket .cart--basket_footer .cart--basket--total .box__discount--amount {
+    display: none
+}
+
+/* SHIPPING GROUP */
+.cart--basket .cart--basket_body .shipping--info {
+    display: block;
+    background: #f8f9fa;
+    height: 34px;
+    line-height: 34px;
+    text-align: right;
+    position: relative;
+    padding-right: 54px;
+    clear: both;
+    float: none;
+    margin-top: -1px;
+    border-bottom: 1px solid #dedede;
+}
+
+.cart--basket .cart--basket_body .shipping--info .delivery-oversea, .cart--basket .cart--basket_body .shipping--info .delivery {
+    line-height: 34px;
+}
+
+.cart--basket .cart--basket_body .shipping--info .delivery .text__unit {
+    *line-height: 1.5;
+    *margin-top: -1px;
+    color: #000
+}
+
+.cart--basket .cart--basket_body .shipping--info .text__value {
+    color: #000;
+    font-size: 14px;
+    line-height: 17px;
+    font-weight: bold;
+    display: inline-block;
+    margin-left: 20px;
+}
+
+.cart--basket .cart--basket_body .shipping--info .text__value.free {
+    color: #2e8de5;
+    font-size: 12px;
+    font-weight: normal;
+}
+
+.cart--basket .cart--basket_body .shipping--info .text__value .text__unit {
+    line-height: 1;
+    font-size: 12px;
+    display: inline-block;
+    margin-top: 2px;
+    color: #000;
+    font-weight: normal;
+    vertical-align: top;
+}
+
+.cart--basket .cart--basket_body .shipping--info .delivery_tip {
+    color: #91949A;
+    font-size: 12px;
+    background: url(//pics.gmarket.co.kr/pc/ko/pay/cart/bg_delivery.png) left center no-repeat;
+    padding-left: 6px;
+    line-height: 18px;
+    margin-left: 4px;
+}
+
+.cart--basket .cart--basket_body .shipping--info .delivery_tip .text__value {
+    color: #91949A;
+    margin-left: 0;
+    font-size: 12px;
+    font-weight: normal
+}
+
+.cart--basket .cart--basket_body .shipping--info .delivery_tip .text__unit {
+    color: #91949A;
+}
+
+.cart--basket .cart--basket_body .shipping--info .text {
+    color: #91949A;
+}
+
+.cart--basket .cart--basket_body .shipping--info .delivery_price {
+    color: #000;
+    font-size: 12px;
+    line-height: 17px;
+    font-weight: bold;
+    display: inline-block;
+    margin-left: 20px;
+}
+
+.cart--basket .cart--basket_body .shipping--info .delivery_price.free {
+    color: #91949A;
+    font-weight: normal
+}
+
+.cart--basket .cart--basket_body .shipping--info .delivery-oversea {
+    display: inline-block;
+}
+
+.cart--basket .cart--basket_body .shipping--info .delivery-oversea::before {
+    content: '+';
+    display: inline-block;
+    margin: 0 4px;
+    font-size: 14px;
+    color: #91949a;
+    line-height: 34px;
+}
+
+/*************************/
+/*  ITEM GROUP
+/**********************/
+.cart--basket .cart--basket_body .order--idx .item::after {
+    content: '';
+    display: block;
+    clear: both;
+}
+
+.cart--basket .cart--basket_body .order--idx .item_check {
+    display: inline-block;
+    float: left;
+    padding-top: 3px;
+}
+
+.cart--basket .cart--basket_body .order--idx .item_img {
+    display: inline-block;
+    position: relative;
+    width: 80px;
+    height: 80px;
+    float: left;
+    margin-left: 12px;
+}
+
+.cart--basket .cart--basket_body .order--idx .item_img img {
+    width: auto;
+    max-width: 80px;
+    display: block;
+}
+
+.cart--basket .cart--basket_body .order--idx .item_img .box__bigs-tag {
+    overflow: hidden;
+    position: absolute;
+    right: 46px;
+    bottom: 48px;
+    width: 44px
+}
+
+.cart--basket .cart--basket_body .order--idx .item_img .box__bigs-tag .image {
+    width: 100%
+}
+
+.cart--basket .cart--basket_body .order--idx .item_info {
+    float: left;
+    display: inline-block;
+    width: 656px;
+    margin-left: 12px;
+    min-height: 100px;
+}
+
+.cart--basket .cart--basket_body .order--idx .item_info .box__item-banner {
+    position: relative;
+    margin-top: -10px;
+    padding-bottom: 20px;
+}
+
+.cart--basket .cart--basket_body .order--idx .item_info .box__item-banner .link__banner--bigsmile {
+    display: block;
+    width: 303px;
+    height: 26px;
+    border: 1px solid #fad9d6;
+    background-color: #fff1f0;
+    text-align: center
+}
+
+.cart--basket .cart--basket_body .order--idx .item_info .box__item-banner .link__banner--bigsmile .text__bigsmile {
+    display: inline-block;
+    position: relative;
+    font-size: 12px;
+    color: #333;
+    vertical-align: top;
+    line-height: 26px
+}
+
+.cart--basket .cart--basket_body .order--idx .item_info .box__item-banner .link__banner--bigsmile .text__bigsmile:before {
+    content: none;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 18px;
+    height: 28px;
+    background: url(//pics.gmarket.co.kr/mobile/single/kr/promotion/bigs/tag/tag__18x28.png) no-repeat;
+    background-size: 18px auto;
+    margin-top: -14px
+}
+
+.cart--basket .cart--basket_body .order--idx .item_info .box__item-banner .link__banner--bigsmile .text__date {
+    font-weight: bold;
+    color: #f52e21
+}
+
+.cart--basket .cart--basket_body .order--idx .box__item-price {
+    position: absolute;
+    top: 0;
+    left: 900px;
+    width: 150px;
+    display: inline-block;
+    text-align: center;
+    height: 100%;
+    border-left: 1px solid #e8e8e8;
+}
+
+/*************************/
+/* CART UNIT
+/**********************/
+.unit--item {
+    padding: 20px 0 0 0;
+    border-top: 1px solid #dedede;
+}
+
+.unit--item .unit--item_desc {
+    width: 100%;
+    height: auto;
+    position: relative;
+    min-height: 40px;
+    padding-bottom: 20px;
+}
+
+.unit--item .unit--item_desc .section {
+    float: left;
+}
+
+.unit--item .unit--item_desc .section.item_title {
+    width: 100%;
+    display: none;
+    float: none
+}
+
+.unit--item .unit--item_desc .section.item_title a {
+    display: inline-block;
+}
+
+.unit--item .unit--item_desc .section.item_title a:hover .item_name {
+    color: #2e8de5;
+}
+
+.unit--item .unit--item_desc .section.item_title .item_name {
+    font-size: 15px;
+    letter-spacing: -0.5px;
+    color: #000;
+    line-height: 22px;
+    margin-bottom: 8px;
+    display: block;
+    max-width: 260px;
+}
+
+.unit--item .unit--item_desc .section.item_title .item_name .text__brand-name {
+    position: relative;
+    top: 1px;
+    font-size: 15px;
+    color: #0231a6;
+    line-height: 22px;
+}
+
+.unit--item .unit--item_desc .section.item_title .box__tag {
+    display: none
+}
+
+.unit--item .unit--item_desc .section.item_qty {
+    float: none;
+    position: absolute;
+    right: 267px;
+    top: 0;
+    height: 27px;
+    vertical-align: middle;
+    width: auto;
+    min-width: 86px;
+    margin-right: 12px;
+}
+
+.unit--item .unit--item_desc .section.item_qty .loading {
+    display: none;
+    width: 34px;
+    height: 28px;
+    background : url(//pics.gmarket.co.kr/pc/ko/pay/cart/loader_ec.gif) left center no-repeat;
+    background-size: 28px 28px;
+    margin: 0 24px 0 28px ;
+}
+
+.unit--item .unit--item_desc .section.item_option {
+    float: none;
+    display: block;
+    font-weight: 400;
+    max-width: 260px
+}
+
+.unit--item .unit--item_desc .section.item_option li {
+    margin-bottom: 7px;
+    max-width: 260px
+}
+
+.unit--item .unit--item_desc .section.item_option .option_name {
+    font-size: 14px;
+    color: #91949A;
+    background : url(//pics.gmarket.co.kr/pc/ko/pay/cart/bg_item_option_contour.png) right center no-repeat;
+    padding-right: 6px;
+    margin-right: 6px;
+}
+
+.unit--item .unit--item_desc .section.item_option .option_value {
+    font-size: 14px;
+    line-height: 17px;
+    letter-spacing: -0.5px;
+    color: #91949A;
+    word-break: break-all;
+}
+
+.unit--item .unit--item_desc .section.item_add {
+    float: none;
+    display: block;
+    font-weight: 400;
+    max-width: 260px;
+}
+
+.unit--item .unit--item_desc .section.item_add li {
+    max-width: 250px;
+    margin-bottom: 5px;
+    line-height: 16px;
+    background : url(//pics.gmarket.co.kr/pc/ko/pay/cart/bg_item_option_addbuy.png) 0px 5px no-repeat ;
+    padding-left: 10px ;
+}
+
+.unit--item .unit--item_desc .section.item_add .add_name {
+    font-size: 13px;
+    color: #91949A;
+    background : url(//pics.gmarket.co.kr/pc/ko/pay/cart/bg_item_option_addbuy_contour.png) right center no-repeat;
+    padding-right: 6px;
+    margin-right: 6px;
+}
+
+.unit--item .unit--item_desc .section.item_add .add_value {
+    font-size: 13px;
+    line-height: 17px;
+    letter-spacing: -0.5px;
+    color: #91949A;
+    word-break: break-all;
+}
+
+.unit--item .unit--item_desc .section.item_add .add_count {
+    background : url(//pics.gmarket.co.kr/pc/ko/pay/cart/bg_item_option_addbuy_count.png) left center no-repeat;
+    font-size: 13px;
+    color: #91949A;
+    padding-left: 6px;
+    margin-left: 6px;
+}
+
+.unit--item .unit--item_desc .section.item_add .bar {
+    color: #dedede;
+    margin: 0 4px;
+    font-size: 11px;
+    line-height: 16px;
+    font-weight: normal;
+}
+
+.unit--item .unit--item_desc .section.item_notice {
+    position: relative;
+    float: none;
+    display: block;
+    color: #f83030;
+    font-size: 12px;
+    line-height: 20px;
+    margin-top: 8px;
+}
+
+.unit--item .unit--item_desc .section.item_notice strong {
+    font-weight: normal;
+}
+
+.unit--item .unit--item_desc .section.item_soldout {
+    position: relative;
+    float: none;
+    display: block;
+    color: #2e8de5;
+    font-size: 12px;
+    line-height: 20px;
+    margin-top: 8px;
+}
+
+.unit--item .unit--item_desc .section.item_soldout strong {
+    font-weight: normal;
+    letter-spacing: -0.5px;
+}
+
+.unit--item .unit--item_desc .section.item_soldout .btn_del {
+    display: none
+}
+
+.unit--item .unit--item_desc .section.item_qty .item_qty_wrap {
+    position: relative;
+    vertical-align: middle;
+    height: 100%;
+    margin-top: 2px;
+}
+
+.unit--item .unit--item_desc .section.item_qty .btn_minus {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.unit--item .unit--item_desc .section.item_qty .btn_plus {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.unit--item .unit--item_desc .section.item_qty .item_qty_count {
+    display: inline-block;
+    width: 30px;
+    height: 21px;
+    /* margin-left: 30px; */
+    border: 1px solid #ececec;
+    line-height: 21px;
+    color: #233549;
+    font-size: 14px;
+    text-align: center;
+    background: #fff;
+    float: left;
+    margin: 0 27px;
+    padding: 0;
+}
+
+.unit--item .unit--item_desc .section.item_qty .item_qty_plus {
+    display: inline-block;
+    float: left;
+}
+
+.unit--item .unit--item_desc .section.item_coupon {
+    width: 70px;
+    float: none;
+    position: absolute;
+    right: 185px;
+    top: 0;
+}
+
+.unit--item .unit--item_desc .section.item_coupon .btn_coupoon {
+    position: relative;
+    display: inline-block;
+    padding: 0;
+    width: 70px;
+    height: 27px;
+    background-position: -80px -25px
+}
+
+.unit--item .unit--item_desc .section.item_coupon .btn_coupoon.button__disabled {
+    background-position: 0px -25px
+}
+
+.unit--item .unit--item_desc .section.item_coupon .btn_coupoon.button__disabled:disabled {
+    cursor: default
+}
+
+.unit--item .unit--item_desc .section.item_coupon .btn_coupoon.button__active {
+    background-position: -80px -25px
+}
+
+.unit--item .unit--item_desc .section.item_coupon .btn_coupoon.button__active:after {
+    position: absolute;
+    display: block;
+    top: -6px;
+    right: -6px;
+    width: 16px;
+    height: 16px;
+    background-position: -157px 0;
+    content: ''
+}
+
+.unit--item .unit--item_desc .section.item_coupon .button__coupon {
+    position: relative;
+    display: inline-block;
+    padding: 0;
+    width: 63px;
+    height: 28px;
+    background: #00c400;
+    border-radius: 6px;
+    font-family: 'Gmarket Sans',serif;
+    font-size: 12px;
+    color: #fff;
+    text-align: center
+}
+
+.unit--item .unit--item_desc .section.item_coupon .button__coupon.button__disabled {
+    opacity: .4;
+    cursor: default
+}
+
+.unit--item .unit--item_desc .section.item_coupon .button__coupon.button__disabled:disabled {
+    cursor: default
+}
+
+.unit--item .unit--item_desc .section.item_coupon .button__coupon.button__active {
+    background: #01a900
+}
+
+.unit--item .unit--item_desc .section.item_coupon .button__coupon.button__active:after {
+    position: absolute;
+    display: block;
+    top: -6px;
+    right: -6px;
+    width: 16px;
+    height: 16px;
+    background: url(//pics.gmarket.co.kr/pc/ko/pay/cart/sp_cart.png) no-repeat -157px 0;
+    content: ''
+}
+
+.unit--item .unit--item_desc .section.item_price {
+    position: absolute;
+    right: 32px;
+    top: 0;
+    width: 150px;
+    text-align: right;
+    float: none;
+}
+
+.unit--item .unit--item_desc .section.item_price .text__value {
+    color: #424242;
+    font-family: 'Gmarket Sans',serif;
+    font-size: 18px;
+    line-height: 27px;
+    font-weight: bold;
+    word-wrap: break-word;
+    word-break: break-all;
+}
+
+.unit--item .unit--item_desc .section.item_price .text__unit {
+    display: inline-block;
+    vertical-align: top;
+    margin-top: 5px;
+    color: #424242;
+    font-size: 16px;
+    line-height: 1;
+    *margin-top: -3px;
+    *line-height: 1.5;
+    font-weight: bold
+}
+
+.unit--item .unit--item_desc .section.item_price .price_desc {
+    display: block;
+    font-size: 12px;
+    letter-spacing: -0.5px;
+    color: #A4A9B0;
+    font-weight: normal;
+    line-height: 14px
+}
+
+.unit--item .unit--item_desc .section.item_price .price_desc .box__format-amount {
+    display: inline;
+}
+
+.unit--item .unit--item_desc .section.item_price .price_desc .box__format-amount .text__value {
+    font-size: inherit;
+    color: inherit;
+    line-height: inherit;
+    font-weight: normal;
+    display: inline;
+    vertical-align: top;
+}
+
+.unit--item .unit--item_desc .section.item_price .price_desc .box__format-amount .text__unit {
+    font-size: inherit;
+    color: inherit;
+    vertical-align: top;
+    display: inline;
+}
+
+.unit--item .unit--item_desc .section.item_discount-price > .format-price .box__format-amount .text__value {
+    font-weight: normal;
+    font-size: 14px;
+    color: #424242;
+    line-height: 20px;
+    text-decoration-line: line-through
+}
+
+.unit--item .unit--item_desc .section.item_discount-price > .format-price .box__format-amount .text__unit {
+    margin-top: 1px;
+    font-size: 12px;
+    color: #424242;
+    line-height: 17px
+}
+
+.unit--item .unit--item_desc .section.item_discount-price .box__sale-amount {
+    display: block
+}
+
+.unit--item .unit--item_desc .section.item_discount-price .box__sale-amount .text__value {
+    font-size: 18px;
+    font-weight: bold;
+    color: #01a900;
+    line-height: 24px
+}
+
+.unit--item .unit--item_desc .section.item_discount-price .box__sale-amount .text__unit {
+    margin-top: 0;
+    font-size: 16px;
+    font-weight: bold;
+    color: #01a900;
+    line-height: 24px
+}
+
+.unit--item .unit--item_desc .box__install {
+    margin-bottom: 8px;
+    font-size: 0
+}
+
+.unit--item.case_nooption .unit--item_desc .box__install {
+    margin-top: 8px
+}
+
+.unit--item .unit--item_desc .box__install .text__install {
+    position: relative;
+    display: block;
+    color: #4741c7;
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 700;
+    padding-left: 22px
+}
+
+.unit--item .unit--item_desc .box__install .text__install::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 20px;
+    height: 20px;
+    background: url(//pics.gmarket.co.kr/pc/single/kr/checkout/gds-calendar-check.svg) no-repeat;
+    background-size: 20px 20px
+}
+
+.unit--item .unit--item_desc .section.item_del {
+    float: none;
+    clear: both;
+    position: absolute;
+    top: 6px;
+    right: 0;
+}
+
+.unit--item .unit--item_desc .section.item_del .btn_del {
+    width: 14px;
+    height: 14px;
+    display: block;
+    vertical-align: middle;
+    outline-offset: 4px;
+}
+
+.unit--item .unit--item_desc .section.item_del .btn_del .icon {
+    vertical-align: top
+}
+
+/* case */
+.unit--item.first {
+    padding-top: 0;
+    border-top: 0
+}
+
+.unit--item.first .unit--item_desc .section.item_title {
+    display: block;
+}
+
+.unit--item.first .unit--item_desc .section.item_title .item_name {
+    display: block;
+    word-break: break-all;
+}
+
+.unit--item.case_nooption .unit--item_desc {
+    min-height: 44px
+}
+
+.unit--item.case_nooption .unit--item_desc .section.item_title .item_name {
+    margin-bottom: 0
+}
+
+.unit--item.case_nooption .unit--item_desc .section.item_title {
+    display: block
+}
+
+.unit--item.case_nooption .unit--item_desc .section.item_title .item_name {
+    display: block
+}
+
+.unit--item .unit--item_desc .section.item_qty.case_loading .item_qty_count {
+    display: none
+}
+
+.unit--item .unit--item_desc .section.item_qty.case_loading .loading {
+    display: block;
+}
+
+.case_soldout .item_img {
+    opacity: 0.4;
+}
+
+.case_soldout .unit--item .unit--item_desc .section {
+    opacity: 0.4;
+}
+
+.unit--item .unit--item_desc .section.item_notice, .unit--item .unit--item_desc .section.item_soldout {
+    opacity: 1;
+}
+
+/*************************/
+/* ORDER
+/**********************/
+.order {
+    position: relative;
+    width: 360px;
+    background: #fff;
+    border-radius: 8px;
+    border: 1px solid #000;
+    box-sizing: border-box;
+}
+
+.order .order_title {
+    height: 60px;
+    line-height: 60px;
+    margin: 0 22px;
+    border-bottom: 1px solid #333333;
+    width: auto;
+    position: relative;
+    background: #fff !important;
+}
+
+.order .order_title.order_smiledelivery {
+    display: none
+}
+
+.order .order_title.order_oversea {
+    border-radius: unset;
+}
+
+.order .order_title .text {
+    font-size: 16px;
+    color: #1e1e1e;
+    letter-spacing: -0.4px;
+}
+
+.order .order_title .order_delivery {
+    position: absolute;
+    right: 0;
+    top: 0;
+    display: block;
+    height: 60px;
+    line-height: 60px;
+    text-align: right
+}
+
+.order .order_title .order_delivery .text {
+    color: #7f8590;
+    font-size: 14px;
+}
+
+.order .order_title .order_delivery .emphasis {
+    font-size: 14px;
+}
+
+.order .order_title .order_delivery .icon {
+    margin-left: 4px;
+    vertical-align: top;
+    margin-top: 25px;
+    *margin-top: 4px;
+}
+
+.order .order_oversea {
+    position: relative;
+    z-index: 10;
+    background: #f8f9fa;
+    margin: 12px 22px 0;
+    width: auto;
+    border-radius: 8px;
+}
+
+.order .order_oversea .oversea_notice {
+    text-align: center;
+    padding: 20px 0;
+    border-bottom: 1px solid #ececec;
+}
+
+.order .order_oversea .oversea_notice strong {
+    font-size: 12px;
+    color: #F83030;
+    font-weight: normal;
+}
+
+.order .order_oversea .oversea_weight {
+    display: block;
+    overflow: auto;
+    padding: 12px 16px;
+    border-bottom: 1px solid #ececec;
+}
+
+.order .order_oversea .oversea_weight .format-amount {
+    float: right;
+    font-size: 17px;
+    letter-spacing: -0.17px;
+    color: #000;
+    font-weight: normal;
+}
+
+.order .order_oversea .oversea_weight .format-amount .text {
+    font-weight: normal;
+}
+
+.order .order_oversea .oversea_weight .label {
+    float: left;
+    font-size: 14px;
+    line-height: 22px;
+    color: #7F8590;
+}
+
+.order .order_oversea .oversea_weight .text__value {
+    line-height: 14px;
+    font-weight: normal;
+    font-size: 15px;
+    letter-spacing: -0.5px;
+}
+
+.order .order_oversea .oversea_weight .text__unit {
+    font-size: 15px;
+    line-height: 14px;
+    font-weight: normal;
+}
+
+.order .order_oversea .oversea_rule {
+    padding: 12px 16px 16px;
+    position: relative
+}
+
+.order .order_oversea .oversea_rule .overflow_delivery_rule {
+    display: block;
+    position: relative;
+}
+
+.order .order_oversea .oversea_rule .btn_more {
+    position: absolute;
+    right: 12px;
+    top: 12px;
+}
+
+.order .order_oversea .oversea_rule .btn_more .icon {
+    width: 16px;
+    height: 16px;
+    margin-top: 3px;
+    background: url(//pics.gmarket.co.kr/pc/sprite/kr/cart/sprite__cart.png) no-repeat -26px -51px;
+    background-size: 500px auto;
+    vertical-align: top;
+}
+
+.order .order_oversea .oversea_rule .btn_more .text {
+    font-size: 14px;
+    color: #7f8590;
+}
+
+.order .order_oversea .oversea_rule .overflow_delivery_rule .label {
+    margin-left: 0;
+    font-size: 14px;
+    color: #7f8590;
+}
+
+.order .order_oversea .oversea_rule .oversea_rule_box {
+    overflow: visible;
+    margin-top: 12px;
+}
+
+.order .order_oversea .oversea_rule .oversea_rule_box .list {
+    position: relative;
+    display: block;
+    overflow: visible;
+    height: auto;
+    font-weight: normal;
+    height: 20px;
+}
+
+.order .order_oversea .oversea_rule .oversea_rule_box .list + .list {
+    margin-top: 8px
+}
+
+.order .order_oversea .oversea_rule .oversea_rule_box .list span {
+    display: inline-block;
+}
+
+.order .order_oversea .oversea_rule .oversea_rule_box .list .icon.input_radio {
+    display: none;
+}
+
+.order .order_oversea .oversea_rule .oversea_rule_box .list .input_custom {
+    *width: auto
+}
+
+.order .order_oversea .oversea_rule .oversea_rule_box .list .input_custom input[type="radio"] {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    background: url(//pics.gmarket.co.kr/pc/sprite/kr/cart/sprite__cart.png) no-repeat -235px 0;
+    background-size: 500px auto;
+}
+
+.order .order_oversea .oversea_rule .oversea_rule_box .list .input_custom input[type="radio"]:checked {
+    background-position: -191px 0;
+}
+
+.order .order_oversea .oversea_rule .oversea_rule_box .list .input_custom input[type="radio"]:disabled {
+    background-position: -257px 0;
+}
+
+.order .order_oversea .oversea_rule .oversea_rule_box .list .input_custom label {
+    width: auto;
+    background-color: #f8f9fa;
+    background: none;
+}
+
+.order .order_oversea .oversea_rule .oversea_rule_box .list .box__format-amount {
+    position: absolute;
+    right: 0;
+    top: 0
+}
+
+.order .order_oversea .oversea_rule .oversea_rule_box .list .btn_sfexpress {
+    vertical-align: top;
+    margin-top: 1px;
+    margin-left: 3px;
+}
+
+.order .order_oversea .oversea_rule .oversea_rule_box .list .btn_cjdelivery {
+    vertical-align: top;
+    margin-top: 0;
+    margin-left: 3px;
+}
+
+.order .order_oversea .oversea_rule .oversea_rule_box .list .ly_wrap {
+    display: none;
+    *display: none
+}
+
+.order .order_oversea .oversea_rule .oversea_rule_box .label {
+    font-size: 14px;
+    line-height: 18px;
+    color: #222;
+    letter-spacing: -0.14px;
+    margin-left: 5px;
+}
+
+.order .order_oversea .oversea_rule .oversea_rule_box .input_radio {
+    width: 20px;
+    height: 20px;
+}
+
+.order .order_oversea .oversea_rule .oversea_rule_box .box__format-amount {
+    float: right
+}
+
+.order .order_oversea .oversea_rule .oversea_rule_box .text__value {
+    line-height: 20px;
+    font-weight: normal;
+    font-size: 17px;
+    letter-spacing: -0.17px;
+    color: #000
+}
+
+.order .order_oversea .oversea_rule .oversea_rule_box .text__unit {
+    font-size: 17px;
+    line-height: 20px;
+    font-weight: normal;
+    letter-spacing: -0.17px;
+    color: #000
+}
+
+.order .order_oversea .oversea_rule .oversea_rule_box a {
+    display: inline-block
+}
+
+.order .order_info {
+    border-bottom: 1px solid #333333;
+    margin: 0 22px;
+    padding: 12px 0 6px 0;
+}
+
+.order .order_info .receipt_list_box {
+    overflow: auto;
+}
+
+.order .order_info .receipt_list_box .list {
+    display: block;
+    overflow: hidden;
+    margin-bottom: 6px;
+    min-height: 25px;
+    position: relative;
+}
+
+.order .order_info .receipt_list_box .label {
+    font-size: 16px;
+    line-height: 20px;
+    color: #7F8590;
+    letter-spacing: -0.16px
+}
+
+.order .order_info .receipt_list_box button.label:after {
+    display: inline-block;
+    width: 9px;
+    height: 5px;
+    margin: -1px 0 1px 6px;
+    content: '';
+    background: url(//pics.gmarket.co.kr/pc/ko/pay/cart/sp_cart.png) no-repeat -90px -60px;
+    vertical-align: middle
+}
+
+.order .order_info .receipt_list_box button.label--active:after {
+    background-position: -90px -70px
+}
+
+.order .order_info .receipt_list_box .box__format-amount {
+    float: right
+}
+
+.order .order_info .receipt_list_box .box__format-amount.discount .text__value {
+    color: #00c400
+}
+
+.order .order_info .receipt_list_box .format-price.discount {
+    float: right;
+    clear: both
+}
+
+.order .order_info .receipt_list_box .format-price.discount .box__discount--amount {
+    display: inline-block;
+    padding-right: 5px;
+    font-size: 14px;
+    color: #f9560e;
+    line-height: 20px
+}
+
+.order .order_info .receipt_list_box .format-price.discount .box__discount--amount .text__value {
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 500;
+    font-family: 'Gmarket Sans',serif;
+    color: #f9560e;
+    line-height: 20px;
+    vertical-align: baseline
+}
+
+.order .order_info .receipt_list_box .format-price.discount .box__discount--amount .text__percent {
+    font-size: 14px;
+    font-weight: 500;
+    font-family: 'Gmarket Sans',serif;
+    line-height: 20px
+}
+
+.order .order_info .receipt_list_box .format-amount {
+    float: right;
+    font-size: 17px;
+    color: #000;
+}
+
+.order .order_info .receipt_list_box .text {
+    line-height: 20px;
+    margin-bottom: 6px;
+    color: #000;
+    font-weight: normal;
+    font-size: 16px;
+}
+
+.order .order_info .receipt_list_box .text__value {
+    line-height: 20px;
+    color: #000;
+    font-weight: normal;
+    font-size: 16px;
+    font-family: 'Gmarket Sans',serif
+}
+
+.order .order_info .receipt_list_box .text__unit {
+    font-size: 17px;
+    line-height: 1;
+    font-weight: normal;
+    color: #000;
+    vertical-align: top;
+    margin-top: 1px;
+    display: inline-block;
+    *margin-top: -3px;
+    *line-height: 1.5
+}
+
+.order .order_info .receipt_list_box .btn_introduce_smiledelivery {
+    width: 111px;
+    height: 31px;
+    margin-top: -4px;
+    margin-left: 4px;
+    background: url(//pics.gmarket.co.kr/pc/sprite/kr/cart/sprite__cart.png?v=20220427) no-repeat;
+    background-size: 500px auto;
+}
+
+.order .order_info .receipt_list_box .list_child {
+    clear: both;
+    padding: 8px 0
+}
+
+.order .order_info .receipt_list_box li:last-child .list_child {
+    margin-bottom: 0
+}
+
+.order .order_info .receipt_list_box .list_child__item {
+    position: relative;
+    display: block;
+    width: auto;
+    padding-left: 12px;
+    font-size: 12px;
+    line-height: 22px;
+    overflow: hidden;
+    zoom:1}
+
+.order .order_info .receipt_list_box .list_child__item:before, .order .order_info .receipt_list_box .list_child__item:after {
+    position: absolute;
+    left: 0;
+    background: #9e9e9e;
+    content: ''
+}
+
+.order .order_info .receipt_list_box .list_child__item:before {
+    top: 6px;
+    width: 1px;
+    height: 7px
+}
+
+.order .order_info .receipt_list_box .list_child__item:after {
+    top: 12px;
+    width: 7px;
+    height: 1px
+}
+
+.order .order_info .receipt_list_box .list_child__item .label {
+    font-size: 14px;
+    color: #9e9e9e
+}
+
+.order .order_info .receipt_list_box .list_child__item .format-price span, .order .order_info .receipt_list_box .list_child__item .format-price .text__value {
+    font-size: 15px;
+    color: #9e9e9e
+}
+
+.order .order_info .receipt_list_box .list_child__item .format-price .text__unit {
+    margin-top: 3px
+}
+
+.order .order_info .receipt_list_box .list-smileclub {
+    display: none
+}
+
+.order .order_info .receipt_list_box .text__free-delivery {
+    margin-top: 2px;
+    text-align: right;
+    font-size: 12px;
+    line-height: 16px;
+    color: #067dfd;
+}
+
+.order .order_info .receipt_list_box .text__free-delivery .text__free {
+    font-weight: 700
+}
+
+.order .order_info .discount .text__value {
+    display: inline-block;
+    margin-bottom: 0;
+    font-size: 16px;
+    font-family: 'Gmarket Sans',serif;
+    color: #01a900;
+    line-height: 20px;
+    vertical-align: baseline
+}
+
+.order .order_info .discount .text__sign {
+    display: inline-block;
+    font-size: 16px;
+    font-family: 'Gmarket Sans',serif;
+    color: #01a900;
+    line-height: 20px
+}
+
+.order .order_info .discount .text__unit {
+    color: #01a900
+}
+
+.order .order_summary {
+    margin: 0 22px;
+    height: auto;
+    display: block;
+    padding: 22px 0 0 0;
+    height: auto;
+    text-align: right;
+    min-height: 30px;
+}
+
+.order .order_summary .label {
+    font-size: 18px;
+    font-family: 'Gmarket Sans',sans-serif;
+    line-height: 24px;
+    color: #222;
+    letter-spacing: -0.18px;
+    line-height: 30px;
+    font-weight: normal;
+    float: left;
+}
+
+.order .order_summary .box__format-amount .text__value {
+    font-size: 30px;
+    font-family: 'Gmarket Sans',sans-serif;
+    color: #424242;
+    letter-spacing: -0.3px;
+    font-weight: bold;
+    line-height: 30px;
+}
+
+.order .order_summary .box__format-amount .text__unit {
+    font-size: 29px;
+    font-family: 'Gmarket Sans',sans-serif;
+    font-weight: normal;
+    letter-spacing: -0.29px;
+    line-height: 30px;
+    vertical-align: top;
+    display: inline-block;
+    color: #424242;
+}
+
+.order .order_summary + .smilecash_benefit {
+    margin-top: 10px
+}
+
+.order .smilecash_benefit {
+    margin: 0 22px;
+    display: block;
+    position: relative;
+}
+
+.order .smilecash_benefit .smilecash_guide .text {
+    font-size: 14px;
+    line-height: 21px;
+    font-weight: normal;
+    color: #7F8590;
+}
+
+.order .smilecash_benefit .my_smilecash {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.order .smilecash_benefit .my_smilecash .price_smilecash {
+    font-size: 14px;
+    line-height: 21px;
+    color: #2e8de5;
+}
+
+.order .smilecash_benefit .my_smilecash .price_smilecash .box__format-amount .text__value {
+    font-weight: bold
+}
+
+.order .smilecash_benefit .my_smilecash .price_smilecash .box__format-amount .text__unit {
+    color: #067dfd;
+}
+
+.order .smilecash_benefit .my_smilecash .btn_more {
+    line-height: 1;
+    display: inline-block;
+    vertical-align: top;
+    margin-left: 5px
+}
+
+.order .smilecash_benefit .my_smilecash .btn_more .icon {
+    vertical-align: top;
+    margin-top: 9px;
+}
+
+.order .box__clubday {
+    margin-top: 12px;
+    padding: 7px;
+    border: 1px solid #bc9a6e;
+    border-radius: 6px;
+    background-color: rgb(134 67 0 / 8%);
+    text-align: center
+}
+
+.order .box__clubday .text__clubday {
+    font-size: 12px;
+    color: #424242;
+    white-space: nowrap;
+    line-height: 16px
+}
+
+.order .box__clubday .text__clubday .text__emphasis {
+    color: #864300
+}
+
+.order .box__clubday .text__clubday .text__point {
+    font-weight: 700;
+    font-size: 13px
+}
+
+.order .box__clubday .text__clubday .text__bold {
+    font-weight: 700
+}
+
+.order .box__clubday .text__clubday .image__smileclub {
+    margin-top: 1px;
+    width: 36px;
+    height: 14px;
+    background-position: -140px -33px;
+    vertical-align: top
+}
+
+.order .order_action {
+    margin: 0 22px;
+    padding: 30px 0 24px;
+}
+
+.order .order_action .btn_submit .text {
+    color: #fff;
+    font-size: 22px;
+    font-family: 'Gmarket Sans',sans-serif;
+    vertical-align: middle;
+    letter-spacing: -0.22px;
+}
+
+.order .order_action .btn_submit {
+    height: 64px;
+    line-height: 64px;
+    display: block;
+    background: #0028ac;
+    width: 100%;
+    text-align: center;
+    border-radius: 8px;
+}
+
+.order .order_action .btn_submit .item--qty {
+    display: none
+}
+
+/*************************/
+/* smile benefit
+/**********************/
+#smilecash_detail {
+    display: none;
+    padding-top: 8px;
+}
+
+#smilecash_detail .smilecash_detail_box {
+    overflow: auto;
+    background: #f8f9fa;
+    border-top: 1px solid #ececec;
+    padding: 12px 12px 3px 12px;
+    border-bottom: 1px solid #ececec;
+}
+
+#smilecash_detail .smilecash_detail_box .list {
+    display: block;
+    overflow: hidden;
+    height: auto;
+    margin-bottom: 10px;
+    font-weight: normal;
+}
+
+#smilecash_detail .smilecash_detail_box .list.use_info {
+    border-top: 1px solid #ececec;
+    padding-top: 10px;
+}
+
+#smilecash_detail .smilecash_detail_box .label {
+    float: left;
+    font-size: 12px;
+    line-height: 14px;
+    color: #7F8590;
+    *line-height: 1.5
+}
+
+#smilecash_detail .smilecash_detail_box .text {
+    float: right;
+    line-height: 14px;
+    color: #2e8de5;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+#smilecash_detail .smilecash_detail_box .box__format-amount {
+    float: right;
+}
+
+#smilecash_detail .smilecash_detail_box .box__format-amount .text__value {
+    line-height: 14px;
+    color: #2e8de5;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+#smilecash_detail .smilecash_detail_box .box__format-amount .text__unit {
+    font-size: 12px;
+    line-height: 14px;
+    font-weight: bold;
+    color: #2e8de5;
+}
+
+#smilecash_detail .smilecash_detail_box .list.list-clubday .label, #smilecash_detail .smilecash_detail_box .list.list-clubday .box__format-amount .text__value, #smilecash_detail .smilecash_detail_box .list.list-clubday .box__format-amount .text__unit {
+    color: #864300
+}
+
+#smilecash_detail .img_smileclub {
+    margin-left: 2px
+}
+
+#smilecash_detail {
+    display: none;
+    padding-top: 8px;
+}
+
+#smilecash_detail .smilecash_detail_box {
+    overflow: auto;
+    background: #f8f9fa;
+    border-top: 1px solid #ececec;
+    padding: 12px 12px 3px 12px;
+    border-bottom: 1px solid #ececec;
+}
+
+#smilecash_detail .smilecash_detail_box .list {
+    display: block;
+    overflow: hidden;
+    height: auto;
+    margin-bottom: 10px;
+    font-weight: normal;
+}
+
+#smilecash_detail .smilecash_detail_box .list.use_info {
+    border-top: 1px solid #ececec;
+    padding-top: 10px;
+}
+
+#smilecash_detail .smilecash_detail_box .label {
+    float: left;
+    font-size: 12px;
+    line-height: 14px;
+    color: #7F8590;
+    *line-height: 1.5
+}
+
+#smilecash_detail .smilecash_detail_box .text {
+    float: right;
+    line-height: 14px;
+    color: #2e8de5;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+#smilecash_detail .smilecash_detail_box .box__format-amount {
+    float: right;
+}
+
+#smilecash_detail .smilecash_detail_box .box__format-amount .text__value {
+    line-height: 14px;
+    color: #2e8de5;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+#smilecash_detail .smilecash_detail_box .box__format-amount .text__unit {
+    font-size: 12px;
+    line-height: 14px;
+    font-weight: bold;
+    color: #2e8de5;
+}
+
+/* #smilecash_detail .img_smileclub{margin-left:2px} */
+.order .box__order-benefit {
+    display: block;
+    margin: 10px 22px 0
+}
+
+.order .box__order-benefit .box__benefit {
+    position: relative;
+}
+
+.order .box__order-benefit .box__benefit + .box__benefit {
+    margin-top: 5px;
+}
+
+.order .box__order-benefit .box__benefit-summery {
+    height: 21px
+}
+
+.order .box__order-benefit .box__benefit-summery .text__label {
+    font-size: 14px;
+    line-height: 21px;
+    font-weight: 500;
+    letter-spacing: -1px;
+    color: #7f8590;
+}
+
+.order .box__order-benefit .box__benefit-summery .box__value .format-price {
+    display: inline-block;
+    font-size: 15px;
+    vertical-align: top;
+    line-height: 21px;
+    height: 21px;
+    color: #222
+}
+
+.order .box__order-benefit .box__benefit-summery .box__value .button__detail {
+    font-size: 0;
+    float: right;
+}
+
+.order .box__order-benefit .box__benefit-summery .box__value .button__detail::after {
+    width: 16px;
+    height: 16px;
+    background-position: -319px 0;
+    margin: 2px 0 0 2px;
+}
+
+.order .box__order-benefit .box__benefit-summery .box__value .button__detail--active::after {
+    transform: rotate(180deg);
+}
+
+.order .box__order-benefit .box__benefit-detail {
+    margin: 8px 0 7px
+}
+
+.order .box__order-benefit .box__benefit:last-child .box__benefit-detail {
+    margin-bottom: 0
+}
+
+.order .box__order-benefit .box__benefit-detail[aria-hidden="true"] {
+    display: none
+}
+
+.order .box__order-benefit .box__benefit-detail .list__detail {
+    overflow: auto;
+    background: #f8f9fa;
+    padding: 16px;
+    border: solid #ececec;
+    border-width: 1px 0;
+}
+
+.order .box__order-benefit .box__benefit-detail .list__detail .list-item {
+    display: block;
+    overflow: hidden;
+    height: auto;
+}
+
+.order .box__order-benefit .box__benefit-detail .list__detail .list-item + .list-item {
+    margin-top: 10px;
+}
+
+.order .box__order-benefit .box__benefit-detail .list__detail .label {
+    float: left;
+    font-size: 12px;
+    line-height: 14px;
+    letter-spacing: -1px;
+    color: #7f8590;
+}
+
+.order .box__order-benefit .box__benefit-detail .list__detail .format-price {
+    float: right;
+    line-height: 16px;
+    color: #222;
+    font-size: 12px
+}
+
+.order .box__order-benefit .box__benefit-detail .list__detail .list-item.use_info {
+    border-top: 1px solid #eee;
+    padding-top: 10px;
+    margin-top: 10px;
+    margin-bottom: 0
+}
+
+.order .box__order-benefit .box__benefit-detail .list__detail .list-item.use_info .label {
+    float: none
+}
+
+.order .box__order-benefit .box__benefit-detail .list__detail .list-item.use_info .text__description {
+    display: block;
+    margin-top: 8px;
+    font-size: 12px;
+    line-height: 14px;
+    color: #9e9e9e;
+    letter-spacing: -1px
+}
+
+.order .box__order-benefit .box__benefit--cash .box__benefit-summery .format-price, .order .box__order-benefit .box__benefit--cash .box__benefit-detail .list__detail .format-price {
+    color: #067dfd
+}
+
+/*************************/
+/* smile gauge
+/**********************/
+.order_smile_cart {
+    margin: 0 22px;
+    position: relative;
+    z-index: 1
+}
+
+.order_smile_cart .cart_gauge.fixed {
+    z-index: 99;
+    position: fixed !important;
+    top: 0;
+    margin-left: 160px;
+    top: 10px;
+}
+
+.order_smile_cart .cart_gauge_layer {
+    width: 100%;
+    height: 90px;
+    background: #FFD201;
+    border-radius: 2px;
+}
+
+.order_smile_cart .cart_gauge_layer .baseAdminBanner {
+    margin: 10px auto;
+    display: block;
+    border: none;
+    position: relative;
+    width: 320px;
+    height: 80px;
+    text-align: center
+}
+
+.order_smile_cart .cart_gauge_layer .baseAdminBanner img {
+    border: 0;
+    width: 320px;
+    height: 80px;
+    margin: 0 auto;
+    position: relative;
+    display: inline-block
+}
+
+.order_smile_cart .cart_gauge_layer .blank_cover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    z-index: 99
+}
+
+.order_smile_cart .cart_gauge_layer .blank_cover .g30000 span {
+    position: absolute;
+    top: 37px;
+    display: inline-block;
+    right: 41%;
+    height: 15px;
+    font-size: 10px;
+    color: rgba(0,0,0,0.3);
+    letter-spacing: -0.2px;
+    line-height: 14px;
+    border-right: 1px solid rgba(0,0,0,0.07);
+    padding-right: 10px;
+    margin-left: -9px;
+}
+
+.order_smile_cart .cart_gauge_layer .blank_cover .g50000 span {
+    position: absolute;
+    top: 37px;
+    display: inline-block;
+    right: 40px;
+    height: 15px;
+    font-size: 10px;
+    color: rgba(0,0,0,0.3);
+    letter-spacing: -0.2px;
+    line-height: 14px;
+}
+
+.order_smile_cart .cart_gauge_layer .gauge {
+    position: relative;
+    display: inline-block;
+    padding-top: 37px;
+    height: 15px;
+    /*width:100%;*/
+    box-sizing: border-box;
+    text-align: center;
+    font-size: 0;
+    margin: 0 34px;
+}
+
+.order_smile_cart .cart_gauge_layer .gauge .gauge_bar {
+    position: relative;
+    display: block;
+    background: #fff;
+    border-radius: 34px;
+    height: 15px;
+    width: 252px;
+    text-indent: -999em;
+    z-index: 50;
+    margin: 0 auto;
+}
+
+.order_smile_cart .cart_gauge_layer .gauge .gauge_bar .cover {
+    position: absolute;
+    display: inline-block;
+    top: 0;
+    left: 0;
+    width: 252px;
+    height: 15px;
+    background: transparent;
+    z-index: 60
+}
+
+.order_smile_cart .cart_gauge_layer .gauge .gauge_bar .cover:before {
+    position: absolute;
+    content: '';
+    display: inline-block;
+    top: 0;
+    left: 0;
+    width: 7px;
+    height: 15px;
+    z-index: 60;
+    background: url(//pics.gmarket.co.kr/pc/ko/smiledelivery/guage-bracket-left.png) no-repeat;
+    padding: 0;
+    margin: 0
+}
+
+.order_smile_cart .cart_gauge_layer .gauge .gauge_bar .cover:after {
+    position: absolute;
+    content: '';
+    display: inline-block;
+    top: 0;
+    right: 0;
+    width: 7px;
+    height: 15px;
+    z-index: 60;
+    background: url(//pics.gmarket.co.kr/pc/ko/smiledelivery/guage-bracket-right.png) no-repeat;
+    padding: 0;
+    margin: 0
+}
+
+.order_smile_cart .cart_gauge_layer .gauge .gauge_bar .graph {
+    position: absolute;
+    display: inline-block;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 15px;
+    background: #1b91ff;
+    z-index: 55;
+    padding: 0;
+    margin: 0
+}
+
+.order_smile_cart .cart_gauge_layer .gauge .gauge_desc {
+    position: relative;
+    display: inline-block;
+    margin: 2px auto 0;
+    color: #191919;
+    font-size: 14px;
+    line-height: 21px;
+    height: 21px;
+    vertical-align: middle
+}
+
+.order_smile_cart .cart_gauge_layer .gauge .gauge_desc span {
+    color: #191919;
+    font-weight: normal;
+}
+
+.order_smile_cart .cart_gauge_layer .gauge .gauge_desc strong,.order_smile_cart .cart_gauge_layer .gauge .gauge_desc strong span {
+    color: #0084ff;
+    font-weight: normal;
+}
+
+.order_smile_cart .cart_gauge_layer .gauge .gauge_balloon {
+    position: absolute;
+    display: inline-block;
+    margin: 0;
+    padding: 0 8px;
+    top: 12px;
+    left: 0;
+    margin-left: -13px;
+    height: 19px;
+    vertical-align: top;
+    box-sizing: border-box;
+    background: #fff;
+    font-size: 0;
+    border: 1px solid #2e8de5;
+    border-radius: 15px
+}
+
+.order_smile_cart .cart_gauge_layer .gauge .gauge_balloon .balloon_money {
+    position: relative;
+    display: block;
+    color: #2e8de5;
+    font-size: 14px;
+    height: 14px;
+    line-height: 14px;
+    text-align: center;
+    vertical-align: middle;
+    box-sizing: border-box;
+    position: relative;
+    top: 1px;
+    font-family: Tahoma !important;
+    *line-height: 1.5;
+    *margin-top: -2px
+}
+
+.order_smile_cart .cart_gauge_layer .gauge .money_tip {
+    font-size: 0 !important;
+    position: absolute;
+    display: inline-block;
+    width: 10px;
+    height: 5px;
+    bottom: -5px;
+    left: 50%;
+    margin-left: -5px;
+    background: url(//pics.gmarket.co.kr/pc/ko/pay/cart/sp_smiledelivery_baloon.png) center bottom no-repeat;
+}
+
+.order_smile_cart .cart_gauge_layer .i_arrow {
+    position: absolute;
+    width: 10px;
+    height: 5px;
+    display: block;
+    top: -5px;
+    right: 28px;
+    background-position: -75px -209px;
+    display: none;
+}
+
+.order_smile_cart .cart_gauge_layer .guest_member {
+    position: absolute;
+    display: inline-block;
+    width: 100%;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 50%;
+    margin-top: -7px;
+    text-align: center;
+    vertical-align: middle;
+    color: #191919;
+    font-weight: normal;
+    font-size: 14px
+}
+
+/*************************/
+/* SMILE DELIVERY BANNER AREA
+/**********************/
+.box__cart-banner {
+    margin-top: 16px;
+    padding: 21px 0 19px;
+    background-color: #eff4fa;
+    border-bottom: 1px solid #e5e5e5;
+    text-align: center
+}
+
+.box__cart-banner .text__banner-title {
+    font-size: 21px;
+    line-height: 22px;
+    color: #000;
+    font-weight: normal;
+}
+
+.box__cart-banner .text__description {
+    margin-top: 10px;
+    font-size: 13px;
+    line-height: 18px;
+    color: #777;
+    padding: 0 40px;
+}
+
+.box__cart-banner .text__description .text__row {
+    display: block
+}
+
+.box__cart-banner .link__more {
+    display: inline-block;
+    overflow: hidden;
+    margin-top: 14px;
+    padding: 6px 18px 9px;
+    height: 34px;
+    border: 1px solid #2e8de5;
+    border-radius: 25px;
+    line-height: 34px;
+    box-sizing: border-box;
+}
+
+.box__cart-banner .link__more .text__button {
+    position: relative;
+    font-size: 14px;
+    color: #2e8de5;
+    line-height: 35px;
+    vertical-align: top;
+    line-height: 18px;
+    display: inline-block;
+    vertical-align: top;
+    padding-right: 10px;
+}
+
+.box__cart-banner .link__more .text__button:after {
+    line-height: 999em;
+    vertical-align: top;
+    content: '';
+    display: block;
+    position: absolute;
+    top: 3px;
+    right: 0;
+    width: 7px;
+    height: 12px;
+    background: url(//pics.gmarket.co.kr/pc/single/kr/cart/arrow-smile-banner.png) center center no-repeat;
+    background-size: 7px auto
+}
+
+.os__android .box__cart-banner .link__more {
+    padding-top: 7px;
+}
+
+/*이미지 처리했을 때 -- 지울예정 */
+.ad_smiledelivery {
+    margin-top: 16px;
+}
+
+.cart--basket_body .box__ad-smiledelivery {
+    display: none;
+}
+
+#cart_order.fixed + .box__ad-smiledelivery {
+    position: fixed;
+    display: inline-block;
+    float: none;
+    margin-right: 0
+}
+
+#cart_order.bottom + .box__ad-smiledelivery {
+    position: absolute;
+    bottom: 116px;
+    top: auto !important;
+    float: none;
+}
+
+.box__ad-smiledelivery {
+    float: right;
+    width: 360px;
+    margin-top: 16px;
+    border-radius: 2px;
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.18);
+    background-color: #fef9e2;
+}
+
+.box__ad-smiledelivery .link__ad-smiledelivery {
+    position: relative;
+    display: block;
+    padding: 22px 0 23px 23px;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: -0.5px;
+    color: #000
+}
+
+.box__ad-smiledelivery .link__ad-smiledelivery .text {
+    display: block;
+}
+
+.box__ad-smiledelivery .link__ad-smiledelivery .text + .text {
+    font-weight: 500
+}
+
+.box__ad-smiledelivery .link__ad-smiledelivery .text .text__emphasis {
+    position: relative;
+    display: inline-block
+}
+
+.box__ad-smiledelivery .link__ad-smiledelivery .text .text__emphasis .box__line {
+    position: relative;
+    z-index: 5;
+}
+
+.box__ad-smiledelivery .link__ad-smiledelivery .text .text__emphasis::before {
+    content: '';
+    opacity: 0.8;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 11px;
+    background-color: #ffd201;
+    z-index: 1;
+}
+
+.box__ad-smiledelivery .link__ad-smiledelivery .text.sprite__cart--after:after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 24px;
+    width: 30px;
+    height: 17px;
+    margin-top: -9px;
+    background-position: -113px 0;
+}
+
+.type_smiledelivery .box__ad-smiledelivery--free {
+    display: block;
+    float: none;
+    margin-top: 0;
+    border-radius: 0;
+    box-shadow: none;
+    background-color: transparent
+}
+
+.type_smiledelivery .box__ad-smiledelivery--free .link__ad-smiledelivery {
+    padding: 0;
+    font-size: 14px;
+    line-height: 1.43;
+    color: #222;
+    white-space: nowrap
+}
+
+.type_smiledelivery .box__ad-smiledelivery--free .link__ad-smiledelivery br {
+    display: none
+}
+
+.type_smiledelivery .box__ad-smiledelivery--free .link__ad-smiledelivery .text {
+    display: inline;
+    white-space: nowrap
+}
+
+.type_smiledelivery .box__ad-smiledelivery--free .link__ad-smiledelivery .text::after {
+    width: 16px;
+    height: 16px;
+    background-position: -166px -51px;
+    margin-top: 2px;
+    vertical-align: top;
+    position: relative;
+    display: inline-block;
+    top: 0;
+    right: 0
+}
+
+.type_smiledelivery .box__ad-smiledelivery--free .link__ad-smiledelivery .text .text__emphasis {
+    font-weight: 700
+}
+
+.type_smiledelivery .box__ad-smiledelivery--free .link__ad-smiledelivery .text .text__emphasis::before {
+    content: none
+}
+
+.type_smiledelivery .box__ad-smiledelivery--free, .box__club-smiledelivery {
+    position: absolute;
+    right: 22px;
+    top: -36px;
+    min-width: 329px;
+    transform: translateY(-50%);
+    text-align: right
+}
+
+.box__club-smiledelivery .link__club {
+    color: #864300
+}
+
+.box__club-smiledelivery .text__cart-gauge {
+    font-size: 14px;
+    line-height: 1.43;
+    text-align: right;
+    color: #864300;
+    white-space: nowrap
+}
+
+.box__club-smiledelivery .text__cart-gauge::after {
+    width: 16px;
+    height: 16px;
+    background-position: -184px -51px;
+    margin-top: 2px;
+    vertical-align: top
+}
+
+.box__club-smiledelivery .text__cart-gauge .text__emphasis {
+    font-weight: 700
+}
+
+.box__club-smiledelivery .box__gauge {
+    position: relative;
+    margin-top: 8px;
+    height: 8px;
+    box-sizing: border-box;
+    text-align: center;
+    font-size: 0;
+    display: block
+}
+
+.box__club-smiledelivery .box__gauge .box__gauge-bar {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    width: 100%;
+    height: 8px;
+    text-indent: -999em;
+    z-index: 50;
+    margin: 0 auto
+}
+
+.box__club-smiledelivery .box__gauge .box__gauge-bar::after {
+    content: '';
+    display: block;
+    background-color: #bc9a6e;
+    opacity: 0.3;
+    border-radius: 6px;
+    width: 100%;
+    height: 100%
+}
+
+.box__club-smiledelivery .box__gauge .box__gauge-bar .image__value {
+    position: absolute;
+    display: inline-block;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 8px;
+    border-radius: 6px;
+    background-image: linear-gradient(to left, #864300 0, #a78353 100%);
+    z-index: 55;
+    padding: 0;
+    margin: 0
+}
+
+.type_smiledelivery .box__nudge-smiledelivery {
+    position: absolute;
+    right: 22px;
+    top: -31px;
+    min-width: 329px;
+    transform: translateY(-50%);
+    text-align: right
+}
+
+.type_smiledelivery .box__nudge-smiledelivery .link__nudge-smiledelivery {
+    padding: 0;
+    font-size: 14px;
+    line-height: 20px;
+    color: #222;
+    white-space: nowrap
+}
+
+.type_smiledelivery .box__nudge-smiledelivery .link__nudge-smiledelivery br {
+    display: none
+}
+
+.type_smiledelivery .box__nudge-smiledelivery .link__nudge-smiledelivery .text {
+    display: inline;
+    white-space: nowrap
+}
+
+.type_smiledelivery .box__nudge-smiledelivery .link__nudge-smiledelivery .text::after {
+    width: 16px;
+    height: 16px;
+    background-position: -166px -51px;
+    margin: 2px 0 0 2px;
+    vertical-align: top;
+    position: relative;
+    display: inline-block;
+    top: 0;
+    right: 0
+}
+
+.type_smiledelivery .box__nudge-smiledelivery .link__nudge-smiledelivery .text .text__emphasis {
+    position: relative;
+    font-weight: 700
+}
+
+.type_smiledelivery .box__nudge-smiledelivery .link__nudge-smiledelivery .text .text__emphasis::before {
+    content: '';
+    opacity: 0.8;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 8px;
+    background-color: #ffd201;
+    z-index: 1
+}
+
+.type_smiledelivery .box__nudge-smiledelivery .link__nudge-smiledelivery .text .text__emphasis .box__line {
+    position: relative;
+    z-index: 5
+}
+
+.type_smiledelivery .cart--basket_header.box__smiledelivery {
+    padding: 23px 0 22px
+}
+
+.type_smiledelivery .box__nudge-smiledelivery {
+    top: -36px
+}
+
+.type_smiledelivery .box__club-smiledelivery--gauge .link__nudge-smiledelivery {
+    display: block;
+    padding-right: 16px
+}
+
+.type_smiledelivery .box__club-smiledelivery--gauge.box__club-smiledelivery--gauge .link__nudge-smiledelivery {
+    margin-bottom: 8px
+}
+
+.type_smiledelivery .box__club-smiledelivery--gauge.box__nonclub .link__nudge-smiledelivery {
+    margin-bottom: 0
+}
+
+.type_smiledelivery .box__club-smiledelivery--gauge.box__nonclub .link__nudge-smiledelivery .text__emphasis {
+    padding-left: 10px
+}
+
+.type_smiledelivery .box__club-smiledelivery--gauge .text__cart-gauge {
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: #002041;
+    line-height: 20px
+}
+
+.type_smiledelivery .box__club-smiledelivery--gauge .text__cart-gauge:after {
+    top: 2px;
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    background-position: -338px 0px
+}
+
+.type_smiledelivery .box__club-smiledelivery--gauge .text__cart-gauge .image__club {
+    width: 34px;
+    height: 16px;
+    margin-top: -2px;
+    background-position: -280px -33px;
+    vertical-align: middle
+}
+
+.type_smiledelivery .box__club-smiledelivery--gauge .box__gauge {
+    display: block;
+    position: relative;
+    box-sizing: border-box;
+    width: 329px;
+    height: 8px;
+    font-size: 0;
+    text-align: center
+}
+
+.type_smiledelivery .box__club-smiledelivery--gauge .box__gauge .box__gauge-bar {
+    display: block;
+    overflow: hidden;
+    position: relative;
+    z-index: 50;
+    width: 100%;
+    height: 8px;
+    margin: 0 auto;
+    border-radius: 6px;
+    background-color: #dbe5ff;
+    text-indent: -999em
+}
+
+.type_smiledelivery .box__club-smiledelivery--gauge .box__gauge .box__gauge-bar .image__value {
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 8px;
+    border-radius: 6px;
+    background-image: linear-gradient(90deg, #497cff 0%, #0f233f 100%)
+}
+
+.type_smiledelivery .box__club-smiledelivery--gauge .link__nudge-smiledelivery .text .text__emphasis::before {
+    content: none
+}
+
+/*************************/
+/* POPUP
+/**********************/
+/* couponbox */
+#popup_couponbox .input_custom {
+    position: relative;
+    display: -moz-inline-box;
+    display: inline-block;
+    *display: inline;
+    zoom:1;margin-right: 5px;
+    vertical-align: middle;
+    line-height: 20px
+}
+
+#popup_couponbox .input_custom input {
+    border: 0;
+    background: none;
+    -webkit-appearance: none;
+    appearance: none
+}
+
+#popup_couponbox .input_custom input[type="radio"] {
+    position: absolute;
+    top: 0;
+    left: 0%;
+    z-index: 1;
+    width: 20px;
+    height: 20px;
+    margin-top: 0 !important
+}
+
+#popup_couponbox .input_custom input[type="radio"]+label {
+    padding-left: 27px;
+    WIDTH: AUTO;
+}
+
+#popup_couponbox .input_custom input[type="radio"]+label:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0%;
+    z-index: 1;
+    z-index: 5;
+    height: 20px;
+    width: 20px;
+    margin: 0;
+    background: url(//pics.gmarket.co.kr/pc/sprite/kr/cart/coupon.png) no-repeat 0 -110px
+}
+
+#popup_couponbox .input_custom input[type="radio"]:checked+label:after {
+    background-position: -30px -110px
+}
+
+#popup_couponbox .input_custom input[type="radio"]:disabled+label:after {
+    background-position: -60px -110px
+}
+
+#popup_couponbox .input_custom input[type="radio"]:focus+label:after {
+    background-color: transparent
+}
+
+#popup_couponbox .sp_coupon, #popup_couponbox .icon {
+    overflow: hidden;
+    display: block;
+    background: url(//pics.gmarket.co.kr/pc/sprite/kr/cart/coupon.png) no-repeat -999em -999em;
+    text-indent: -999em
+}
+
+#popup_couponbox .item__coupon {
+    position: relative;
+    overflow: hidden;
+    margin: -277px auto 0;
+    padding: 30px 40px 20px;
+    width: 670px;
+    height: auto;
+    background: #fff;
+}
+
+#popup_couponbox .item__coupon .button-close {
+    position: absolute;
+    right: 10px;
+    top: 5px;
+    width: 30px;
+    height: 30px;
+    background-position: -140px -100px
+}
+
+#popup_couponbox .item__coupon .icon_question {
+    display: inline-block;
+    margin-right: 5px;
+    width: 30px;
+    height: 30px;
+    background-position: -100px -100px;
+    vertical-align: middle
+}
+
+#popup_couponbox .item__coupon .coupon__header .coupon_title {
+    margin-bottom: 15px;
+    width: 86px;
+    height: 24px;
+    background-position: 0 0
+}
+
+#popup_couponbox .item__coupon .coupon__header .link_list {
+    position: absolute;
+    right: 40px;
+    top: 45px;
+    display: block;
+    padding-left: 24px;
+    background-position: -220px -110px;
+    color: #444;
+    font-size: 14px;
+    font-weight: bold
+}
+
+#popup_couponbox .item__coupon .coupon__body {
+    width: 670px;
+    border-top: 1px solid #c6c6c6;
+    border-bottom: 1px solid #000
+}
+
+#popup_couponbox .item__coupon .coupon__body .coupon-group {
+    padding: 17px 0;
+    border-top: 1px solid #f0f1f4
+}
+
+#popup_couponbox .item__coupon .coupon__body .coupon-group:first-child {
+    border-top: 0 none
+}
+
+#popup_couponbox .item__coupon .coupon__body .coupon-group.coupon-empty {
+    padding: 60px 0;
+    color: #888;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center
+}
+
+#popup_couponbox .item__coupon .coupon__body .coupon-group.coupon-empty>span {
+    display: block;
+    height: 30px;
+    line-height: 30px
+}
+
+#popup_couponbox .item__coupon .coupon__body .coupon-title {
+    float: left;
+    padding: 3px 0;
+    color: #333;
+    font-size: 14px;
+    font-weight: bold
+}
+
+#popup_couponbox .item__coupon .coupon__body .coupon-list {
+    margin-left: 100px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    position: relative
+}
+
+#popup_couponbox .item__coupon .coupon__body .coupon-list.block__height-type1 {
+    height: 133px
+}
+
+#popup_couponbox .item__coupon .coupon__body .coupon-list.block__height-type2 {
+    height: 80px
+}
+
+#popup_couponbox .item__coupon .coupon__body .coupon-list.block__height-type1 .coupon-empty, #popup_couponbox .item__coupon .coupon__body .coupon-list.block__height-type2 .coupon-empty {
+    padding: 26px 0
+}
+
+#popup_couponbox .item__coupon .coupon__body .coupon-unit {
+    position: relative;
+    padding: 3px 0
+}
+
+#popup_couponbox .item__coupon .coupon__body .coupon-unit.disabled .label, #popup_couponbox .item__coupon .coupon__body .coupon-unit.disabled .format-price {
+    color: #999
+}
+
+#popup_couponbox .item__coupon .coupon__body .coupon-unit.coupon-empty {
+    padding: 3px 0;
+    font-size: 12px;
+    font-weight: 400;
+    color: #777;
+    text-align: center
+}
+
+#popup_couponbox .item__coupon .coupon__body .coupon-unit .label {
+    overflow: hidden;
+    display: inline-block;
+    width: 328px;
+    color: #444;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    vertical-align: middle
+}
+
+#popup_couponbox .item__coupon .coupon__body .coupon-unit .format-price {
+    display: inline-block;
+    width: 70px;
+    color: #222;
+    font-size: 14px
+}
+
+#popup_couponbox .item__coupon .coupon__body .coupon-unit .format-price .text__value {
+    font-family: Tahoma
+}
+
+#popup_couponbox .item__coupon .coupon__body .coupon-unit .format-price .text__unit {
+    font-size: 12px
+}
+
+#popup_couponbox .item__coupon .coupon__body .coupon-unit .button-cancel, #popup_couponbox .item__coupon .coupon__body .coupon-unit .button-used {
+    position: absolute;
+    right: 57px;
+    top: 3px;
+    display: block;
+    margin: 0;
+    padding: 0;
+    height: 20px;
+    color: #1179e9;
+    font-size: 12px;
+    border-bottom: 1px solid #7cadf9;
+    text-decoration: none
+}
+
+#popup_couponbox .item__coupon .coupon__body .coupon-unit .button-used {
+    cursor: default
+}
+
+#popup_couponbox .item__coupon .coupon__body .coupon-unit .icon {
+    display: inline-block;
+    width: 13px;
+    height: 14px
+}
+
+#popup_couponbox .item__coupon .coupon__body .coupon-unit .icon_cancel {
+    background-position: -218px -68px
+}
+
+#popup_couponbox .item__coupon .coupon__body .coupon-unit .icon_used {
+    background-position: -218px -30px
+}
+
+#popup_couponbox .item__coupon .coupon__body .coupon-unit.disabled .button-used {
+    border-bottom-color: #bfbfbf;
+    color: #999
+}
+
+#popup_couponbox .item__coupon .coupon__body .coupon-unit.disabled .icon_used {
+    background-position: -220px -50px
+}
+
+#popup_couponbox .item__coupon .coupon__body .coupon-unit .text__expire-day {
+    position: absolute;
+    right: 10px;
+    top: 5px;
+    color: #999;
+    font-family: Tahoma
+}
+
+#popup_couponbox .item__coupon .coupon__footer {
+    width: 650px;
+    padding: 26px 10px 20px
+}
+
+#popup_couponbox .item__coupon .coupon__footer .coupon_total:after {
+    content: '';
+    clear: both;
+    display: block
+}
+
+#popup_couponbox .item__coupon .coupon__footer .coupon_total .price_origin, #popup_couponbox .item__coupon .coupon__footer .coupon_total .price_discount, #popup_couponbox .item__coupon .coupon__footer .coupon_total .price_total, #popup_couponbox .item__coupon .coupon__footer .coupon_total .math {
+    display: block;
+    float: left;
+    text-align: center
+}
+
+#popup_couponbox .item__coupon .coupon__footer .coupon_total .price_origin, #popup_couponbox .item__coupon .coupon__footer .price_total {
+    width: 201px
+}
+
+#popup_couponbox .item__coupon .coupon__footer .coupon_total .price_discount {
+    width: 203px
+}
+
+#popup_couponbox .item__coupon .coupon__footer .coupon_total .label {
+    display: block;
+    font-size: 20px;
+    font-weight: bold;
+    letter-spacing: -0.1em;
+    color: #222
+}
+
+#popup_couponbox .item__coupon .coupon__footer .coupon_total .format-price {
+    display: block;
+    font-family: tahoma;
+    font-size: 24px
+}
+
+#popup_couponbox .item__coupon .coupon__footer .coupon_total .text__unit {
+    font-size: 14px;
+    font-weight: bold
+}
+
+#popup_couponbox .item__coupon .coupon__footer .coupon_total .price_origin .format-price {
+    color: #999
+}
+
+#popup_couponbox .item__coupon .coupon__footer .coupon_total .price_discount .format-price {
+    color: #222
+}
+
+#popup_couponbox .item__coupon .coupon__footer .coupon_total .price_total .format-price {
+    color: #eb2c06
+}
+
+#popup_couponbox .item__coupon .coupon__footer .coupon_total .icon_minus, #popup_couponbox .item__coupon .coupon__footer .coupon_total .icon_result {
+    width: 22px;
+    height: 23px;
+    margin-top: 10px;
+    background-position: -8px -137px
+}
+
+#popup_couponbox .item__coupon .coupon__footer .coupon_total .icon_result {
+    background-position: -40px -137px
+}
+
+#popup_couponbox .item__coupon .coupon__footer .coupon_button {
+    text-align: center;
+    padding-top: 26px
+}
+
+#popup_couponbox .item__coupon .coupon__footer .coupon_button .button-cancel {
+    display: none
+}
+
+#popup_couponbox .item__coupon .coupon__footer .coupon_button .button-submit {
+    overflow: hidden;
+    display: block;
+    margin: 0 auto;
+    width: 199px;
+    height: 42px;
+    background: url(//pics.gmarket.co.kr/pc/sprite/kr/cart/coupon.png) no-repeat 0 -40px;
+    text-indent: -999em
+}
+
+#popup_couponbox .item__coupon .button_able_download {
+    display: inline-block;
+    padding-left: 17px;
+    background: url(//pics.gmarket.co.kr/pc/sprite/kr/cart/coupon.png) no-repeat -220px -85px;
+    color: #222;
+    font-weight: bold;
+    text-decoration: none
+}
+
+#popup_couponbox .item__coupon .button_able_download .ea {
+    display: inline-block;
+    padding-right: 7px;
+    background: url(//pics.gmarket.co.kr/pc/sprite/kr/cart/coupon.png) no-repeat 100% 6px;
+    color: #1179e9
+}
+
+#popup_couponbox .item__coupon .button_able_download.active .ea {
+    background-position: 100% -14px
+}
+
+#popup_couponbox .item__coupon .button_able_download .ea>span {
+    display: inline-block;
+    padding: 1px 0;
+    border-bottom: 1px solid #7cadf9;
+    font-weight: normal
+}
+
+#popup_couponbox .item__coupon .button_able_download .ea>.deco {
+    font-family: Tahoma;
+    font-size: 14px;
+    font-weight: bold
+}
+
+#popup_couponbox .item__coupon .button_able_download.active+.able_download {
+    display: block
+}
+
+#popup_couponbox .item__coupon .able_download {
+    display: none;
+    width: 670px
+}
+
+#popup_couponbox .item__coupon .able_download.active {
+    display: block
+}
+
+#popup_couponbox .item__coupon .able_download_list {
+    margin-top: 20px
+}
+
+#popup_couponbox .item__coupon .able_download_list li {
+    position: relative;
+    margin-top: -1px;
+    padding: 10px 20px 9px;
+    border: 1px solid #edeff5
+}
+
+#popup_couponbox .item__coupon .able_download_list .label {
+    display: block;
+    width: 330px;
+    color: #888
+}
+
+#popup_couponbox .item__coupon .able_download_list .label>strong {
+    display: block;
+    margin-bottom: 4px;
+    color: #444
+}
+
+#popup_couponbox .item__coupon .able_download_list .label>span {
+    display: block;
+    padding-left: 35px;
+    text-indent: -35px;
+    line-height: 15px
+}
+
+#popup_couponbox .item__coupon .able_download_list .label .bar {
+    color: #c9cbd3;
+    font-size: 11px
+}
+
+#popup_couponbox .item__coupon .able_download_list .benefit {
+    position: absolute;
+    right: 240px;
+    top: 50%;
+    display: block;
+    margin-top: -9px;
+    height: 30px;
+    color: #1179e9
+}
+
+#popup_couponbox .item__coupon .able_download_list a.button_download {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    display: block;
+    margin-top: -15px;
+    width: 104px;
+    height: 30px;
+    border: 1px solid #e6e7ed;
+    border-bottom-color: #bebfc6;
+    color: #1179EA;
+    font-weight: bold;
+    line-height: 30px;
+    text-align: center;
+    text-decoration: none
+}
+
+#popup_couponbox .item__coupon .paginate {
+    position: relative;
+    width: 100%;
+    padding-top: 15px;
+    text-align: center
+}
+
+#popup_couponbox .item__coupon .paginate>span {
+    display: inline-block;
+    *zoom:1;vertical-align: top
+}
+
+#popup_couponbox .item__coupon .paginate>span strong, #popup_couponbox .item__coupon .paginate>span a {
+    display: inline-block;
+    width: 34px;
+    height: 33px;
+    border: 1px solid #e6e7ed;
+    color: #777;
+    font-family: tahoma;
+    font-size: 14px;
+    line-height: 33px
+}
+
+#popup_couponbox .item__coupon .paginate>span strong {
+    border-bottom-color: #bebfc6;
+    color: #666
+}
+
+#popup_couponbox .item__coupon .paginate>span a:hover {
+    color: #1179EA;
+    text-decoration: none
+}
+
+#popup_couponbox .price_origin {
+    position: relative;
+}
+
+#popup_couponbox .price_origin .box__shop-nudge {
+    position: absolute;
+    left: 50%;
+    top: -36px;
+    transform: translate(-50%, 0);
+}
+
+#popup_couponbox .price_origin .box__shop-nudge::after {
+    content: '';
+    display: block;
+    position: relative;
+    width: 0;
+    top: -5px;
+    left: 50%;
+    margin-left: -4px;
+    -webkit-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+    border-bottom: 4px solid #00C275;
+    border-top: 4px solid transparent;
+    border-left: 4px solid #00C275;
+    border-right: 4px solid transparent;
+}
+
+#popup_couponbox .price_origin .box__shop-nudge .text__sale {
+    font-family: 'Noto Sans Korean';
+    position: relative;
+    display: block;
+    padding: 0 8px;
+    height: 24px;
+    line-height: 23px;
+    font-size: 12px;
+    color: #fff;
+    font-weight: bold;
+    letter-spacing: 0;
+    white-space: nowrap;
+    background-image: linear-gradient(to right, #00c1b6 21%, #00c400 100%);
+    border-radius: 12px;
+    z-index: 2;
+}
+
+/* 견적서 - 팝업 */
+#cartEstimate {
+    background: #fff;
+    width: 800px;
+    height: 690px;
+    border: 0 solid #d6d6d6;
+    overflow-y: auto;
+    display: inline-block;
+    margin-top: -50%;
+    margin-left: 50%;
+    transform: translate3d(-50%,50%,0);
+    overflow-x: hidden;
+}
+
+.pop-warp {
+    width: 720px;
+    padding: 30px 40px;
+}
+
+.pop-warp div.header {
+    height: 45px;
+    background: url('//pics.gmarket.co.kr/pc/ko/pay/bg_es_top.png') repeat-x 0 100%;
+    text-align: center;
+}
+
+.pop-warp div.header h1 {
+    padding-bottom: 19px
+}
+
+.pop-warp div.content {
+    padding-top: 24px;
+}
+
+.pop-warp div.content div.con-01 {
+    overflow: hidden;
+    width: 100%;
+    padding-bottom: 30px;
+    table-layout: fixed
+}
+
+.pop-warp div.content div.con-01 table.left {
+    float: left;
+    width: 292px;
+    border: 1px solid #e0e0e0;
+    height: 140px;
+}
+
+.pop-warp div.content div.con-01 table.left th {
+    height: auto;
+    padding: 11px 14px;
+    color: #222;
+    font-size: 13px;
+    font-weight: normal;
+    line-height: 25px;
+    text-align: left;
+}
+
+.pop-warp div.content div.con-01 table.left th.pd, .pop-warp div.content div.con-01 table.left td.pd {
+    /* padding:0 0 10px 0; */
+}
+
+.pop-warp div.content div.con-01 table.left td {
+    height: 20px;
+    padding: 16px;
+    color: #222;
+    font-size: 13px;
+    text-align: left;
+    line-height: 20px;
+    padding-top: 11px;
+}
+
+.pop-warp div.content div.con-01 table.left td strong {
+    color: #333;
+    letter-spacing: -1px
+}
+
+.pop-warp div.content div.con-01 table.left td span.font-tahoma {
+    font-family: 'Tahoma'
+}
+
+.pop-warp div.content div.con-01 table.right {
+    float: right;
+    width: 408px;
+    border-top: solid 2px #222;
+    table-layout: fixed;
+    border-bottom: 2px solid #222;
+}
+
+.pop-warp div.content div.con-01 table.right th {
+    height: auto;
+    background: #fff;
+    border-bottom: solid 1px #e0e0e0;
+    color: #222;
+    font-size: 13px;
+    font-weight: normal;
+    text-align: center;
+    line-height: 22px;
+    letter-spacing: -1px;
+    padding: 11px 0px;
+    width: auto;
+    text-align: left;
+}
+
+.pop-warp div.content div.con-01 table.right th.align-c {
+    border-left: 1px solid #e0e0e0;
+    padding-left: 10px;
+}
+
+.pop-warp div.content div.con-01 table.right td {
+    height: 20px;
+    padding: 12px 10px;
+    border-bottom: solid 1px #ddd;
+    color: #222;
+    font-size: 13px;
+    line-height: 22px;
+    letter-spacing: -1px;
+    text-align: left;
+    border-left: solid 1px #ddd;
+    font-family: notosans;
+}
+
+.pop-warp div.content div.con-01 table.right td.align-c {
+    text-align: center
+}
+
+.pop-warp div.content div.con-01 table.right td span.font-tahoma {
+    font-family: 'Tahoma';
+    letter-spacing: 0
+}
+
+.pop-warp div.content div.con-02 table.list {
+    width: 100%;
+    table-layout: fixed
+}
+
+.pop-warp div.content div.con-02 table.list thead th {
+    height: 31px;
+    background: #f7f7f7;
+    border-top: solid 2px #000;
+    border-bottom: solid 1px #000;
+    border-right: solid 1px #e0e0e0;
+    color: #000;
+    font-weight: normal;
+    font-size: 13px;
+    line-height: 20px;
+    padding: 13px 0;
+    letter-spacing: -0.4px;
+}
+
+.pop-warp div.content div.con-02 table.list thead th.first {
+    border-left: solid 1px #e0e0e0;
+}
+
+.pop-warp div.content div.con-02 table.list tbody td {
+    padding: 13px 10px;
+    background: #fff;
+    border-top: solid 1px #000;
+    border-right: solid 1px #ddd;
+    color: #222;
+    font-weight: normal;
+    font-size: 13px;
+    text-align: center;
+    letter-spacing: -1px;
+}
+
+.pop-warp div.content div.con-02 table.list tbody td.first {
+    border-left: solid 1px #ddd
+}
+
+.pop-warp div.content div.con-02 table.list tbody td.rowline {
+    padding: 9px 10px 7px 10px;
+    border-top: solid 1px #ddd;
+    font-size: 11px
+}
+
+.pop-warp div.content div.con-02 table.list tbody td.align-l {
+    text-align: left
+}
+
+.pop-warp div.content div.con-02 table.list tbody td span.font-tahoma1 {
+    font-family: 'Tahoma';
+    letter-spacing: 0
+}
+
+.pop-warp div.content div.con-02 table.list tbody td span.font-tahoma2 {
+    font-weight: normal;
+    font-family: 'Tahoma';
+    letter-spacing: 0;
+    color: #222;
+}
+
+.pop-warp div.content div.con-02 table.list tbody td span.font-tahoma3 {
+    color: #222;
+    font-weight: normal;
+    font-family: 'Tahoma';
+    letter-spacing: 0;
+}
+
+.pop-warp div.content div.con-02 table.list tbody td span.font-tahoma4 {
+    color: #222;
+    font-weight: bold;
+    font-family: 'Tahoma';
+    letter-spacing: 0;
+}
+
+.pop-warp div.content div.con-02 table.list tfoot td {
+    height: 50px;
+    background: #fff;
+    border-top: solid 1px #000;
+    border-right: solid 1px #e0e0e0;
+    border-bottom: solid 2px #000;
+    color: #222;
+    font-weight: bold;
+    font-size: 13px;
+    line-height: 20px;
+    text-align: center;
+    letter-spacing: -1px;
+}
+
+.pop-warp div.content div.con-02 table.list tfoot td.first {
+    border-left: solid 1px #dbdfea
+}
+
+.pop-warp div.content div.con-02 table.list tfoot td span.font-tahoma1 {
+    font-family: 'Tahoma';
+    letter-spacing: 0
+}
+
+.pop-warp div.content div.con-02 table.list tfoot td span.font-tahoma2 {
+    font-weight: normal;
+    font-family: 'Tahoma';
+    letter-spacing: 0;
+}
+
+.pop-warp div.content div.con-02 table.list tfoot td span.font-tahoma3 {
+    color: #222;
+    font-family: 'Tahoma';
+    letter-spacing: 0;
+    font-weight: normal;
+}
+
+.pop-warp div.content div.con-02 table.list tfoot td span.font-tahoma4 {
+    color: #222;
+    font-weight: bold;
+    font-family: 'Tahoma';
+    letter-spacing: 0;
+}
+
+.pop-warp div.content div.con-02 p.txt-info {
+    padding: 35px 0;
+    color: #999;
+    font-size: 12px;
+    letter-spacing: -1px;
+    line-height: 20px;
+    width: 400px;
+    display: inline-block;
+    float: left;
+}
+
+.pop-warp div.content div.con-02 table.sum {
+    min-width: 210px;
+    display: inline-block;
+    float: right;
+    margin-top: 20px;
+}
+
+.pop-warp div.content div.con-02 table.sum th {
+    height: 22px;
+    color: #333;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 22px;
+    text-align: left;
+    padding: 20px 0;
+    min-width: 80px;
+}
+
+.pop-warp div.content div.con-02 table tbody {
+    width: 100%
+}
+
+.pop-warp div.content div.con-02 table.sum tr {
+    border-bottom: 1px solid #000;
+}
+
+.pop-warp div.content div.con-02 table.sum td {
+    height: 22px;
+    color: #333;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 22px;
+    text-align: right;
+    padding-left: 51px;
+}
+
+.pop-warp div.content div.con-02 table.sum td span.font-tahoma1 {
+    font-family: 'Tahoma';
+    letter-spacing: 0;
+}
+
+.pop-warp div.content div.con-02 table.sum td span.font-tahoma4 {
+    color: #222;
+    font-weight: bold;
+    font-family: 'Tahoma';
+    letter-spacing: 0;
+    font-size: 14px;
+}
+
+.pop-warp div.content div.btn {
+    padding: 40px 0 50px 0;
+    text-align: center;
+    display: block;
+    clear: both;
+    float: none;
+}
+
+.pop-warp.btn_ly_ty4 {
+    position: relative
+}
+
+.pop-warp.btn_ly_ty4 .ly_close {
+    position: absolute;
+    top: 20px;
+    right: 29px;
+    width: 20px;
+    height: 20px;
+    padding: 12px;
+    background-position: 13px -438px;
+    line-height: 10em;
+    overflow: hidden;
+}
+
+/*SF  EXPRESS POPUP */
+#sf_express {
+    width: 500px;
+    margin-left: -216px;
+    position: absolute;
+    left: 0%;
+    z-index: 222;
+    background: #fff;
+    border: 3px solid #1179ea;
+    margin-top: 0;
+}
+
+#sf_express .pop_cont {
+    max-height: 180px;
+}
+
+#sf_express .pop_cont .cont {
+    margin-bottom: 10px;
+}
+
+#sf_express .pop_cont .cont .tit_bl {
+    display: block;
+    padding: 0 0 5px 15px;
+    background: url(//pics.gmarket.co.kr/pc/ko/net/pay/en/fr_img/sprite_layer_icon.gif) no-repeat 0 -120px;
+    color: #222;
+    font-weight: bold;
+    letter-spacing: 0px;
+    font-size: 12px;
+    line-height: 1;
+    background-position: 0 -123px;
+}
+
+#sf_express .pop_cont .cont ul.not_delivery_list {
+    overflow-y: scroll;
+    height: 48px;
+    padding: 8px;
+    background: #f7f7f7;
+    border: 1px solid #dedede;
+}
+
+#sf_express .txt_box {
+    margin-bottom: 10px;
+    padding: 10px;
+    background: #f7f7f7;
+    border: 1px solid #dedede;
+    line-height: 1.4;
+}
+
+#sf_express .pop_cont .cont strong {
+    font-size: 12px;
+    color: #676767;
+}
+
+#sf_express .txt_box .txt_blue2 {
+    color: #006BDF !important;
+}
+
+/*CJ  EXPRESS POPUP */
+#cj_express {
+    display: none;
+    position: absolute;
+    left: 50%;
+    z-index: 222;
+    background: #fff;
+    border: 3px solid #1179ea;
+    width: 444px;
+    margin-left: -310px;
+    margin-top: 0;
+}
+
+#cj_express .pop_cont {
+    max-height: 180px;
+}
+
+#cj_express .pop_cont .cont {
+    margin-bottom: 10px;
+}
+
+#cj_express .pop_cont .cont .tit_bl {
+    display: block;
+    padding: 0 0 5px 15px;
+    background: url(//pics.gmarket.co.kr/pc/ko/net/pay/en/fr_img/sprite_layer_icon.gif) no-repeat 0 -120px;
+    color: #222;
+    font-weight: bold;
+    letter-spacing: 0px;
+    font-size: 12px;
+    line-height: 1;
+    background-position: 0 -123px;
+}
+
+#cj_express .pop_cont .cont ul.not_delivery_list {
+    overflow-y: scroll;
+    height: 48px;
+    padding: 8px;
+    background: #f7f7f7;
+    border: 1px solid #dedede;
+}
+
+#cj_express .txt_box {
+    margin-bottom: 10px;
+    padding: 10px;
+    background: #f7f7f7;
+    border: 1px solid #dedede;
+    line-height: 1.4;
+}
+
+#cj_express .pop_cont .cont strong {
+    font-size: 12px;
+    color: #676767;
+}
+
+#cj_express .txt_box .txt_blue2 {
+    color: #006BDF !important;
+}
+
+/* authenticate popup */
+.box__layer-authenticate {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    z-index: 310;
+    padding: 64px 16px 21px;
+    width: 400px;
+    border-radius: 8px;
+    background-color: #fff;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    text-align: center
+}
+
+.box__layer-authenticate .text__message {
+    font-family: 'Gmarket Sans';
+    font-size: 20px;
+    line-height: 28px;
+    color: #000
+}
+
+.box__layer-authenticate .box__button {
+    margin-top: 32px;
+    font-size: 0
+}
+
+.box__layer-authenticate .button__confirm {
+    width: 100%;
+    height: 56px;
+    border-radius: 8px;
+    background: #00c400;
+    font-family: 'Gmarket Sans';
+    font-size: 18px;
+    line-height: 56px;
+    color: #fff
+}
+
+.box__layer-authenticate .button__cancel {
+    margin-top: 12px;
+    width: 100%;
+    height: 56px;
+    border-radius: 8px;
+    background: #fff;
+    font-family: 'Gmarket Sans';
+    font-size: 18px;
+    line-height: 58px;
+    color: #222;
+    border: 1px solid #bdbdbd
+}
+
+.box__layer-authenticate .button__close-layer {
+    position: absolute;
+    right: 16px;
+    top: 16px;
+    padding: 5px
+}
+
+.box__layer-authenticate .button__close-layer .sprite__cart {
+    width: 22px;
+    height: 22px;
+    background-position: -145px 0
+}
+
+/*************************/
+/* oneclick-smileclub
+/**********************/
+.box__layer-oneclick-smileclub {
+    display: none
+}
+
+.box__layer-oneclick-smileclub {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    z-index: 310;
+    border-radius: 8px;
+    background-color: #fff;
+    -webkit-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+    padding-top: 34px;
+    width: 310px;
+    box-sizing: border-box
+}
+
+.box__layer-oneclick-smileclub--active {
+    display: block
+}
+
+.box__layer-oneclick-smileclub--active .box__layer-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,.4);
+    z-index: 310;
+    cursor: pointer
+}
+
+.box__layer-oneclick-smileclub .text__smileclub {
+    margin: 0 auto;
+    height: 46px;
+    font-size: 18px;
+    font-weight: 700;
+    color: #222;
+    line-height: 24px;
+    text-align: center
+}
+
+.box__layer-oneclick-smileclub .text__smileclub .text__emphasis, .box__layer-oneclick-smileclub .box__notice .text__emphasis {
+    color: #966e46;
+    font-style: normal
+}
+
+.box__layer-oneclick-smileclub .text__smileclub1 {
+    height: 20px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px
+}
+
+.box__layer-oneclick-smileclub .text__smileclub2 {
+    height: 28px;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 28px
+}
+
+.box__layer-oneclick-smileclub .box__scene {
+    position: relative;
+    z-index: 1
+}
+
+.box__layer-oneclick-smileclub .box__scene--hidden {
+    position: absolute;
+    left: -999em;
+    top: -999em
+}
+
+.box__layer-oneclick-smileclub .button__smileclub-start, .box__layer-oneclick-smileclub .button__smileclub-loading, .box__layer-oneclick-smileclub .button__smileclub-confirm {
+    display: block;
+    margin: 14px auto 22px;
+    width: 200px;
+    height: 44px;
+    line-height: 40px;
+    border-radius: 8px;
+    background: #a78353;
+    color: #fff;
+    font-family: 'Gmarket Sans';
+    font-weight: 400
+}
+
+.box__layer-oneclick-smileclub--loading .button__smileclub-loading:before {
+    content: '';
+    display: block
+}
+
+.box__layer-oneclick-smileclub .button__smileclub-start {
+    font-size: 16px
+}
+
+.box__layer-oneclick-smileclub .button__smileclub-loading .text__button {
+    display: block;
+    margin: 0 auto;
+    width: 171px;
+    height: 9px;
+    background: url(//pics.gmarket.co.kr/pc/single/kr/cart/image__smileclub-loading.gif) no-repeat 0 0;
+    background-size: 100% auto;
+    font-size: 0;
+    line-height: 999em
+}
+
+.box__layer-oneclick-smileclub .button__smileclub-confirm .text__button {
+    display: block;
+    margin: 0 auto;
+    width: 45px;
+    height: 13px;
+    background: url(//pics.gmarket.co.kr/pc/single/kr/cart/text__confirm.png) no-repeat 0 0;
+    background-size: 45px auto;
+    font-size: 0;
+    line-height: 999em
+}
+
+.box__layer-oneclick-smileclub .button__closed {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    z-index: 2;
+    background-color: transparent
+}
+
+.box__layer-oneclick-smileclub .button__closed:before {
+    content: '';
+    display: block;
+    width: 24px;
+    height: 24px;
+    background: url(//pics.gmarket.co.kr/pc/single/kr/cart/button__colsed.png) no-repeat 0 0;
+    background-size: 24px 24px
+}
+
+.box__layer-oneclick-smileclub .box__notice {
+    box-sizing: border-box;
+    padding: 14px 32px;
+    background: #f6f6f6;
+    border-radius: 0 0 8px 8px;
+    text-align: center
+}
+
+.box__layer-oneclick-smileclub .list__notice {
+    display: inline-block
+}
+
+.box__layer-oneclick-smileclub .list-item__notice {
+    position: relative;
+    margin-top: 2px;
+    padding-left: 7px;
+    font-size: 10px;
+    line-height: 14px;
+    letter-spacing: -1px;
+    color: #9e9e9e;
+    text-align: left;
+    font-weight: 400
+}
+
+.box__layer-oneclick-smileclub .list-item__notice:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 5px;
+    width: 3px;
+    height: 3px;
+    background: #ccc
+}
+
+.box__layer-oneclick-smileclub .list-item__notice .link__layer-terms {
+    font-size: 10px;
+    line-height: 14px;
+    letter-spacing: -1px;
+    color: #9e9e9e;
+    text-decoration: underline
+}
+
+.box__layer-oneclick-smileclub .box__confetti {
+    position: absolute;
+    left: -999em
+}
+
+.box__layer-oneclick-smileclub .box__scene--success .text__smileclub {
+    -webkit-transition: all .3s .3s ease-in;
+    transition: all .3s .3s ease-in;
+    transform: translate3D(0,2px,0);
+    opacity: 0;
+    transform: rotate(.001deg)
+}
+
+.box__layer-oneclick-smileclub .box__scene--success .button__smileclub-confirm {
+    margin-top: -6px;
+    -webkit-transition: all .4s ease-in;
+    transition: all .4s ease-in;
+    transform: rotate(.001deg)
+}
+
+.box__layer-oneclick-smileclub .box__scene--success .button__smileclub-confirm {
+    margin-top: 11px
+}
+
+.box__layer-oneclick-smileclub--success .box__scene--success .text__smileclub {
+    opacity: 1;
+    transform: translate3D(0,0,0)
+}
+
+.box__layer-oneclick-smileclub--success .button__closed {
+    display: none
+}
+
+.box__layer-oneclick-smileclub--success .box__confetti {
+    overflow: hidden;
+    left: -85px;
+    right: -85px;
+    top: -135px;
+    width: 480px;
+    height: 280px
+}
+
+.box__layer-oneclick-smileclub--success .box__scene--success .button__smileclub-confirm {
+    margin-top: 20px;
+    width: 80px;
+    height: 34px;
+    border-radius: 6px;
+    line-height: 0
+}
+
+.box__oneclick-smileclub-terms {
+    display: none;
+    position: absolute;
+    left: 50%;
+    top: -320px;
+    z-index: 311;
+    margin-left: -205px;
+    background: #fff
+}
+
+.box__oneclick-smileclub-terms--active {
+    display: block
+}
+
+.box__oneclick-smileclub-terms .box__terms-header {
+    height: 52px;
+    border-bottom: 1px solid #e6e6e6;
+    box-sizing: border-box
+}
+
+.box__oneclick-smileclub-terms .box__terms-header .button__close {
+    position: absolute;
+    right: 3px;
+    top: 5px;
+    padding: 10px 13px 9px 13px
+}
+
+.box__oneclick-smileclub-terms .box__terms-header .button__close .icon {
+    width: 14px;
+    height: 14px;
+    background-position: -102px -60px
+}
+
+.box__oneclick-smileclub-terms .box__terms-header .text__title {
+    padding: 12px 0;
+    font-size: 19px;
+    font-weight: bold;
+    letter-spacing: -0.48px;
+    text-align: center;
+    color: #000
+}
+
+.box__oneclick-smileclub-terms .iframe__oneclick-smileclub-terms {
+    width: 410px;
+    height: 560px;
+    vertical-align: bottom
+}
+
+#layer_onclick-smileclub .nv-layer-bg {
+    display: block !important
+}
+
+/* 스마일클럽 - 퀵패스 가입 레이어 */
+.box__layer-smileclub {
+    display: none
+}
+
+.box__layer-smileclub.box__layer-smileclub--active {
+    display: block
+}
+
+.box__layer_oneclick-smileclub-dawn .box__layer-oneclick-smileclub--active, .box__layer_smileclub-dawn .box__layer-smileclub--active {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 99999;
+    width: 100%;
+    height: 100%
+}
+
+.box__layer-smileclub:after {
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 300;
+    background: rgba(0,0,0,.5);
+    content: ''
+}
+
+.box__layer-smileclub .box__content {
+    overflow: hidden;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    z-index: 301;
+    width: 360px;
+    height: 270px;
+    padding: 0 16px;
+    margin: -135px 0 0 -180px;
+    border-radius: 8px;
+    background: #fff;
+    box-sizing: border-box
+}
+
+.box__layer-smileclub .box__content:before {
+    display: block;
+    height: 90px;
+    margin: 0 -16px;
+    background: url(//pics.gmarket.co.kr/pc/single/kr/cart/image__bg-layersmileclub.png) no-repeat 50% 0;
+    background-size: auto 90px;
+    content: ''
+}
+
+.box__layer-smileclub .text__smileclub {
+    padding: 16px 0 0;
+    font-size: 16px;
+    font-weight: normal;
+    color: #222;
+    line-height: 22px;
+    text-align: center
+}
+
+.box__layer-smileclub .text__smileclub em {
+    display: block;
+    margin-bottom: 3px;
+    font-size: 18px;
+    font-weight: bold;
+    font-style: normal;
+    line-height: 24px;
+    color: #222
+}
+
+.box__layer-smileclub .text__smileclub .text__emphasis {
+    color: #966e46
+}
+
+.box__layer-smileclub .text__smileclub .text__line {
+    position: relative;
+    z-index: 0;
+    display: inline-block
+}
+
+.box__layer-smileclub .text__smileclub .text__line::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 4px;
+    z-index: -1;
+    width: 100%;
+    height: 5px;
+    background-color: #ffd201
+}
+
+.box__layer-smileclub .button__join {
+    display: block;
+    width: 100%;
+    height: 48px;
+    padding: 0;
+    margin: 20px auto 0;
+    border-radius: 8px;
+    background: #a78353;
+    font-size: 16px;
+    font-weight: normal;
+    line-height: 48px;
+    color: #fff
+}
+
+.box__layer-smileclub .button__closed {
+    position: absolute;
+    top: 0;
+    right: 0;
+    /* height:38px; */
+    height: auto;
+    padding: 15px;
+    background: transparent
+}
+
+.box__layer-smileclub .button__closed .sprite__oneclick {
+    overflow: hidden;
+    display: block;
+    width: 18px;
+    height: 18px;
+    line-height: 999px;
+    background: url(//pics.gmarket.co.kr/pc/ko/pay/cart/sp_cart.png) no-repeat -160px -25px
+}
+
+/* 스마일배송 인지 강화 */
+.unit--item .unit--item_desc .text__delivery-make {
+    display: block
+}
+
+.unit--item .unit--item_desc .section.item_title a + .text__delivery-make {
+    margin: 7px 0 10px
+}
+
+.unit--item .unit--item_desc .text__delivery-make .text__object {
+    font-size: 15px;
+    color: #2e8de5;
+    letter-spacing: -0.5px
+}
+
+.unit--item .unit--item_desc .text__delivery-make .text__condition {
+    padding-left: 4px;
+    font-size: 14px;
+    color: #777;
+    letter-spacing: -0.5px
+}
+
+#layer_culture-tax.nv-layer .nv-layer-bg {
+    opacity: 0.7;
+    filter: alpha(opacity=70)
+}
+
+.box__layer-culture-tax {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    z-index: 310;
+    padding: 69px 24px 26px;
+    width: 410px;
+    background: #fff;
+    box-sizing: border-box;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    text-align: center;
+    border-radius: 8px;
+}
+
+.box__layer-culture-tax .text__info {
+    font-family: 'Gmarket Sans',serif;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 24px;
+    color: #222;
+    text-align: center
+}
+
+.box__layer-culture-tax .text__info .text--primary {
+    color: #067dfd
+}
+
+.box__layer-culture-tax .box__button {
+    padding-top: 41px;
+    font-size: 0;
+    text-align: center
+}
+
+.box__layer-culture-tax .box__button .button {
+    font-family: 'Gmarket Sans',serif;
+    font-weight: 500;
+    display: block;
+    width: 100%;
+    border-radius: 8px;
+    border: solid 1px #bdbdbd;
+    background-color: #fff;
+    height: 56px;
+    font-size: 16px;
+    letter-spacing: -0.57px;
+    line-height: 56px;
+    color: #000;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.box__layer-culture-tax .box__button .button + .button {
+    margin-top: 12px
+}
+
+.box__layer-culture-tax .box__button .button.button__cancel {
+}
+
+.box__layer-culture-tax .box__button .button.button__confirm {
+    color: #fff;
+    border: solid 1px #0028ac;
+    background-color: #0028ac;
+}
+
+.box__layer-culture-tax .button__close {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 46px;
+    height: 46px
+}
+
+.box__layer-culture-tax .button__close:after {
+    content: '';
+    display: inline-block;
+    width: 22px;
+    height: 20px;
+    margin: 6px;
+    background-position: -145px 0
+}
+
+#popup_oversea-delivery.nv-layer .nv-layer-bg {
+    opacity: 0.7;
+    filter: alpha(opacity=70)
+}
+
+.box__layer-oversea-delivery {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    z-index: 310;
+    padding: 46px 24px 24px;
+    width: 410px;
+    background: #fff;
+    box-sizing: border-box;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    text-align: center;
+    border-radius: 16px;
+}
+
+.box__layer-oversea-delivery .text__info {
+    font-family: 'Gmarket Sans',serif;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 28px;
+    color: #222;
+    text-align: center
+}
+
+.box__layer-oversea-delivery .text__info .text--primary {
+    color: #067dfd
+}
+
+.box__layer-oversea-delivery .text__info-desc {
+    padding-top: 8px;
+    font-size: 16px;
+    line-height: 22px;
+    color: #222;
+}
+
+.box__layer-oversea-delivery .box__button {
+    padding-top: 24px;
+    font-size: 0;
+    text-align: center
+}
+
+.box__layer-oversea-delivery .box__button .button {
+    font-family: 'Gmarket Sans',serif;
+    font-weight: 500;
+    display: block;
+    width: 100%;
+    border-radius: 8px;
+    border: solid 1px #bdbdbd;
+    background-color: #fff;
+    height: 56px;
+    font-size: 16px;
+    letter-spacing: -0.57px;
+    line-height: 56px;
+    color: #000;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.box__layer-oversea-delivery .box__button .button + .button {
+    margin-top: 12px
+}
+
+.box__layer-oversea-delivery .box__button .button.button__cancel {
+}
+
+.box__layer-oversea-delivery .box__button .button.button__confirm {
+    color: #fff;
+    border: solid 1px #0028ac;
+    background-color: #0028ac;
+}
+
+.box__layer-oversea-delivery .button__close {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 46px;
+    height: 46px
+}
+
+.box__layer-oversea-delivery .button__close:after {
+    content: '';
+    display: inline-block;
+    width: 22px;
+    height: 20px;
+    margin: 6px;
+    background-position: -145px 0
+}
+
+/* 예약설치 레이어 */
+.box__layer-booking-install {
+    display: none;
+    z-index: 9999
+}
+
+.box__layer-booking-install .button__close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 16px
+}
+
+.box__layer-booking-install .button__close::before {
+    width: 24px;
+    height: 24px;
+    background-position: 0 -51px
+}
+
+.box__layer-booking-install .box__layer-header {
+    height: 57px
+}
+
+.box__layer-booking-install .box__layer-content {
+    border-radius: 16px;
+    background-color: #fff;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    text-align: center
+}
+
+.box__layer-booking-install + .dimmed {
+    background-color: #000;
+    opacity: .6
+}
+
+.box__layer-booking-install .box__layer-header {
+    border-bottom: 0
+}
+
+.box__layer-booking-install .section__booking-install {
+    width: 430px
+}
+
+.box__layer-booking-install .section__booking-install .text__message {
+    font-size: 20px;
+    font-family: 'Gmarket Sans',serif;
+    line-height: 20px;
+    color: #222;
+    font-weight: 500;
+    text-align: center;
+}
+
+.box__layer-booking-install .section__booking-install .text__message br {
+    content: '';
+    display: inline-block;
+    width: 7px
+}
+
+.box__layer-booking-install .section__booking-install .text__message .text__booking-install {
+    position: relative;
+    display: inline-block;
+    color: #4741c7;
+    font-size: 20px;
+    line-height: 20px;
+    font-weight: 700;
+    padding-left: 24px;
+    text-align: center
+}
+
+.box__layer-booking-install .section__booking-install .text__message .text__booking-install::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: 0;
+    width: 24px;
+    height: 24px;
+    background: url(//pics.gmarket.co.kr/pc/single/kr/checkout/gds-calendar-check.svg) no-repeat;
+    background-size: 24px 24px
+}
+
+.box__layer-booking-install .section__booking-install .text__description {
+    padding-top: 10px;
+    font-size: 16px;
+    line-height: 20px;
+    color: #424242;
+    font-weight: 400;
+    text-align: center;
+}
+
+.box__layer-booking-install .section__booking-install .list__order-goods {
+    font-size: 0;
+    margin: 20px 0 30px;
+    box-sizing: border-box;
+    text-align: center
+}
+
+.box__layer-booking-install .section__booking-install .list__order-goods .list-item {
+    display: inline-block;
+    margin: 0 4px
+}
+
+.box__layer-booking-install .section__booking-install .list__order-goods .box__thumbnail {
+    position: relative;
+    overflow: hidden;
+    width: 70px;
+    height: 70px;
+    background: #eee;
+    border-radius: 8px
+}
+
+.box__layer-booking-install .section__booking-install .list__order-goods .box__thumbnail::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    background: rgba(0,0,0,.04)
+}
+
+.box__layer-booking-install .section__booking-install .list__order-goods .box__thumbnail .image__thumbnail {
+    width: 100%
+}
+
+.box__layer-booking-install .box__button {
+    border-top: 1px solid #eee;
+    padding: 16px
+}
+
+.box__layer-booking-install .box__button .button {
+    display: block;
+    width: 100%;
+    height: 57px;
+    border-radius: 8px;
+    font-size: 18px;
+    font-family: 'Gmarket Sans',serif;
+    font-weight: 500
+}
+
+.box__layer-booking-install .box__button .button + .button {
+    margin-top: 8px
+}
+
+.box__layer-booking-install .box__button .button.button__default {
+    background: #0028ac;
+    color: #fff;
+    border: 1px solid #0028ac
+}
+
+.box__layer--alert {
+    display: none;
+    z-index: 9999
+}
+
+.box__layer--alert .box__layer-content {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    z-index: 310;
+    width: 280px;
+    padding: 32px 16px 16px;
+    border-radius: 8px;
+    background: #fff;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    text-align: center
+}
+
+.box__layer--alert .box__layer-body {
+    overflow-y: initial
+}
+
+.box__layer--alert .text__title {
+    font-weight: 700
+}
+
+.box__layer--alert .text__title, .box__layer--alert .text__message {
+    font-size: 14px;
+    color: #222;
+    line-height: 20px
+}
+
+.box__layer--alert .text__message {
+    margin: 8px 0 32px;
+    font-weight: 400
+}
+
+.box__layer--alert .button__confirm {
+    width: 100%;
+    height: 44px;
+    font-family: 'Gmarket Sans',serif;
+    font-size: 16px;
+    font-weight: 400;
+    color: #fff;
+    background: #00c400;
+    border-radius: 8px
+}
+
+/* 0원 삭제 안내 */
+.unit--item .unit--item_desc .section.item_del .box__tooltip {
+    position: absolute;
+    margin-top: 4px;
+    right: -12px;
+}
+
+.unit--item .unit--item_desc .section.item_del .box__tooltip .text__guide {
+    font-family: 'Gmarket Sans',serif;
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+    height: 25px;
+    margin-top: 4px;
+    padding: 0 8px;
+    font-size: 11px;
+    line-height: 24px;
+    color: #222;
+    white-space: nowrap;
+    border: 1px solid #9E9E9E;
+    background-color: #fff;
+    border-radius: 13px;
+    box-sizing: border-box;
+    z-index: 10;
+}
+
+.unit--item .unit--item_desc .section.item_del .box__tooltip .text__guide .text__emphasis {
+    font-family: 'Gmarket Sans',serif;
+    font-weight: bold;
+}
+
+.unit--item .unit--item_desc .section.item_del .box__tooltip .text__guide::before, .unit--item .unit--item_desc .section.item_del .box__tooltip .text__guide::after {
+    content: '';
+    display: block;
+    position: absolute;
+    right: 14px;
+    width: 0;
+    background-image: none;
+    border-style: solid;
+    border-width: 0 4px 5px;
+}
+
+.unit--item .unit--item_desc .section.item_del .box__tooltip .text__guide::before {
+    top: -6px;
+    z-index: 0;
+    border-color: #9E9E9E transparent
+}
+
+.unit--item .unit--item_desc .section.item_del .box__tooltip .text__guide::after {
+    top: -4px;
+    z-index: 1;
+    border-color: #fff transparent;
+}
+
+.unit--item .unit--item_desc .section.item_del .box__tooltip.oversea-delivery {
+    margin-top: 7px;
+}
+
+.unit--item .unit--item_desc .section.item_del .box__tooltip.oversea-delivery .text__guide {
+    font-family: -apple-system, BlinkMacSystemFont, Apple SD Gothic Neo, Roboto, Noto Sans CJK KR, Tahoma, 'Noto Sans KR', 'Gmarket Sans', sans-serif;
+    font-size: 12px;
+    padding: 0 12px;
+    line-height: 22px;
+}
+
+.unit--item .unit--item_desc .section.item_del .box__tooltip.oversea-delivery .text__guide .text__emphasis {
+    font-family: -apple-system, BlinkMacSystemFont, Apple SD Gothic Neo, Roboto, Noto Sans CJK KR, Tahoma, 'Noto Sans KR', 'Gmarket Sans', sans-serif;
+}
+
+/* 복수구매 할인 */
+.box__mutiple-purchases {
+    display: none;
+}
+
+.case_mutiple-purchases {
+    position: relative;
+    margin: 16px 0 1px;
+    overflow: visible !important;
+    z-index: 10;
+    border-top: 0 !important;
+}
+
+.case_mutiple-purchases::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -22px;
+    right: -22px;
+    bottom: -1px;
+    border: 1px solid #067dfd !important;
+    border-radius: 8px;
+    box-sizing: border-box;
+    overflow: hidden;
+    z-index: -1;
+}
+
+.case_mutiple-purchases .box__mutiple-purchases {
+    display: block;
+    margin: -20px -22px 20px;
+    padding: 8px 16px;
+    text-align: center;
+    font-size: 14px;
+    line-height: 20px;
+    color: #067dfd;
+    font-weight: normal;
+    background-color: #eef7ff;
+    border: 1px solid #067dfd !important;
+    border-bottom: 0 !important;
+    border-radius: 8px 8px 0 0;
+    box-sizing: border-box;
+}
+
+.case_mutiple-purchases .box__mutiple-purchases .text__line {
+    display: inline-block;
+    padding-right: 12px;
+    text-indent: 12px;
+    vertical-align: top;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.case_mutiple-purchases .box__mutiple-purchases .text__line + .text__line {
+    position: relative;
+    text-indent: 0;
+    margin-left: -4px;
+    padding-right: 0;
+    max-width: 0;
+    opacity: 0;
+    animation-duration: 1.2s;
+    animation-name: slideup-mutiple-purchases;
+}
+
+.case_mutiple-purchases .box__mutiple-purchases.succeed .text__line + .text__line {
+    max-width: 100%;
+    opacity: 1;
+    animation-duration: 1.2s;
+    animation-name: slidedown-mutiple-purchases;
+}
+
+@keyframes slidedown-mutiple-purchases {
+    0% {
+        max-width: 0;
+        opacity: 0;
+    }
+
+    100% {
+        max-width: 100%;
+        opacity: 1;
+    }
+}
+
+@keyframes slideup-mutiple-purchases {
+    0% {
+        max-width: 100%;
+        opacity: 1;
+    }
+
+    100% {
+        max-width: 0;
+        opacity: 0;
+    }
+}
+
+.case_mutiple-purchases .box__mutiple-purchases .text__emphasis {
+    font-weight: bold;
+}
+
+.case_mutiple-purchases .unit--item .unit--item_desc .section.item_title {
+    margin-bottom: 0;
+}
+
+.case_mutiple-purchases .unit--item .unit--item_desc .section.item_discount-price .box__sale-amount .text__value, .case_mutiple-purchases .unit--item .unit--item_desc .section.item_discount-price .box__sale-amount .text__unit {
+    color: #424242
+}
+
+.case_mutiple-purchases .unit--item .unit--item_desc .section.item_discount-price .box__sale-amount--coupon .text__value, .case_mutiple-purchases .unit--item .unit--item_desc .section.item_discount-price .box__sale-amount--coupon .text__unit {
+    color: #01a900
+}
+
+.case_mutiple-purchases .cart--basket_body .shipping--group + .shipping--no--group {
+    border-top: 0;
+}
+
+.case_mutiple-purchases .order--idx {
+    border-bottom: 0 !important;
+}
+
+.case_mutiple-purchases .unit--item {
+    padding-top: 16px;
+    padding-bottom: 16px;
+}
+
+/* .case_mutiple-purchases .unit--item ~ .unit--item{margin-top: -12px;padding-bottom: 0;} */
+.case_mutiple-purchases .unit--item.first {
+    margin-top: 0;
+    padding-top: 0;
+}
+
+.case_mutiple-purchases .unit--item .unit--item_desc {
+    padding-bottom: 4px;
+}
+
+.case_mutiple-purchases .unit--item .unit--item_desc .section.item_option {
+    margin-bottom: 8px;
+}
+
+.case_mutiple-purchases .unit--item ~ .unit--item .unit--item_desc {
+    padding-bottom: 4px;
+}
+
+.case_mutiple-purchases .unit--item_coupon.unit--item_coupon--active {
+    margin-bottom: -13px;
+}
+
+/*  더 빠른 배송 */
+.section.item_title .box__delivery-info {
+    display: block;
+    font-size: 0;
+    margin-bottom: 15px;
+}
+
+.section.item_title .box__delivery-info .text__smiledelivery, .section.item_title .box__delivery-info .text__freedelivery {
+    display: none;
+}
+
+.section.item_title .box__delivery-info .text__delivery-make {
+    display: inline-block;
+    margin-right: 8px;
+    font-size: 14px;
+    line-height: 18px;
+    color: #067dfd;
+}
+
+.section.item_title .box__delivery-info .text__delivery-smileclub {
+    color: #864300;
+}
+
+.section.item_title .box__delivery-info .text__delivery-smileclub::before {
+    content: '';
+    width: 39px;
+    height: 16px;
+    margin: 1px 6px 0 0;
+    background-position: -39px -33px;
+}
+
+.section.item_title .box__delivery-info .text__delivery-holiday::before {
+    content: '';
+    width: 37px;
+    height: 16px;
+    margin: 1px 6px 0 0;
+    background-position: 0 -33px;
+}
+
+.section.item_title .box__delivery-info .text__condition {
+    display: inline-block;
+    font-size: 14px;
+    line-height: 18px;
+    color: #222
+}
+
+.section.item_title .box__delivery-info .text__condition::before {
+    content: '';
+    width: 12px;
+    height: 12px;
+    margin: 4px 2px 0 0;
+    background-position: -112px -33px;
+    vertical-align: top;
+}
+
+.section.item_title .box__delivery-info .button__refresh {
+    display: inline-block;
+    margin-left: 4px;
+    vertical-align: top;
+    font-size: 14px;
+    line-height: 19px;
+    color: #067dfd;
+}
+
+.section.item_title .box__delivery-info .button__refresh::before {
+    content: '';
+    width: 20px;
+    height: 20px;
+    background-position: -169px 0;
+}
+
+.section.item_title .box__delivery-info .text__delivery-smileclub--timeover {
+    text-decoration: line-through;
+}
+
+.section.item_title .box__delivery-info .text__condition--timeover {
+    display: block;
+    color: #ef2b2a;
+    margin-top: 4px
+}
+
+.section.item_title .box__delivery-info .text__condition--timeover::before {
+    background-position: -126px -33px;
+}
+
+.section.item_title .box__delivery-info .text__condition--timeover.sprite__cart--before {
+    display: inline-block;
+    margin-top: 0
+}
+
+.unit--item.case_nooption .unit--item_desc .section.item_title .box__delivery-info {
+    margin-top: 10px
+}
+
+.box__layer-order-reject {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 430px;
+    background-color: #fff;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.box__layer-order-reject .box__layer-header {
+    height: auto;
+    padding-top: 57px;
+    border-bottom: 0
+}
+
+.box__layer-order-reject .box__layer-header .text__header {
+    line-height: 24px;
+    font-size: 20px;
+    color: #000;
+    font-family: 'Gmarket Sans',serif;
+    font-weight: normal;
+}
+
+.box__layer-order-reject .box__layer-header .text__header .text__emphasis {
+    position: relative;
+    display: inline-block;
+    z-index: 0;
+}
+
+.box__layer-order-reject .box__layer-header .text__header .text__emphasis::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 4px;
+    width: 100%;
+    height: 5px;
+    background-color: #ffd201;
+    z-index: -1;
+}
+
+.box__layer-order-reject .box__layer-body {
+    text-align: center;
+}
+
+.box__layer-order-reject .box__layer-body .text {
+    padding-top: 10px;
+    font-size: 16px;
+    line-height: 24px;
+    color: #616161
+}
+
+/* .box__layer-order-reject .box__layer-body .list__order-reject{display:inline-block;margin:20px 0 10px;padding:0 16px;font-size:0;text-align:left;} */
+.box__layer-order-reject .box__layer-body .list__order-reject {
+    display: inline-block;
+    max-height: 250px;
+    margin: 20px 0 10px;
+    padding: 0 6px 0 16px;
+    font-size: 0;
+    text-align: left;
+    overflow: hidden auto;
+}
+
+.box__layer-order-reject .box__layer-body .list__order-reject .list-item {
+    display: inline-block;
+    margin: 0 8px 16px 0
+}
+
+.box__layer-order-reject .box__layer-body .list__order-reject .list-item:nth-child(5n) {
+    margin-right: 0
+}
+
+.box__layer-order-reject .box__layer-body .list__order-reject .list-item .image {
+    width: 70px;
+    height: 70px;
+    border-radius: 8px;
+}
+
+.box__layer-order-reject .box__layer-body .box__order {
+    padding: 16px;
+    border-top: 1px solid #eee;
+}
+
+.box__layer-order-reject .box__layer-body .box__order .button__order {
+    width: 100%;
+    height: 56px;
+    background-color: #00c400;
+    font-size: 18px;
+    color: #fff;
+    font-family: 'Gmarket Sans',serif;
+    line-height: 22px;
+    font-weight: normal;
+    border-radius: 8px;
+}
+
+.box__layer-order-reject .button__close {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 57px;
+    height: 57px;
+}
+
+.box__layer-order-reject .button__close:before {
+    content: '';
+    width: 24px;
+    height: 24px;
+    background-position: 0 -51px;
+}
+
+.box__smiledelivery-timer {
+    visibility: hidden;
+    overflow: hidden;
+    position: absolute;
+    left: 50%;
+    bottom: 68px;
+    width: 191px;
+    height: 45px;
+    margin-left: -95px;
+    z-index: 30;
+    transition: transform 0.2s ease-out 0.3s, visibility 0.2s ease-out 0.3s;
+    transform: scale(0);
+    transform-origin: 50% 100%;
+}
+
+.box__smiledelivery-timer--active {
+    visibility: visible;
+    transform: scale(1);
+}
+
+.box__smiledelivery-timer .text__delivery-dawn {
+    position: absolute;
+    left: 0;
+    width: 63px;
+    height: 34px;
+    background-position: 0 -77px;
+}
+
+.box__smiledelivery-timer .text__time {
+    display: block;
+    height: 34px;
+    padding: 7px 15px 0 68px;
+    font-size: 13px;
+    color: #fff;
+    line-height: 22px;
+    background-color: #a78353;
+    border-radius: 17px;
+    box-shadow: 0 2px 5px 0 rgb(0 0 0 / 30%);
+    white-space: nowrap;
+    font-family: 'Gmarket Sans',serif;
+    box-sizing: border-box;
+}
+
+.box__smiledelivery-timer .text__time::before {
+    content: '';
+    position: absolute;
+    top: 29px;
+    left: 50%;
+    width: 10px;
+    height: 10px;
+    margin-left: -5px;
+    background-color: #a78353;
+    transform: rotate(45deg);
+}
+
+.box__smiledelivery-timer .text__time .text {
+    position: relative;
+    margin-right: 2px;
+    font-size: 13px;
+    z-index: 0;
+}
+
+.box__smiledelivery-timer .text__time .text__min, .box__smiledelivery-timer .text__time .text__sec {
+    display: inline-block;
+    font-weight: bold;
+}
+
+.box__smiledelivery-timer .text__time .text::before {
+    content: '';
+    width: 14px;
+    height: 14px;
+    margin: 3px 2px 0 0;
+    vertical-align: top;
+    background-position: -44px -51px;
+}
+
+.box__toast-popup {
+    visibility: hidden;
+    opacity: 0;
+    position: fixed;
+    width: 400px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    box-sizing: border-box;
+    z-index: 30;
+    transition: opacity 0.3s ease-out, visibility 0.3s ease-out;
+}
+
+.box__toast-popup--active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.box__toast-popup .text {
+    display: block;
+    padding: 62px 30px 30px;
+    font-size: 16px;
+    line-height: 24px;
+    text-align: center;
+    color: #fff;
+    border-radius: 8px;
+    background-color: rgba(0, 0, 0, 0.8);
+    font-family: 'Gmarket Sans',serif;
+}
+
+.box__toast-popup .text__emphasis {
+    color: #ffd200
+}
+
+.box__toast-popup .text__imoji {
+    font-size: 26px;
+    position: absolute;
+    left: 50%;
+    top: 35px;
+    transform: translateX(-50%);
+}
+
+.box__order-info {
+    position: relative;
+    min-height: 61px;
+    padding: 14px 0 10px;
+    margin: 0 22px;
+    border-bottom: 1px solid #333;
+    box-sizing: border-box;
+}
+
+.box__order-info .box__address-info {
+    position: relative;
+    display: block;
+}
+
+.box__order-info .box__address-info .button__address, .box__order-info .box__address-info .link__address {
+    margin-left: 8px;
+    padding: 7px 8px;
+    font-family: 'Gmarket Sans',serif;
+    color: #222;
+    font-size: 12px;
+    line-height: 16px;
+    border: 1px solid #bdbdbd;
+    border-radius: 6px;
+    background: #fff;
+}
+
+.box__order-info .text__name {
+    font-size: 16px;
+    line-height: 22px;
+    font-family: 'Gmarket Sans',serif;
+    color: #2c2c2c;
+}
+
+.box__order-info .text__name::after {
+    content: '';
+    display: inline-block;
+    width: 1px;
+    height: 16px;
+    margin: 3px 6px 0 6px;
+    background-color: #9e9e9e;
+    vertical-align: top;
+}
+
+.box__order-info .text__address {
+    position: relative;
+    display: inline-block;
+    padding-left: 20px;
+    font-size: 16px;
+    line-height: 22px;
+    font-family: 'Gmarket Sans',serif;
+    color: #2c2c2c;
+}
+
+.box__order-info .text__address::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 2px;
+    width: 16px;
+    height: 16px;
+    background-position: -80px -33px
+}
+
+.box__order-info .text__address-none + .link__address {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    background-color: transparent;
+    border: 0;
+    line-height: 999px;
+    overflow: hidden;
+}
+
+.box__order-info .text__address-none + .button__address {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    font-size: 0;
+    padding: 0;
+    margin: 0;
+    background-color: transparent;
+    border: 0
+}
+
+.box__order-info .text__address-none + .button__address-set {
+    text-align: right;
+    text-decoration: underline;
+    font-family: inherit;
+    font-size: 14px;
+}
+
+.box__order-info .text__address .text__emphasis {
+    text-decoration: underline;
+    color: #00c400
+}
+
+.box__order-info .text__address-oversea .text__emphasis {
+    overflow: hidden;
+    display: inline-block;
+    max-width: 153px;
+    color: #2e8de5;
+    text-decoration: none;
+    text-overflow: ellipsis;
+    vertical-align: top;
+    white-space: nowrap;
+}
+
+.box__order-info .text__oversea {
+    display: block;
+    margin-top: 8px;
+    text-align: right;
+}
+
+.box__order-info .text__oversea .button__oversea {
+    font-size: 12px;
+    line-height: 21px;
+    letter-spacing: -0.54px;
+    color: #7f8590;
+}
+
+.box__order-info .text__oversea .button__oversea::after {
+    content: '';
+    width: 16px;
+    height: 16px;
+    margin-top: 3px;
+    background-position: -26px -51px;
+}
+
+.box__order-info .text__address-unable {
+}
+
+.box__order-info .text__address-unable::before {
+    background-position: -178px -33px;
+}
+
+.box__order-info .text__address-unable .text__emphasis {
+    margin-right: 4px;
+    color: #f9560e;
+    text-decoration: none;
+}
+
+.box__order-info .text__title {
+    display: inline-block;
+    line-height: 32px;
+    font-size: 18px;
+    color: #000;
+    font-family: 'Gmarket Sans',serif;
+    font-weight: normal;
+}
+
+.box__order-info .text__title + .text__oversea {
+    position: absolute;
+    right: 0;
+    top: 19px;
+    margin-top: 0
+}
+
+.box__layer-order-oversea {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 500px;
+    height: calc(100vh - 80px);
+    max-height: 840px;
+    background-color: #fff;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.box__layer-order-oversea .box__layer-header {
+    height: 56px;
+    border-bottom: 1px solid #f5f5f5;
+}
+
+.box__layer-order-oversea .text__header {
+    padding: 19px 0;
+    font-size: 18px;
+    line-height: 18px;
+    color: #222;
+    letter-spacing: -0.5px;
+    font-family: 'Gmarket Sans',serif;
+    font-weight: normal;
+}
+
+.box__layer-order-oversea .button__close {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 56px;
+    height: 56px
+}
+
+.box__layer-order-oversea .button__close::before {
+    content: '';
+    width: 24px;
+    height: 24px;
+    background-position: 0 -51px;
+}
+
+.box__layer-order-oversea .box__layer-body {
+    position: relative;
+    height: calc(100% - 56px);
+    padding-bottom: 91px;
+    box-sizing: border-box;
+}
+
+.box__layer-order-oversea .box__order-oversea {
+    position: relative;
+    overflow-y: auto;
+    height: 100%;
+}
+
+.box__layer-order-oversea .box__order-oversea .list__order-oversea {
+    padding: 20px 0 24px 20px;
+    text-align: left;
+    box-sizing: border-box;
+}
+
+.box__layer-order-oversea .box__order-oversea .list__order-oversea .list-item + .list-item {
+    margin-top: 30px
+}
+
+.box__layer-order-oversea .box__order-oversea .list__order-oversea .form__radio {
+    width: 20px;
+    height: 20px;
+    margin-top: 1px;
+    background-position: -235px 0;
+    appearance: none;
+}
+
+.box__layer-order-oversea .box__order-oversea .list__order-oversea .form__radio:checked {
+    background-position: -213px 0;
+}
+
+.box__layer-order-oversea .box__order-oversea .list__order-oversea .text__label {
+    margin-left: 16px;
+    font-size: 16px;
+    line-height: 20px;
+    color: #000;
+    font-family: 'Gmarket Sans',serif;
+}
+
+.box__layer-order-oversea .box__button-wrap {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    padding: 16px;
+    border-top: 1px solid #eee
+}
+
+.box__layer-order-oversea .box__button-wrap .button {
+    display: inline-block;
+    width: 230px;
+    line-height: 56px;
+    font-size: 18px;
+    color: #2c2c2c;
+    border: 1px solid #bdbdbd;
+    border-radius: 8px;
+    font-family: 'Gmarket Sans',serif;
+}
+
+.box__layer-order-oversea .box__button-wrap .button__comfirm {
+    margin-left: 4px;
+    background-color: #00c400;
+    color: #fff;
+    border: 0;
+}
+
+.box__layer-order-oversea .box__destination {
+    margin: 20px;
+    padding: 15px 0;
+    border-radius: 8px;
+    border: 1px solid #000;
+    text-align: center;
+    box-sizing: border-box;
+    background-color: #fff;
+}
+
+.box__layer-order-oversea .box__destination .box__inner {
+}
+
+.box__layer-order-oversea .box__destination .text__destination {
+    display: block;
+    font-family: 'Gmarket Sans',serif;
+    font-size: 14px;
+    line-height: 22px;
+    color: #00c400;
+    font-weight: bold;
+}
+
+.box__layer-order-oversea .box__destination .button__change {
+    margin-top: 6px;
+    padding: 10px 11px;
+    font-family: 'Gmarket Sans',serif;
+    font-size: 12px;
+    color: #222;
+    border: 1px solid #bdbdbd;
+    border-radius: 6px;
+}
+
+.box__smiledelivery-wrap {
+    display: none;
+}
+
+/* iframe */
+.box__layer-iframe {
+    position: fixed;
+    width: 100%;
+    height: auto;
+    top: 40px;
+    bottom: 40px;
+    z-index: 10060
+}
+
+.box__layer-iframe .box__iframe {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 500px;
+    height: 100%;
+    max-height: 840px;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    z-index: 10060;
+    overflow: hidden;
+    box-sizing: border-box
+}
+
+.box__layer-iframe iframe {
+    width: 100%;
+    height: 100%
+}
+
+.box__layer-iframe .dimmed {
+    background: rgba(0,0,0,0.7);
+    display: block;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000
+}
+
+.box__layer-iframe.box__layer-iframe-small .box__iframe {
+    width: 410px;
+    height: 640px;
+}
+
+/* ================
+  스마일 프레시
+================ */
+.unit--item {
+    position: relative;
+}
+
+.unit--item_desc .box__delivery-info .text__smilefresh {
+    display: none;
+}
+
+.page__smilefresh .box__smilefresh-wrap {
+    display: block;
+}
+
+.cart--basket .cart--basket_header.box__smilefresh {
+    margin: 0;
+    padding: 18px 22px 19px;
+    border-bottom: 0;
+    background-image: linear-gradient(90deg, #067DFD 0%, #00C3A0 50%, #00C400 100%);
+}
+
+.page__smilefresh .cart--basket .cart--basket_header.box__smilefresh .input_custom {
+    display: none;
+}
+
+.box__smilefresh-wrap {
+    display: none;
+    padding: 8px 16px 0;
+}
+
+.box__smilefresh-wrap .box__address-info {
+    position: relative;
+    padding: 10px 12px;
+    border-radius: 8px 8px 0 0;
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    border-bottom: 0;
+    text-align: left;
+}
+
+.box__smilefresh-wrap .box__address-info:only-child {
+    border-radius: 8px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.box__smilefresh-wrap .box__address-info + .box__smiledelivery {
+    border-radius: 0 0 8px 8px;
+    border-top: 0;
+    margin-top: -4px
+}
+
+.box__smilefresh-wrap .box__address-info + .box__smiledelivery--smileclub {
+    margin-top: -2px
+}
+
+.box__smilefresh-wrap .box__address-info + .box__smiledelivery--smileclub::before {
+    content: '';
+    position: absolute;
+    left: 12px;
+    top: 0;
+    right: 12px;
+    height: 1px;
+    background-color: #f5f5f5;
+}
+
+.box__smilefresh-wrap .text__address {
+    font-size: 13px;
+    line-height: 20px;
+    color: #2c2c2c;
+    font-family: 'Gmarket Sans',serif;
+}
+
+.box__smilefresh-wrap .text__address::before {
+    width: 16px;
+    height: 16px;
+    margin: 2px 4px 0 0;
+    background-position: -80px -66px;
+    vertical-align: top;
+}
+
+.box__smilefresh-wrap .text__address::after {
+    width: 16px;
+    height: 16px;
+    margin-top: 2px;
+    background-position: -134px -66px;
+    vertical-align: top;
+}
+
+.box__smilefresh-wrap .text__address .text__emphasis {
+    color: #00c400;
+    text-decoration: underline;
+}
+
+.box__smilefresh-wrap .box__address-info .button__address, .box__smilefresh-wrap .box__address-info .link__address {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    line-height: 999px;
+    overflow: hidden;
+}
+
+.box__smilefresh-wrap .box__address-info .button__address-set::after {
+    content: '설정하기';
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    font-size: 12px;
+    line-height: 16px;
+    color: #222;
+    text-decoration: underline;
+    transform: translateY(-50%);
+}
+
+.box__smilefresh-wrap .box__smiledelivery {
+    position: relative;
+    padding: 0 12px 10px;
+    background-color: #fff;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+}
+
+.box__smilefresh-wrap .box__smiledelivery--smileclub {
+    padding: 10px 12px
+}
+
+.box__smilefresh-wrap .box__smiledelivery .text__smiledelivery {
+    position: relative;
+    padding: 10px 8px 10px 56px;
+    font-size: 12px;
+    line-height: 16px;
+    color: #864300;
+    background-color: rgba(134, 67, 0, 0.08);
+    font-family: 'Gmarket Sans',serif;
+    border-radius: 8px;
+    white-space: nowrap;
+}
+
+.box__smilefresh-wrap .box__smiledelivery--smileclub .text__smiledelivery {
+    padding: 0 0 0 48px;
+    background: none;
+}
+
+.box__smilefresh-wrap .box__smiledelivery .text__smiledelivery::before {
+    position: absolute;
+    left: 8px;
+    width: 44px;
+    height: 16px;
+    margin-right: 4px;
+    vertical-align: top;
+    background: url(//pics.gmarket.co.kr/mobile/single/kr/common/image__smileclub.svg) no-repeat 0 0 44px 16px;
+}
+
+.box__smilefresh-wrap .box__smiledelivery--smileclub .text__smiledelivery::before {
+    left: 0
+}
+
+.box__smilefresh-wrap .box__smiledelivery .text__smiledelivery .sprite__cart--before::before {
+    width: 16px;
+    height: 16px;
+    background-position: -98px -66px;
+    vertical-align: top;
+}
+
+.box__smilefresh-wrap .box__smiledelivery .link__free-membershop {
+    position: absolute;
+    right: 22px;
+    top: 8px;
+    font-size: 12px;
+    line-height: 20px;
+    color: #864300;
+    font-weight: bold;
+    font-family: 'Gmarket Sans',serif;
+}
+
+.box__smilefresh-wrap .box__smiledelivery .link__free-membershop::after {
+    width: 16px;
+    height: 16px;
+    margin-top: 2px;
+    background-position: -116px -66px;
+    vertical-align: top;
+}
+
+/* 당일/새벽 탭 */
+.box__smilefresh-toggle {
+    position: absolute;
+    top: 12px;
+    right: 22px;
+}
+
+.box__smilefresh-toggle .text__delivery-info {
+    font-family: 'Gmarket Sans',serif;
+    font-weight: 500;
+    display: inline-block;
+    vertical-align: top;
+    font-size: 16px;
+    line-height: 36px;
+    color: #fff;
+}
+
+.box__smilefresh-toggle .button__toggle {
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+    width: 116px;
+    height: 36px;
+    background-color: rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-sizing: border-box;
+    border-radius: 20px;
+    outline-offset: 1px;
+}
+
+.box__smilefresh-toggle .button__toggle::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    height: 36px;
+    width: 62px;
+    border-style: solid;
+    border-width: 1px;
+    border-image-source: linear-gradient(to right, #067dfd 0%, #00c3a0 50%, #00c400 100%);
+    border-image-slice: 1;
+    background-image: linear-gradient(to bottom, #fff, #fff), linear-gradient(to right, #067dfd 0%, #00c3a0 50%, #00c400 100%);
+    background-origin: border-box;
+    background-clip: content-box, border-box;
+    border-radius: 20px;
+    box-sizing: border-box;
+    z-index: 1;
+    transition: left .2s ease;
+}
+
+.box__smilefresh-toggle .button__toggle[aria-checked=true]::before {
+    left: -1px;
+}
+
+.box__smilefresh-toggle .button__toggle[aria-checked=false]::before {
+    left: 53px;
+}
+
+.box__smilefresh-toggle .button__toggle .text__emphasis {
+    float: left;
+    position: relative;
+    width: 50%;
+    height: 100%;
+    font-size: 16px;
+    color: #fff;
+    line-height: 34px;
+    font-weight: bold;
+    opacity: .5;
+    z-index: 2;
+}
+
+.box__smilefresh-toggle .button__toggle .item--today {
+    text-indent: 3px;
+}
+
+.box__smilefresh-toggle .button__toggle .item--dawn {
+    text-indent: -2px;
+}
+
+.box__smilefresh-toggle .button__toggle[aria-checked=true] .item--today, .box__smilefresh-toggle .button__toggle[aria-checked=false] .item--dawn {
+    background-image: linear-gradient(to right, #067dfd 0%, #00c3a0 50%, #00c400 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    opacity: 1;
+}
+
+.box__ad-smilefresh {
+    position: relative;
+    padding: 15px 19px 13px;
+    background-color: #fff;
+    text-align: center;
+    border-bottom: 1px solid #e0e0e0;
+    z-index: 10;
+}
+
+.box__smilefresh--gauge {
+    padding: 29px 100px;
+    background-color: #FAFAFA;
+}
+
+.box__smilefresh--gauge .link__smilefresh {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    font-size: 14px;
+    line-height: 20px;
+    color: #424242;
+    text-align: center;
+    outline-offset: -1px;
+}
+
+.box__smilefresh--gauge .text__cart-gauge {
+    position: absolute;
+    top: 25px;
+    left: 558px;
+    padding-right: 0;
+    font-size: 14px;
+    color: #424242;
+}
+
+.box__smilefresh--gauge .text__cart-gauge::after {
+    content: none;
+}
+
+.box__smilefresh--gauge .text__emphasis {
+    font-weight: bold;
+}
+
+.box__smilefresh--gauge .box__gauge {
+    position: relative;
+    width: 446px;
+    height: 12px;
+    box-sizing: border-box;
+    text-align: center;
+    font-size: 0;
+    display: block
+}
+
+.box__smilefresh--gauge .box__gauge .box__gauge-bar {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    background-color: #EBEBEB;
+    width: 100%;
+    height: 12px;
+    border-radius: 6px;
+    text-indent: -999em;
+    z-index: 50;
+    margin: 0 auto;
+}
+
+.box__smilefresh--gauge .box__gauge .box__gauge-bar .image__value {
+    position: absolute;
+    display: inline-block;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 12px;
+    border-radius: 6px;
+    background-image: linear-gradient(90deg, #067DFD 0%, #00C3A0 50%, #00C400 100%);
+}
+
+.unit--item .unit--item_desc .section.item_smiefresh-state {
+    position: relative;
+    float: none;
+    display: block;
+    color: #2e8de5;
+    font-size: 12px;
+    line-height: 20px;
+    margin-top: 8px;
+    opacity: 1;
+}
+
+.unit--item .unit--item_desc .section.item_smiefresh-state .box__state {
+    font-size: 12px;
+    color: #067dfd;
+    line-height: 16px
+}
+
+.unit--item .unit--item_desc .section.item_smiefresh-state .box__state .text__smiefresh-delivery {
+}
+
+.unit--item .unit--item_desc .section.item_smiefresh-state .box__state .text__smiefresh-delivery::before {
+    content: '';
+    display: inline-block;
+    height: 16px;
+    margin: 0 6px 0 0;
+    overflow: hidden;
+}
+
+.unit--item .unit--item_desc .section.item_smiefresh-state .box__state .text__smiefresh-delivery.icon-dawn::before {
+    width: 39px;
+    background: url(//pics.gmarket.co.kr/pc/single/kr/cart/image__dawn.svg) no-repeat 0 0;
+    background-size: auto 100%;
+}
+
+.unit--item .unit--item_desc .section.item_smiefresh-state .box__state .text__smiefresh-delivery.icon-today::before {
+    width: 41px;
+    background: url(//pics.gmarket.co.kr/pc/single/kr/cart/image__day.svg) no-repeat 0 0;
+    background-size: auto 100%;
+}
+
+/* .unit--item .unit--item_desc .section.item_smiefresh-state .box__state .text__smiefresh-delivery.icon-dawn{width: 39px;background-position: -196px -33px;}
+.unit--item .unit--item_desc .section.item_smiefresh-state .box__state .text__smiefresh-delivery.icon-today{width: 41px;background-position: -237px -33px;} */
+.unit--item .unit--item_desc .section.item_smiefresh-state .box__state .btn_del {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 44px;
+    height: 32px;
+    border: 1px solid #bdbdbd;
+    border-radius: 6px;
+    font-family: 'Gmarket Sans',serif;
+    font-size: 12px;
+    color: #222
+}
+
+.unit--item .unit--item_desc .section.item_smiefresh-state .box__state .btn_del:hover {
+    border: 1px solid #9e9e9e;
+    background: #fafafa
+}
+
+.cart--basket .cart--basket_body .box__smilefresh--guide {
+    display: none;
+}
+
+.cart--basket.type_smilefresh .cart--basket_body .box__smilefresh--guide {
+    display: block;
+}
+
+.cart--basket .cart--basket_body .box__smilefresh--guide {
+    position: absolute;
+    top: -41px;
+    right: 22px;
+    margin: 0;
+    padding: 0;
+    border: 0 none;
+    background-color: transparent;
+}
+
+.cart--basket.has-smilefresh--menu .cart--basket_body .box__smilefresh--guide {
+    right: 154px;
+}
+
+.cart--basket .cart--basket_body .box__smilefresh--guide .text__smilefresh--guide {
+    font-family: 'Gmarket Sans',serif;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 22px;
+    color: #fff;
+}
+
+/* 장바구니 상품없음 */
+.shipping--empty {
+    display: none;
+}
+
+.shipping--empty .box__cart-empty {
+    display: block;
+    width: 100%;
+    height: 543px;
+    margin: 0 auto;
+    text-align: center
+}
+
+.shipping--empty .box__cart-empty::after {
+    content: '';
+    display: inline-block;
+    vertical-align: middle;
+    width: 1px;
+    height: 100%;
+}
+
+.service__cart .shipping--empty .inner_cont {
+    display: inline-block;
+    vertical-align: middle;
+    width: auto;
+}
+
+.shipping--empty .none_item {
+    width: auto;
+}
+
+.shipping--empty .none_item .box__animation {
+    width: 112px;
+    height: 112px;
+    margin: 0 auto 24px
+}
+
+.shipping--empty .none_item .msg {
+    position: relative;
+    display: block;
+    margin-top: 0;
+    padding-top: 0;
+    font-size: 16px;
+    text-align: center;
+    color: #616161;
+    line-height: 22px;
+    font-weight: normal;
+    background: none;
+}
+
+.shipping--empty .none_item .btn_action {
+    display: inline-block;
+    width: 175px;
+    height: 44px;
+    margin: 20px auto 0;
+    padding: 0 16px;
+    border: 1px solid #bdbdbd;
+    border-radius: 8px;
+    font-family: 'Gmarket Sans',serif;
+    font-size: 16px;
+    color: #000;
+    line-height: 42px;
+    background: #fff
+}
+
+/* 스마일프레시 중복 주문불가 넛징 */
+.box__layer__smilefresh {
+    text-align: center
+}
+
+.box__layer__smilefresh.box__layer--full {
+    overflow-y: visible;
+    outline: 0
+}
+
+.box__layer__smilefresh .box__layer-smilefresh-order {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 500px;
+    height: calc(100vh - 80px);
+    max-height: 840px;
+    background-color: #fff;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.box__layer__smilefresh .box__layer-header {
+    height: 33px;
+}
+
+.box__layer__smilefresh .box__layer-content {
+    border-radius: 16px 16px 0 0;
+}
+
+.box__layer__smilefresh .button__close {
+    width: 32px;
+    height: 32px;
+    top: 8px
+}
+
+.box__layer__smilefresh .box__layer-content:before {
+    position: absolute;
+    top: 0;
+    content: '';
+    display: block;
+    width: 100%;
+    height: 100px;
+    z-index: -1;
+    box-shadow: 0 -4px 8px 0 rgba(0, 0, 0, 0.1);
+    border-radius: 16px 16px 0 0
+}
+
+.box__layer__smilefresh .box__layer-header {
+    border-bottom: 0
+}
+
+.box__layer__smilefresh .section__smilefresh-order {
+    padding: 0 16px 16px
+}
+
+.box__list-cart {
+    margin: 28px 0 26px;
+    padding: 0 6px;
+}
+
+.box__list-cart .list__cart {
+    position: relative;
+    margin: 0 auto;
+    padding: 0;
+    white-space: nowrap;
+    overflow: auto hidden;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    -webkit-backface-visibility: hidden;
+    box-sizing: border-box;
+}
+
+.box__list-cart .list__cart::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    height: 0
+}
+
+.box__list-cart .list-item {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.box__list-cart .list-item .link__item {
+    position: relative;
+    display: block;
+    width: 70px;
+    height: 70px;
+    border-radius: 8px;
+    overflow: hidden;
+    z-index: 20;
+}
+
+.box__list-cart .list-item .link__item .image__thumb {
+    position: relative;
+    width: 100%;
+    z-index: 2;
+}
+
+.box__list-cart .list-item .link__item::before, .box__list-cart .list-item .link__item::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.box__list-cart .list-item .link__item::before {
+    background-color: rgba(0, 0, 0, .04);
+    z-index: 3;
+}
+
+.box__list-cart .list-item .link__item::after {
+    background-color: #eee;
+    z-index: 1;
+}
+
+.order_action .box__list-cart {
+    display: block;
+    width: 100%;
+    margin: 0;
+    padding: 8px;
+    border-bottom: 1px solid #eee;
+    background-color: #fff;
+    border-radius: 16px 16px 0 0;
+    box-shadow: 0 -2px 3px 0 rgba(0, 0, 0, 0.1);
+}
+
+.order_action .box__list-cart .list__cart {
+    max-width: 768px;
+    margin: 0 auto;
+}
+
+.order_action .box__list-cart .list-item .link__item {
+    width: 40px;
+    height: 40px;
+    border-radius: 4px;
+}
+
+.order_action .box__list-cart .list-item .link__item {
+}
+
+.box__layer__smilefresh .section__smilefresh-order {
+    text-align: left;
+}
+
+.box__layer__smilefresh .section__smilefresh-order .text__smilefresh-order {
+    font-family: 'Gmarket Sans',serif;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 23px;
+    color: #2c2c2c;
+}
+
+.box__layer__smilefresh .section__smilefresh-order .text__smilefresh-order .text__underline {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    z-index: 1;
+}
+
+.box__layer__smilefresh .section__smilefresh-order .text__smilefresh-order .text__underline::before {
+    content: '';
+    position: absolute;
+    bottom: 4px;
+    left: 0;
+    height: 5px;
+    width: 100%;
+    background-color: #ffd201;
+    z-index: -1;
+}
+
+.box__layer__smilefresh .section__smilefresh-order .text__smilefresh-order-sub {
+    margin-top: 8px;
+    font-size: 14px;
+    line-height: 20px;
+    color: #424242;
+    letter-spacing: -.42px;
+    font-weight: normal;
+}
+
+.box__layer__smilefresh .box__button {
+    margin-top: 24px
+}
+
+.box__layer__smilefresh .box__button .button {
+    font-family: 'Gmarket Sans',serif;
+    font-weight: 500;
+    display: block;
+    width: 100%;
+    height: 48px;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+.box__layer__smilefresh .box__button .button.button__default {
+    background: #00c400;
+    color: #fff
+}
+
+.order_action .box__list-cart {
+    display: none;
+}
+
+.box__toast-auto-init.box__toast-popup {
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease-out, visibility 0.3s ease-out;
+    z-index: 30;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate3d(-50%, -50%, 0);
+    width: 400px;
+    height: 108px;
+    padding: 42px 0;
+    border-radius: 8px;
+    background-color: rgba(0, 0, 0, 0.8);
+    box-sizing: border-box
+}
+
+.box__toast-auto-init.box__toast-popup--active {
+    opacity: 1;
+    visibility: visible
+}
+
+.box__toast-auto-init.box__toast-popup .text__message {
+    font-family: 'Gmarket Sans';
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.5;
+    text-align: center;
+    color: #fff
+}

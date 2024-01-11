@@ -10,6 +10,7 @@ import java.io.PrintWriter;
 import java.util.*;
 import com.sist.dao.*;
 import com.sist.vo.BusanListVO;
+import com.sist.vo.CartVO;
 import com.sist.vo.FoodReserveVO;
 import com.sist.vo.JjimVO;
 import com.sist.vo.MemberVO;
@@ -221,10 +222,30 @@ public class MypageModel {
 		HttpSession session=request.getSession();
 		String id=(String)session.getAttribute("id");
 		
-		MypageDAO dao=MypageDAO.newInstance();
-		/* MemberVO vo=dao.myprofile(id); */
+		String page=request.getParameter("page");
+		if(page==null)
+			page="1";
+		int curpage=Integer.parseInt(page);
 		
-		/* request.setAttribute("vo", vo); */
+		MypageDAO dao=MypageDAO.newInstance();
+		List<CartVO> list = dao.myBuyData(id, curpage);
+		int total = dao.myBuyTotal(id);
+		
+        int totalpage = dao.myBuyTotalPage(id);
+        final int BLOCK = 5;
+        int startPage = ((curpage - 1) / BLOCK * BLOCK) + 1;
+        int endPage = ((curpage - 1) / BLOCK * BLOCK) + BLOCK;
+        if (endPage > totalpage) endPage = totalpage;
+        
+        System.out.println(list.size());
+        System.out.println(total);
+        System.out.println(totalpage);
+        request.setAttribute("curpage", curpage);
+		request.setAttribute("totalpage", totalpage);
+		request.setAttribute("startPage", startPage);
+		request.setAttribute("endPage", endPage);
+		request.setAttribute("list", list);
+		request.setAttribute("total", total);
 		request.setAttribute("mypage_jsp", "myPurchase.jsp");
 		request.setAttribute("main_jsp", "../mypage/mypage_main.jsp");
 		return "../main/main.jsp";
