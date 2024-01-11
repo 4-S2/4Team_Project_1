@@ -415,6 +415,47 @@ public class BusanDAO {
 		}
 		return list;
 	}
+	// 부산 리스트
+	   public List<BusanListVO> BusanRecoListData(String tab,String addr)
+	   {
+		   List<BusanListVO> list=new ArrayList<>();
+		   try
+		   {
+			   // 1. 연결 
+			   conn=dbconn.getConnection();
+			   // 2. SQL문장 전송 
+			   String sql="SELECT no,title,poster "
+			   		+ "FROM "+tab
+			   		+ " WHERE addr LIKE '%'||?||'%' "
+			   		+ "ORDER BY no ASC";
+			   // 3. 미리 전송 
+			   ps=conn.prepareStatement(sql);
+			   // 4. 실행 요청전에 ?에 값을 채운다 
+			   ps.setString(1, addr);
+			   // 5. 실행후에 결과값을 받는다 
+			   ResultSet rs=ps.executeQuery();
+			   while(rs.next()) // 출력 1번째 위치부터 읽기 시작 
+			   {
+				   BusanListVO vo=new BusanListVO();
+				   vo.setNo(rs.getInt(1));
+				   vo.setTitle(rs.getString(2));
+				   vo.setPoster(rs.getString(3));
+				   vo.setTab(tab);
+				   list.add(vo);
+			   }
+			   rs.close();
+		   }catch(Exception ex)
+		   {
+			  // 에러 출력 
+			   ex.printStackTrace();
+		   }
+		   finally
+		   {
+			   // 반환 => 재사용 
+			   dbconn.disConnection(conn, ps);
+		   }
+		   return list;
+	   }
 }
 
 

@@ -4,10 +4,10 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <!-- Include Kakao Maps API -->
-<script type="text/javascript"
-	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fce1f2ebd7aeec53bebf70c1f38c36c7&libraries=services"></script>
+
 
 <script type="text/javascript">
+   /*global-kakao*/
     var mapInitialized = false;
     var map, geocoder;
 
@@ -205,8 +205,9 @@
 }
 
 #kkomap {
-	width: 100%;
+	width: 80%;
 	height: 350px;
+	/* margin-right: 3%; */
 }
 
 .product-card-price {
@@ -259,7 +260,38 @@ color: #fff;
 .detail .product-info .heart{
     margin: 0px;
 }
-</style>
+#mapCont .product-card-wrapper{
+  width: 100%;
+  margin-bottom: 20px;
+}
+.reco{
+  display: flex;
+  height: 430px;
+  margin: 20px 20px 50px;
+}
+.products1{
+  width: 20%;
+  overflow-y: scroll;
+}
+#mapCont .product-card-image-wrapper
+{
+    height: 130px;
+    width: 130px;
+    margin-bottom: 8px;
+}
+#mapCont .product-card-price{
+   margin-top: 0px;
+   background-color: white;
+   color: black;
+   font-weight: 700;
+}
+.recommend{
+    margin-left: 19px;
+    margin-top: 60px;
+    font-size: 19px;
+
+}
+</style> 
 
 <div id="busan" class="detail">
 	<!-- <div class="section no-padding-vertical">
@@ -383,8 +415,30 @@ color: #fff;
 						</div>
 					</div>
 					<div id="mapCont" class="tab-content" style="display: none;">
-						지도 표시
-						<div id="kkomap" style="width: 100%; height: 350px;"></div>
+					 <h3 class="recommend">주변 여행지 추천</h3>
+						<div class="reco">
+						<div id="kkomap" style="height: 100%;">
+						</div>
+						<div role="list" class="products1 w-dyn-items">
+					<c:forEach var="vo1" items="${recoList}" begin="0" end="3">
+						<div role="listitem" class="product-card-wrapper w-dyn-item">
+							<a href="../busan/${vo1.tab}_detail.do?no=${vo1.no}"
+								class="product-card w-inline-block">
+								<div class="product-card-image-wrapper">
+									<img alt="" src="${vo1.poster}"
+										size="(max-width: 479px) 73vw, (max-width: 767px) 34vw, (max-width: 991px) 33vw, 12vw" />
+								</div>
+								<div
+									data-wf-sku-bindings="%5B%7B%22from%22%3A%22f_price_%22%2C%22to%22%3A%22innerHTML%22%7D%5D"
+									class="product-card-price"
+									style="font-size: 13px">${vo1.title}</div>
+							</a>
+						</div>
+						
+					</c:forEach>
+				</div>
+						</div>
+						
 					</div>
 					<div id="reviewCont" class="tab-content" style="">
 						<!-- 리뷰 내용 -->

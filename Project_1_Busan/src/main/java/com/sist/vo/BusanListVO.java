@@ -20,9 +20,16 @@ public class BusanListVO {
 		   private String rdate;
 		   private String rate;
 		   private int cocate;
+		   private String tab;
 		
 		
 		
+		public String getTab() {
+			return tab;
+		}
+		public void setTab(String tab) {
+			this.tab = tab;
+		}
 		public String getTag1() {
 			return tag1;
 		}

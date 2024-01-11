@@ -3,6 +3,8 @@ package com.sist.model;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -33,6 +35,30 @@ public class BusanDetailModel {
 		  String id=(String)session.getAttribute("id");
 		  JjimDAO dao1=JjimDAO.newInstance();
 		  int count=dao1.jjimCount(id,4,Integer.parseInt(no));
+		  
+
+		  String addr=vo.getAddr().substring(vo.getAddr().indexOf(" "));
+		  System.out.println(addr);
+		  String addr1=addr.trim().substring(0,addr.trim().indexOf(" "));
+		  String addr2=addr1.substring(3);
+		  System.out.println(addr1);
+		  List<BusanListVO> recolist1=dao.BusanRecoListData("food", addr2);	 
+		  List<BusanListVO> recolist2=dao.BusanRecoListData("tour", addr2);
+		  List<BusanListVO> recolist3=dao.BusanRecoListData("activity", addr2);
+		  List<BusanListVO> recolist4=dao.BusanRecoListData("festival", addr2);
+		 
+		  List<BusanListVO> recoList = Stream.of(recolist4, recolist3, recolist2, recolist1)
+	                .flatMap(List::stream)
+	                .collect(Collectors.toList());
+
+	        // 합쳐진 리스트 출력
+//	        System.out.println(recoList);
+//	        for(BusanListVO vo1:recoList)
+//	        {
+//	        	System.out.println(vo1.getPoster());
+//	        	System.out.println(vo1.getTitle());
+//	        	System.out.println(vo1.getTab());
+//	        }
 		  // 쿠키 저장
 		  Cookie[] cookies = request.getCookies();
 			if(cookies==null) {
@@ -91,6 +117,7 @@ public class BusanDetailModel {
 		  request.setAttribute("tab","food");
 		  request.setAttribute("vo", vo);
 		  request.setAttribute("list", list);
+		  request.setAttribute("recoList", recoList);
 		  //3. 결과값 모아서 request에 저장 
 		  request.setAttribute("main_jsp", "../busan/busanList_detail.jsp");
 		  return "../main/main.jsp";
@@ -110,6 +137,21 @@ public class BusanDetailModel {
 		  String id=(String)session.getAttribute("id");
 		  JjimDAO dao1=JjimDAO.newInstance();
 		  int count=dao1.jjimCount(id,1,Integer.parseInt(no));
+		  
+		  String addr=vo.getAddr().substring(vo.getAddr().indexOf(" "));
+		  System.out.println(addr);
+		  String addr1=addr.trim().substring(0,addr.trim().indexOf(" "));
+		  String addr2=addr1.substring(3);
+		  System.out.println(addr1);
+		  List<BusanListVO> recolist1=dao.BusanRecoListData("food", addr2);	 
+		  List<BusanListVO> recolist2=dao.BusanRecoListData("tour", addr2);
+		  List<BusanListVO> recolist3=dao.BusanRecoListData("activity", addr2);
+		  List<BusanListVO> recolist4=dao.BusanRecoListData("festival", addr2);
+		 
+		  List<BusanListVO> recoList = Stream.of(recolist4, recolist3, recolist1, recolist2)
+	                .flatMap(List::stream)
+	                .collect(Collectors.toList());
+		  
 		  // 쿠키 저장
 		  Cookie[] cookies = request.getCookies();
 			if(cookies==null) {
@@ -167,6 +209,7 @@ public class BusanDetailModel {
 			request.setAttribute("tab","tour");
 			request.setAttribute("count",count);
 			request.setAttribute("cateno","1");
+			request.setAttribute("recoList", recoList);
 		  //3. 결과값 모아서 request에 저장 
 		  request.setAttribute("main_jsp", "../busan/busanList_detail.jsp");
 		  return "../main/main.jsp";
@@ -187,6 +230,22 @@ public class BusanDetailModel {
 		  String id=(String)session.getAttribute("id");
 		  JjimDAO dao1=JjimDAO.newInstance();
 		  int count=dao1.jjimCount(id,2,Integer.parseInt(no));
+		  
+		  String addr=vo.getAddr().substring(vo.getAddr().indexOf(" "));
+		  System.out.println(addr);
+		  String addr1=addr.trim().substring(0,addr.trim().indexOf(" "));
+		  String addr2=addr1.substring(3);
+		  System.out.println(addr1);
+		  List<BusanListVO> recolist1=dao.BusanRecoListData("food", addr2);	 
+		  List<BusanListVO> recolist2=dao.BusanRecoListData("tour", addr2);
+		  List<BusanListVO> recolist3=dao.BusanRecoListData("activity", addr2);
+		  List<BusanListVO> recolist4=dao.BusanRecoListData("festival", addr2);
+		 
+		  List<BusanListVO> recoList = Stream.of(recolist1, recolist2, recolist3, recolist4)
+	                .flatMap(List::stream)
+	                .collect(Collectors.toList());
+		  
+		  
 		  // 쿠키 저장
 		  Cookie[] cookies = request.getCookies();
 			if(cookies==null) {
@@ -244,6 +303,7 @@ public class BusanDetailModel {
 		  request.setAttribute("count",count);
 		  request.setAttribute("tab","festival");
 		  request.setAttribute("cateno","2");
+		  request.setAttribute("recoList", recoList);
 		  //3. 결과값 모아서 request에 저장 
 		  request.setAttribute("main_jsp", "../busan/busanList_detail.jsp");
 		  return "../main/main.jsp";
@@ -264,6 +324,21 @@ public class BusanDetailModel {
 		  String id=(String)session.getAttribute("id");
 		  JjimDAO dao1=JjimDAO.newInstance();
 		  int count=dao1.jjimCount(id,3,Integer.parseInt(no));
+		  
+		  String addr=vo.getAddr().substring(vo.getAddr().indexOf(" "));
+		  System.out.println(addr);
+		  String addr1=addr.trim().substring(0,addr.trim().indexOf(" "));
+		  String addr2=addr1.substring(3);
+		  System.out.println(addr1);
+		  List<BusanListVO> recolist1=dao.BusanRecoListData("food", addr2);	 
+		  List<BusanListVO> recolist2=dao.BusanRecoListData("tour", addr2);
+		  List<BusanListVO> recolist3=dao.BusanRecoListData("activity", addr2);
+		  List<BusanListVO> recolist4=dao.BusanRecoListData("festival", addr2);
+		 
+		  List<BusanListVO> recoList = Stream.of(recolist1, recolist2, recolist4, recolist3)
+	                .flatMap(List::stream)
+	                .collect(Collectors.toList());
+		  
 		  // 쿠키 저장
 		  Cookie[] cookies = request.getCookies();
 			if(cookies==null) {
@@ -321,6 +396,7 @@ public class BusanDetailModel {
 		  request.setAttribute("count",count);
 		  request.setAttribute("tab","activity");
 		  request.setAttribute("cateno","3");
+		  request.setAttribute("recoList", recoList);
 		  //3. 결과값 모아서 request에 저장 
 		  request.setAttribute("main_jsp", "../busan/busanList_detail.jsp");
 		  return "../main/main.jsp";
