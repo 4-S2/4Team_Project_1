@@ -29,7 +29,7 @@ $(function(){
                 <h4 class="titbox"><strong>회원</strong>관리</h4>
    	  </div>
    	  <div class="tab_contents_area">
-   	  	<p class="titbox">&nbsp;&nbsp;<span class="total_num_txt offline ta_px0">총 <strong>${mSize}</strong>명의 회원이 있습니다.</span></p>
+   	  	<p class="titbox">&nbsp;&nbsp;<span class="total_num_txt offline ta_px0">총 <strong>${total}</strong>명의 회원이 있습니다.</span></p>
    	  </div>
 		<div id="divBoardList2" >
 		<!--TABLE-->
@@ -59,9 +59,9 @@ $(function(){
 				        </tr>
 				    </c:when>
 				    <c:otherwise>
-				        <c:forEach var="vo" items="${mlist}" varStatus="m">
+				        <c:forEach var="vo" items="${mlist}">
 				             <tr data-id="${vo.id}"><%--<a href="#" class="ellipsis">--%>
-				                <td class="dp_pc num2"> ${m.index + 1}</td>
+				                <td class="dp_pc num2"> ${vo.num}</td>
 				                <td class="category px_20 ta_px10">${vo.id}</td>
 				                <td class="category px_20 ta_px10">${vo.name}</td>
 				                <td class="category px_20 ta_px10">${vo.phone}</td>

@@ -389,15 +389,17 @@ public class MypageModel {
 		return "../main/main.jsp";
 	}
 	
+	// 문의글 답변찾기
 	@RequestMapping("mypage/myInquiry_answer.do")
 	public String mypage_myqInquiry_answer(HttpServletRequest request, HttpServletResponse response)
 	{	
 		String gid=request.getParameter("gid");
 		String qno=request.getParameter("qno");
 		
-		request.setAttribute("mypage_jsp", "myacc_delete.jsp");
-		request.setAttribute("main_jsp", "../mypage/mypage_main.jsp");
-		return "../main/main.jsp";
+		MypageDAO dao=MypageDAO.newInstance();
+		int answer_qno = dao.findAnswerQna(Integer.parseInt(qno),Integer.parseInt(gid));
+		
+		return "redirect:../board/qnaboard_detail.do?qno="+answer_qno;
 	}
 	
 	// 회원탈퇴

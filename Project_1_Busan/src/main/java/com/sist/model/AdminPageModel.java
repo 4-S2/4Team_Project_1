@@ -46,8 +46,9 @@ public class AdminPageModel {
 				int endPage=((curpage-1)/BLOCK)*BLOCK+BLOCK;
 				if(totalpage<endPage) 
 					endPage=totalpage;
-				
+				int total = dao.memberTotal();
 			  
+				request.setAttribute("total", total);
 			  request.setAttribute("curpage", curpage);
 			  request.setAttribute("totalpage", totalpage);
 			  request.setAttribute("startPage", startPage);

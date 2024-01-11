@@ -660,6 +660,27 @@ ORDER BY r.frno DESC;
 				return total;
 			}
 			
+			// 문의글 답변 찾기
+			public int findAnswerQna(int qno, int gid) {
+				int aQno=0;
+				try {
+					conn=dbconn.getConnection();
+					String sql="SELECT qno FROM QnaBoard "
+							+ "WHERE group_id=? AND qno!="+qno;
+					ps=conn.prepareStatement(sql);
+					ps.setInt(1, gid);
+					ResultSet rs=ps.executeQuery();
+					rs.next();
+					aQno=rs.getInt(1);
+					rs.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}finally {
+					dbconn.disConnection(conn, ps);
+				}
+				return aQno;
+			}
+			
 //------------------------ End of 문의내역
 
 //------------------------ 장바구니/구매내역

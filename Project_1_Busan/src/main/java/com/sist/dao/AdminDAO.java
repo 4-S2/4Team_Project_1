@@ -49,6 +49,7 @@ public class AdminDAO {
 					vo.setEmail(rs.getString(3));
 					vo.setPhone(rs.getString(4));
 					vo.setAddr(rs.getString(5));
+					vo.setNum(rs.getInt(6));
 					list.add(vo);
 				}
 				rs.close();
@@ -227,6 +228,25 @@ public class AdminDAO {
 			   }
 			   return success;
 		   }
+		 
+			// 총 회원 수
+			public int memberTotal() {
+				int total=0;
+				try {
+					conn=dbconn.getConnection();
+					String sql="SELECT COUNT(*) FROM user_ WHERE admin='n'";
+					ps=conn.prepareStatement(sql);
+					ResultSet rs=ps.executeQuery();
+					rs.next();
+					total=rs.getInt(1);
+					rs.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				} finally {
+					dbconn.disConnection(conn, ps);
+				}
+				return total;
+			}
 //----------------------- END OF 회원관리
 
 //----------------------- 특산물 관리(goods)
@@ -660,7 +680,7 @@ public class AdminDAO {
 			try {
 				conn=dbconn.getConnection();
 				String sql="SELECT COUNT(*) AS total FROM QnaBoard "
-						+ "WHERE group_step=0";
+						+ "WHERE group_step=0 AND status=0";
 				ps=conn.prepareStatement(sql);
 				ResultSet rs=ps.executeQuery();
 				rs.next();
@@ -713,13 +733,6 @@ public class AdminDAO {
 		   {		
 			   try {
 				   conn=dbconn.getConnection();
-					/*
-					 * String sql =
-					 * "SELECT MAX(group_step) FROM qnaBoard WHERE group_id="+vo.getGroup_id();
-					 * ps=conn.prepareStatement(sql); ResultSet rs=ps.executeQuery(); rs.next(); int
-					 * maxGId = rs.getInt(1);
-					 */
-				    
 		           String sql="INSERT INTO qnaBoard(qno,name,subject,cont,pwd,filename,filesize,id,group_id,"
 		            		+ "group_step) "
 		            		+ "VALUES(qb_no_seq.nextval,?,?,?,?,?,?,?,?,?)";

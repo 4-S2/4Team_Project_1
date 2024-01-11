@@ -2,6 +2,15 @@ package com.sist.vo;
 
 public class MemberVO {
 	private String id, pwd, email, name, phone, postcode, addr, detail_addr, msg, admin;
+	private int num;
+	
+	
+	public int getNum() {
+		return num;
+	}
+	public void setNum(int num) {
+		this.num = num;
+	}
 	public String getMsg() {
 		return msg;
 	}

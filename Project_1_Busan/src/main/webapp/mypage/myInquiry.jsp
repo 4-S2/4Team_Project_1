@@ -14,8 +14,11 @@
 </style>
 <script>
     function answer(gid,qno) {
-    	"mypage/myInquiry_answer.do?gid="+gid+"&qno="+qno;
-        location.href()
+    	/*"../mypage/myInquiry_answer.do?gid="+gid+"&qno="+qno;*/
+        /*let newUrl = '../mypage/myInquiry_answer.do';  
+        newUrl += '?gid=' + gid + '&qno=' + qno;
+        window.location.href = newUrl;*/
+        location.href="../mypage/myInquiry_answer.do?gid="+gid+"&qno="+qno;
     }
 </script>
 
@@ -60,7 +63,7 @@
 				                	<td class="category px_20 ta_px10">답변대기</td>
 				                </c:if>
 				                <c:if test="${vo.status == 1 }">
-				                	<td class="category px_20 ta_px10"  onclick="answer(${vo.group_id},(${vo.qno})"> <strong>답변완료</strong></td>
+				                	<td class="category px_20 ta_px10"  onclick="answer(${vo.group_id},${vo.qno})"> <strong>답변완료</strong></td>
 				                </c:if>				                
 				            </tr>
 				        </c:forEach>
