@@ -170,5 +170,29 @@ public class HeartDAO {
 		}
 		return result;
 	}
+	public int heartTotalCount(int cateno,int no)
+	{
+		int count=0;
+		try {
+			conn=dbconn.getConnection();
+			String sql="SELECT count(*) FROM Heart "
+					+ "WHERE cateno=? AND no=?";
+			ps=conn.prepareStatement(sql);
+			ps.setInt(1, cateno);
+			ps.setInt(2, no);
+			ResultSet rs=ps.executeQuery();
+			rs.next();
+			count=rs.getInt(1);
+			rs.close();
+			ps.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			dbconn.disConnection(conn, ps);
+		}
+		return count;
+		
+	}
 	
 }

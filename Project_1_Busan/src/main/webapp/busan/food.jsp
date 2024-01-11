@@ -178,12 +178,15 @@
                                     </div>
                                     <h6 class="product-card-heading">${vo.title}</h6>
                                     <div class="product-card-info">
+                                    
 	                                   	<span><img src="../images/icon_heart.png" class="icon icon-heart"> 좋아요 ${vo.heart}</span>
+	                                   	
 	                                   	<span><img src="../images/icon_jjim.png" class="icon icon-jjim"> 찜 ${vo.jjim}</span>
 	                                </div>
                                 </a>
                             </div>
                             </c:forEach>
+                            
                         </div>
                     </div>
                 </div>

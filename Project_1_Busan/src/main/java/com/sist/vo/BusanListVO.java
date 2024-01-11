@@ -14,7 +14,7 @@ public class BusanListVO {
 		   private String phone,restday,bhour;
 		   private String[] tag;
 		   private String tag1;
-		   private String jjim;
+		   private int jjim;
 		   private int heart;
 		   private String[] deimage;
 		   private String rdate;
@@ -113,11 +113,11 @@ public class BusanListVO {
 		public void setBhour(String bhour) {
 			this.bhour = bhour;
 		}
-		public String getJjim() {
+		public int getJjim() {
 			return jjim;
 		}
-		public void setJjim(String jjim) {
-			this.jjim = jjim;
+		public void setJjim(int jcount) {
+			this.jjim = jcount;
 		}
 		public int getHeart() {
 			return heart;

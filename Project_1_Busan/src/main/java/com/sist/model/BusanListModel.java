@@ -11,6 +11,7 @@ import java.util.*;
 import com.sist.dao.*;
 import com.sist.vo.BusanListVO;
 
+import oracle.jdbc.driver.parser.util.Array;
 import oracle.net.ns.SessionAtts;
 public class BusanListModel {
 	
@@ -27,6 +28,17 @@ public class BusanListModel {
 		  //2. DB연동 
 		  BusanDAO dao=new BusanDAO();
 		  List<BusanListVO> list=dao.BusanListData(curpage,"food");
+		  HeartDAO hdao=HeartDAO.newInstance();
+		  JjimDAO jdao=JjimDAO.newInstance();
+		  List<Integer> hlist=new ArrayList<>();
+		  for(BusanListVO a:list)
+		  {
+			  int hcount=hdao.heartTotalCount(4, a.getNo());
+			  int jcount=jdao.jjimTotalCount(4, a.getNo());
+			  a.setHeart(hcount);
+			  a.setJjim(jcount);
+		  }
+		  
 		  int totalpage=dao.BusanListTotalPage("food");
 		  
 		   final int BLOCK=10;
@@ -119,6 +131,16 @@ public class BusanListModel {
 		  //2. DB연동 
 		  BusanDAO dao=new BusanDAO();
 		  List<BusanListVO> list=dao.BusanFindList(word,curpage,"tour",sort);
+		  HeartDAO hdao=HeartDAO.newInstance();
+		  JjimDAO jdao=JjimDAO.newInstance();
+		  List<Integer> hlist=new ArrayList<>();
+		  for(BusanListVO a:list)
+		  {
+			  int hcount=hdao.heartTotalCount(1, a.getNo());
+			  int jcount=jdao.jjimTotalCount(1, a.getNo());
+			  a.setHeart(hcount);
+			  a.setJjim(jcount);
+		  }
 		  int totalpage=dao.BusanFindTotalPage(word, "tour");
 		  
 		   final int BLOCK=10;
@@ -164,6 +186,16 @@ public class BusanListModel {
 		  //2. DB연동 
 		  BusanDAO dao=new BusanDAO();
 		  List<BusanListVO> list=dao.BusanFindList(word,curpage,"festival",sort);
+		  HeartDAO hdao=HeartDAO.newInstance();
+		  JjimDAO jdao=JjimDAO.newInstance();
+		  List<Integer> hlist=new ArrayList<>();
+		  for(BusanListVO a:list)
+		  {
+			  int hcount=hdao.heartTotalCount(2, a.getNo());
+			  int jcount=jdao.jjimTotalCount(2, a.getNo());
+			  a.setHeart(hcount);
+			  a.setJjim(jcount);
+		  }
 		  int totalpage=dao.BusanFindTotalPage(word, "festival");
 		  
 		   final int BLOCK=10;
@@ -208,6 +240,16 @@ public class BusanListModel {
 		  //2. DB연동 
 		  BusanDAO dao=new BusanDAO();
 		  List<BusanListVO> list=dao.BusanFindList(word,curpage,"activity",sort);
+		  HeartDAO hdao=HeartDAO.newInstance();
+		  JjimDAO jdao=JjimDAO.newInstance();
+		  List<Integer> hlist=new ArrayList<>();
+		  for(BusanListVO a:list)
+		  {
+			  int hcount=hdao.heartTotalCount(3, a.getNo());
+			  int jcount=jdao.jjimTotalCount(3, a.getNo());
+			  a.setHeart(hcount);
+			  a.setJjim(jcount);
+		  }
 		  int totalpage=dao.BusanFindTotalPage(word, "activity");
 		  
 		   final int BLOCK=10;
