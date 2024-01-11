@@ -114,7 +114,99 @@ public class MypageDAO {
 			return success;
 		}
 
+		// 회원 탈퇴하기
+		// 연결된 테이블: reservation, jjim, heart, review, review_reply,order => cart, reserve_info
+		 public String memberDeleteOk(String id,String pwd)
+		   {
+			   String result="fail";
+			   try
+			   {
+				   conn=dbconn.getConnection();
+				   
+				   String sql="SELECT password FROM user_ "
+						     +"WHERE id=?";
+				   ps=conn.prepareStatement(sql);
+				   ps.setString(1, id);
+				   ResultSet rs=ps.executeQuery();
+				   rs.next();
+				   String db_pwd=rs.getString(1);
+				   rs.close();
+				   if(db_pwd.equals(pwd))
+				   {
+					   conn.setAutoCommit(false);
+						   sql="DELETE FROM reservation "
+							  +"WHERE id=?";
+						   ps=conn.prepareStatement(sql);
+						   ps.setString(1, id);
+						   ps.executeUpdate();
+						   
+						   sql="DELETE FROM jjim  "
+								   +"WHERE id=?";
+						   ps=conn.prepareStatement(sql);
+						   ps.setString(1, id);
+						   ps.executeUpdate();
+						   
+						   sql="DELETE FROM heart  "
+								   +"WHERE id=?";
+						   ps=conn.prepareStatement(sql);
+						   ps.setString(1, id);
+						   ps.executeUpdate();
+						   
+						   sql="DELETE FROM qnaboard "
+								   +"WHERE id=?";
+						   ps=conn.prepareStatement(sql);
+						   ps.setString(1, id);
+						   ps.executeUpdate();
+						   
+						   sql="DELETE FROM review "
+								   +"WHERE id=?";
+						   ps=conn.prepareStatement(sql);
+						   ps.setString(1, id);
+						   ps.executeUpdate();
 
+						   sql="DELETE FROM reserve_info "
+							  +"WHERE id=?";
+						   ps=conn.prepareStatement(sql);
+						   ps.setString(1, id);
+						   ps.executeUpdate();
+						   
+						   sql="DELETE FROM review_reply "
+							  +"WHERE id=?";
+						   ps=conn.prepareStatement(sql);
+						   ps.setString(1, id);
+						   ps.executeUpdate();
+						   
+						   sql="DELETE FROM cart "
+							  +"WHERE id=?";
+						   ps=conn.prepareStatement(sql);
+						   ps.setString(1, id);
+						   ps.executeUpdate();
+						   
+						   sql="DELETE FROM user_ "
+								   +"WHERE id=?";
+						   ps=conn.prepareStatement(sql);
+						   ps.setString(1, id);
+						   ps.executeUpdate();
+						   
+						   result="OK";
+						   conn.commit();
+				   }else {
+					   result="NO";
+				   }
+			   }catch(Exception ex){
+				   ex.printStackTrace();
+				   try{
+					   conn.rollback();
+				   }catch(Exception e) {}
+				   
+			   	}finally{
+				   dbconn.disConnection(conn, ps);
+				   try{
+					   conn.setAutoCommit(true);
+				   }catch(Exception ex) {}
+			   }
+			   return result;
+		   }
 
 //----------------------- 나의 예약내역
 	    /*
@@ -422,100 +514,10 @@ ORDER BY r.frno DESC;
 		}
 
 		
-		// 회원 탈퇴하기
-		// 연결된 테이블: reservation, jjim, heart, review, review_reply,order => cart, reserve_info
-		 public String memberDeleteOk(String id,String pwd)
-		   {
-			   String result="fail";
-			   try
-			   {
-				   conn=dbconn.getConnection();
-				   
-				   String sql="SELECT password FROM user_ "
-						     +"WHERE id=?";
-				   ps=conn.prepareStatement(sql);
-				   ps.setString(1, id);
-				   ResultSet rs=ps.executeQuery();
-				   rs.next();
-				   String db_pwd=rs.getString(1);
-				   rs.close();
-				   if(db_pwd.equals(pwd))
-				   {
-					   conn.setAutoCommit(false);
-						   sql="DELETE FROM reservation "
-							  +"WHERE id=?";
-						   ps=conn.prepareStatement(sql);
-						   ps.setString(1, id);
-						   ps.executeUpdate();
-						   
-						   sql="DELETE FROM jjim  "
-								   +"WHERE id=?";
-						   ps=conn.prepareStatement(sql);
-						   ps.setString(1, id);
-						   ps.executeUpdate();
-						   
-						   sql="DELETE FROM heart  "
-								   +"WHERE id=?";
-						   ps=conn.prepareStatement(sql);
-						   ps.setString(1, id);
-						   ps.executeUpdate();
-						   
-						   sql="DELETE FROM qnaboard "
-								   +"WHERE id=?";
-						   ps=conn.prepareStatement(sql);
-						   ps.setString(1, id);
-						   ps.executeUpdate();
-						   
-						   sql="DELETE FROM review "
-								   +"WHERE id=?";
-						   ps=conn.prepareStatement(sql);
-						   ps.setString(1, id);
-						   ps.executeUpdate();
+//------------------------ End of 예약 
 
-						   sql="DELETE FROM reserve_info "
-							  +"WHERE id=?";
-						   ps=conn.prepareStatement(sql);
-						   ps.setString(1, id);
-						   ps.executeUpdate();
-						   
-						   sql="DELETE FROM review_reply "
-							  +"WHERE id=?";
-						   ps=conn.prepareStatement(sql);
-						   ps.setString(1, id);
-						   ps.executeUpdate();
-						   
-						   sql="DELETE FROM cart "
-							  +"WHERE id=?";
-						   ps=conn.prepareStatement(sql);
-						   ps.setString(1, id);
-						   ps.executeUpdate();
-						   
-						   sql="DELETE FROM user_ "
-								   +"WHERE id=?";
-						   ps=conn.prepareStatement(sql);
-						   ps.setString(1, id);
-						   ps.executeUpdate();
-						   
-						   result="OK";
-						   conn.commit();
-				   }else {
-					   result="NO";
-				   }
-			   }catch(Exception ex){
-				   ex.printStackTrace();
-				   try{
-					   conn.rollback();
-				   }catch(Exception e) {}
-				   
-			   	}finally{
-				   dbconn.disConnection(conn, ps);
-				   try{
-					   conn.setAutoCommit(true);
-				   }catch(Exception ex) {}
-			   }
-			   return result;
-		   }
-
+		
+//------------------------ 문의내역
 			/*
 			 * private int qno; private String subject; private Date regdate;
 			 */
@@ -572,5 +574,162 @@ ORDER BY r.frno DESC;
 					dbconn.disConnection(conn, ps);
 				}
 				return total;
+			}
+			
+//------------------------ End of 문의내역
+
+//------------------------ 장바구니/구매내역
+			//특산물 리스트 (검색기능 추가)
+			public List<GoodsVO> adGoodsListData(int page){
+				List<GoodsVO> list = new ArrayList<GoodsVO>();
+				try {
+					conn=dbconn.getConnection();
+					String sql="SELECT gno, gname, price, amount, num "
+							  +"FROM (SELECT gno, gname, amount, price, rownum as num "
+							  +"FROM (SELECT gno, gname, amount, price "
+							  +"FROM goods ORDER BY gno ASC)) "
+							  +"WHERE num BETWEEN ? AND ?";
+					ps=conn.prepareStatement(sql);
+					
+					int rowSize=8;
+					int start=(rowSize*page)-(rowSize-1);
+					int end=rowSize*page;
+					
+					ps.setInt(1, page);
+					ps.setInt(2, start);
+					ps.setInt(3, end);
+					
+					ResultSet rs=ps.executeQuery();
+					while(rs.next()) {
+						GoodsVO vo=new GoodsVO();
+						vo.setGno(rs.getInt(1));
+						vo.setGname(rs.getString(2));
+						vo.setPoster(rs.getString(3));
+						vo.setPrice(rs.getString(4));
+						list.add(vo);
+						list.add(vo);
+					}
+					rs.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				} finally {
+					dbconn.disConnection(conn, ps);
+				}
+				
+				return list;
+			}
+			
+			// 나의 구매내역
+			public List<CartVO> myBuyData(String id, int page) {
+				List<CartVO> list=new ArrayList<>();
+				
+				try {
+			        conn=dbconn.getConnection();
+			        String sql="SELECT cart_no,GNO, amount, price, id, regdate, GNAME, poster,issale,ischeck, num "
+			        		+ "FROM (SELECT cart_no,GNO, amount, price, id, regdate, GNAME, poster,issale,ischeck, rownum AS num "
+			        		+ "FROM (SELECT cart_no,c.GNO, amount, c.price, c.id, regdate, g.GNAME, g.poster,issale,ischeck "
+			        		+ "FROM cart c,goods g "
+			        		+ "WHERE c.gno=g.gno AND id=? AND issale=1 ORDER BY cart_no DESC)) "
+			        		+ "WHERE num BETWEEN ? AND ?";
+			        ps=conn.prepareStatement(sql);
+			        ps.setString(1, id);
+					int rowSize=5;
+					int start=(rowSize*page)-(rowSize-1);
+					int end=rowSize*page;
+					ps.setInt(2, start);
+					ps.setInt(3, end);
+					ResultSet rs=ps.executeQuery();
+			        while(rs.next()) {
+			        	CartVO vo=new CartVO();
+			            vo.setCart_no(rs.getInt(1));
+			            vo.setGno(rs.getInt(2));
+			            vo.setAmount(rs.getInt(3));
+			            vo.getGvo().setPrice(rs.getString(4));
+			            vo.setId(rs.getString(5));
+			            vo.setRegdate(rs.getDate(6));
+			            vo.getGvo().setGname(rs.getString(7));
+			            vo.getGvo().setPoster(rs.getString(8));
+			            vo.setIssale(rs.getInt(9));
+			            vo.setIscheck(rs.getInt(10));
+			            vo.setNum(rs.getInt(11));
+			            list.add(vo);
+			        }
+			        rs.close();
+			    } catch (Exception ex) {
+			        ex.printStackTrace();
+			    } finally {
+			        dbconn.disConnection(conn, ps);
+			    }
+				return list;
+			}
+			
+			// 총 구매내역 숫자
+			public int myBuyTotal(String id) {
+				int total=0;
+				try {
+					conn=dbconn.getConnection();
+					String sql="SELECT COUNT(*) FROM cart WHERE id=? AND issale=1";
+					ps=conn.prepareStatement(sql);
+					ps.setString(1, id);
+					ResultSet rs=ps.executeQuery();
+					rs.next();
+					total=rs.getInt(1);
+					rs.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				} finally {
+					dbconn.disConnection(conn, ps);
+				}
+				return total;
+			}
+			
+			//구매내역 총페이지
+			public int myBuyTotalPage(String id) {
+				int totalpage=0;
+				
+				try {
+					conn=dbconn.getConnection();
+					String sql="SELECT CEIL(COUNT(*)/5.0) FROM cart WHERE id=? AND issale=1";
+					ps=conn.prepareStatement(sql);
+					ps.setString(1, id);
+					ResultSet rs=ps.executeQuery();
+					rs.next();
+					totalpage=rs.getInt(1);
+					rs.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				} finally {
+					dbconn.disConnection(conn, ps);
+				}
+				return totalpage;
+			}
+			
+			//특산물 상세 
+			public GoodsVO adGoodsDetailData(int gno) {
+				GoodsVO vo=new GoodsVO();
+				
+				try {
+					conn=dbconn.getConnection();
+					String sql="SELECT * FROM goods "
+			                  +"WHERE gno=?";
+					ps=conn.prepareStatement(sql);
+					ps.setInt(1, gno);
+					ResultSet rs=ps.executeQuery();
+					if(rs.next()) {
+						vo.setGno(rs.getInt(1));
+			            vo.setGname(rs.getString(2));
+			            vo.setPoster(rs.getString(3));
+			            vo.setOrigin(rs.getString(4));
+			            vo.setManufacturer(rs.getString(5));
+			            vo.setPrice(rs.getString(6));
+			            vo.setDimage(rs.getString(7));
+					}
+					rs.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				} finally {
+					dbconn.disConnection(conn, ps);
+				}
+				return vo;
 			}
 }

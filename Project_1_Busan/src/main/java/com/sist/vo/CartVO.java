@@ -15,10 +15,17 @@ public class CartVO {
     private int cart_no, gno, amount, price, ischeck, issale;
     private String id;
     private Date regdate;
-    
+    private int num;
 	private MemberVO mvo=new MemberVO();
 	private GoodsVO gvo=new GoodsVO();
     
+	
+	public int getNum() {
+		return num;
+	}
+	public void setNum(int num) {
+		this.num = num;
+	}
 	public MemberVO getMvo() {
 		return mvo;
 	}
