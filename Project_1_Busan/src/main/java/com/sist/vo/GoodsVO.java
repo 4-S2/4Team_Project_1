@@ -10,9 +10,16 @@ package com.sist.vo;
  DIMAGE                                             VARCHAR2(2000)
  */
 public class GoodsVO {
-	private int gno;
+	private int gno,num;
 	private String gname, poster, origin, manufacturer, price, dimage;
 	
+	
+	public int getNum() {
+		return num;
+	}
+	public void setNum(int num) {
+		this.num = num;
+	}
 	public int getGno() {
 		return gno;
 	}

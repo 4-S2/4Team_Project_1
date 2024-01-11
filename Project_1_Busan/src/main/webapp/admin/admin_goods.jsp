@@ -10,32 +10,20 @@
 <script>
 $(document).ready(function(){
   $("#search").on("keyup", function() {
-    var value = $(this).val().toLowerCase();
+    let value = $(this).val().toLowerCase();
     $("#myTable tr").filter(function() {
-      $(this).toggle(($(this).find("td:eq(1)").text().toLowerCase().indexOf(value) > -1) || 
-    		  		 ($(this).find("td:eq(2)").text().toLowerCase().indexOf(value) > -1))
+      $(this).toggle(($(this).find("td:eq(2)").text().toLowerCase().indexOf(value) > -1))
     });
     
   });
   
-  $('.gInfo').on("click", function(){
+  $(".upDel").click(function(){
 		let x=(document.body.offsetWidth/2)-(750/2)
 		let y=(window.screen.height/2)-(570/2)-50
 		let gno=$(this).attr('data-gno')
-		window.open("../adminpage/groundDetail.do?gno="+gno,"",'width=750, height=570, left='+x+', top='+y)
-  })
-  $('.mInfo').on("click", function(){
-	  	let x=(document.body.offsetWidth/2)-(750/2)
-		let y=(window.screen.height/2)-(500/2)-50
-		let id=$(this).attr('data-id')
-		window.open("../adminpage/memberDetail.do?id="+id,"",'width=750, height=500, left='+x+', top='+y)
-  })
+		window.open("../admin/goods_upDel.do?gno="+gno,"",'width=750, height=570, left='+x+', top='+y)
+	});
   
-  $('.rState').on("change",function(){
-	  let rstate=$(this).val()
-	  let rno=$(this).attr("data-rno")
-	  location.href="../adminpage/stateChange.do?rstate="+rstate+"&rno="+rno
-  })
 });
 </script>
 <style type="text/css">
@@ -54,44 +42,75 @@ $(document).ready(function(){
 			cursor: pointer;
 			font-weight: bold;
 		}
+		th {
+/* 			color: #0923a9; */
+			text-align: center
+		}
+ .tab_contents_area {
+    float: left;
+    margin-right: 210px; 
+  }
+
+  #sFrm {
+    float: left;
+  }
+
+  .clearfix::after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  #search {
+    width: 250px; 
+    height: 32px; 
+  }
+
+  #searchBtn {
+    width: 60px; 
+    height: 30px; 
+  }
+
 </style>
 </head>
 <body>
-	<div class="container mt-3" style="overflow-y: scroll;;height:800px;width:850px">
-	  <h4>예약 현황</h4>
-	  <div style="height:30px;"></div>
-	  <p>예약 현황</p><div><input type=search id="search" placeholder="구장 혹은 이름을 입력하세요.." style="width: 200px;"></div>   
-	  <table class="table table-hover" style="table-layout: auto;">
+      <div class="max1200 dp_pc contents_titbox">
+                <h4 class="titbox"><strong>특산물</strong>관리</h4>
+   	  </div>
+   	  <div class="clearfix">
+   	  <div class="tab_contents_area">
+   	  	<p class="titbox">&nbsp;&nbsp;<span class="total_num_txt offline ta_px0">총 <strong>${gSize}</strong>개의 상품이 등록되어 있습니다.</span></p>
+   	  </div>
+		  <div id="sFrm">
+		  	<input type=search name=search id="search" placeholder="검색어을 입력하세요" value="${search }">
+		  	<input type=button id="searchBtn" value="검색" class="btn btn-sm btn-info">
+		  </div>
+	  </div>
+	<div class="container mt-3" style="overflow-y: scroll;height:800px;width:850px">
+
+	  <table class="table table-hover" style="table-layout: auto; ">
 	    <thead>
 	      <tr>
+	        <th style="width: 6%;">번호</th>
 	        <th></th>
-	        <th>구장 이름</th>
-	        <th>예약자</th>
-	        <th>예약날짜</th>
-	        <th>시간</th>
-	        <th>승인여부</th>
+	        <th>상품명</th>
+	        <th>제조사</th>
+	        <th>가격</th>
+	        <th>수정|삭제</th>
 	      </tr>
 	    </thead>
 	    <tbody id=myTable>
 	    	<c:forEach var="vo" items="${list }">
 	    		<tr>
-			        <td width=10%><img src="${vo.gimage }" width=60px height=40px></td>
-			        <td><span class="gInfo" data-gno="${vo.gno }">${vo.gname }</span></td>
-			        <td><span class=mInfo data-id="${vo.id }">${vo.name }</span></td>
-			        <td>${vo.rdate }</td>
-			        <td>${vo.time }</td>
-			        <td>
-						<select class="rState" data-rno=${vo.rno }>
-							<option ${vo.rstate=='예약대기'?"selected":"" } value=예약대기>예약대기</option>
-							<option ${vo.rstate=='예약승인'?"selected":"" } value=예약승인>예약승인</option>
-							<option ${vo.rstate=='예약취소'?"selected":"" } value=예약취소>예약취소</option>
-						</select>
-					</td>
+	    			<td style="text-align: center;">${vo.num}</td>
+			        <td width=10%><img src="${vo.poster }" width=60px height=40px></td>
+			        <td><a href="../store/goods_detail.do?gno=${vo.gno }"><span> ${vo.gname }</span></a></td>
+			        <td><span>${vo.manufacturer }</span></td>
+			        <td>${vo.price }</td>
+			        <td><input type="button" value="수정|삭제" id="" data-gno="${vo.gno }" class="btn btn-sm upDel"></td>
 			    </tr>
 	    	</c:forEach>
 	    </tbody>
 	  </table>
 	</div>
-	
 </body>
 </html>

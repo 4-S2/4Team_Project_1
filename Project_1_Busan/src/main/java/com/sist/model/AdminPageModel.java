@@ -293,37 +293,20 @@ public class AdminPageModel {
         return "redirect:../admin/admin_qna.do";
 	}
 	
-	// 특산물 리스트
+	// 특산물 목록
 	@RequestMapping("admin/admin_goods.do")
 	public String admin_goods(HttpServletRequest request,HttpServletResponse response) {
 		try {
 			request.setCharacterEncoding("UTF-8");
 		} catch (Exception e) {}
 		
-		String page=request.getParameter("page");
 		String search=request.getParameter("search");
 		if(search==null)
 			search="";
-		if(page==null)
-			page="1";
-		int curpage=Integer.parseInt(page);
 		AdminDAO dao=AdminDAO.newInstance();
-		List<GoodsVO> list=dao.adGoodsListData(curpage, search);
-		int totalpage=dao.adGoodsTotalPage(search);
+		List<GoodsVO> list=dao.adGoodsListData(search);
 		
-		final int BLOCK=10;
-		int startpage=((curpage-1)/BLOCK)*BLOCK+1;
-		int endpage=((curpage-1)/BLOCK)*BLOCK+BLOCK;
-		if(totalpage<endpage) {
-			endpage=totalpage;
-		}
-		
-		request.setAttribute("search", search);
-		request.setAttribute("curpage", curpage);
-		request.setAttribute("totalpage", totalpage);
-		request.setAttribute("startpage", startpage);
-		request.setAttribute("endpage", endpage);
-		
+		request.setAttribute("gSize", list.size());
 		request.setAttribute("list", list);
 		request.setAttribute("admin_jsp", "../admin/admin_goods.jsp");
 		request.setAttribute("main_jsp", "../admin/admin_main.jsp");
@@ -331,14 +314,15 @@ public class AdminPageModel {
 	}
 	
 	// 특산물 상세
-	@RequestMapping("admin/admin_goods_detail.do")
+	@RequestMapping("admin/goods_upDel.do")
 	public String admin_goods_detail(HttpServletRequest request, HttpServletResponse response) {
 		String gno=request.getParameter("gno");
 		
 		GoodsVO vo=dao.adGoodsDetailData(Integer.parseInt(gno));
+		System.out.println(vo.getGno());
 		
 		request.setAttribute("vo", vo);
-		return "../admin/admin_goods_detail.jsp";
+		return "../admin/admin_goods_updel.jsp";
 	}
 				
 	// 특산물 수정
@@ -352,21 +336,17 @@ public class AdminPageModel {
 		}catch(Exception ex) {}
 		int gno = Integer.parseInt(request.getParameter("gno"));
 		String gname=request.getParameter("gname");
-		String poster=request.getParameter("poster");
 		String origin=request.getParameter("origin");
 		String manufacturer=request.getParameter("manufacturer");
 		String price=request.getParameter("price");
-		String dimage=request.getParameter("dimage");
 		
 		GoodsVO vo=new GoodsVO();
 		vo.setGno(gno);
 		vo.setGname(gname);
-		vo.setPoster(poster);
 		vo.setOrigin(origin);
 		vo.setManufacturer(manufacturer);
 		vo.setPrice(price);
-		vo.setDimage(dimage);
-		
+
 		int success=dao.adGoodsUpdate(vo);
 		try
 		{
@@ -395,7 +375,7 @@ public class AdminPageModel {
 		try
 		{
 			PrintWriter out=response.getWriter();
-			if(success==2) //order, goods 수정
+			if(success==2) //cart, goods 수정
 			{
 				out.write("success");
 			}

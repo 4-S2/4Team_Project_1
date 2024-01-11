@@ -21,6 +21,10 @@ padding:0;
 /* width: auto;
 max-width: 1280px; */
 }
+.list_fliter_board .board_filter_area .board_filter_box .board_filter_in .divider {
+    margin: 10px 0;
+    border-top: 1px solid #e6e8eb;
+}
 </style>
 <script>
 document.addEventListener("DOMContentLoaded", function() {

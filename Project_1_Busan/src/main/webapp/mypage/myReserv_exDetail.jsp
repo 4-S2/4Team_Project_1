@@ -92,7 +92,7 @@ color: #fff;
 			<div class="product">
 			
 				<div class="product-top">
-				<div><h1> ${vo.evo.ename }</h1></div>
+				<div><h4> ${vo.evo.ename } </h4><h5>예약정보</h5></div>
 					<div class="product-poster">
 						<img alt="대표 이미지" src="${vo.evo.poster }" width="300" height="300" />
 
@@ -142,7 +142,7 @@ color: #fff;
 											승인완료
 											</div>
 					                </c:if>	
-					                <c:if test="${vo.ok == 2 }">
+					                <c:if test="${vo.rok == 2 }">
 											<div
 												data-wf-sku-bindings="%5B%7B%22from%22%3A%22f_width_%22%2C%22to%22%3A%22innerHTML%22%7D%5D">
 											예약취소

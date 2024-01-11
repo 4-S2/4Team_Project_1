@@ -93,7 +93,7 @@ color: #fff;
 			<div class="product">
 			
 				<div class="product-top">
-				<div><h1> ${vo.fvo.title }</h1></div>
+				<div><h4> ${vo.fvo.title } </h4><h5>예약정보</h5> </div>
 					<div class="product-poster">
 						<img alt="대표 이미지" src="${vo.fvo.poster }" width="300" height="300" />
 
