@@ -1,24 +1,83 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
-.h3
-{
- color="#2546f3"
+.container{
+   width: 95%;
+   margin-top: 90px;
+}
+.row{
+  margin: 0px auto;
+  width: 100%
+}
+
+.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th{
+  border-top:0px;
+}
+#food_list tr:hover{
+   cursor: pointer;
+}
+#food_image{
+  height: 230px;
+  border-radius: 30px;
+    padding: 10px;
+}
+h3{
+  font-size: 16px;
+  color:black;
+}
+.tspans, .tinwon{
+   font-size: 14px;
+    margin: 0px 3px;
+    height: 30px;
+    width: 50px;
+}
+.resInfo{
+    font-size: 15px;
+    color:black;
+}
+.btn-res{
+    color: #fff;
+    background-color: #0923a9;
+    border-color: #0923a9;
+    border-radius: 20px;
+}
+
+.btn-res:hover{
+    color: #fff;
+    background-color: #0923a9d4;
+    border-color: #0923a9;
+}
+.resDaInfo, .resInfo{
+  border-collapse: collapse;
+  border-radius: 10px;
+  border-style: hidden;
+  box-shadow: 0 0 0 2px #e6e6e6;
+}
+.resInfo .td{
+  padding: 7px 25px;
+
+}
+.resInfo .td1{
+padding: 7px 25px 20px;
+}
+#ok{
+  padding: 0px 3px;
 }
 </style>
 <script type="text/javascript">
 $(function(){
 	let eno=$('#ex_eno').val();
-	$('#eno').val(no);
+	$('#no').val(eno);
 	
 	$.ajax({
 		type:'post',
-		url:'../reserve/diary.do',
+		url:'../reserve/ex_date.do',
 		data:{"eno":eno},
 		success:function(result)
 		{
@@ -27,97 +86,81 @@ $(function(){
 	})
 	$.ajax({
 		type:'post',
-		url:"../reserve/ename.do",
+		url:"../reserve/ex_ename.do",
 		data:{"eno":eno},
 		success:function(result)
 		{
-			var ename=decodeURIComponent(result);
-			$('#ex_ename').text(ename);
+			var name=decodeURIComponent(result);
+			$('#ex_ename').text(name);
 		}
 	})
 	
-})
+}) 
 </script>
 </head>
 <body>
-  <div >
-   <main class="container clear">
-   <h2 class="sectiontitle" >전시회 예약</h2>
+  <div class="container">
    <div class="row">
-    <table class="table" height=600px>
+    <table class="table" height="700">
       <tr>
-        <td width=20% height="580" class="">
-          <table class="table">
-           <tr>
+       <td width=65% height="400">
+         <table class="table resDaInfo">
+          <caption><h3>날짜선택</h3></caption>
+          <input type="hidden" id="ex_eno" value="${param.eno}">
+          <tr>
+           <td style="padding: 18px 20px 0px">
+           <div id="ex_date"></div>
+           </td>
+          </tr>
+         </table>
+       </td>
+       <td width=35% rowspan="3">
+         <table class="table resInfo">
+          <caption><h3>예약정보 확인</h3></caption>
+          <tbody style="height:404px">
+          <tr>
            <td>
-            <img src="${param.poster }" style="width: 300px" id="ex_image">
+            <img src="${param.poster }" style="width: 100%" id="food_image">
            </td>
           </tr>
           <tr>
-            <td class="td">전시회명&nbsp;:&nbsp;<span id="ex_ename"></span></td>
+            <td class="td">업체명&nbsp;:&nbsp;<span id="ex_ename"></span></td>
           </tr>
           <tr>
             <td class="td">예약일&nbsp;:&nbsp;<span id="ex_day"></span></td>
-          </tr>  
+          </tr>
+          <tr>
+            <td class="td">예약시간&nbsp;:&nbsp;<span id="ex_time"></span></td>
+          </tr>
           <tr>
             <td class="td1">인원&nbsp;:&nbsp;<span id="ex_inwon"></span></td>
           </tr>
-          </table>
-        </td>
-        
-      </tr>
-          </table>
-          
-        </td>
-        <td width=35%  rowspan="2" >
-          <table class="table">
-           <caption><h3>예약 정보</h3></caption>
-           <tr>
-             <td colspan="2" class="text-center">
-              <img src="noimage.png" style="width: 200px;height: 220px" id="ex_img">
-             </td>
-           </tr>
-           <tr>
-             <td colspan="2">
-              <span style="color:gray;display:none" id="en">전시회명:</span><span id="ex_ename"></span>
-             </td>
-           </tr>
-           <tr>
-             <td colspan="2">
-              <span style="color:gray;display:none" id="ed">예약일:</span><span id="ex_day"></span>
-             </td>
-           </tr>
-           <tr>
-             <td colspan="2">
-              <span style="color:gray;display:none" id="et">예약시간:</span><span id="ex_t"></span>
-             </td>
-           </tr>
-           <tr>
-             <td colspan="2">
-              <span style="color:gray;display:none" id="ei">예약인원:</span><span id="ex_i"></span>
-             </td>
-           </tr>
-           <%--
-               no NUMBER, 제외
-			   id VARCHAR2(20), session
-			   **fno NUMBER,
-			   **rday VARCHAR2(30) CONSTRAINT ri_day_nn NOT NULL,
-			   **rtime VARCHAR2(30) CONSTRAINT ri_time_nn NOT NULL,
-			   **inwon VARCHAR2(30) CONSTRAINT ri_inwon_nn NOT NULL,
-			   rok CHAR(1) DEFAULT 'n',
-			   regdate DATE DEFAULT SYSDATE
-            --%>
-           <tr id="ok" style="display:none">
-             <td colspan="2" class="text-center">
-              <form method="post" action="../reserve/reserve_ok.do"> 
-       <input type="hidden" name="eno" id="eno">
+          </tbody>
+         </table>
+         <div style="display: none" id="ok">
+    <form method="post" action="../reserve/reserve_ok.do"> 
+       <input type="hidden" name="no" id="no">
        <input type="hidden" name="rday" id="rday">
+       <input type="hidden" name="rtime" id="rtime">
        <input type="hidden" name="rinwon" id="rinwon">
        <button class="btn btn-sm btn-res" style="font-size: 14px;width: 100%;height: 40px">예약하기</button>
        </form>
-             </td>
+       </div>
+       </td>
+      </tr>
+      <tr>
+        <td width="35%" height="150">
+          <table class="table">
+           <h3>시간선택</h3>
+           <tr>
+           <td>
+             <div id="times"></div>
+           </td>
            </tr>
-            <tr>
+          </table>
+        </td>    
+      </tr>
+      <tr>
       <td width="35%" height="150">
           <table class="table">
            <h3>인원선택</h3>
@@ -129,13 +172,8 @@ $(function(){
           </table>
         </td>
       </tr>
-          </table>
-        </td>
-      </tr>
-      
     </table>
    </div>
-   </main>
   </div>
 </body>
 </html>

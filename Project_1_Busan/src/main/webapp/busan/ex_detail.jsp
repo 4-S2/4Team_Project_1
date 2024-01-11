@@ -174,7 +174,7 @@
                 }
             });
         });
-
+ 
 	
     });
     /* let bCheck=false;
@@ -221,9 +221,9 @@
 		                <div class="product-info">
 		                    <h1>${vo.ename}</h1>
 	                    	<h3>${vo.eename}</h3>
-	                    	<a href="../reserve/reserve_main.do">
-        					<input type="submit" value="예약하기" class="w-commerce-commerceaddtocartbutton button add-to-cart-button" id="reservationButton" />
-    						</a>
+	                  
+    						<p>
+    						<p>
     						<p>
     						
     						
@@ -235,7 +235,7 @@
 	                    	
 	                    	
 	                   
-	                    	<div class="jjim" data-count="${count }">
+	                    	<div class="jjim" data-count="${count }" style="float:left">
 							<span><img src="../busan/jjim_none.png" class="jjim_img"></span>
 							
 							<button class="jjimBtn" data-cateno="${cateno }" data-eno="${vo.eno }">찜하기</button>
@@ -384,7 +384,7 @@
 					    	</table>
 					    </form> -->
 				    </div>
-				 <div id="reserveCont" class="tab-content" style="display: none">
+				<div id="reserveCont" class="tab-content" style="display: none">
 						<!-- 예약하기 내용 -->
 						<jsp:include page="../reserve/reserve_main.jsp">
 						  <jsp:param name="eno" value="${vo.eno }"/>
