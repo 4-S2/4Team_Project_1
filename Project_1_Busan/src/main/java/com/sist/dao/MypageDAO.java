@@ -684,45 +684,6 @@ ORDER BY r.frno DESC;
 //------------------------ End of 문의내역
 
 //------------------------ 장바구니/구매내역
-			//특산물 리스트 (검색기능 추가)
-			public List<GoodsVO> adGoodsListData(int page){
-				List<GoodsVO> list = new ArrayList<GoodsVO>();
-				try {
-					conn=dbconn.getConnection();
-					String sql="SELECT gno, gname, price, amount, num "
-							  +"FROM (SELECT gno, gname, amount, price, rownum as num "
-							  +"FROM (SELECT gno, gname, amount, price "
-							  +"FROM goods ORDER BY gno ASC)) "
-							  +"WHERE num BETWEEN ? AND ?";
-					ps=conn.prepareStatement(sql);
-					
-					int rowSize=8;
-					int start=(rowSize*page)-(rowSize-1);
-					int end=rowSize*page;
-					
-					ps.setInt(1, page);
-					ps.setInt(2, start);
-					ps.setInt(3, end);
-					
-					ResultSet rs=ps.executeQuery();
-					while(rs.next()) {
-						GoodsVO vo=new GoodsVO();
-						vo.setGno(rs.getInt(1));
-						vo.setGname(rs.getString(2));
-						vo.setPoster(rs.getString(3));
-						vo.setPrice(rs.getString(4));
-						list.add(vo);
-						list.add(vo);
-					}
-					rs.close();
-				} catch (Exception e) {
-					e.printStackTrace();
-				} finally {
-					dbconn.disConnection(conn, ps);
-				}
-				
-				return list;
-			}
 			
 			// 구매내역
 			public List<CartVO> myBuyData(String id, int page) {
@@ -925,34 +886,5 @@ ORDER BY r.frno DESC;
 				{
 					dbconn.disConnection(conn, ps);
 				}
-			}
-			
-			//특산물 상세 
-			public GoodsVO adGoodsDetailData(int gno) {
-				GoodsVO vo=new GoodsVO();
-				
-				try {
-					conn=dbconn.getConnection();
-					String sql="SELECT * FROM goods "
-			                  +"WHERE gno=?";
-					ps=conn.prepareStatement(sql);
-					ps.setInt(1, gno);
-					ResultSet rs=ps.executeQuery();
-					if(rs.next()) {
-						vo.setGno(rs.getInt(1));
-			            vo.setGname(rs.getString(2));
-			            vo.setPoster(rs.getString(3));
-			            vo.setOrigin(rs.getString(4));
-			            vo.setManufacturer(rs.getString(5));
-			            vo.setPrice(rs.getString(6));
-			            vo.setDimage(rs.getString(7));
-					}
-					rs.close();
-				} catch (Exception e) {
-					e.printStackTrace();
-				} finally {
-					dbconn.disConnection(conn, ps);
-				}
-				return vo;
 			}
 }

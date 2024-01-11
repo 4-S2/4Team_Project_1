@@ -16,9 +16,12 @@
 </style>
 <script type="text/javascript">
 function qnaAnswer(qno) {
-	let x=(document.body.offsetWidth/2)-(750/2)
-	let y=(window.screen.height/2)-(500/2)-50
-	window.open("../admin/admin_qna_detail.do?qno="+qno,"",'width=650, height=500, left='+x+', top='+y)
+    let x = (document.body.offsetWidth / 2) - (750 / 2);
+    let y = (window.screen.height / 2) - (500 / 2) - 50;
+    let newWindow = window.open("../admin/admin_qna_detail.do?qno=" + qno, '', 'width=650, height=500, left=' + x + ', top=' + y);
+    newWindow.addEventListener('unload', function() {
+        location.reload();
+    });
 }
 </script>
 </head>

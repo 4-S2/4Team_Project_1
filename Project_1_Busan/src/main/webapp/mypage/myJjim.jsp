@@ -87,13 +87,20 @@
 }
     
 .jjimTitle {
-        font-size: 1.2em; /* 원하는 크기로 조절 */
+        font-size: 1.2em; 
         font-weight: bold;
 }
-    .jjimBtn {
-        width: 25px; /* 원하는 너비로 조절 */
-        height: 25px; /* 원하는 높이로 조절 */
+.jjimBtn {
+        width: 25px; 
+        height: 25px; 
     }
+ .jjimTitle {
+    display: inline-block;
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 </style>
 <script type="text/javascript">
 function toggleTab(tabIndex) {
@@ -142,6 +149,7 @@ $(function(){
             success: function(result) {
                 if (result === 'ok') {
                     alert("찜 취소가 완료되었습니다");
+                    location.reload(); 
                 } 
             }
         });
@@ -154,7 +162,7 @@ $(function(){
       <div class="max1200 dp_pc contents_titbox">
                 <h4 class="titbox">나의<strong>찜목록</strong></h4>
    	  </div>
-   	 <div class="tab_contents_area">
+   	 <div class="tab_contents_area ">
    	  	<p class="titbox">&nbsp;&nbsp;<span class="total_num_txt offline ta_px0">총 <strong>${totalJjim}</strong>개의 찜 내역이 있습니다.</span></p>
    	  </div>
 		<div class="pc_mt30 ta_mt40 ta_mx40 tab_area tab5 sub4 mypage">
@@ -183,7 +191,7 @@ $(function(){
 				 </table>
 			 </c:when>
 			<c:otherwise>        
-        	<div class="col-sm-8 col-md-12">
+        	<div class="col-sm-4 col-md-12">
 				<div class="row">
 					<c:forEach var="vo" items="${tlist }">
 						<div class="col-md-4">
