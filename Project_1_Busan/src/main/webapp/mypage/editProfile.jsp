@@ -37,7 +37,16 @@
     font-size: 14px;
     line-height: 24px;
     }
-    
+.button_box .btn_myreview {
+    background-color: #0923a9;
+    color: #ffffff;
+}
+.my_information_area {
+    padding: 5px 30px 30px 30px;
+    margin-top: 40px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+}    
   </style>
   
   

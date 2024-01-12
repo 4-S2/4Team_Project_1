@@ -226,6 +226,7 @@ input[type=file]::file-selector-button:hover{
 </head>
 <body>
 	<div class="container" id="notice">
+	<h1 style="text-align: center">답변하기</h1>
 		<div class="row">
 			<form method="post" action="../admin/admin_qna_insert.do" enctype="multipart/form-data">
 			  <input type="hidden" name="gid" value="${vo.group_id }">
