@@ -144,25 +144,38 @@
         $('.jjimBtn').click(function() {
             let no = $(this).attr("data-no");            
             let cateno = $(this).attr("data-cateno");
-
+            let tab = $(this).attr("data-tab");
             $.ajax({
-                type: 'post',
-                url: '../busan/jjim.do',
-                data: {'no': no, 'cateno': cateno},
-                success: function(result) {
-                    if (result === 'ok') {
-                        alert("찜하기가 완료되었습니다");
-                        $('.jjim_img').attr('src', '../busan/jjim.png');
-                        localStorage.setItem('jjimState', 'ok');  // 찜 상태를 Local Storage에 저장
-                        localStorage.setItem('no', no);
-                    } else if (result === 'no') {
-                        alert("찜하기가 취소되었습니다");
-                        $('.jjim_img').attr('src', '../busan/jjim_none.png');
-                        localStorage.setItem('jjimState', 'no');  // 찜 상태를 Local Storage에 저장
-                        localStorage.setItem('no', no);
-                    }
+            	type: 'post',
+                url: '../busan/checklogin.do',
+                success: function(loginResult) {
+                	if (loginResult === 'no') {
+                		alert("로그인 후 찜하기가 가능합니다");
+                		window.location.href="../member/login_main.do";
+                	}
+                	else{
+                		$.ajax({
+                            type: 'post',
+                            url: '../busan/jjim.do',
+                            data: {'no': no, 'cateno': cateno,'tab':tab},
+                            success: function(result) {
+                                if (result === 'ok') {
+                                    alert("찜하기가 완료되었습니다");
+                                    $('.jjim_img').attr('src', '../busan/jjim.png');
+                                    localStorage.setItem('jjimState', 'ok');  // 찜 상태를 Local Storage에 저장
+                                    localStorage.setItem('no', no);
+                                } else if (result === 'no') {
+                                    alert("찜하기가 취소되었습니다");
+                                    $('.jjim_img').attr('src', '../busan/jjim_none.png');
+                                    localStorage.setItem('jjimState', 'no');  // 찜 상태를 Local Storage에 저장
+                                    localStorage.setItem('no', no);
+                                }
+                            }
+                        });
+                	}
                 }
             });
+            
         });
         $('.heartBtn').click(function() {
             let no = $(this).attr("data-no");            
@@ -335,7 +348,7 @@ color: #fff;
 						</div>
 						<div class="jjim" data-count="${count }">
 							<span><img src="../busan/jjim_none.png" class="jjim_img"></span>
-							<button class="jjimBtn" data-cateno="${cateno}" data-no="${vo.no }">찜하기</button>
+							<button class="jjimBtn" data-cateno="${cateno}" data-no="${vo.no }" data-tab="${tab }">찜하기</button>
 						</div>
 						</div>
 					</div>
