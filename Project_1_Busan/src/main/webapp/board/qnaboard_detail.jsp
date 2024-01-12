@@ -336,7 +336,7 @@ $(function(){
 
                <tr>
                   <td colspan="4" class="text-right">
-                  <c:if test="${vo.name!='관리자'}">
+                  <c:if test="${vo.group_step!='1'}">
                   <a href="../board/qnaboard_update.do?qno=${vo.qno }">수정</a> 
                   &nbsp; <input type="button" id="delete" value="삭제">  
                   </c:if>

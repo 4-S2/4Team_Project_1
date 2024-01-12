@@ -211,7 +211,7 @@ public class QnaBoardDAO {
 	            ps.executeUpdate();
 	            ps.close();
 	            
-	            sql="SELECT qno,name,subject,cont,TO_CHAR(regdate,'yyyy-mm-dd'),hit,filename,filesize,TO_CHAR(filesize, '999,999,999,999') "
+	            sql="SELECT qno,name,subject,cont,TO_CHAR(regdate,'yyyy-mm-dd'),hit,filename,filesize,TO_CHAR(filesize, '999,999,999,999'),group_step "
 	                    +"FROM qnaBoard "
 	                    +"WHERE qno="+qno;
 	            ps=conn.prepareStatement(sql);
@@ -226,6 +226,7 @@ public class QnaBoardDAO {
 	                vo.setFilename(rs.getString(7));
 	                vo.setFilesize(rs.getInt(8));
 	                vo.setFilesize2(rs.getString(9));
+	                vo.setGroup_step(rs.getInt(10));
 	            }
 	            rs.close();
 	         }catch(Exception ex)
