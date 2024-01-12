@@ -100,7 +100,7 @@ a.btn:hover{
 			</div>
 			<div id="noticesearch">
 			  <form method="post" action="../board/qnaboard_find.do">
-			    <input type="text" id="searchbar" name="word" required>
+			    <input type="text" id="searchbar" name="word" required value=${word }>
 			    <input type="submit" id="searchBtn" value="검색">
 			  </form>
 			</div>

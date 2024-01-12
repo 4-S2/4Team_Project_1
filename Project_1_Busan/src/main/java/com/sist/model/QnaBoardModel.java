@@ -86,6 +86,7 @@ public class QnaBoardModel {
 	        request.setAttribute("startPage", startPage);
 	        request.setAttribute("endPage", endPage);
 	        request.setAttribute("list", list);
+	        request.setAttribute("word", word);
 	        //3. 결과값 모아서 request에 저장 
 	        request.setAttribute("main_jsp", "../board/qnaboard.jsp");
 	        return "../main/main.jsp";

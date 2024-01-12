@@ -88,6 +88,16 @@ public class BusanListModel {
 		  //2. DB연동 
 		  BusanDAO dao=new BusanDAO();
 		  List<BusanListVO> list=dao.foodFindList(word,curpage,tag,sort);
+		  HeartDAO hdao=HeartDAO.newInstance();
+		  JjimDAO jdao=JjimDAO.newInstance();
+		  List<Integer> hlist=new ArrayList<>();
+		  for(BusanListVO a:list)
+		  {
+			  int hcount=hdao.heartTotalCount(4, a.getNo());
+			  int jcount=jdao.jjimTotalCount(4, a.getNo());
+			  a.setHeart(hcount);
+			  a.setJjim(jcount);
+		  }
 		  int totalpage=dao.foodFindTotalPage(word, tag);
 		   final int BLOCK=10;
 		   int startPage=((curpage-1)/BLOCK*BLOCK)+1;
