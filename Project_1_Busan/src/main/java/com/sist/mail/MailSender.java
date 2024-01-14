@@ -5,8 +5,7 @@ import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-
-
+import com.sist.vo.*;
 public class MailSender {
 	private String style="<style>" + 
     		"body {" + 
@@ -36,7 +35,7 @@ public class MailSender {
     		"	}" + 
     		"	 td {" + 
     		"	  border-bottom: 1px solid rgba(0,0,0,.1);" + 
-    		"	  background: #000;" + 
+    		"	  background: #fff;" + 
     		"	}" + 
     		"	a {" + 
     		"	  color: #73685d;" + 
@@ -76,84 +75,58 @@ public class MailSender {
     		"	  }" + 
     		"	  }" + 
     		"</style>";
-
-	/*
-	 * public static void main(String[] args) { MailManager m=new MailManager();
-	 * MemberVO vo=new MemberVO(); m.naverMailSend(vo, 1); }
-	 */
+	
 	public static void main(String[] args) {
-		MailSender s=new MailSender();
-		s.naverMailSend();
+	//  임시비번용 랜덤수 발생
+	/*
+	 * Random rand=new Random(); int x = rand.nextInt(9000) + 1000; // 4자리수
+	 * 1000~9999 String t=x+""; SendMailer s=new SendMailer();
+	 * s.naverMailSend("pkpphn@naver.com",t);
+	 */
 	}
-	public void naverMailSend() {
+	
+	public void naverMailSend(String toEmail, String tempPwd) {
+		// 수신이메일, 임시비번
+		String host="smtp.naver.com"; // 네이버일 경우 네이버 계정, gmail경우 gamil계정
+		String user="ksssk96@naver.com";
+		String password="LJNRZL6YY7VR";
+		Properties props=new Properties();
+		props.put("mail.smtp.host", host);
+		props.put("mail.smtp.port", 587);
+		props.put("mail.smtp.auth", true);
+		Session session=Session.getDefaultInstance(props, new javax.mail.Authenticator() {
+			protected PasswordAuthentication getPasswordAuthentication() {
+				return new PasswordAuthentication(user, password);
+			}
+		});
 		
-		 String host = "smtp.naver.com"; // 네이버일 경우 네이버 계정, gmail경우 gmail 계정 
-	     String user = "ksssk96@naver.com"; // 패스워드 
-	     String password = "akak852312";      // SMTP 서버 정보를 설정한다. 
-	     Properties props = new Properties(); 
-	     props.put("mail.smtp.host", host); 
-	     props.put("mail.smtp.port", 587); 
-	     props.put("mail.smtp.auth", "true"); 
-	     Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator(){ 
-	    	 protected PasswordAuthentication getPasswordAuthentication() 
-	    	 { 
-	    		 return new PasswordAuthentication(user, password); 
-	    	 } 
-	     }); 
-	     try { 
-	        	MimeMessage message = new MimeMessage(session); 
-	              message.setFrom(new InternetAddress(user)); 
-	              message.addRecipient(Message.RecipientType.TO, new InternetAddress("ksssk96@naver.com")); // 메일 제목 
-	              message.setSubject("예약 내역입니다!!"); // 메일 내용
-	              
-	              String html="<html>"
-	            		     +"<head>"
-	            		     +style
-	            		     +"</head>"
-	            		     +"<table>"
-	            		     +"<thead>"
-	            		     +"<tr>"
-	            		     +"<th width=15%>예약번호</th>"
-	            		     +"<td width=85%>1</td>"
-	            		     +"</tr>"
-	            		     +"<tr>"
-	            		     +"<th>아이디</th>"
-	            		     +"<td>hong</td>"
-	            		     +"</tr>"
-	            		     +"<tr>"
-	            		     +"<th>맛집명</th>"
-	            		     +"<td>승일참치</td>"
-	            		     +"</tr>"
-	            		     +"<tr>"
-	            		     +"<th></th>"
-	            		     +"<td><img src=\"https://www.menupan.com/restaurant/restimg/007/zzmenuimg/j10371733_z.jpg\" width=200 height=200></td>"
-	            		     +"</tr>"
-	            		     +"<tr>"
-	            		     +"<th>전화</th>"
-	            		     +"<td>02)2203-3044</td>"
-	            		     +"</tr>"
-	            		     +"<tr>"
-	            		     +"<th>주소</th>"
-	            		     +"<td>서울 송파구 송파동 58-18 성우빌딩 2층</td>"
-	            		     +"</tr>"
-	            		     +"<tr>"
-	            		     +"<th>예약일</th>"
-	            		     +"<td>2024년 01월 09일</td>"
-	            		     +"</tr>"
-	            		     +"<tr>"
-	            		     +"<th>인원</th>"
-	            		     +"<td>5명</td>"
-	            		     +"</tr>"
-	            		     +"<body>"
-	            		     +"</body>"
-	            		     +"</html>";
-	              		     
-	              message.setContent(html,"text/html;charset=UTF-8"); // send the message 
-	              Transport.send(message); 
-	              System.out.println("Success Message Send"); 
-	         } catch (MessagingException e) 
-	          {
-	        	 e.printStackTrace();
-	          }
-	     }
+		
+		
+		try {
+			MimeMessage message=new MimeMessage(session);
+			message.setFrom(new InternetAddress(user));
+			message.addRecipient(Message.RecipientType.TO, new InternetAddress("ksssk96@gmail.com"));
+			// 보낼이메일주소 매개변수
+			message.setSubject("[Busan Tour]임시 비밀번호 발송 안내."); // 메일 제목
+			// 메일내용
+			
+			
+			
+			String html="<html>"
+       		     +"<head>"
+       		     +"</head>"
+       		     +"<body>"
+       		     +"<h3>'Busan Tour' 임시 비밀번호 <b>'"+tempPwd+"'</b>"
+       		     +"입니다.</h3>"
+       		     +"<h3>로그인 후 비밀번호 변경을 권장합니다.</h3>"
+       		     +"</body>"
+       		     +"</html>";
+			
+			message.setContent(html,"text/html;charset=UTF-8"); // send the message
+			Transport.send(message);
+			System.out.println("Message Send Success!");
+		}catch(MessagingException e) {
+			e.printStackTrace();
+		}
+	}
 }

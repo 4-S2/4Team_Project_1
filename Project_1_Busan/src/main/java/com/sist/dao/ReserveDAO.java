@@ -87,8 +87,8 @@ public class ReserveDAO {
 	   { 
 		   try {
 			   conn=dbconn.getConnection();
-			   String sql="INSERT INTO Reserve "
-			   		+ "VALUES((SELECT NVL(MAX(no)+1,1) FROM Reserve_Info),"
+			   String sql="INSERT INTO Reserve_info "
+			   		+ "VALUES((SELECT NVL(MAX(no)+1,1) FROM Reserve_info),"
 			   		+ "?,?,?,?,0,SYSDATE)";
 			   ps=conn.prepareStatement(sql);
 			   ps.setString(1, vo.getMvo().getId());

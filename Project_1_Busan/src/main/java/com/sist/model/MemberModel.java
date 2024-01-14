@@ -1,5 +1,5 @@
 package com.sist.model;
-
+import java.util.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import com.sist.controller.RequestMapping;
 import com.sist.dao.*;
 import com.sist.vo.MemberVO;
+import com.sist.mail.*;
 
 public class MemberModel {
     @RequestMapping("member/join.do")
@@ -193,45 +194,33 @@ public class MemberModel {
     }
     
     // 비밀번호 찾기 결과 처리 요청 매핑
-    @RequestMapping("member/passwordfindOk.do")
-    public void passwordfindOk(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String id = request.getParameter("id");
-        String email = request.getParameter("email");
+    @RequestMapping("member/find_password_ok.do")
+	  public void member_pwdfindok(HttpServletRequest request,
+			  HttpServletResponse response) {
 
-        MemberDAO dao = MemberDAO.newInstance();
-        String pwd = dao.getOriginalPassword(id, email); // 원래 비밀번호 가져오기
-
-        if(pwd != null) {
-            boolean emailSent = dao.sendPasswordToEmail(id, email, pwd); // 이메일 발송
-            if(emailSent) {
-                response.getWriter().print("YES");
-            } else {
-                response.getWriter().print("EMAIL_SEND_FAIL");
-            }
-        } else {
-            response.getWriter().print("NO");
-        }
-    }
-
-    @RequestMapping("member/passwordfindOk2.do")
-	public void memeberPasswordOk2(HttpServletRequest request,HttpServletResponse response)
-	{
-		try
-		{
-			request.setCharacterEncoding("UTF-8");
-		}catch(Exception ex) {}
-		String id= request.getParameter("id");
-		String phone= request.getParameter("phone");
-		//DAO 연동
-		MemberDAO dao=MemberDAO.newInstance();
-		String res = dao.memberPasswordPhoneFind(id, phone);
-		try
-		{
-			//Spring => @RestController
-			PrintWriter out = response.getWriter();
-			out.println(res);
-		}catch(Exception ex) {}
-	}
+		  String id=request.getParameter("id");
+		  String email=request.getParameter("email");
+		  // 임시비번 생성
+		  Random rand=new Random();
+		  int x = rand.nextInt(9000) + 1000; // 4자리수 1000~9999
+		  String t=x+"";
+		  MemberDAO dao=MemberDAO.newInstance();
+		  String res=dao.pwdFind(id,email,t);
+		  // id, email 맞으면 임시비번 전송후 변경
+		  if(res.equals("SEND")) {
+			  MailSender msd=new MailSender();
+			  msd.naverMailSend(email, t);
+		  }
+		  
+		  
+		  try {
+			  PrintWriter out=response.getWriter();
+			  out.write(res);
+		  }catch(Exception ex) {
+			  ex.printStackTrace();
+		  }
+	  }
+    
     
     
 }

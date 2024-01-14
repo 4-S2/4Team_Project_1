@@ -23,7 +23,7 @@
    cursor: pointer;
 }
 #food_image{
-  height: 230px;
+  height: 400px;
   border-radius: 30px;
     padding: 10px;
 }
@@ -124,7 +124,7 @@ $(function(){
            </td>
           </tr>
           <tr>
-            <td class="td">업체명&nbsp;:&nbsp;<span id="ex_ename"></span></td>
+            <td class="td">전시회명&nbsp;:&nbsp;<span id="ex_ename"></span></td>
           </tr>
           <tr>
             <td class="td">예약일&nbsp;:&nbsp;<span id="ex_day"></span></td>
@@ -143,6 +143,7 @@ $(function(){
        <input type="hidden" name="rday" id="rday">
        <input type="hidden" name="rtime" id="rtime">
        <input type="hidden" name="rinwon" id="rinwon">
+       <input type="hidden" name="rpirce" id="rprice">
        <button class="btn btn-sm btn-res" style="font-size: 14px;width: 100%;height: 40px">예약하기</button>
        </form>
        </div>

@@ -134,13 +134,13 @@
 
             $.ajax({
                 type: 'post',
-                url: '../member/passwordfindOk.do',
+                url: '../member/find_password_ok.do',
                 data: {"id":id, "name":name, "phone":phone, "email":email},
                 success: function(result) {
                     var res = result.trim();
                     if(res === 'NO') {
                         alert('입력하신 정보와 일치하는 계정이 없습니다.');
-                    } else {
+                    } else if(res =='SEND'){
                         alert('입력하신 이메일로 임시 비밀번호를 발송하였습니다.');
                     }
                 },
@@ -156,7 +156,7 @@
 
     <div id="findpwd-all-cont">
        
-        <form id="findpwd-form-all" action="../member/passwordfindOk.do" method="post">
+        <form id="findpwd-form-all" action="../member/find_password_ok.do" method="post">
 
             <div>
                 <h2>비밀번호 찾기</h2>

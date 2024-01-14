@@ -254,64 +254,56 @@ public class MemberDAO {
 		}
 		return result;
 	}
-	public boolean sendPasswordToEmail(String id, String email, String pwd) {
-	    boolean sent = false;
-
-	     String host = "smtp.naver.com"; // 네이버일 경우 네이버 계정, gmail경우 gmail 계정 
-	     String user = ""; // 패스워드 
-	     String password = "";      // SMTP 서버 정보를 설정한다. 
-	     Properties props = new Properties(); 
-	     props.put("mail.smtp.host", host); 
-	     props.put("mail.smtp.port", 587); 
-	     props.put("mail.smtp.auth", "true"); 
-	     Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator(){ 
-	    	 protected PasswordAuthentication getPasswordAuthentication() 
-	    	 { 
-	    		 return new PasswordAuthentication(user, password); 
-	    	 } 
-	     }); 
-	     try { 
-	        	  MimeMessage message = new MimeMessage(session); 
-	              message.setFrom(new InternetAddress(user)); 
-	              message.addRecipient(Message.RecipientType.TO, new InternetAddress("ksssk96@gmail.com"));
-	              // 메일 제목 
-	              message.setSubject("Busan Tour 비밀번호 확인"); // 메일 내용
-	              
-	              String html="<html><head>"+
-	                     "<body>"
-	            		  +id+"님의 비밀번호는 '"+pwd+"'입니다."
-	            		  +"</body></html>";
-	              		     
-	              message.setContent(html,"text/html;charset=UTF-8"); // send the message 
-	              Transport.send(message); 
-	              System.out.println("Success Message Send"); 
-	         } catch (MessagingException e) 
-	          {
-	        	 e.printStackTrace();
-	          }
-
-	    return sent;
-	}
-
-	public String getOriginalPassword(String id, String email) {
-	    try {
-	        conn = dbconn.getConnection();
-	        String sql = "SELECT password FROM user_ WHERE id=? AND email=?";
-	        ps = conn.prepareStatement(sql);
-	        ps.setString(1, id);
-	        ps.setString(2, email);
-	        ResultSet rs = ps.executeQuery();
-	        if(rs.next()) {
-	            return rs.getString("password");
-	        }
-	        rs.close();
-	    } catch(Exception ex) {
-	        ex.printStackTrace();
-	    } finally {
-	        dbconn.disConnection(conn, ps);
-	    }
-	    return null; // 일치하는 사용자가 없으면 null 반환
-	}
+	// id와 이메일 확인후 맞으면 임시비번으로 변경, 메일전송은 모델에서
+	   public String pwdFind(String id,String email,String temp) {
+		   String res="";
+		   try {
+			   conn=dbconn.getConnection();
+			   String sql="SELECT COUNT(*) FROM user_ "
+					   + "WHERE id=?";
+			   ps=conn.prepareStatement(sql);
+			   ps.setString(1, id);
+			   ResultSet rs=ps.executeQuery();
+			   rs.next();
+			   int count=rs.getInt(1);
+			   rs.close();
+			   ps.close();
+			   
+			   if(count==0) {
+				   res="NO";  // 아이디없음
+			   }else {
+				   sql="SELECT COUNT(*) FROM user_ WHERE id=? AND email=?";
+				   // 이메일 확인
+				   ps=conn.prepareStatement(sql);
+				   ps.setString(1, id);
+				   ps.setString(2, email);
+				   rs=ps.executeQuery();
+				   rs.next();
+				   int co=rs.getInt(1);
+				   rs.close();
+				   ps.close();
+				   if(co==1) {
+					   res="SEND";
+					   sql="UPDATE user_ SET password=? "
+					   		+ "WHERE id=?";
+					   ps=conn.prepareStatement(sql);
+					   ps.setString(1, temp);
+					   ps.setString(2, id);
+					   ps.executeUpdate();
+					   ps.close();
+				   }else {
+					   res="EMAILNO";
+				   }
+			   }
+			   
+		   }catch(Exception ex) {
+			   ex.printStackTrace();
+		   }finally {
+			   dbconn.disConnection(conn, ps);
+		   }
+		   
+		   return res;
+	   }
 	
 	// 사용자 조회
 	public MemberVO memberSearch(String id) {
