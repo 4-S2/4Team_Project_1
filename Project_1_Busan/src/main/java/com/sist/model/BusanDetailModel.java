@@ -37,21 +37,24 @@ public class BusanDetailModel {
 		  int count=dao1.jjimCount(id,4,Integer.parseInt(no));
 		  
 
-		  String addr=vo.getAddr().substring(vo.getAddr().indexOf(" "));
+		  String addr=vo.getAddr().substring(0,vo.getAddr().indexOf(" "));
+//		  System.out.println(vo.getAddr());
 		  System.out.println(addr);
-		  String addr1=addr.trim().substring(0,addr.trim().indexOf(" "));
-		  String addr2=addr1.substring(1);
-		  if(addr1.length()>2)
-		  {
-			  addr2=addr1.substring(3);
-		  }else {
-			  
-		  }
-		  System.out.println(addr1);
-		  List<BusanListVO> recolist1=dao.BusanRecoListData("food", addr2);	 
-		  List<BusanListVO> recolist2=dao.BusanRecoListData("tour", addr2);
-		  List<BusanListVO> recolist3=dao.BusanRecoListData("activity", addr2);
-		  List<BusanListVO> recolist4=dao.BusanRecoListData("festival", addr2);
+//		  System.out.println(addr.trim().indexOf(" "));
+//		  String addr1=addr.trim().substring(0,addr.trim().indexOf(" "));
+//		  
+//		  String addr2=addr1.substring(1);
+//		  if(addr1.length()>2)
+//		  {
+//			  addr2=addr1.substring(3);
+//		  }else {
+//			  
+//		  }
+//		  System.out.println(addr1);
+		  List<BusanListVO> recolist1=dao.BusanRecoListData("food", addr);	 
+		  List<BusanListVO> recolist2=dao.BusanRecoListData("tour", addr);
+		  List<BusanListVO> recolist3=dao.BusanRecoListData("activity", addr);
+		  List<BusanListVO> recolist4=dao.BusanRecoListData("festival", addr);
 		 
 		  List<BusanListVO> recoList = Stream.of(recolist4, recolist3, recolist2, recolist1)
 	                .flatMap(List::stream)
@@ -144,20 +147,11 @@ public class BusanDetailModel {
 		  JjimDAO dao1=JjimDAO.newInstance();
 		  int count=dao1.jjimCount(id,1,Integer.parseInt(no));
 		  
-		  String addr=vo.getAddr().substring(vo.getAddr().indexOf(" "));
-		  System.out.println(addr);
-		  String addr1=addr.trim().substring(0,addr.trim().indexOf(" "));
-		  String addr2=addr1.substring(1);
-		  if(addr1.length()>2)
-		  {
-			  addr2=addr1.substring(3);
-		  }else {
-			  
-		  }
-		  List<BusanListVO> recolist1=dao.BusanRecoListData("food", addr2);	 
-		  List<BusanListVO> recolist2=dao.BusanRecoListData("tour", addr2);
-		  List<BusanListVO> recolist3=dao.BusanRecoListData("activity", addr2);
-		  List<BusanListVO> recolist4=dao.BusanRecoListData("festival", addr2);
+		  String addr=vo.getAddr().substring(0,vo.getAddr().indexOf(" "));
+		  List<BusanListVO> recolist1=dao.BusanRecoListData("food", addr);	 
+		  List<BusanListVO> recolist2=dao.BusanRecoListData("tour", addr);
+		  List<BusanListVO> recolist3=dao.BusanRecoListData("activity", addr);
+		  List<BusanListVO> recolist4=dao.BusanRecoListData("festival", addr);
 		 
 		  List<BusanListVO> recoList = Stream.of(recolist4, recolist3, recolist1, recolist2)
 	                .flatMap(List::stream)
@@ -242,20 +236,11 @@ public class BusanDetailModel {
 		  JjimDAO dao1=JjimDAO.newInstance();
 		  int count=dao1.jjimCount(id,2,Integer.parseInt(no));
 		  
-		  String addr=vo.getAddr().substring(vo.getAddr().indexOf(" "));
-		  System.out.println(addr);
-		  String addr1=addr.trim().substring(0,addr.trim().indexOf(" "));
-		  String addr2=addr1.substring(1);
-		  if(addr1.length()>2)
-		  {
-			  addr2=addr1.substring(3);
-		  }else {
-			  
-		  }
-		  List<BusanListVO> recolist1=dao.BusanRecoListData("food", addr2);	 
-		  List<BusanListVO> recolist2=dao.BusanRecoListData("tour", addr2);
-		  List<BusanListVO> recolist3=dao.BusanRecoListData("activity", addr2);
-		  List<BusanListVO> recolist4=dao.BusanRecoListData("festival", addr2);
+		  String addr=vo.getAddr().substring(0,vo.getAddr().indexOf(" "));
+		  List<BusanListVO> recolist1=dao.BusanRecoListData("food", addr);	 
+		  List<BusanListVO> recolist2=dao.BusanRecoListData("tour", addr);
+		  List<BusanListVO> recolist3=dao.BusanRecoListData("activity", addr);
+		  List<BusanListVO> recolist4=dao.BusanRecoListData("festival", addr);
 		 
 		  List<BusanListVO> recoList = Stream.of(recolist1, recolist2, recolist3, recolist4)
 	                .flatMap(List::stream)
@@ -341,20 +326,11 @@ public class BusanDetailModel {
 		  JjimDAO dao1=JjimDAO.newInstance();
 		  int count=dao1.jjimCount(id,3,Integer.parseInt(no));
 		  
-		  String addr=vo.getAddr().substring(vo.getAddr().indexOf(" "));
-		  System.out.println(addr);
-		  String addr1=addr.trim().substring(0,addr.trim().indexOf(" "));
-		  String addr2=addr1.substring(1);
-		  if(addr1.length()>2)
-		  {
-			  addr2=addr1.substring(3);
-		  }else {
-			  
-		  }
-		  List<BusanListVO> recolist1=dao.BusanRecoListData("food", addr2);	 
-		  List<BusanListVO> recolist2=dao.BusanRecoListData("tour", addr2);
-		  List<BusanListVO> recolist3=dao.BusanRecoListData("activity", addr2);
-		  List<BusanListVO> recolist4=dao.BusanRecoListData("festival", addr2);
+		  String addr=vo.getAddr().substring(0,vo.getAddr().indexOf(" "));
+		  List<BusanListVO> recolist1=dao.BusanRecoListData("food", addr);	 
+		  List<BusanListVO> recolist2=dao.BusanRecoListData("tour", addr);
+		  List<BusanListVO> recolist3=dao.BusanRecoListData("activity", addr);
+		  List<BusanListVO> recolist4=dao.BusanRecoListData("festival", addr);
 		 
 		  List<BusanListVO> recoList = Stream.of(recolist1, recolist2, recolist4, recolist3)
 	                .flatMap(List::stream)
