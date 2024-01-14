@@ -8,14 +8,26 @@
 <title>Insert title here</title>
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script>
-$(document).ready(function(){
+/* $(document).ready(function(){
   $("#search").on("keyup", function() {
     let value = $(this).val().toLowerCase();
     $("#myTable tr").filter(function() {
       $(this).toggle(($(this).find("td:eq(2)").text().toLowerCase().indexOf(value) > -1))
     });
     
-  });
+  }); */
+  $(document).ready(function(){
+	  $("#search").on("keyup", function() {
+	    let value = $(this).val().toLowerCase();
+
+	    $("#myTable tr").filter(function() {
+	      let matchColumn2 = $(this).find("td:eq(2)").text().toLowerCase().indexOf(value) > -1;
+	      let matchColumn3 = $(this).find("td:eq(3)").text().toLowerCase().indexOf(value) > -1;
+
+	      $(this).toggle(matchColumn2 || matchColumn3);
+	    });
+	});
+
   
   $(".upDel").click(function(){
 		let x=(document.body.offsetWidth/2)-(750/2)
@@ -63,6 +75,9 @@ $(document).ready(function(){
   #search {
     width: 250px; 
     height: 32px; 
+    border-radius: 5px;
+    border: 1px solid #ccc; 
+    padding: 8px;
   }
 
   #searchBtn {

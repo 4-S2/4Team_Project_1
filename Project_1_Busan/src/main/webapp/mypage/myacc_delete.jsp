@@ -37,7 +37,6 @@
         padding-right: 30px;
         padding-bottom: 10px;
         padding-top: 10px;
-        font-family: 'Noto Sans KR', sans-serif;
         font-size: 15px;
         font-weight: bold;
         box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
@@ -50,7 +49,6 @@
 .page-title{
         padding-bottom: 15px;
         color: #77D6C9;
-        font-family: 'Noto Sans KR', sans-serif;
         font-weight: bold;
         font-size: 25px;
         text-align: center;
@@ -99,12 +97,11 @@
     border-radius: 5em;
     color: black;
     background: #fff;
-    border: 1px solid black;
+    border: 1px solid #0923a9;
     padding-left: 30px;
     padding-right: 30px;
     padding-bottom: 10px;
     padding-top: 10px;
-    font-family: 'Noto Sans KR', sans-serif;
     font-size: 13px;
     font-weight: bold;
     box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
@@ -119,10 +116,9 @@
         cursor: pointer;
         border-radius: 5em;
         color: #fff;
-        background: gray;
+        background: #0923a9;
         border: 0;
         padding:10px 30px;
-        font-family: 'Noto Sans KR', sans-serif;
         font-size: 13px;
         box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
         display: inline-block;
