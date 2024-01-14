@@ -28,6 +28,7 @@ public class BusanDetailModel {
 		  //1. 요청값 받기
 		  String no=request.getParameter("no");
 
+		  
 		  BusanDAO dao=new BusanDAO();
 		  BusanListVO vo=dao.busanDetailData(Integer.parseInt(no), "food");
 		  List<BusanListVO> list=dao.busanRandomList("food");
