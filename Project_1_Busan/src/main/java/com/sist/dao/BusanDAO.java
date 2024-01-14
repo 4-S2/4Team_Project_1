@@ -30,9 +30,9 @@ public class BusanDAO {
 		   // 1. 연결 
 		   conn=dbconn.getConnection();
 		   // 2. SQL문장 전송 
-		   String sql="SELECT no,title,poster,num "
-				     +"FROM (SELECT no,title,poster,rownum as num "
-				     +"FROM (SELECT no,title,poster "
+		   String sql="SELECT no,title,poster,jjim,heart,num "
+				     +"FROM (SELECT no,title,poster,jjim,heart,rownum as num "
+				     +"FROM (SELECT no,title,poster,jjim,heart "
 				     +"FROM "+tab+" ORDER BY no ASC)) "
 				     +"WHERE num BETWEEN ? AND ?";
 		   // 3. 미리 전송 
@@ -53,6 +53,8 @@ public class BusanDAO {
 			   vo.setNo(rs.getInt(1));
 			   vo.setTitle(rs.getString(2));
 			   vo.setPoster(rs.getString(3));
+			   vo.setJjim(rs.getInt(4));
+			   vo.setHeart(rs.getInt(5));
 			   list.add(vo);
 		   }
 		   rs.close();
@@ -315,9 +317,9 @@ public class BusanDAO {
 		   // 1. 연결 
 		   conn=dbconn.getConnection();
 		   // 2. SQL문장 전송 
-		   String sql = "SELECT no, title, poster, tag, num " +
-				   "FROM (SELECT no, title, poster, tag, rownum as num " +
-				   "FROM (SELECT no, title, poster, tag, hit, heart " +
+		   String sql = "SELECT no, title, poster, tag,jjim,heart num " +
+				   "FROM (SELECT no, title, poster, tag,jjim,heart, rownum as num " +
+				   "FROM (SELECT no, title, poster, tag,jjim,heart " +
 				   "FROM food " +
 				   "WHERE title LIKE '%'||?||'%' AND tag LIKE '%'||?||'%' " +
 				   "ORDER BY " + sort + " " + sort_way + ")) " +
@@ -342,6 +344,8 @@ public class BusanDAO {
 			   vo.setTitle(rs.getString(2));
 			   vo.setPoster(rs.getString(3));
 			   vo.setTag1(rs.getString(4));
+			   vo.setJjim(rs.getInt(5));
+			   vo.setHeart(rs.getInt(6));
 			   list.add(vo);
 		   }
 		   rs.close();

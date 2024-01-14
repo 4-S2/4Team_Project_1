@@ -21,6 +21,7 @@ padding:0;
 /* width: auto;
 max-width: 1280px; */
 }
+
 </style>
 <script>
 document.addEventListener("DOMContentLoaded", function() {

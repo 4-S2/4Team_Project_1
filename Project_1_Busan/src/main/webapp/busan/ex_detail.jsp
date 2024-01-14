@@ -134,27 +134,40 @@
                 $('.reply').show();
             }
         });
-        $('.jjimBtn').click(function(){
-            let eno= $(this).attr("data-eno");
-            let cateno= $(this).attr("data-cateno");
+        $('.jjimBtn').click(function() {
+            let eno = $(this).attr("data-eno");            
+            let cateno = $(this).attr("data-cateno");
             $.ajax({
-                type: 'post',
-                url: '../busan/ex_jjim.do',
-                data: {'eno':eno, 'cateno':cateno},
-                success: function(result){
-                    if(result === 'ok'){
-                        alert("찜하기가 완료되었습니다");
-                        $('.jjim_img').attr('src', '../busan/jjim.png');
-                        localStorage.setItem('jjimState', 'ok');  // 찜 상태를 Local Storage에 저장
-                        localStorage.setItem('no', eno);
-                    } else if(result === 'no'){
-                        alert("찜하기가 취소되었습니다");
-                        $('.jjim_img').attr('src', '../busan/jjim_none.png');
-                        localStorage.setItem('jjimState', 'no');  // 찜 상태를 Local Storage에 저장
-                        localStorage.setItem('no', eno);
-                    }
+            	type: 'post',
+                url: '../busan/checklogin.do',
+                success: function(loginResult) {
+                	if (loginResult === 'no') {
+                		alert("로그인 후 찜하기가 가능합니다");
+                		window.location.href="../member/login_main.do";
+                	}
+                	else{
+                		$.ajax({
+                            type: 'post',
+                            url: '../busan/ex_jjim.do',
+                            data: {'eno': eno, 'cateno': cateno},
+                            success: function(result) {
+                                if (result === 'ok') {
+                                    alert("찜하기가 완료되었습니다");
+                                    $('.jjim_img').attr('src', '../busan/jjim.png');
+                                    localStorage.setItem('jjimState', 'ok');  // 찜 상태를 Local Storage에 저장
+                                    localStorage.setItem('no', no);
+                                } else if (result === 'no') {
+                                    alert("찜하기가 취소되었습니다");
+                                    $('.jjim_img').attr('src', '../busan/jjim_none.png');
+                                    localStorage.setItem('jjimState', 'no');  // 찜 상태를 Local Storage에 저장
+                                    localStorage.setItem('no', no);
+                                }
+                            }
+                        });
+                	}
                 }
             });
+            
         });
         $('.heartBtn').click(function(){
             let eno= $(this).attr("data-eno");

@@ -34,9 +34,8 @@ public class BusanListModel {
 		  for(BusanListVO a:list)
 		  {
 			  int hcount=hdao.heartTotalCount(4, a.getNo());
-			  int jcount=jdao.jjimTotalCount(4, a.getNo());
 			  a.setHeart(hcount);
-			  a.setJjim(jcount);
+			  System.out.println(a.getJjim());
 		  }
 		  
 		  int totalpage=dao.BusanListTotalPage("food");
@@ -94,9 +93,7 @@ public class BusanListModel {
 		  for(BusanListVO a:list)
 		  {
 			  int hcount=hdao.heartTotalCount(4, a.getNo());
-			  int jcount=jdao.jjimTotalCount(4, a.getNo());
 			  a.setHeart(hcount);
-			  a.setJjim(jcount);
 		  }
 		  int totalpage=dao.foodFindTotalPage(word, tag);
 		   final int BLOCK=10;
@@ -147,9 +144,7 @@ public class BusanListModel {
 		  for(BusanListVO a:list)
 		  {
 			  int hcount=hdao.heartTotalCount(1, a.getNo());
-			  int jcount=jdao.jjimTotalCount(1, a.getNo());
 			  a.setHeart(hcount);
-			  a.setJjim(jcount);
 		  }
 		  int totalpage=dao.BusanFindTotalPage(word, "tour");
 		  
@@ -202,9 +197,7 @@ public class BusanListModel {
 		  for(BusanListVO a:list)
 		  {
 			  int hcount=hdao.heartTotalCount(2, a.getNo());
-			  int jcount=jdao.jjimTotalCount(2, a.getNo());
 			  a.setHeart(hcount);
-			  a.setJjim(jcount);
 		  }
 		  int totalpage=dao.BusanFindTotalPage(word, "festival");
 		  
@@ -256,9 +249,7 @@ public class BusanListModel {
 		  for(BusanListVO a:list)
 		  {
 			  int hcount=hdao.heartTotalCount(3, a.getNo());
-			  int jcount=jdao.jjimTotalCount(3, a.getNo());
 			  a.setHeart(hcount);
-			  a.setJjim(jcount);
 		  }
 		  int totalpage=dao.BusanFindTotalPage(word, "activity");
 		  

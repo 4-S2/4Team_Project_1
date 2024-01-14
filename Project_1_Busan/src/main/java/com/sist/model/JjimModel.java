@@ -18,10 +18,11 @@ public class JjimModel {
 	   }catch(Exception e) {e.printStackTrace();}
 	   String no=request.getParameter("no");
 	   String cateno=request.getParameter("cateno");
+	   String tab=request.getParameter("tab");
 	   HttpSession session=request.getSession();
 	   String id=(String)session.getAttribute("id");
 	   JjimDAO dao=JjimDAO.newInstance();
-	   String res=dao.jjimUpdate(id, Integer.parseInt(cateno), Integer.parseInt(no));
+	   String res=dao.jjimUpdate(id, Integer.parseInt(cateno), Integer.parseInt(no),tab);
 	   
 	   try {
 		   PrintWriter out=response.getWriter();
@@ -43,13 +44,34 @@ public class JjimModel {
  	   HttpSession session=request.getSession();
  	   String id=(String)session.getAttribute("id");
  	   JjimDAO dao=JjimDAO.newInstance();
- 	   String res=dao.jjimUpdate(id, Integer.parseInt(cateno), Integer.parseInt(eno));
+ 	   String res=dao.jjimexUpdate(id, Integer.parseInt(cateno), Integer.parseInt(eno),"EXHIBITION");
  	   
  	   try {
  		   PrintWriter out=response.getWriter();
  		   out.write(res);
  	   }catch(Exception e) {e.printStackTrace();}
  	}
+   
+   @RequestMapping("busan/checklogin.do")
+	public void checklogin(HttpServletRequest request, HttpServletResponse response)
+	{
+	   try {
+		   request.setCharacterEncoding("UTF-8");
+		   
+	   }catch(Exception e) {e.printStackTrace();}
+	   HttpSession session=request.getSession();
+	   String id=(String)session.getAttribute("id");
+	   System.out.println(id);
+	   String res="no";
+	   if(id==null)
+		   res="no";
+	   else
+		   res="yes";   
+	   try {
+		   PrintWriter out=response.getWriter();
+		   out.write(res);
+	   }catch(Exception e) {e.printStackTrace();}
+	}
 
    
     
