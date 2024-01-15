@@ -200,18 +200,15 @@ public class MemberModel {
 
 		  String id=request.getParameter("id");
 		  String email=request.getParameter("email");
-		  // 임시비번 생성
 		  Random rand=new Random();
-		  int x = rand.nextInt(9000) + 1000; // 4자리수 1000~9999
+		  int x = rand.nextInt(9000) + 1000; 
 		  String t=x+"";
 		  MemberDAO dao=MemberDAO.newInstance();
 		  String res=dao.pwdFind(id,email,t);
-		  // id, email 맞으면 임시비번 전송후 변경
 		  if(res.equals("SEND")) {
 			  MailSender msd=new MailSender();
 			  msd.naverMailSend(email, t);
 		  }
-		  
 		  
 		  try {
 			  PrintWriter out=response.getWriter();

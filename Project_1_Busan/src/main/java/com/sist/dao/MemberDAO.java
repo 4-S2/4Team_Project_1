@@ -254,7 +254,7 @@ public class MemberDAO {
 		}
 		return result;
 	}
-	// id와 이메일 확인후 맞으면 임시비번으로 변경, 메일전송은 모델에서
+	
 	   public String pwdFind(String id,String email,String temp) {
 		   String res="";
 		   try {
@@ -270,10 +270,10 @@ public class MemberDAO {
 			   ps.close();
 			   
 			   if(count==0) {
-				   res="NO";  // 아이디없음
+				   res="NO";  
 			   }else {
 				   sql="SELECT COUNT(*) FROM user_ WHERE id=? AND email=?";
-				   // 이메일 확인
+				   
 				   ps=conn.prepareStatement(sql);
 				   ps.setString(1, id);
 				   ps.setString(2, email);
