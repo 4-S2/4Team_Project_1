@@ -55,8 +55,20 @@ $(document).ready(function(){
 	}) */
 	
 	$('#reviewCommentBtn').click(function(){
-		$(this).closest('.review-list').find('.review-comment').toggle();
-	})
+	    let rno = $(this).attr("data-rno");
+	    alert(rno);
+	    $.ajax({
+	        type: 'post',
+	        url: '../busan/review_reply.do',
+	        data: {'rno': rno},
+	        success: function(result){
+	            console.log(result); // 콘솔에 응답 결과 출력
+	            $('.review-comment').html(result);
+	        }
+	    });
+	});
+
+
 	
 	
 	$("#reviewInsertBtn").click(function(){
@@ -150,25 +162,10 @@ function reviewInsert(gno) {
 		        <button class="btn-sm btn-info" value="삭제" id="reviewDeleteBtn">삭제</button>
         	</div>
         	
-        	<button value="댓글" class="btn" id="reviewCommentBtn">댓글</button>
+        	<button value="댓글" class="btn" id="reviewCommentBtn" data-rno="${rvo.rno }">댓글</button>
 	        
-	        <div class="review-comment" style="display:none">
-	        	<ul class="review-comment-list">
-	        		<li>
-	        			<h5>lee5678<br>
-	        				<span class="regdate">2024.01.05</span>
-	        			</h5>
-	        			<p class="comment">댓글 내용 댓글 내용 댓글 내용 댓글 내용 댓글 내용 댓글 내용 댓글 내용</p>
-	        			<ul class="review-comment-reply">
-	        				<li>
-	        					<h5>park0000<br>
-	        					<span class="regdate">2024.01.05</span>
-			        			</h5>
-			        			<p class="comment">답글 내용 답글 내용 답글 내용 답글 내용 답글 내용 답글 내용</p>
-	        				</li>
-	        			</ul>
-	        		</li>
-	        	</ul>
+	        <div class="review-comment">
+	        	
 	        </div>
         </div>
 	</c:forEach>
