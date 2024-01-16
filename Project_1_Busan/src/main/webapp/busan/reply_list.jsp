@@ -33,6 +33,7 @@ $(function(){
             // '취소'가 아닐 때의 동작
             $(this).text('취소');
             $(this).closest('.reply-list').find('.reply').show();
+            
         }
     });
 });
