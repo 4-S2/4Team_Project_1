@@ -79,6 +79,7 @@ $(function(){
 		<h5>${vo.id }<span class="regdate">&nbsp;${vo.dbday }</span></h5>
 			<div class="review-comment-list" style="border-top: 1px solid #eee">
 			
+			
 				<p class="comment" style="border-top: 0px">${vo.cont }</p>
 				<div class="btnTo">
 					<button class="btn btn-sm reUp">수정</button>
