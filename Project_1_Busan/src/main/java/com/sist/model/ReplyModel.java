@@ -89,4 +89,31 @@ public class ReplyModel {
 		return "redirect:../busan/reply.do?rno=" + rno;
 	}
 	
+	@RequestMapping("busan/reply_reReply.do")
+	public String reply_reReply(HttpServletRequest request,
+			HttpServletResponse response)
+	{
+		try {
+			request.setCharacterEncoding("UTF-8");
+		}catch(Exception e) {}
+		String rno=request.getParameter("rno");
+		String rrno=request.getParameter("rrno");
+		String gid=request.getParameter("gid");
+		System.out.println(rno);
+		String cont=request.getParameter("cont");
+		HttpSession session=request.getSession();
+		String id=(String)session.getAttribute("id");
+		
+		ReviewReplyVO vo=new ReviewReplyVO();
+		vo.setCont(cont);
+		vo.setId(id);
+		vo.setRoot(Integer.parseInt(rrno));
+		vo.setRno(Integer.parseInt(rno));
+		vo.setGroup_id(Integer.parseInt(gid));
+		
+		ReplyDAO dao=ReplyDAO.newInstance();
+		dao.reReplyInsertData(vo);
+		 return "redirect:../busan/reply.do?rno=" + rno;
+	}
+	
 }

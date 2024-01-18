@@ -66,6 +66,21 @@ $(function(){
 			}
     	})
     }) 
+    $('.replyInsertBtn').click(function(){
+    	let rrno=$(".reDel").attr("data-rrno");
+    	let rno=$(".reDel").attr("data-rno");
+    	let cont=$('.replyBox').val();
+    	let gid=$(this).attr("data-gid");
+    	$.ajax({
+    		type:'post',
+    		url:'../busan/reply_reReply.do',
+    		data:{'rrno':rrno,'rno':rno,'cont':cont,'gid':gid},
+    		success:function(result)
+			{
+				$('#reply_list').html(result)
+			}
+    	})
+    }) 
 });
 
 </script>
@@ -84,7 +99,7 @@ $(function(){
 				<div class="btnTo">
 					<button class="btn btn-sm reUp">수정</button>
 					<button class="btn btn-sm reDel" data-rno="${vo.rno }" data-rrno="${vo.rrno }">삭제</button>
-					<button class="btn btn-sm replyBtn">답글달기</button>
+					<button class="btn btn-sm replyBtn" data-gid="${vo.goods_id }">답글달기</button>
 				</div>
 			</div>
 			<div class="update" style="display: none">

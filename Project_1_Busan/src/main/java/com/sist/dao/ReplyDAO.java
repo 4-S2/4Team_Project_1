@@ -91,8 +91,10 @@ public class ReplyDAO {
 			   		+ "VALUES(rr_rrno_seq.nextval,?,?,?,?,?,?,?)";
 			   		     
 			   ps=conn.prepareStatement(sql);
-			   ps.setString(1, vo.getCont());
-			   ps.setInt(2, vo.getRrno());
+			   ps.setInt(1, vo.getRno());
+			   ps.setString(2, vo.getId());
+			   ps.setString(3, vo.getCont());
+			   ps.setInt(4, vo.getGroup_id());
 			   ps.executeUpdate();
 			   
 		   }catch(Exception ex) 
