@@ -127,4 +127,23 @@ public class ReplyDAO {
 			   dbconn.disConnection(conn, ps);
 		   }
 	   }
+	  public void replyDeleteData(int rrno)
+	  {
+		  try
+		   {
+			   conn=dbconn.getConnection();
+			   String sql = "DELETE FROM review_reply WHERE rrno=?";
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, rrno);
+			ps.executeUpdate();
+			   
+		   }catch(Exception ex) 
+		   {
+			   ex.printStackTrace();
+		   }
+		   finally
+		   {
+			   dbconn.disConnection(conn, ps);
+		   }
+	  }
 }

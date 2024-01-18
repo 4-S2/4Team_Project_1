@@ -57,6 +57,36 @@ public class ReplyModel {
 		dao.replyInsertData(vo);
 		 return "redirect:../busan/reply.do?rno=" + rno;
 	}
-	
+	@RequestMapping("busan/reply_delete.do")
+	public String reply_delete(HttpServletRequest request,
+			HttpServletResponse response)
+	{
+
+		String rrno=request.getParameter("rrno");
+		String rno=request.getParameter("rno");
+		System.out.println(rrno);
+		
+		ReplyDAO dao=ReplyDAO.newInstance();
+		dao.replyDeleteData(Integer.parseInt(rrno));
+		return "redirect:../busan/reply.do?rno=" + rno;
+	}
+	@RequestMapping("busan/reply_update.do")
+	public String reply_update(HttpServletRequest request,
+			HttpServletResponse response)
+	{
+		try {
+			request.setCharacterEncoding("UTF-8");
+		}catch(Exception e) {}
+		String rrno=request.getParameter("rrno");
+		String rno=request.getParameter("rno");
+		String cont=request.getParameter("cont");
+		
+		ReviewReplyVO vo=new ReviewReplyVO();
+		vo.setCont(cont);
+		vo.setRrno(Integer.parseInt(rrno));
+		ReplyDAO dao=ReplyDAO.newInstance();
+		dao.replyupdateData(vo);
+		return "redirect:../busan/reply.do?rno=" + rno;
+	}
 	
 }
