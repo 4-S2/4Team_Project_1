@@ -82,7 +82,7 @@ public class ReplyDAO {
 			   dbconn.disConnection(conn, ps);
 		   }
 	   }
-	   public void replyInertData(ReviewReplyVO vo)
+	   public void reReplyInsertData(ReviewReplyVO vo)
 	   {
 		   try
 		   {
@@ -91,8 +91,10 @@ public class ReplyDAO {
 			   		+ "VALUES(rr_rrno_seq.nextval,?,?,?,?,?,?,?)";
 			   		     
 			   ps=conn.prepareStatement(sql);
-			   ps.setString(1, vo.getCont());
-			   ps.setInt(2, vo.getRrno());
+			   ps.setInt(1, vo.getRno());
+			   ps.setString(2, vo.getId());
+			   ps.setString(3, vo.getCont());
+			   ps.setInt(4, vo.getGroup_id());
 			   ps.executeUpdate();
 			   
 		   }catch(Exception ex) 
@@ -104,4 +106,46 @@ public class ReplyDAO {
 			   dbconn.disConnection(conn, ps);
 		   }
 	   }
+	   public void replyInsertData(ReviewReplyVO vo)
+	   {
+		   try
+		   {
+			   conn=dbconn.getConnection();
+			   String sql = "INSERT INTO review_reply(rrno, rno, id, cont, group_id, group_step, group_tab) " +
+			             "VALUES(rr_rrno_seq.nextval, ?, ?, ?, (SELECT NVL(MAX(group_id) + 1, 1) FROM review_reply), 0, 0)";
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, vo.getRno());
+			ps.setString(2, vo.getId());
+			ps.setString(3, vo.getCont());
+			ps.executeUpdate();
+
+			   
+		   }catch(Exception ex) 
+		   {
+			   ex.printStackTrace();
+		   }
+		   finally
+		   {
+			   dbconn.disConnection(conn, ps);
+		   }
+	   }
+	  public void replyDeleteData(int rrno)
+	  {
+		  try
+		   {
+			   conn=dbconn.getConnection();
+			   String sql = "DELETE FROM review_reply WHERE rrno=?";
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, rrno);
+			ps.executeUpdate();
+			   
+		   }catch(Exception ex) 
+		   {
+			   ex.printStackTrace();
+		   }
+		   finally
+		   {
+			   dbconn.disConnection(conn, ps);
+		   }
+	  }
 }
