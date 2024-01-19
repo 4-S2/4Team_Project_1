@@ -119,7 +119,8 @@
 			$.ajax({
 				type:'post',
 				url:'../busan/review.do',
-				data:{"gno":gno},
+				data:{"no":gno, // 가져올 수 있나?
+					"cateno":6},
 				success:function(result)
 				{
 					$('#reviewCont').html(result)

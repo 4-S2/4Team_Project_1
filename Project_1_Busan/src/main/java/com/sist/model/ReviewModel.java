@@ -6,6 +6,7 @@ import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.sist.controller.RequestMapping;
 import com.sist.dao.*;
@@ -17,7 +18,8 @@ public class ReviewModel {
 		
 		//1. 페이지 받기
 		String page=request.getParameter("page");
-		String gno=request.getParameter("gno");
+		String no=request.getParameter("no");
+		String cateno = request.getParameter("cateno");
 		if(page==null) {
 			page="1";
 		}
@@ -25,7 +27,7 @@ public class ReviewModel {
         
         // 2. 데이터베이스 연결
         ReviewDAO dao=ReviewDAO.newInstance();
-		List<ReviewVO> rlist=dao.reviewListData(curpage);
+		List<ReviewVO> rlist=dao.reviewListData(curpage,Integer.parseInt(cateno),Integer.parseInt(no));
 		
 		int count=dao.ReviewRowCount();
 		int totalpage=(int)(Math.ceil(count/10.0));
@@ -37,11 +39,11 @@ public class ReviewModel {
 		 * 
 		 * if(endPage>totalpage) {endPage=totalpage;}
 		 */
+		request.setAttribute("no", no);
         request.setAttribute("curpage", curpage);
         request.setAttribute("count", count);
         request.setAttribute("totalpage", totalpage);
         request.setAttribute("rlist", rlist);
-        request.setAttribute("gno", gno);
         request.setAttribute("today", new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
         request.setAttribute("main_jsp", "../busan/review.jsp");
 		return "../busan/review.jsp";
@@ -50,13 +52,13 @@ public class ReviewModel {
 	 
 	@RequestMapping("busan/review_detail.do")
     public String board_detail(HttpServletRequest request, HttpServletResponse response) {
-		String gno=request.getParameter("gno");
+		String no=request.getParameter("no");
 		String rno=request.getParameter("rno");
 		ReviewDAO dao=ReviewDAO.newInstance();
 		ReviewVO rvo=dao.reviewDetailData(Integer.parseInt(rno));
 		request.setAttribute("rvo", rvo);
 		request.setAttribute("rno", rno);
-		request.setAttribute("gno", gno);
+		request.setAttribute("no", no);
 		
 		request.setAttribute("main_jsp", "../board/review.jsp");
 		return "../main/main.jsp";
@@ -66,8 +68,8 @@ public class ReviewModel {
 	// 추가
 	@RequestMapping("busan/review_insert.do")
 	public String review_insert(HttpServletRequest request, HttpServletResponse response){   
-		
-		request.setAttribute("main_jsp", "../busan/review_insert.jsp");
+		String no=request.getParameter("no");
+		request.setAttribute("no", no);
 		return "../busan/review_insert.jsp";
 	}
 	
@@ -78,32 +80,33 @@ public class ReviewModel {
 			request.setCharacterEncoding("UTF-8");
 		}catch(Exception ex) {}
 		
-		String gno=request.getParameter("gno");
-		
-		String rno=request.getParameter("rno");
 		String score=request.getParameter("score");
 		String cateno=request.getParameter("cateno");
-		String id=request.getParameter("id");
 		String cont=request.getParameter("cont");
-		String img=request.getParameter("img");
+		String no=request.getParameter("no");
 		String password=request.getParameter("password");
-		
-		request.setAttribute("gno", gno);
-		
+        HttpSession session=request.getSession();
+        String id=(String) session.getAttribute("id");
+        
+		System.out.println(score);
+		System.out.println(cateno);
+		System.out.println(id);
+		System.out.println(cont);
+		System.out.println(no);
+		System.out.println(password);
 		ReviewVO rvo=new ReviewVO();
-		rvo.setRno(Integer.parseInt(rno));
 		rvo.setScore(Integer.parseInt(score));
 		rvo.setCateno(Integer.parseInt(cateno));
 		rvo.setId(id);
 		rvo.setCont(cont);
-		rvo.setImg(img);
 		rvo.setPassword(password);
+		rvo.setNo(Integer.parseInt(no));
 		
 		// 데이터베이스 연결 
 		ReviewDAO dao=ReviewDAO.newInstance();
-		dao.reviewInsert(rvo);		
+		dao.reviewInsert(rvo);	
 		
-		return "redirect:../busan/review.do";
+		return "../store/goods_detail.do?gno="+no;
 	}
 	
 	// 삭제

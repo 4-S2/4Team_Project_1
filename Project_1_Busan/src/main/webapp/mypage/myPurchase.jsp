@@ -21,6 +21,13 @@
         /* margin: 5px; 
     }
 </style>
+<script type="text/javascript">
+function reviewInsert(no) {
+    let x=(document.body.offsetWidth/2) - (640/2);
+    let y=(window.screen.height/2) - (480/2) - 50;
+    window.open("../busan/review_insert.do?no="+no, "_blank", 'width=640, height=480, left=' + x + ', top=' + y);
+	} 
+</script>
 </head>
 <body>
   <div class="myInquiry">
@@ -70,7 +77,7 @@
 				                <td class="category px_20 ta_px10"><fmt:formatNumber value="${vo.amount * vo.gvo.price}" pattern="#,###" />원</td>
 				                <td class="category px_20 ta_px10">${vo.regdate }</td>
 				                	<td class="dp_pc writer">
-										<input type="button" value="리뷰작성" onclick="" class="r-button">
+										<input type="button" value="리뷰작성" onclick="reviewInsert(${vo.gno})" class="r-button">
 									 </td>	
 				            </tr>
 				        </c:forEach> 

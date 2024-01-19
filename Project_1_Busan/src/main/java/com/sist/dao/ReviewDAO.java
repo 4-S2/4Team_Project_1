@@ -21,16 +21,17 @@ public class ReviewDAO {
     }
     
     // 리뷰 목록 출력
-    public List<ReviewVO> reviewListData(int page){
+    public List<ReviewVO> reviewListData(int page,int cateno,int no){
        List<ReviewVO> rlist=new ArrayList<ReviewVO>();
        try{
           // 1. 연결
           conn=dbconn.getConnection();
           // 2. SQL문장 전송 
-          String sql="SELECT rno, score, cateno, id, cont, password, img, TO_CHAR(regdate,'YYYY-MM-DD'), num "
-                  +"FROM (SELECT rno, score, cateno, id, cont, password, img, regdate, rownum as num "
-                  +"FROM (SELECT rno, score, cateno, id, cont, password, img, regdate "
-                  +"FROM review ORDER BY rno DESC)) "
+          String sql="SELECT rno, score, cateno, id, cont, password, img, TO_CHAR(regdate,'YYYY-MM-DD'),no, num "
+                  +"FROM (SELECT rno, score, cateno, id, cont, password, img, regdate,no, rownum as num "
+                  +"FROM (SELECT rno, score, cateno, id, cont, password, img, regdate,no "
+                  +"FROM review Where cateno=? And no=? "
+                  + "ORDER BY rno DESC)) "
                   +"WHERE num BETWEEN ? AND ?";
           // 3. 미리 전송 
           ps=conn.prepareStatement(sql);
@@ -38,9 +39,10 @@ public class ReviewDAO {
           int rowSize=10;
           int start=(rowSize*page)-(rowSize-1); // 오라클 => 1번  
           int end=rowSize*page;
-          
-          ps.setInt(1, start);
-          ps.setInt(2, end);
+          ps.setInt(1, cateno);
+          ps.setInt(2, no);
+          ps.setInt(3, start);
+          ps.setInt(4, end);
           
           // 5. 실행후에 결과값을 받는다 
           ResultSet rs=ps.executeQuery();
@@ -54,6 +56,7 @@ public class ReviewDAO {
              rvo.setPassword(rs.getString(6));
              rvo.setImg(rs.getString(7));
              rvo.setRegdate(rs.getDate(8));
+             rvo.setNo(no);
              rlist.add(rvo);
           }
           rs.close();
@@ -126,7 +129,7 @@ public class ReviewDAO {
     public void reviewInsert(ReviewVO rvo) {
     	try {
     		conn=dbconn.getConnection();
-    		String sql="INSERT INTO review(rno, score, cateno, id, cont, password, img) "
+    		String sql="INSERT INTO review(rno, score, cateno, id, cont, password,no) "
     				 + "VALUES(review_rno_seq.nextval,?,?,?,?,?,?)";
     		ps=conn.prepareStatement(sql);
     		ps.setInt(1, rvo.getScore());
@@ -134,7 +137,7 @@ public class ReviewDAO {
 			ps.setString(3, rvo.getId());
     		ps.setString(4, rvo.getCont());
     		ps.setString(5, rvo.getPassword());
-    		ps.setString(6, rvo.getImg());
+    		ps.setInt(6, rvo.getNo());
     		ps.executeUpdate();
     	}catch(Exception ex) {
     		ex.printStackTrace();

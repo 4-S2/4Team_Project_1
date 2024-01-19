@@ -59,12 +59,12 @@ $(document).ready(function(){
 	})
 	
 	
-	$("#reviewInsertBtn").click(function(){
+/*  	$("#reviewInsertBtn").click(function(){
         let x=(document.body.offsetWidth/2) - (640/2);
         let y=(window.screen.height/2) - (480/2) - 50;
-        let gno=$(this).closest('.review-list').data('gno');
-        window.open("../busan/review_insert.do?gno="+gno, "_blank", 'width=640, height=480, left=' + x + ', top=' + y);
-    })
+        let no=$(this).closest('.review-list').data('gno');
+        window.open("../busan/review_insert.do?no="+no, "_blank", 'width=640, height=480, left=' + x + ', top=' + y);
+    })  */
     
     
     $("#reviewUpdateBtn").click(function(){
@@ -106,20 +106,20 @@ $(document).ready(function(){
 })
 
 
-function reviewInsert(gno) {
+ function reviewInsert(no) {
     let x=(document.body.offsetWidth/2) - (640/2);
     let y=(window.screen.height/2) - (480/2) - 50;
-    window.open("../busan/review_insert.do?gno="+gno, "_blank", 'width=640, height=480, left=' + x + ', top=' + y);
-	}
+    window.open("../busan/review_insert.do?no="+no, "_blank", 'width=640, height=480, left=' + x + ', top=' + y);
+	} 
 
 </script>
 
 </head>
 <body>
-	<button value="리뷰 작성" class="btn" id="reviewInsertBtn" onclick="reviewInsert(${vo.gno})">리뷰 작성</button>
+	<button value="리뷰 작성" class="btn" id="reviewInsertBtn"  onclick="reviewInsert(${no})" >리뷰 작성</button>
 	<c:forEach var="rvo" items="${rlist}">
-        <div class="review-list" data-gno="${vo.gno}">
-        	<input type="hidden" id="goods_gno" value="${gno}">
+        <div class="review-list" data-gno="${rvo.no}">
+        	<input type="hidden" id="goods_gno" value="${rvo.no}">
         	<div class="review-profile">
         		<div class="profile">
         			<div class="profile-icon">
