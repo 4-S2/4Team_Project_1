@@ -54,19 +54,36 @@ $(document).ready(function(){
 		})
 	}) */
 	
-	$('#reviewCommentBtn').click(function(){
+	$('.reviewCommentBtn').click(function () {
 	    let rno = $(this).attr("data-rno");
-	    alert(rno);
-	    $.ajax({
-	        type: 'post',
-	        url: '../busan/review_reply.do',
-	        data: {'rno': rno},
-	        success: function(result){
-	            console.log(result); // 콘솔에 응답 결과 출력
-	            $('.review-comment').html(result);
-	        }
-	    });
+	    let reviewCommentContainer = $(this).closest('.review-list').find('.review-comment');
+
+	    // reviewCommentContainer에 내용이 있는지 확인
+	    if (!reviewCommentContainer.html().trim()) {
+	        // 내용이 없는 경우에만 AJAX 호출
+	        $.ajax({
+	            type: 'post',
+	            url: '../busan/review_reply.do',
+	            data: { 'rno': rno },
+	            success: function (result) {
+	                console.log(result);
+	                reviewCommentContainer.html(result);
+	            }
+	        });
+	    } else {
+	        // 내용이 있는 경우 비우기
+	    	$.ajax({
+	            type: 'post',
+	            url: '../busan/review_reply.do',
+	            data: { 'rno': rno },
+	            success: function (result) {
+	                console.log(result);
+	                reviewCommentContainer.html("");
+	            }
+	        });
+	    }
 	});
+
 
 
 	
@@ -162,7 +179,7 @@ $(document).ready(function(){
 		        <button class="btn-sm btn-info" value="삭제" id="reviewDeleteBtn">삭제</button>
         	</div>
         	
-        	<button value="댓글" class="btn" id="reviewCommentBtn" data-rno="${rvo.rno }">댓글</button>
+        	<button value="댓글" class="btn reviewCommentBtn" id="reviewCommentBtn" data-rno="${rvo.rno }">댓글</button>
 	        
 	        <div class="review-comment">
 	        	

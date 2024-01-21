@@ -25,18 +25,25 @@ $(function(){
     });
     
     $('.replyBtn').click(function(){
+    	var id= $(this).attr("data-id");
         var buttonText = $(this).text();
-        
-        if(buttonText === '취소') {
-            // '취소'일 때의 동작
-            $(this).text('답글달기');
-            $(this).closest('.reply-list').find('.reply').hide();
-        } else {
-            // '취소'가 아닐 때의 동작
-            $(this).text('취소');
-            $(this).closest('.reply-list').find('.reply').show();
-            
+        if (!id || id.trim() === '') {
+            alert("로그인 후 이용이 가능합니다.");
+            location.href = "../member/login_main.do";
         }
+        else{
+        	if(buttonText === '취소') {
+                // '취소'일 때의 동작
+                $(this).text('답글달기');
+                $(this).closest('.reply-list').find('.reply').hide();
+            } else {
+                // '취소'가 아닐 때의 동작
+                $(this).text('취소');
+                $(this).closest('.reply-list').find('.reply').show();
+                
+            }
+        }
+        
     });
     
      $('.reDel').click(function(){
@@ -53,9 +60,9 @@ $(function(){
     	})
     }) 
     $('.reUpBtn').click(function(){
-    	let rrno=$(".reDel").attr("data-rrno");
-    	let rno=$(".reDel").attr("data-rno");
-    	let cont=$('.upBox').val();
+    	let rrno=$(this).closest('.Reply').find(".reDel").attr("data-rrno");
+    	let rno=$(this).closest('.Reply').find(".reDel").attr("data-rno");
+    	let cont=$(this).closest('.Reply').find('.upBox').val();
     	$.ajax({
     		type:'post',
     		url:'../busan/reply_update.do',
@@ -67,19 +74,25 @@ $(function(){
     	})
     }) 
     $('.replyInsertBtn').click(function(){
-    	let rrno=$(".reDel").attr("data-rrno");
-    	let rno=$(".reDel").attr("data-rno");
-    	let cont=$('.replyBox').val();
+    	let rrno=$(this).attr("data-rrno");
+    	let rno=$(this).attr("data-rno");
+    	let cont=$(this).closest('.Reply').find('.replyBox').val();
     	let gid=$(this).attr("data-gid");
-    	$.ajax({
-    		type:'post',
-    		url:'../busan/reply_reReply.do',
-    		data:{'rrno':rrno,'rno':rno,'cont':cont,'gid':gid},
-    		success:function(result)
-			{
-				$('#reply_list').html(result)
-			}
-    	})
+    	if(!cont || cont.trim() === ''){
+			alert("내용을 입력하세요.")
+		}
+		else{
+			$.ajax({
+	    		type:'post',
+	    		url:'../busan/reply_reReply.do',
+	    		data:{'rrno':rrno,'rno':rno,'cont':cont,'gid':gid},
+	    		success:function(result)
+				{
+					$('#reply_list').html(result)
+				}
+	    	})
+		}
+    	
     }) 
 });
 
@@ -89,7 +102,15 @@ $(function(){
 
 <c:forEach var="vo" items="${list }">
 <div class="Reply" style="display: flex">
- <div style="background-color: skyblue;display: block;width: 40px;"></div>
+<c:forEach var="i" begin="1" end="${vo.group_tab }" varStatus="loop">
+ <div style="display: block;width: 40px;">
+ <c:if test="${loop.last}">
+  <img src="../busan/icon-back.png" style="
+    transform: rotate(180deg);
+        height: 30px;">
+ </c:if>
+ </div>
+ </c:forEach>
   <div class="reply-list" style="width: 100%;display: block">
 		<h5>${vo.id }<span class="regdate">&nbsp;${vo.dbday }</span></h5>
 			<div class="review-comment-list" style="border-top: 1px solid #eee">
@@ -97,9 +118,11 @@ $(function(){
 			
 				<p class="comment" style="border-top: 0px">${vo.cont }</p>
 				<div class="btnTo">
+				  <c:if test="${sessionScope.id==vo.id}">
 					<button class="btn btn-sm reUp">수정</button>
 					<button class="btn btn-sm reDel" data-rno="${vo.rno }" data-rrno="${vo.rrno }">삭제</button>
-					<button class="btn btn-sm replyBtn" data-gid="${vo.goods_id }">답글달기</button>
+					</c:if>
+					<button class="btn btn-sm replyBtn" data-id="${sessionScope.id}">답글달기</button>
 				</div>
 			</div>
 			<div class="update" style="display: none">
@@ -109,7 +132,7 @@ $(function(){
 			<div class="reply" style="display: none">
 				<h5>${id }</h5>
 				<input type=text class="replyBox"> 
-				<button class="btn btn-sm replyInsertBtn">등록</button>
+				<button class="btn btn-sm replyInsertBtn" data-rno="${vo.rno }" data-rrno="${vo.rrno }" data-gid="${vo.group_id }">등록</button>
 			</div>
 	</div>
 	<%-- <ul class="review-comment-list">

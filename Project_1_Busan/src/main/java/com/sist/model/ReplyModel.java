@@ -99,7 +99,7 @@ public class ReplyModel {
 		String rno=request.getParameter("rno");
 		String rrno=request.getParameter("rrno");
 		String gid=request.getParameter("gid");
-		System.out.println(rno);
+		System.out.println(rrno);
 		String cont=request.getParameter("cont");
 		HttpSession session=request.getSession();
 		String id=(String)session.getAttribute("id");

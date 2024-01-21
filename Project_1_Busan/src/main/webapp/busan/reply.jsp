@@ -76,24 +76,37 @@ $(function(){
 			
 		}
 	});
-	$('#replyInsert').click(function(){
-		let cont=$('#cont').val();
-		$.ajax({
-			type:'post',
-			url:'../busan/reply_insert.do',
-			data:{"rno":rno, "cont":cont},
-			success:function(result)
-			{
-				$('#cont').val("");
-				$('#reply_list').html(result);
-				
+	$('.reInBtn').click(function(){
+		let cont=$(this).closest('.reply-insert').find('.cont').val();
+		var id= $(this).attr("data-sid");
+		if (!id || id.trim() === '') {
+            alert("로그인 후 이용이 가능합니다.");
+            location.href = "../member/login_main.do";
+        }
+		else{
+			if(!cont || cont.trim() === ''){
+				alert("내용을 입력하세요.")
 			}
-		});
+			else{
+				$.ajax({
+					type:'post',
+					url:'../busan/reply_insert.do',
+					data:{"rno":rno, "cont":cont},
+					success:function(result)
+					{
+						$('#reply_list').html(result);
+						
+					}
+				});
+				$(this).closest('.reply-insert').find('.cont').val("");
+			}
+		}
+		
 		
 	});
 	
-	$('#replyCancel').click(function(){
-		$('#cont').val("");
+	$('.reBack').click(function(){
+		$(this).closest('.reply-insert').find('.cont').val("");
 	})
 	
 	
@@ -115,10 +128,10 @@ $(function(){
 				<tr>
 
 					<td style="position: relative; max-width: 100%; padding: 10px 0">
-						<h5>${id }</h5> <textarea rows="4" cols="60" id="cont" style="resize: none" required="required"></textarea><br>
+						<h5>${id }</h5> <textarea rows="4" cols="60" id="cont" class="cont" style="resize: none" required="required"></textarea><br>
 							<input type="hidden" name="rno" value="${rno }">
 						<div class="reply-btn-wrapper">
-							<button class="btn-sm btn reInBtn" value="등록" id="replyInsert">등록</button>
+							<button class="btn-sm btn reInBtn" value="등록" id="replyInsert" data-sid="${sessionScope.id }">등록</button>
 							<button class="btn-sm btn reBack" value="취소" id="replyCancel">취소</button>
 						</div>
 					</td>
