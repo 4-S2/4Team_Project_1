@@ -49,13 +49,29 @@ $(function(){
      $('.reDel').click(function(){
     	let rrno=$(this).attr("data-rrno");
     	let rno=$(this).attr("data-rno");
+    	
     	$.ajax({
     		type:'post',
-    		url:'../busan/reply_delete.do',
+    		url:'../busan/reply_redelete.do',
     		data:{'rrno':rrno,'rno':rno},
     		success:function(result)
 			{
-				$('#reply_list').html(result)
+				if(result==='no')
+				{
+					alert('대댓글이 있는 경우 삭제할 수 없습니다');
+				}
+				else{
+					$.ajax({
+			    		type:'post',
+			    		url:'../busan/reply_delete.do',
+			    		data:{'rrno':rrno,'rno':rno},
+			    		success:function(result)
+						{
+							$('#reply_list').html(result)
+						}
+			    	})
+					
+				}
 			}
     	})
     }) 

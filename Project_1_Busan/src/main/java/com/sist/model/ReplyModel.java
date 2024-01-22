@@ -1,5 +1,6 @@
 package com.sist.model;
 
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -57,6 +58,23 @@ public class ReplyModel {
 		dao.replyInsertData(vo);
 		 return "redirect:../busan/reply.do?rno=" + rno;
 	}
+	@RequestMapping("busan/reply_redelete.do")
+	public void reply_redelete(HttpServletRequest request,
+			HttpServletResponse response)
+	{
+
+		String rrno=request.getParameter("rrno");
+		String rno=request.getParameter("rno");
+		System.out.println(rrno);
+		
+		ReplyDAO dao=ReplyDAO.newInstance();
+		String res=dao.replyDeleteDataCheck(Integer.parseInt(rrno));
+		try {
+			PrintWriter out=response.getWriter();
+			out.write(res);
+		}catch(Exception e) {}
+	}
+	
 	@RequestMapping("busan/reply_delete.do")
 	public String reply_delete(HttpServletRequest request,
 			HttpServletResponse response)

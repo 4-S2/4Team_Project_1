@@ -129,8 +129,8 @@ public class ReviewDAO {
     public void reviewInsert(ReviewVO rvo) {
     	try {
     		conn=dbconn.getConnection();
-    		String sql="INSERT INTO review(rno, score, cateno, id, cont, password,no) "
-    				 + "VALUES(review_rno_seq.nextval,?,?,?,?,?,?)";
+    		String sql="INSERT INTO review(rno, score, cateno, id, cont, password,no,img) "
+    				 + "VALUES(review_rno_seq.nextval,?,?,?,?,?,?,?)";
     		ps=conn.prepareStatement(sql);
     		ps.setInt(1, rvo.getScore());
     		ps.setInt(2, rvo.getCateno());
@@ -138,6 +138,7 @@ public class ReviewDAO {
     		ps.setString(4, rvo.getCont());
     		ps.setString(5, rvo.getPassword());
     		ps.setInt(6, rvo.getNo());
+    		ps.setString(7, rvo.getImg());
     		ps.executeUpdate();
     	}catch(Exception ex) {
     		ex.printStackTrace();
@@ -163,11 +164,6 @@ public class ReviewDAO {
       		
       		if(db_pwd.equals(password)){
       			result="yes";
-      			sql="DELETE FROM review_reply "
-      			   +"WHERE rno="+rno;
-      			ps=conn.prepareStatement(sql);
-      			ps.executeUpdate();
-      			ps.close();
       			
       			sql="DELETE FROM review_reply "
       			   +"WHERE rno="+rno;
@@ -177,6 +173,31 @@ public class ReviewDAO {
       		}else {
       			result="no";
       		}
+      	}catch(Exception ex) {
+      		ex.printStackTrace();
+      	}
+      	finally {
+      		dbconn.disConnection(conn, ps);
+      	}
+    	return result;
+    }
+ // 리뷰 삭제
+    public String reviewDeleteData(int rno) {
+    	String result="yes";
+    	try {
+      		conn=dbconn.getConnection();
+      		String sql="DELETE FROM review_reply "
+      			   +"WHERE rno="+rno;
+      			ps=conn.prepareStatement(sql);
+      			ps.executeUpdate();
+      			ps.close();
+      			
+      			sql="DELETE FROM review "
+           			   +"WHERE rno="+rno;
+           			ps=conn.prepareStatement(sql);
+           			ps.executeUpdate();
+           			ps.close();
+      		
       	}catch(Exception ex) {
       		ex.printStackTrace();
       	}

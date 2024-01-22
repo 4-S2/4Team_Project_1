@@ -1,17 +1,22 @@
 package com.sist.model;
 
 import java.io.*;
+import java.nio.file.Files;
 import java.text.*;
 import java.util.*;
 
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.sist.controller.RequestMapping;
 import com.sist.dao.*;
 import com.sist.vo.*;
-public class ReviewModel {
+public class ReviewModel{
 	
 	@RequestMapping("busan/review.do")
 	public String review_list(HttpServletRequest request, HttpServletResponse response){
@@ -73,41 +78,80 @@ public class ReviewModel {
 		return "../busan/review_insert.jsp";
 	}
 	
+	
+	    
 	@RequestMapping("busan/review_insert_ok.do")
-	public String review_insert_ok(HttpServletRequest request, HttpServletResponse response){   
-		
-		try {
-			request.setCharacterEncoding("UTF-8");
-		}catch(Exception ex) {}
-		
-		String score=request.getParameter("score");
-		String cateno=request.getParameter("cateno");
-		String cont=request.getParameter("cont");
-		String no=request.getParameter("no");
-		String password=request.getParameter("password");
-        HttpSession session=request.getSession();
-        String id=(String) session.getAttribute("id");
-        
-		System.out.println(score);
-		System.out.println(cateno);
-		System.out.println(id);
-		System.out.println(cont);
-		System.out.println(no);
-		System.out.println(password);
-		ReviewVO rvo=new ReviewVO();
-		rvo.setScore(Integer.parseInt(score));
-		rvo.setCateno(Integer.parseInt(cateno));
-		rvo.setId(id);
-		rvo.setCont(cont);
-		rvo.setPassword(password);
-		rvo.setNo(Integer.parseInt(no));
-		
-		// 데이터베이스 연결 
-		ReviewDAO dao=ReviewDAO.newInstance();
-		dao.reviewInsert(rvo);	
-		
-		return "../store/goods_detail.do?gno="+no;
+	public String review_insert_ok(HttpServletRequest request, HttpServletResponse response) {
+	    try {
+	        request.setCharacterEncoding("UTF-8");
+
+	        // 현재 작업 디렉토리 얻기
+	        String currentDirectory = System.getProperty("user.dir");
+
+	        // 저장할 파일 경로 생성
+	        String path="/Users/yoonsaiyoung/Desktop/download";
+	        //String path = currentDirectory + File.separator + "upload";
+	        File downloadDirectory = new File(path);
+	        if (!downloadDirectory.exists()) {
+	            downloadDirectory.mkdirs();
+	        }
+
+	        String enctype = "UTF-8";
+	        int max_size = 1024 * 1024 * 500;
+
+	        MultipartRequest mr = new MultipartRequest(request, path, max_size, enctype, new DefaultFileRenamePolicy());
+	        String score = mr.getParameter("score");
+	        String cateno = mr.getParameter("cateno");
+	        String cont = mr.getParameter("cont");
+	        String no = mr.getParameter("no");
+	        String password = mr.getParameter("password");
+	        String upload = mr.getFilesystemName("upload");
+
+	        HttpSession session = request.getSession();
+	        String id = (String) session.getAttribute("id");
+
+	        System.out.println(score);
+	        System.out.println(cateno);
+	        System.out.println(id);
+	        System.out.println(cont);
+	        System.out.println(no);
+	        System.out.println(password);
+
+	        // 파일 저장 경로
+	        String filePath = path + File.separator + upload;
+	        System.out.println(filePath);
+
+	        // 파일의 길이 얻기
+	        long fileLength = new File(filePath).length();
+
+	        // 파일을 바이트 배열로 읽어오기
+	        byte[] fileBytes = Files.readAllBytes(new File(filePath).toPath());
+
+	        // 바이트 배열을 Base64로 인코딩하여 문자열로 변환
+	        String encodedString = Base64.getEncoder().encodeToString(fileBytes);
+
+	        ReviewVO rvo = new ReviewVO();
+	        rvo.setScore(Integer.parseInt(score));
+	        rvo.setCateno(Integer.parseInt(cateno));
+	        rvo.setId(id);
+	        rvo.setCont(cont);
+	        rvo.setPassword(password);
+	        rvo.setNo(Integer.parseInt(no));
+	        rvo.setImg(encodedString); // 인코딩된 문자열 저장
+
+	        // 데이터베이스 연결
+	        ReviewDAO dao = ReviewDAO.newInstance();
+	        dao.reviewInsert(rvo);
+
+	    } catch (Exception ex) {
+	        ex.printStackTrace();
+	    }
+
+	    String no = request.getParameter("no");
+	    return "../store/goods_detail.do?gno=" + no;
 	}
+	
+
 	
 	// 삭제
 	@RequestMapping("busan/review_delete_ok.do")
@@ -115,9 +159,10 @@ public class ReviewModel {
 		
 		String gno=request.getParameter("gno");
 		String rno=request.getParameter("rno");
-		String password=request.getParameter("password");
+		//String password=request.getParameter("password");
 		ReviewDAO dao=ReviewDAO.newInstance();
-		String result=dao.reviewDelete(Integer.parseInt(rno), password);
+		String result=dao.reviewDeleteData(Integer.parseInt(rno));
+		//String result=dao.reviewDelete(Integer.parseInt(rno), password);
 		
 		request.setAttribute("gno", gno);
 		

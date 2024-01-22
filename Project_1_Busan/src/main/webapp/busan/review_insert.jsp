@@ -17,7 +17,7 @@
 </head>
 <body>
 	<div class="review-insert">
-        <form method="post" id="yourFormId" action="../busan/review_insert_ok.do">
+        <form method="post" id="yourFormId" action="../busan/review_insert_ok.do" enctype="multipart/form-data">
         <input type="hidden" id="no" name="no">
 			<table class="table">
 				<tr>

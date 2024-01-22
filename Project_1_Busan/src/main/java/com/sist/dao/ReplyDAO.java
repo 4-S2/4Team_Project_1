@@ -171,15 +171,7 @@ public class ReplyDAO {
 			   rs.close();
 			   ps.close();
 			   
-			   if(db_depth>0)
-			   {
-				   sql="UPDATE review_reply SET cont=? WHERE rrno="+rrno;
-				   ps=conn.prepareStatement(sql);
-				   ps.setString(1, "대댓글이 있는 경우 삭제할 수 없습니다.");
-				   ps.executeUpdate();
-				   ps.close();
-			   }
-			   else {
+			   
 				    sql = "DELETE FROM review_reply WHERE rrno=?";
 					ps = conn.prepareStatement(sql);
 					ps.setInt(1, rrno);
@@ -194,6 +186,39 @@ public class ReplyDAO {
 						ps.executeUpdate();
 						ps.close();
 					}
+			   
+			   
+			   
+		   }catch(Exception ex) 
+		   {
+			   ex.printStackTrace();
+		   }
+		   finally
+		   {
+			   dbconn.disConnection(conn, ps);
+		   }
+	  }
+	  public String replyDeleteDataCheck(int rrno)
+	  {
+		  String res="";
+		  try
+		   {
+			   conn=dbconn.getConnection();
+			   String sql = "SELECT root,depth FROM review_reply WHERE rrno="+rrno;
+			   ps=conn.prepareStatement(sql);
+			   ResultSet rs=ps.executeQuery();
+			   rs.next();
+			   int db_root=rs.getInt(1);
+			   int db_depth=rs.getInt(2);
+			   rs.close();
+			   ps.close();
+			   
+			   if(db_depth>0)
+			   {
+				   res="no";
+			   }
+			   else {
+				    res="yes";
 			   }
 			   
 			   
@@ -205,5 +230,6 @@ public class ReplyDAO {
 		   {
 			   dbconn.disConnection(conn, ps);
 		   }
+		  return res;
 	  }
 }

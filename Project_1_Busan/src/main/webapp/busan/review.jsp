@@ -23,6 +23,9 @@
 	players:['iframe']
 }) */
 
+
+
+
 $(document).ready(function(){	
 	/* $('#reviewInsertBtn').click(function(){
 		Shadowbox.open({
@@ -104,27 +107,28 @@ $(document).ready(function(){
     })
     
     
-    $("#reviewDeleteBtn").click(function(){
+    /* $("#reviewDeleteBtn").click(function(){
         let x=(document.body.offsetWidth/2) - (640/2);
         let y=(window.screen.height/2) - (480/2) - 50;
         let gno=$(this).closest('.review-list').data('gno');
         window.open("../busan/review_delete.do?gno="+gno, "_blank", 'width=640, height=480, left=' + x + ', top=' + y);
-    })
+    }) */
     
 
-    $("#reviewDeleteBtn").click(function () {
+    $(".reviewDeleteBtn").click(function () {
         // "삭제" 버튼에서 데이터 삭제를 위한 고유 식별자 가져오기
         let gno = $(this).closest('.review-list').data('gno');
-        
+        let rno = $(this).closest('.review-list').find('.goods_rno').val();
         // AJAX를 사용하여 서버에 삭제 요청 보내기
         $.ajax({
             type: "POST",  // 또는 "GET" 등 사용하려는 HTTP 메서드
-            url: "../busan/delete_review.do",  // 실제로 데이터를 삭제할 서버 엔드포인트로의 경로
-            data: { gno: gno },  // 삭제할 리뷰의 고유 식별자 전달
+            url: "../busan/review_delete_ok.do",  // 실제로 데이터를 삭제할 서버 엔드포인트로의 경로
+            data: { gno: gno,'rno':rno },  // 삭제할 리뷰의 고유 식별자 전달
             success: function (response) {
                 // 서버에서 성공적으로 응답을 받았을 때 실행할 코드
                 // 예를 들어, 삭제 후에 화면 갱신이나 사용자에게 알림을 보여주는 등의 작업 수행 가능
-                console.log("리뷰가 성공적으로 삭제되었습니다.");
+                alert("리뷰가 성공적으로 삭제되었습니다.");
+                location.href="../store/goods_detail.do?gno=" + gno;
             },
             error: function (error) {
                 // 서버에서 오류 응답을 받았을 때 실행할 코드
@@ -135,20 +139,127 @@ $(document).ready(function(){
 })
 
 
- function reviewInsert(no) {
+ /* function reviewInsert(no) {
     let x=(document.body.offsetWidth/2) - (640/2);
     let y=(window.screen.height/2) - (480/2) - 50;
     window.open("../busan/review_insert.do?no="+no, "_blank", 'width=640, height=480, left=' + x + ', top=' + y);
-	} 
+	}  */
 
 </script>
 
 </head>
 <body>
-	<button value="리뷰 작성" class="btn" id="reviewInsertBtn"  onclick="reviewInsert(${no})" >리뷰 작성</button>
+	<button class="btn" id="reviewInsertBtn" data-toggle="modal" data-target="#reviewModal">리뷰 작성</button>
+	
+	<!-- 리뷰 작성 모달 -->
+<div class="modal fade" id="reviewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">리뷰 작성</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="post" id="yourFormId" action="../busan/review_insert_ok.do" enctype="multipart/form-data">
+                    <input type="hidden" id="no" name="no">
+                    
+                    <!-- 리뷰 작성 폼 내용 -->
+                    <table class="table">
+                        <tr>
+					<th width=15%>아이디</th>
+					<td width=85% name="id">${sessionScope.id}</td>
+				</tr>
+				<tr>
+					<th width="15%">카테고리</th>
+					<td width="85%" >
+						<select class="cate" name=cateno>
+		        			<option value="1">명소</option>
+		        			<option value="2">맛집</option>
+		        			<option value="3">축제</option>
+		        			<option value="4">체험</option>
+		        			<option value="5">전시</option>
+		        			<option value="6">특산물</option>
+		        		</select>
+					</td>
+				</tr>
+				<tr>
+					<th width=15%>평점</th>
+					<td width=85%>
+						<select class="cate" name="score">
+		        			<option value="1">1</option>
+		        			<option value="2">2</option>
+		        			<option value="3">3</option>
+		        			<option value="4">4</option>
+		        			<option value="5">5</option>
+		        		</select>
+					</td>
+				</tr>
+				<tr>
+					<th width=15%>이미지</th>
+					<td width=85%>
+						<input type="file" name=upload>
+					</td>
+				</tr>
+				<tr>
+					<th width=15%>내용</th>
+					<td width=85%>
+						<textarea rows="10" cols="60" name="cont" required style="resize: none"></textarea>
+					</td>
+				</tr>
+				<tr>
+					<th width=15%>비밀번호</th>
+					<td width=85%>
+						<input type="password" name="password" required>
+					</td>
+				</tr>
+				<tr>
+				 <td colspan="2" class="text-center"> 
+                   <input type="submit" class="btn-sm btn-primary" value="작성" id="reviewInsertBtn">
+                   <button class="btn-sm btn-info" value="취소" id="reviewCancelBtn" data-dismiss="modal">취소</button>
+                 </td>
+				</tr>
+                    </table>
+                </form>
+                <script type="text/javascript">
+                var noValue = ${no};
+                document.getElementById("no").value = noValue;
+
+                // 폼 제출 시
+                $("#yourFormId").submit(function (event) {
+                    event.preventDefault(); // 폼의 기본 제출 동작을 막음
+
+                    // ajax를 사용하여 비동기적으로 폼 제출
+                    $.ajax({
+                        type: $(this).attr('method'),
+                        url: $(this).attr('action'),
+                        data: new FormData(this),
+                        processData: false,
+                        contentType: false,
+                        success: function (response) {
+                            // 폼이 성공적으로 제출되면 모달 닫기
+                            $("#yourModalId").modal('hide');
+
+                            // 페이지 새로 고침
+                            location.reload();
+                        },
+                        error: function (error) {
+                            console.error("폼 제출 중 오류가 발생했습니다:", error);
+                        }
+                    });
+                });
+            </script>
+            </div>
+            
+        </div>
+    </div>
+</div>
+	
 	<c:forEach var="rvo" items="${rlist}">
         <div class="review-list" data-gno="${rvo.no}">
-        	<input type="hidden" id="goods_gno" value="${rvo.no}">
+        	<input type="hidden" class="goods_gno" value="${rvo.no}">
+        	<input type="hidden" class="goods_rno" value="${rvo.rno}">
         	<div class="review-profile">
         		<div class="profile">
         			<div class="profile-icon">
@@ -170,13 +281,13 @@ $(document).ready(function(){
         	</div>
         	
         	<div class="review-item">
-        		<img src="${rvo.img}" class="review-img" alt="후기 이미지">
+        		<img src="data:image/jpeg;base64,${rvo.img}" class="review-img" alt="후기 이미지">
         		<p class="cont">${rvo.cont}</p>
         	</div>
         	
         	<div class="btn-wrapper">
 	        	<button class="btn-sm btn-primary" value="수정" id="reviewUpdateBtn">수정</button>
-		        <button class="btn-sm btn-info" value="삭제" id="reviewDeleteBtn">삭제</button>
+		        <button class="btn-sm btn-info reviewDeleteBtn" value="삭제" id="reviewDeleteBtn">삭제</button>
         	</div>
         	
         	<button value="댓글" class="btn reviewCommentBtn" id="reviewCommentBtn" data-rno="${rvo.rno }">댓글</button>
