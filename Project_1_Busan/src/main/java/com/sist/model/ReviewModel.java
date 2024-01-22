@@ -85,11 +85,12 @@ public class ReviewModel{
 	    try {
 	        request.setCharacterEncoding("UTF-8");
 
-	        // 현재 작업 디렉토리 얻기
-	        String currentDirectory = System.getProperty("user.dir");
+	        
+	        //String currentDirectory = System.getProperty("user.dir");
 
-	        // 저장할 파일 경로 생성
-	        String path="/Users/yoonsaiyoung/Desktop/download";
+	        
+	        //String path="/Users/yoonsaiyoung/Desktop/download";
+	        String path = "C:\\download";
 	        //String path = currentDirectory + File.separator + "upload";
 	        File downloadDirectory = new File(path);
 	        if (!downloadDirectory.exists()) {
