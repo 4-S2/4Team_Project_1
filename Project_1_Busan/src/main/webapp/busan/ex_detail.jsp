@@ -268,7 +268,7 @@
                		<ul class="tab-menu">
                			<li id="detail">상세 설명</li>
                			<li id="map">지도/주변 추천</li>
-               			<li id="review">리뷰</li>
+               			<!-- <li id="review">리뷰</li> -->
                			<li id="reserve">예약하기</li>
                		</ul>
                		

@@ -359,7 +359,7 @@ color: #fff;
 					<ul class="tab-menu">
 						<li id="detail" class="selected">상세 설명</li>
 						<li id="map">지도/주변 추천</li>
-						<li id="review">리뷰</li>
+						<!-- <li id="review">리뷰</li> -->
 						<c:if test="${cate=='맛집' && sessionScope.id != null}">
 						<li id="reserve">예약하기</li>
 						</c:if>
